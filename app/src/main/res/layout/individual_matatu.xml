@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimaryWhite">
 
     <FrameLayout
@@ -20,6 +20,7 @@
             app:cardBackgroundColor="@color/colorPrimaryWhite"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:contentPadding="4dp">

@@ -1,31 +1,40 @@
 package com.alexis.matatu;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 
 import java.util.ArrayList;
 
-public class IndividualMatatu extends AppCompatActivity {
+public class IndividualMatatu extends Fragment {
     private SliderLayout mSliderShow;
+    private View mView;
+    public IndividualMatatu(){
 
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.individual_matatu);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.individual_matatu,container,false);
 
         inflateImageSlider();
 
+        return mView;
     }
 
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------
-        mSliderShow = findViewById(R.id.slider);
+        mSliderShow = mView.findViewById(R.id.slider);
 
         //populating Image slider
         ArrayList<String> sliderImages = new ArrayList<>();
@@ -35,7 +44,7 @@ public class IndividualMatatu extends AppCompatActivity {
         sliderImages.add("https://firebasestorage.googleapis.com/v0/b/e-shop-9c40d.appspot.com/o/grocery.jpg?alt=media&token=e6590863-734e-4418-8f9d-c233ba9df63c");
 
         for (String s : sliderImages) {
-            DefaultSliderView sliderView = new DefaultSliderView(this);
+            DefaultSliderView sliderView = new DefaultSliderView(getContext());
             sliderView.image(s);
             mSliderShow.addSlider(sliderView);
         }
