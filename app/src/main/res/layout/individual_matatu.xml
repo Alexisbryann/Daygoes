@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccentAmber">
+    android:background="@color/colorPrimaryWhite">
 
     <FrameLayout
         android:layout_width="0dp"
@@ -17,6 +17,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/colorPrimaryWhite"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp"
             app:cardPreventCornerOverlap="true"
@@ -27,126 +28,149 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="Favourite"
-                    app:layout_constraintBottom_toTopOf="@+id/button3"
-                    app:layout_constraintStart_toStartOf="@+id/button2"
-                    app:layout_constraintTop_toBottomOf="@+id/button2" />
-
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    style="@android:style/Widget.Material.Light.RatingBar.Indicator"
-                    android:layout_width="wrap_content"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/button5"
-                    app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
-                    app:layout_constraintStart_toStartOf="@+id/frameLayout3" />
+                    android:layout_marginTop="8dp"
+                    android:numStars="5"
+                    app:layout_constraintEnd_toStartOf="@+id/button"
+                    app:layout_constraintStart_toEndOf="@+id/textView13"
+                    app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/almendra"
                     android:gravity="center"
                     android:text="same route vehicles"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
+                    app:layout_constraintEnd_toEndOf="@+id/button4"
+                    app:layout_constraintStart_toEndOf="@+id/frameLayout3"
                     app:layout_constraintStart_toStartOf="@+id/button4"
-                    app:layout_constraintTop_toBottomOf="@+id/button4" />
+                    app:rippleColor="@color/colorAccentAmber" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:backgroundTintMode="multiply"
-                    android:drawableEnd="@drawable/thumb_up"
+                    android:drawableBottom="@drawable/thumb_up"
                     android:drawableTint="@color/colorAccentGreen"
+                    android:fontFamily="@font/almendra"
                     android:text="like"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/frameLayout3" />
+                    app:layout_constraintTop_toTopOf="@+id/frameLayout3"
+                    app:rippleColor="@color/colorAccentAmber" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Button"
+                    android:drawableBottom="@drawable/share"
+                    android:drawableTint="@color/colorAccentAmber"
+                    android:fontFamily="@font/almendra"
+                    android:text="share"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
-                    app:layout_constraintEnd_toEndOf="@+id/button2"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@+id/button7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:rippleColor="@color/colorAccentAmber" />
 
                 <FrameLayout
                     android:id="@+id/frameLayout3"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+                    android:layout_width="216dp"
+                    android:layout_height="268dp"
+                    android:layout_marginTop="6dp"
                     app:layout_constraintEnd_toStartOf="@+id/button4"
                     app:layout_constraintStart_toEndOf="@+id/button2"
                     app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:auto_cycle="true"
+                        app:pager_animation="Default"
+                        app:pager_animation_span="1100" />
+
 
                 </FrameLayout>
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Matatu name"
-                    android:textSize="24sp"
+                    android:fontFamily="@font/almendra"
+                    android:gravity="center"
+                    android:text="Gifts, Offers and Entertainment."
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/button4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumbs_down"
+                    android:drawableBottom="@drawable/thumbs_down"
                     android:drawableTint="@color/colorAccentRed"
+                    android:fontFamily="@font/almendra"
                     android:text="dislike"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/frameLayout3" />
+                    app:layout_constraintTop_toTopOf="@+id/frameLayout3"
+                    app:rippleColor="@color/colorAccentAmber" />
 
-                <TextView
-                    android:id="@+id/textView11"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="offers currently available"
-                    app:layout_constraintEnd_toEndOf="@+id/button"
-                    app:layout_constraintStart_toStartOf="@+id/button"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="@+id/textView11"
-                    app:layout_constraintStart_toStartOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                    android:fontFamily="@font/almendra"
+                    android:text="pay with points"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
+                    app:layout_constraintStart_toStartOf="@+id/frameLayout3"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                    app:rippleColor="@color/colorAccentAmber" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/button7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="pay with points"
-                    app:layout_constraintBottom_toTopOf="@+id/button6"
-                    tools:layout_editor_absoluteX="127dp" />
+                    android:drawableBottom="@drawable/hearts"
+                    android:drawableTint="@color/colorAccentAmber"
+                    android:fontFamily="@font/almendra"
+                    android:text="favourite"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/button3"
+                    app:layout_constraintEnd_toEndOf="@+id/button2"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/button2"
+                    app:layout_constraintTop_toBottomOf="@+id/button2"
+                    app:layout_constraintVertical_bias="0.0" />
 
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="143dp"
-                    android:layout_height="wrap_content"
-                    android:text="pay with mpesa"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:layout_editor_absoluteX="127dp" />
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/almendra"
+                    android:gravity="center"
+                    android:text="Rate"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                    app:layout_constraintStart_toStartOf="@+id/frameLayout3"
+                    app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
