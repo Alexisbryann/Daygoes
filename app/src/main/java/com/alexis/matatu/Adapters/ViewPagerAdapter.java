@@ -44,17 +44,17 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         else if (position==1) {
             title = "Routes";
         }
-        else if (position==2){
-            title = "Black Friday";
-        }
-        else if (position==3){
-            title = "Help";
-        }
+//        else if (position==2){
+//            title = "Black Friday";
+//        }
+//        else if (position==3){
+//            title = "Help";
+//        }
         return title;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 2;
     }
 }
