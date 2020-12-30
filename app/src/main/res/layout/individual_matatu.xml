@@ -1,6 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccentAmber">
 
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="Favourite"
+                    app:layout_constraintBottom_toTopOf="@+id/button3"
+                    app:layout_constraintStart_toStartOf="@+id/button2"
+                    app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/button5"
+                    app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
+                    app:layout_constraintStart_toStartOf="@+id/frameLayout3" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="same route vehicles"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/button4"
+                    app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTintMode="multiply"
+                    android:drawableEnd="@drawable/thumb_up"
+                    android:drawableTint="@color/colorAccentGreen"
+                    android:text="like"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/frameLayout3" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
+                    app:layout_constraintEnd_toEndOf="@+id/button2"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+                    app:layout_constraintEnd_toStartOf="@+id/button4"
+                    app:layout_constraintStart_toEndOf="@+id/button2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Matatu name"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumbs_down"
+                    android:drawableTint="@color/colorAccentRed"
+                    android:text="dislike"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/frameLayout3" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="offers currently available"
+                    app:layout_constraintEnd_toEndOf="@+id/button"
+                    app:layout_constraintStart_toStartOf="@+id/button"
+                    app:layout_constraintTop_toBottomOf="@+id/button" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="@+id/textView11"
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pay with points"
+                    app:layout_constraintBottom_toTopOf="@+id/button6"
+                    tools:layout_editor_absoluteX="127dp" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content"
+                    android:text="pay with mpesa"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:layout_editor_absoluteX="127dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
