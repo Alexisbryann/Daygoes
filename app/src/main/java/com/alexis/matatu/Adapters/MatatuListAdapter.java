@@ -4,13 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.alexis.matatu.Models.MatatuModel;
 import com.alexis.matatu.R;
-
 import java.util.List;
 
 public class MatatuListAdapter extends RecyclerView.Adapter<MatatuListAdapter.ViewHolder> {
@@ -42,7 +39,7 @@ public class MatatuListAdapter extends RecyclerView.Adapter<MatatuListAdapter.Vi
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
