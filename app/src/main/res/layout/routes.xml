@@ -18,22 +18,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:id="@+id/search_view_vehicle"
+        android:id="@+id/search_view_routes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:accessibilityHeading="true"
         android:accessibilityLiveRegion="assertive"
-        android:accessibilityPaneTitle="Search vehicle"
-        android:background="@drawable/round_edges"
+        android:accessibilityPaneTitle="Search route"
         android:iconifiedByDefault="false"
         android:labelFor="@id/tv_app_name"
         android:outlineAmbientShadowColor="@color/colorAccentAmber"
-        android:queryHint="Search vehicles"
+        android:queryHint="Search route"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_app_name"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/tv_app_name"
@@ -49,15 +48,16 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_matatu_list"
+        android:id="@+id/recycler_route"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:listitem="@layout/item_vehicles" />
+        tools:listitem="@layout/item_route" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

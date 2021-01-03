@@ -18,7 +18,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/colorPrimaryWhite"
+            app:cardBackgroundColor="@color/cardBg"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp"
             app:cardMaxElevation="4dp"
@@ -192,6 +192,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
+                <FrameLayout
+                    android:layout_width="390dp"
+                    android:layout_height="259dp"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_comments">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+                    </ScrollView>
+                </FrameLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </FrameLayout>
@@ -212,27 +232,28 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/edt_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:gravity="start|top"
+                android:hint="Enter comment"
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_send_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextTextMultiLine2"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_comment"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editTextTextMultiLine2"
+                app:layout_constraintTop_toTopOf="@+id/edt_comment"
                 app:srcCompat="@android:drawable/ic_menu_send" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MatatuListFragment extends Fragment {
+public class MatatuFragment extends Fragment {
 
-    public MatatuListFragment(){
+    public MatatuFragment(){
     }
 
     private View mView;
@@ -27,7 +27,7 @@ public class MatatuListFragment extends Fragment {
         mView = inflater.inflate(R.layout.matatu_list,container,false);
 
         Toolbar toolbar= mView.findViewById(R.id.toolbar);
-        SearchView searchView = mView.findViewById(R.id.search_view_matatu);
+        SearchView searchView = mView.findViewById(R.id.search_view_vehicle);
         TextView appName = mView.findViewById(R.id.tv_app_name);
         RecyclerView recyclerView = mView.findViewById(R.id.rv_matatu_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

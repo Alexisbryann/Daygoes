@@ -5,5 +5,6 @@
     <color name="colorAccentGreen">#006400</color>
     <color name="colorAccentAmber">#FFBF00</color>
     <color name="colorAccentRed">#FF0000</color>
+    <color name="cardBg">#FFF3E0</color>
 
 </resources>

@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.alexis.matatu.MatatuListFragment;
+import com.alexis.matatu.MatatuFragment;
+import com.alexis.matatu.ProfilesFragment;
 import com.alexis.matatu.RoutesFragment;
-import com.alexis.matatu.VehicleFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm) {
@@ -23,9 +23,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = null;
         if (position == 0) {
-            fragment = new MatatuListFragment();
+            fragment = new MatatuFragment();
         }else if (position == 1){
             fragment = new RoutesFragment();
+        }else if (position == 2){
+            fragment = new ProfilesFragment();
         }
         assert fragment != null;
         return fragment;    }
@@ -36,22 +38,20 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title = null;
         if (position==0){
-            title = "View vehicles";
+            title = "Vehicles";
         }
         else if (position==1) {
             title = "Routes";
         }
-//        else if (position==2){
-//            title = "Black Friday";
-//        }
-//        else if (position==3){
-//            title = "Help";
-//        }
+        else if (position==2){
+            title = "Profile";
+        }
+
         return title;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
