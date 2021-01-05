@@ -45,12 +45,12 @@ public class MatatuFragment extends Fragment {
 
         mList = new ArrayList<>();
         mList.add(new MatatuModel(R.drawable.nganya1,"Saint Raphael","Ngong - CBD","32 pax","KDA 250F",4));
-        mList.add(new MatatuModel(R.drawable.nganya1,"Matata","Rongai - Railways","28 pax","KCF 650R",5));
-        mList.add(new MatatuModel(R.drawable.hearts,"Phantom","Rongai - Agip house","24 pax","KCP 250G",5));
-        mList.add(new MatatuModel(R.drawable.like__v2,"Kingdom","Eastleigh - Bus station","32 pax","KDA 500",2));
-        mList.add(new MatatuModel(R.drawable.thumb_up,"Winner","Eastleigh - Bus station","30 pax","KCS 896",1));
-        mList.add(new MatatuModel(R.drawable.thumbs_down,"Lorem Ipsum est","Westlands - CBD","28 pax","KAA 851",0));
-        mList.add(new MatatuModel(R.drawable.favourite,"Lorem Ipsum neque","Embakasi - CBD","14 pax","KBC 456",4));
+        mList.add(new MatatuModel(R.drawable.nganya2,"Matata","Rongai - Railways","28 pax","KCF 650R",5));
+        mList.add(new MatatuModel(R.drawable.nganya3,"Phantom","Rongai - Agip house","24 pax","KCP 250G",5));
+        mList.add(new MatatuModel(R.drawable.nganya4,"Kingdom","Eastleigh - Bus station","32 pax","KDA 500",2));
+        mList.add(new MatatuModel(R.drawable.nganya5,"Winner","Eastleigh - Bus station","30 pax","KCS 896",1));
+        mList.add(new MatatuModel(R.drawable.nganya6,"Lorem Ipsum est","Westlands - CBD","28 pax","KAA 851",0));
+        mList.add(new MatatuModel(R.drawable.nganya1,"Lorem Ipsum neque","Embakasi - CBD","14 pax","KBC 456",4));
 
 
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
