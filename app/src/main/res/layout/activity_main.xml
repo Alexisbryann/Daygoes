@@ -20,8 +20,13 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/cardBg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorColor="@color/colorAccentRed"
+        app:tabRippleColor="@color/colorAccentAmber"
+        app:tabSelectedTextColor="@color/colorAccentGreen"
+        app:tabTextColor="@color/colorPrimaryBlack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

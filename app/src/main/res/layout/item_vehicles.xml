@@ -8,6 +8,7 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/cardBg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,12 +17,11 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#FFF3E0"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/colorPrimaryWhite"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
             app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="4dp">
+            app:cardUseCompatPadding="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -29,47 +29,37 @@
 
                 <ImageView
                     android:id="@+id/imgview_vehicle_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/tv_route"
+                    android:id="@+id/tv_vehicle_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/almendra"
                     android:text="Vehicle name:"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
-                    app:layout_constraintTop_toTopOf="@+id/imgview_vehicle_photo" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_vehicle_name"
+                    android:id="@+id/tv_route"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/almendra"
                     android:text="Route:"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_route"
-                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
-                    app:layout_constraintStart_toStartOf="@+id/tv_route"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_route" />
-
-                <TextView
-                    android:id="@+id/tv_vehicle_plate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Capacity:"
-                    android:textColor="@color/colorPrimaryBlack"
-                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_vehicle_name"
+                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
                     app:layout_constraintStart_toStartOf="@+id/tv_vehicle_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name" />
 
@@ -78,87 +68,151 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="No. plate:"
+                    android:fontFamily="@font/almendra"
+                    android:text="Capacity:"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_vehicle_plate"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/tv_vehicle_plate"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_plate" />
+                    app:layout_constraintEnd_toEndOf="@+id/tv_route"
+                    app:layout_constraintStart_toStartOf="@+id/tv_route"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_route" />
 
                 <TextView
-                    android:id="@+id/tv_ratings"
+                    android:id="@+id/tv_no_plate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Ratings:"
+                    android:fontFamily="@font/almendra"
+                    android:text="No. plate:"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_capacity"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/tv_capacity"
                     app:layout_constraintTop_toBottomOf="@+id/tv_capacity" />
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="TextView"
-                    android:textColor="@color/colorAccentGreen"
+                    android:id="@+id/tv_ratings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/almendra"
+                    android:text="Ratings:"
+                    android:textColor="@color/colorPrimaryBlack"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_route"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_route"
-                    app:layout_constraintTop_toTopOf="@+id/tv_route" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_no_plate"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_no_plate" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/tv_vehicle_name1"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:text="TextView"
                     android:textColor="@color/colorAccentGreen"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_vehicle_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_vehicle_name"
                     app:layout_constraintTop_toTopOf="@+id/tv_vehicle_name" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/tv_route1"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textColor="@color/colorAccentGreen"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_vehicle_plate"
-                    app:layout_constraintEnd_toEndOf="@+id/textView7"
-                    app:layout_constraintStart_toStartOf="@+id/textView7"
-                    app:layout_constraintTop_toTopOf="@+id/tv_vehicle_plate" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_route"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_vehicle_name1"
+                    app:layout_constraintTop_toTopOf="@+id/tv_route" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/tv_capacity1"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textColor="@color/colorAccentGreen"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_capacity"
-                    app:layout_constraintEnd_toEndOf="@+id/textView8"
-                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_route1"
+                    app:layout_constraintStart_toStartOf="@+id/tv_route1"
                     app:layout_constraintTop_toTopOf="@+id/tv_capacity" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/tv_no_plate1"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textColor="@color/colorAccentGreen"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_no_plate"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_capacity1"
+                    app:layout_constraintStart_toStartOf="@+id/tv_capacity1"
+                    app:layout_constraintTop_toTopOf="@+id/tv_no_plate" />
+
+                <RatingBar
+                    android:id="@+id/ratings"
+                    style="@android:style/Widget.DeviceDefault.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
-                    app:layout_constraintEnd_toEndOf="@+id/textView11"
-                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_ratings"
                     app:layout_constraintTop_toTopOf="@+id/tv_ratings" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_route" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_capacity" />
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_no_plate" />
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="1dp"
+                    android:layout_height="172dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </FrameLayout>
