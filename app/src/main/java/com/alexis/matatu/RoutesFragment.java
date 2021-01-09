@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexis.matatu.Adapters.MatatuAdapter;
 import com.alexis.matatu.Adapters.RoutesAdapter;
-import com.alexis.matatu.Models.MatatuModel;
 import com.alexis.matatu.Models.RoutesModel;
 
 import java.util.ArrayList;

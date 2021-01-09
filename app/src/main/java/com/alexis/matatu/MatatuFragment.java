@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -17,23 +18,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alexis.matatu.Adapters.MatatuAdapter;
 import com.alexis.matatu.FirebaseHelper.MatatuHelper;
 import com.alexis.matatu.Models.MatatuModel;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class MatatuFragment extends Fragment {
 
     private ArrayList<MatatuModel> mList;
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
     private MatatuAdapter mMatatuAdapter;
     private Toolbar mToolbar;
     private SearchView mSearchView;
     private TextView mAppName;
     private MatatuHelper mHelper;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
     private DatabaseReference mDb;
-
+    private DatabaseReference childReference;
+    private ImageView mImg_vehicle;
     /*
 1.INITIALIZE FIREBASE DB
 2.INITIALIZE UI
@@ -53,14 +60,7 @@ public class MatatuFragment extends Fragment {
         mSearchView = mView.findViewById(R.id.search_view_vehicle);
         mAppName = mView.findViewById(R.id.tv_app_name);
 
-//        mList = new ArrayList<>();
-//        mList.add(new MatatuModel(R.drawable.nganya1,"Saint Raphael","Ngong - CBD","32 pax","KDA 250F",4));
-//        mList.add(new MatatuModel(R.drawable.nganya2,"Matata","Rongai - Railways","28 pax","KCF 650R",5));
-//        mList.add(new MatatuModel(R.drawable.nganya3,"Phantom","Rongai - Agip house","24 pax","KCP 250G",5));
-//        mList.add(new MatatuModel(R.drawable.nganya4,"Kingdom","Eastleigh - Bus station","32 pax","KDA 500",2));
-//        mList.add(new MatatuModel(R.drawable.nganya5,"Winner","Eastleigh - Bus station","30 pax","KCS 896",1));
-//        mList.add(new MatatuModel(R.drawable.nganya6,"Lorem Ipsum est","Westlands - CBD","28 pax","KAA 851",0));
-//        mList.add(new MatatuModel(R.drawable.nganya1,"Lorem Ipsum neque","Embakasi - CBD","14 pax","KBC 456",4));
+        mImg_vehicle = mView.findViewById(R.id.imgview_vehicle_photo);
 
 //        Initialize recyclerview
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
@@ -68,13 +68,33 @@ public class MatatuFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
 //        Initialize DB
-        mDb = FirebaseDatabase.getInstance().getReference();
-        mHelper = new MatatuHelper(mDb);
+        mDb = FirebaseDatabase.getInstance().getReference().child("Vehicle details");
 
-//        Adapter
-        mMatatuAdapter = new MatatuAdapter(getContext(), mHelper.retrieve());
+//        query db
+        FirebaseRecyclerOptions<MatatuModel> options
+                = new FirebaseRecyclerOptions.Builder<MatatuModel>()
+                .setQuery(mDb, MatatuModel.class)
+                .build();
+
+        mMatatuAdapter = new MatatuAdapter(options);
         mRecyclerView.setAdapter(mMatatuAdapter);
 
         return mView;
     }
+    // Function to tell the app to start getting data from database on starting of the activity
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        mMatatuAdapter.startListening();
+    }
+
+    // Function to tell the app to stop getting data from database on stopping of the activity
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        mMatatuAdapter.stopListening();
+    }
+
 }

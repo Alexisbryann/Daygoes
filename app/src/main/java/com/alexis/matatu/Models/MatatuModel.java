@@ -2,14 +2,16 @@ package com.alexis.matatu.Models;
 
 public class MatatuModel {
 
-    public int Image;
-    public String Name;
-    public String Route;
-    public String Capacity;
-    public String Plate;
-    public int Ratings;
+    private String Image;
+    private String Name;
+    private String Route;
+    private String Capacity;
+    private String Plate;
+    private int Ratings;
 
-    public MatatuModel(int image, String name, String route, String capacity, String plate, int ratings) {
+    public MatatuModel() {
+    }
+    public MatatuModel(String image, String name, String route, String capacity, String plate, int ratings) {
         Image = image;
         Name = name;
         Route = route;
@@ -18,11 +20,11 @@ public class MatatuModel {
         Ratings = ratings;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MatatuHelper {
     DatabaseReference db;
-    ArrayList<MatatuModel> mMatatulists = new ArrayList<>();
+    ArrayList<MatatuModel> mMatatulists = new ArrayList<MatatuModel>();
 
     public MatatuHelper(DatabaseReference db) {
         this.db = db;
@@ -40,23 +40,23 @@ public class MatatuHelper {
     {
         db.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 fetchData(dataSnapshot);
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                 fetchData(dataSnapshot);
 
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
 
             }
 
