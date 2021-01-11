@@ -74,7 +74,7 @@
                             android:layout_marginTop="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView12">
+                            app:layout_constraintTop_toBottomOf="@+id/tv_plate">
 
                             <com.daimajia.slider.library.SliderLayout
                                 android:id="@+id/slider"
@@ -209,34 +209,39 @@
                         </FrameLayout>
 
                         <TextView
-                            android:id="@+id/textView12"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_plate"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:text="TextView"
+                            android:gravity="center"
+                            android:text="plate"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                         <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_matatu_name"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                            app:layout_constraintEnd_toStartOf="@+id/textView15"
-                            app:layout_constraintStart_toEndOf="@+id/textView12"
-                            app:layout_constraintTop_toTopOf="@+id/textView12" />
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:gravity="center"
+                            android:text="Vehicle name"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_plate"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_route"
+                            app:layout_constraintStart_toEndOf="@+id/tv_plate"
+                            app:layout_constraintTop_toTopOf="@+id/tv_plate" />
 
                         <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_route"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="9dp"
-                            android:text="TextView"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+                            android:layout_marginEnd="8dp"
+                            android:gravity="center"
+                            android:text="Route"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_matatu_name"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/textView14" />
+                            app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>

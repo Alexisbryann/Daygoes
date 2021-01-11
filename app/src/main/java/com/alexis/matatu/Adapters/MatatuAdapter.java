@@ -1,6 +1,7 @@
 package com.alexis.matatu.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexis.matatu.IndividualMatatuFragment;
 import com.alexis.matatu.Models.MatatuModel;
 import com.alexis.matatu.R;
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 
 public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAdapter.FirebaseViewHolder> {
@@ -35,7 +30,7 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, int position, @NonNull MatatuModel model) {
+    protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, final int position, @NonNull MatatuModel model) {
 
         Picasso.get().load(model.getImage()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
@@ -43,7 +38,8 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
         holder.mTv_ratings.setRating(model.getRatings());
-    }
+
+        }
     @NonNull
     @Override
     public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,6 +64,20 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
             mTv_capacity = itemView.findViewById(R.id.tv_capacity1);
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
             mTv_ratings = itemView.findViewById(R.id.ratings);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    Context context = v.getContext();
+                    Intent i = new Intent(context, IndividualMatatuFragment.class);
+                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                    i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
+                    i.putExtra("ROUTE_KEY", mTv_route.getText().toString());
+                    context.startActivity(i);
+                }
+            });
 
         }
     }

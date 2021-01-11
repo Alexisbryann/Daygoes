@@ -1,9 +1,11 @@
 package com.alexis.matatu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,18 +17,34 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 
 import java.util.ArrayList;
 
-public class IndividualMatatu extends Fragment {
+public class IndividualMatatuFragment extends Fragment {
     private SliderLayout mSliderShow;
     private View mView;
-    public IndividualMatatu(){
+    private TextView mTv_name;
+    private TextView mTv_plate;
+    private TextView mTv_route;
 
+    public IndividualMatatuFragment(){
     }
-
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.individual_matatu,container,false);
 
         inflateImageSlider();
+
+//        inflate the layout for this fragment
+        mTv_name = mView.findViewById(R.id.tv_matatu_name);
+        mTv_plate = mView.findViewById(R.id.tv_plate);
+        mTv_route = mView.findViewById(R.id.tv_route);
+
+        //retrieving data using bundle
+        Bundle bundle=getArguments();
+
+        mTv_name.setText(String.valueOf(bundle.getString("NAME_KEY")));
+        mTv_plate.setText(String.valueOf(bundle.getString("PLATE_KEY")));
+        mTv_route.setText(String.valueOf(bundle.getString("ROUTE_KEY")));
+
 
         return mView;
     }

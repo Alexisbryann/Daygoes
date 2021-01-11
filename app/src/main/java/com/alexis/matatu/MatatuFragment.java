@@ -16,31 +16,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.MatatuAdapter;
-import com.alexis.matatu.FirebaseHelper.MatatuHelper;
 import com.alexis.matatu.Models.MatatuModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class MatatuFragment extends Fragment {
 
-    private ArrayList<MatatuModel> mList;
     private MatatuAdapter mMatatuAdapter;
     private Toolbar mToolbar;
     private SearchView mSearchView;
     private TextView mAppName;
-    private MatatuHelper mHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private DatabaseReference mDb;
     private DatabaseReference childReference;
     private ImageView mImg_vehicle;
+    private TextView mTv_name;
+    private TextView mTv_plate;
+    private TextView mTv_route;
+
     /*
 1.INITIALIZE FIREBASE DB
 2.INITIALIZE UI
@@ -60,12 +55,17 @@ public class MatatuFragment extends Fragment {
         mSearchView = mView.findViewById(R.id.search_view_vehicle);
         mAppName = mView.findViewById(R.id.tv_app_name);
 
+        mTv_name = mView.findViewById(R.id.tv_vehicle_name1);
+        mTv_plate = mView.findViewById(R.id.tv_no_plate1);
+        mTv_route = mView.findViewById(R.id.tv_route1);
+
         mImg_vehicle = mView.findViewById(R.id.imgview_vehicle_photo);
 
 //        Initialize recyclerview
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
+
 
 //        Initialize DB
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicle details");
@@ -96,5 +96,4 @@ public class MatatuFragment extends Fragment {
         super.onStop();
         mMatatuAdapter.stopListening();
     }
-
 }
