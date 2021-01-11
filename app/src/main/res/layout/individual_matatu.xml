@@ -198,19 +198,24 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
 
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_payWithPoints"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_edges"
                             android:fontFamily="@font/almendra"
+                            android:includeFontPadding="true"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
                             android:text="pay with points"
                             android:textSize="14sp"
                             android:textStyle="bold"
+                            app:backgroundTint="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
-                            app:rippleColor="@color/colorAccentAmber" />
+                            app:rippleColor="@color/colorAccentRed" />
 
                         <FrameLayout
                             android:id="@+id/frameLayout5"
