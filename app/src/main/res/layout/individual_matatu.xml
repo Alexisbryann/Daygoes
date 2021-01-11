@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,68 +29,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/cardBg"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp"
                     app:cardMaxElevation="4dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true"
-                    app:contentPadding="4dp">
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="false">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <RatingBar
-                            android:id="@+id/ratingBar"
-                            style="@style/Widget.AppCompat.RatingBar.Indicator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:numStars="5"
-                            app:layout_constraintStart_toEndOf="@+id/textView13"
-                            app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/button2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="4dp"
-                            android:backgroundTintMode="multiply"
-                            android:drawableBottom="@drawable/thumb_up"
-                            android:drawableTint="@color/colorAccentGreen"
-                            android:fontFamily="@font/almendra"
-                            android:text="like"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/button7"
-                            app:layout_constraintStart_toStartOf="@+id/frameLayout3"
-                            app:layout_constraintTop_toBottomOf="@+id/frameLayout3"
-                            app:rippleColor="@color/colorAccentAmber" />
-
-                        <FrameLayout
-                            android:id="@+id/frameLayout3"
-                            android:layout_width="0dp"
-                            android:layout_height="199dp"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_plate">
-
-                            <com.daimajia.slider.library.SliderLayout
-                                android:id="@+id/slider"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:auto_cycle="true"
-                                app:pager_animation="Default"
-                                app:pager_animation_span="1100">
-
-                            </com.daimajia.slider.library.SliderLayout>
-
-
-                        </FrameLayout>
-
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/tv_goes"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -98,115 +46,11 @@
                             android:gravity="center"
                             android:text="Gifts, Offers and Entertainment."
                             android:textColor="@color/colorPrimaryBlack"
-                            android:textSize="18sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/button4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginEnd="8dp"
-                            android:drawableBottom="@drawable/thumbs_down"
-                            android:drawableTint="@color/colorAccentRed"
-                            android:fontFamily="@font/almendra"
-                            android:text="dislike"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/button3"
-                            app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
-                            app:layout_constraintTop_toTopOf="@+id/button3"
-                            app:rippleColor="@color/colorAccentAmber" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/button5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/almendra"
-                            android:text="pay with points"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                            app:rippleColor="@color/colorAccentAmber" />
-
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:fontFamily="@font/almendra"
-                            android:gravity="center"
-                            android:text="Rate"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryBlack"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-                            app:layout_constraintStart_toStartOf="@+id/button7"
-                            app:layout_constraintTop_toTopOf="@+id/ratingBar"
-                            app:layout_constraintVertical_bias="0.0" />
-
-                        <TextView
-                            android:id="@+id/tv_comments"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/almendra"
-                            android:text="Comments"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryBlack"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-                        <Button
-                            android:id="@+id/button7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginEnd="4dp"
-                            android:drawableBottom="@drawable/hearts"
-                            android:drawableTint="@color/colorAccentAmber"
-                            android:fontFamily="@font/almendra"
-                            android:text="favourite"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/button2"
-                            app:layout_constraintEnd_toStartOf="@+id/button3"
-                            app:layout_constraintTop_toTopOf="@+id/button2"
-                            app:layout_constraintVertical_bias="0.0" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/button3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginEnd="4dp"
-                            android:drawableBottom="@drawable/share"
-                            android:drawableTint="@color/colorAccentAmber"
-                            android:fontFamily="@font/almendra"
-                            android:text="share"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/button7"
-                            app:layout_constraintEnd_toStartOf="@+id/button4"
-                            app:layout_constraintTop_toTopOf="@+id/button7"
-                            app:rippleColor="@color/colorAccentAmber" />
-
-                        <FrameLayout
-                            android:layout_width="390dp"
-                            android:layout_height="152dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_comments">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                tools:listitem="@layout/item_chat" />
-                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/tv_plate"
@@ -216,8 +60,11 @@
                             android:layout_marginTop="8dp"
                             android:gravity="center"
                             android:text="plate"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryBlack"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_goes" />
 
                         <TextView
                             android:id="@+id/tv_matatu_name"
@@ -227,6 +74,9 @@
                             android:layout_marginEnd="8dp"
                             android:gravity="center"
                             android:text="Vehicle name"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryBlack"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_plate"
                             app:layout_constraintEnd_toStartOf="@+id/tv_route"
                             app:layout_constraintStart_toEndOf="@+id/tv_plate"
@@ -239,9 +89,240 @@
                             android:layout_marginEnd="8dp"
                             android:gravity="center"
                             android:text="Route"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryBlack"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_matatu_name"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout3"
+                            android:layout_width="0dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorPrimaryWhite"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_plate">
+
+                            <androidx.viewpager2.widget.ViewPager2
+                                android:id="@+id/viewPagerVehicle"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/textView9"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/almendra"
+                                    android:gravity="center"
+                                    android:text="like"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toTopOf="@+id/imageView3"
+                                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                                    app:layout_constraintStart_toStartOf="@+id/imageView3"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/textView12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/almendra"
+                                    android:gravity="center"
+                                    android:text="Favourite"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toTopOf="@+id/imageView4"
+                                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                                    app:layout_constraintStart_toStartOf="@+id/imageView4"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/textView14"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/almendra"
+                                    android:gravity="center"
+                                    android:text="Share"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toTopOf="@+id/imageView5"
+                                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                                    app:layout_constraintStart_toEndOf="@+id/textView12"
+                                    app:layout_constraintStart_toStartOf="@+id/imageView5"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/textView15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/almendra"
+                                    android:gravity="center"
+                                    android:text="Dislike"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toTopOf="@+id/imageView6"
+                                    app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                                    app:layout_constraintStart_toEndOf="@+id/textView14"
+                                    app:layout_constraintStart_toStartOf="@+id/imageView6"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/imageView3"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginStart="18dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:srcCompat="@drawable/thumb_up" />
+
+                                <ImageView
+                                    android:id="@+id/imageView4"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginStart="18dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                                    app:srcCompat="@drawable/hearts" />
+
+                                <ImageView
+                                    android:id="@+id/imageView5"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginStart="18dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                                    app:srcCompat="@android:drawable/ic_menu_share" />
+
+                                <ImageView
+                                    android:id="@+id/imageView6"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginStart="18dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                                    app:srcCompat="@drawable/thumbs_down" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </FrameLayout>
+
+                        <Button
+                            android:id="@+id/btn_payWithPoints"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/almendra"
+                            android:text="pay with points"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
+                            app:rippleColor="@color/colorAccentAmber" />
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_payWithPoints">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/textView13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="36dp"
+                                    android:fontFamily="@font/almendra"
+                                    android:gravity="center"
+                                    android:text="Rate"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+                                <RatingBar
+                                    android:id="@+id/ratingBar"
+                                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:numStars="5"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/textView13"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tv_comments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/almendra"
+                            android:text="Comments"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryBlack"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
+
+                        <FrameLayout
+                            android:layout_width="390dp"
+                            android:layout_height="152dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_comments">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:listitem="@layout/item_chat" />
+                        </FrameLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>

@@ -78,7 +78,6 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
                     context.startActivity(i);
                 }
             });
-
         }
     }
 }
