@@ -74,7 +74,7 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
                     Intent i = new Intent(context, IndividualMatatuFragment.class);
                     i.putExtra("NAME_KEY", mTv_name.getText().toString());
                     i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
-                    i.putExtra("ROUTE_KEY", mTv_route.getText().toString());
+                    i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
                     context.startActivity(i);
                 }
             });

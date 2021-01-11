@@ -52,50 +52,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_plate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:gravity="center"
-                            android:text="plate"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryBlack"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_goes" />
-
-                        <TextView
-                            android:id="@+id/tv_matatu_name"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center"
-                            android:text="Vehicle name"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryBlack"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/tv_plate"
-                            app:layout_constraintEnd_toStartOf="@+id/tv_route"
-                            app:layout_constraintStart_toEndOf="@+id/tv_plate"
-                            app:layout_constraintTop_toTopOf="@+id/tv_plate" />
-
-                        <TextView
-                            android:id="@+id/tv_route"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center"
-                            android:text="Route"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryBlack"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/tv_matatu_name"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
-
                         <FrameLayout
                             android:id="@+id/frameLayout3"
                             android:layout_width="0dp"
@@ -104,7 +60,7 @@
                             android:background="@color/colorPrimaryWhite"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_plate">
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout7">
 
                             <androidx.viewpager2.widget.ViewPager2
                                 android:id="@+id/viewPagerVehicle"
@@ -136,7 +92,7 @@
                                     android:text="like"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="18sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/imageView3"
                                     app:layout_constraintEnd_toEndOf="@+id/imageView3"
@@ -154,7 +110,7 @@
                                     android:text="Favourite"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="18sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/imageView4"
                                     app:layout_constraintEnd_toEndOf="@+id/imageView4"
@@ -173,7 +129,7 @@
                                     android:text="Share"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="18sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/imageView5"
                                     app:layout_constraintEnd_toEndOf="@+id/imageView5"
@@ -194,7 +150,7 @@
                                     android:text="Dislike"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="18sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toTopOf="@+id/imageView6"
                                     app:layout_constraintEnd_toEndOf="@+id/imageView6"
@@ -204,37 +160,39 @@
 
                                 <ImageView
                                     android:id="@+id/imageView3"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginStart="18dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="32dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:srcCompat="@drawable/thumb_up" />
 
                                 <ImageView
                                     android:id="@+id/imageView4"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginStart="18dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="32dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/imageView3"
                                     app:srcCompat="@drawable/hearts" />
 
                                 <ImageView
                                     android:id="@+id/imageView5"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginStart="18dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="32dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/imageView4"
                                     app:srcCompat="@android:drawable/ic_menu_share" />
 
                                 <ImageView
                                     android:id="@+id/imageView6"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginStart="18dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginEnd="32dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                                     app:srcCompat="@drawable/thumbs_down" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -299,7 +257,6 @@
                             android:id="@+id/tv_comments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/almendra"
                             android:text="Comments"
@@ -307,12 +264,13 @@
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="14sp"
                             android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
 
                         <FrameLayout
-                            android:layout_width="390dp"
-                            android:layout_height="152dp"
+                            android:layout_width="0dp"
+                            android:layout_height="500dp"
                             android:layout_marginTop="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -322,6 +280,120 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 tools:listitem="@layout/item_chat" />
+                        </FrameLayout>
+
+                        <View
+                            android:id="@+id/divider3"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="?android:attr/listDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
+
+                        <View
+                            android:id="@+id/divider4"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="?android:attr/listDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout6" />
+
+                        <View
+                            android:id="@+id/divider6"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="?android:attr/listDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
+
+                        <View
+                            android:id="@+id/divider7"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="?android:attr/listDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_comments" />
+
+                        <View
+                            android:id="@+id/divider8"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="?android:attr/listDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_goes" />
+
+                        <View
+                            android:id="@+id/divider9"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="?android:attr/listDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout7" />
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout7"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_goes">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tv_matatu_name"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:gravity="center|start"
+                                    android:text="Vehicle name"
+                                    android:textColor="@color/colorAccentGreen"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tv_plate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:gravity="center"
+                                    android:text="plate"
+                                    android:textColor="@color/colorAccentGreen"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toStartOf="@+id/tv_route"
+                                    app:layout_constraintStart_toEndOf="@+id/tv_matatu_name"
+                                    app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
+
+                                <TextView
+                                    android:id="@+id/tv_route"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:gravity="center"
+                                    android:text="Capacity"
+                                    android:textColor="@color/colorAccentGreen"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="@+id/tv_plate" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
