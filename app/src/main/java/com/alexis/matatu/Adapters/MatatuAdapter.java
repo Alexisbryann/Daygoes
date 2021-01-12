@@ -19,6 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 
 public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAdapter.FirebaseViewHolder> {
@@ -31,6 +32,7 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
 
     @Override
     protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, final int position, @NonNull MatatuModel model) {
+
 
         Picasso.get().load(model.getImage()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
