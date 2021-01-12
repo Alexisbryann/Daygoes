@@ -12,7 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexis.matatu.IndividualMatatuFragment;
+import com.alexis.matatu.IndividualMatatu;
+import com.alexis.matatu.MatatuFragment;
 import com.alexis.matatu.Models.MatatuModel;
 import com.alexis.matatu.R;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
@@ -20,22 +21,22 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 
 public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAdapter.FirebaseViewHolder> {
 
     private DatabaseReference mDb;
+    private final Context mContext;
 
-    public MatatuAdapter(@NonNull FirebaseRecyclerOptions<MatatuModel> options) {
+    public MatatuAdapter(@NonNull FirebaseRecyclerOptions<MatatuModel> options, MatatuFragment matatuFragment, Context context) {
         super(options);
+        mContext = context;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, final int position, @NonNull MatatuModel model) {
 
-
-        Picasso.get().load(model.getImage()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
+        Picasso.with(mContext).load(model.getImage()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
         holder.mTv_route.setText(model.getRoute());
         holder.mTv_capacity.setText(model.getCapacity());
@@ -74,7 +75,7 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
                     int position = getAdapterPosition();
 
                     Context context = v.getContext();
-                    Intent i = new Intent(context, IndividualMatatuFragment.class);
+                    Intent i = new Intent(context, IndividualMatatu.class);
                     i.putExtra("NAME_KEY", mTv_name.getText().toString());
                     i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                     i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());

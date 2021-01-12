@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IndividualMatatuFragment"
+        <activity android:name=".IndividualMatatu"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.Light"/>
         <meta-data

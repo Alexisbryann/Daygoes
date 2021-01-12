@@ -13,8 +13,11 @@
         <item name="colorPrimary">@color/cardBg</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
         <item name="theme">@style/Theme.MaterialComponents.DayNight</item>
+    </style>
 
-
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorPrimaryWhite</item>
+        <item name="colorControlActivated">@color/colorAccentAmber</item>
     </style>
 
 

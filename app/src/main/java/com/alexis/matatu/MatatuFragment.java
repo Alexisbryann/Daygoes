@@ -1,5 +1,6 @@
 package com.alexis.matatu;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,7 @@ public class MatatuFragment extends Fragment {
                 .setQuery(mDb, MatatuModel.class)
                 .build();
 
-        mMatatuAdapter = new MatatuAdapter(options);
+        mMatatuAdapter = new MatatuAdapter(options,MatatuFragment.this,getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
 
         return mView;

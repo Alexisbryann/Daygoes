@@ -62,10 +62,19 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout7">
 
-                            <androidx.viewpager2.widget.ViewPager2
-                                android:id="@+id/viewPagerVehicle"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
+
+                            <com.daimajia.slider.library.SliderLayout
+                                android:id="@+id/slider"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:auto_cycle="true"
+                                app:pager_animation="Default"
+                                app:pager_animation_span="1100" />
+
+
                         </FrameLayout>
 
                         <FrameLayout
@@ -187,7 +196,7 @@
                             android:text="pay with points"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:backgroundTint="@color/colorAccentAmber"
+                            app:backgroundTint="@color/colorAccentGreen"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
@@ -227,6 +236,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:numStars="5"
+                                    android:progressBackgroundTint="@color/colorAccentGreen"
+                                    android:progressTint="@color/colorAccentAmber"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/textView13"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -268,7 +279,7 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginTop="4dp"
-                            android:background="?android:attr/listDivider"
+                            android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
@@ -278,7 +289,7 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginTop="4dp"
-                            android:background="?android:attr/listDivider"
+                            android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout6" />
@@ -288,7 +299,7 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginTop="4dp"
-                            android:background="?android:attr/listDivider"
+                            android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
@@ -298,7 +309,7 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginTop="4dp"
-                            android:background="?android:attr/listDivider"
+                            android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_comments" />
@@ -308,7 +319,8 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginTop="4dp"
-                            android:background="?android:attr/listDivider"
+                            android:background="@color/colorAccentAmber"
+                            android:backgroundTintMode="multiply"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_goes" />
@@ -318,7 +330,7 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginTop="4dp"
-                            android:background="?android:attr/listDivider"
+                            android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout7" />
