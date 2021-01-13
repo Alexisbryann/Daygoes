@@ -1,10 +1,13 @@
 package com.alexis.matatu.Adapters;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,37 +19,53 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 
-public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualMatatuModel,IndividualMatatuAdapter.ViewHolder> {
+public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualMatatuModel,IndividualMatatuAdapter.FirebaseViewHolder> {
 
-    public IndividualMatatuAdapter(@NonNull FirebaseRecyclerOptions<IndividualMatatuModel> options) {
+    private final Context mContext;
+
+    public IndividualMatatuAdapter(@NonNull FirebaseRecyclerOptions<IndividualMatatuModel> options, Context context) {
         super(options);
+        mContext = context;
     }
-
     @Override
-    protected void onBindViewHolder(@NonNull IndividualMatatuAdapter.ViewHolder holder, int position, @NonNull IndividualMatatuModel model) {
+    protected void onBindViewHolder(@NonNull IndividualMatatuAdapter.FirebaseViewHolder holder, int position, @NonNull IndividualMatatuModel model) {
 
     }
-
     @NonNull
     @Override
-    public IndividualMatatuAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.individual_matatu,parent,false);
+        return new FirebaseViewHolder(view);
     }
+    public class FirebaseViewHolder extends RecyclerView.ViewHolder {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(@NonNull View itemView) {
+        private final TextView mTv_goes;
+        private final TextView mTv_name;
+        private final TextView mTv_plate;
+        private final TextView mTv_route;
+        private final SliderLayout mSlider;
+        private final ImageView mLike;
+        private final ImageView mFavourite;
+        private final ImageView mShare;
+        private final ImageView mDislike;
+        private final MaterialButton mPay;
+        private final RatingBar mRatingBar;
+
+
+        public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
-            TextView tv_goes = itemView.findViewById(R.id.tv_goes);
-            TextView tv_name = itemView.findViewById(R.id.tv_matatu_name);
-            TextView tv_plate = itemView.findViewById(R.id.tv_plate);
-            TextView tv_route = itemView.findViewById(R.id.tv_route);
-            SliderLayout slider = itemView.findViewById(R.id.slider);
-            ImageView like = itemView.findViewById(R.id.img_like);
-            ImageView favourite = itemView.findViewById(R.id.img_favourite);
-            ImageView share = itemView.findViewById(R.id.img_share);
-            ImageView dislike = itemView.findViewById(R.id.img_dislike);
-            MaterialButton pay = itemView.findViewById(R.id.btn_payWithPoints);
-            RatingBar ratingBar = itemView.findViewById(R.id.ratingBar);
+
+            mTv_goes = itemView.findViewById(R.id.tv_goes);
+            mTv_name = itemView.findViewById(R.id.tv_matatu_name);
+            mTv_plate = itemView.findViewById(R.id.tv_plate);
+            mTv_route = itemView.findViewById(R.id.tv_route);
+            mSlider = itemView.findViewById(R.id.slider);
+            mLike = itemView.findViewById(R.id.img_like);
+            mFavourite = itemView.findViewById(R.id.img_favourite);
+            mShare = itemView.findViewById(R.id.img_share);
+            mDislike = itemView.findViewById(R.id.img_dislike);
+            mPay = itemView.findViewById(R.id.btn_payWithPoints);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
         }
     }
 }

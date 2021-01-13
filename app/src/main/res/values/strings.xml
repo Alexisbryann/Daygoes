@@ -11,5 +11,13 @@
     <string name="no_plate">No. plate:</string>
     <string name="ratings">Ratings:</string>
     <string name="textview">TextView</string>
+    <string name="like">like</string>
+    <string name="comments">Comments</string>
+    <string name="favourite">Favourite</string>
+    <string name="share">Share</string>
+    <string name="dislike">Dislike</string>
+    <string name="gifts_offers_and_entertainment">Gifts, Offers and Entertainment.</string>
+    <string name="pay_with_points">pay with points</string>
+    <string name="rate">Rate</string>
 
 </resources>
