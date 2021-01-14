@@ -11,7 +11,6 @@ import com.alexis.matatu.Models.RoutesModel;
 import com.alexis.matatu.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.ViewHolder> {
 
@@ -46,22 +45,22 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView mTv_start;
-        private final TextView mTv_to;
-        private final TextView mTv_destination;
+//        private final TextView mTv_to;
+//        private final TextView mTv_destination;
         RoutesModel item;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mTv_start = itemView.findViewById(R.id.tv_from);
-            mTv_to = itemView.findViewById(R.id.tv_to);
-            mTv_destination = itemView.findViewById(R.id.tv_destination);
+            mTv_start = itemView.findViewById(R.id.tv_route);
+//            mTv_to = itemView.findViewById(R.id.tv_to);
+//            mTv_destination = itemView.findViewById(R.id.tv_destination);
         }
         private void setData(RoutesModel item) {
             this.item = item;
 
             mTv_start.setText(item.getFrom());
-            mTv_destination.setText(item.getDestination());
+//            mTv_destination.setText(item.getDestination());
 
 
         }

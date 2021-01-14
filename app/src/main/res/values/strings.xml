@@ -19,5 +19,11 @@
     <string name="gifts_offers_and_entertainment">Gifts, Offers and Entertainment.</string>
     <string name="pay_with_points">pay with points</string>
     <string name="rate">Rate</string>
+    <string name="thumbs_up_icon">thumbs up icon</string>
+    <string name="plate">plate</string>
+    <string name="favourite_icon">Favourite icon</string>
+    <string name="thumbs_down_button">Thumbs down button</string>
+    <string name="share_icon">Share icon</string>
+    <string name="share_button">Share button</string>
 
 </resources>

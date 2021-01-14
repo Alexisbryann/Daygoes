@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -77,7 +78,7 @@ public class IndividualMatatu extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                mLike.setColorFilter(Color.rgb(00, 100, 00));
+                mLike.setColorFilter(Color.rgb(0, 100, 0));
                 mDislike.setColorFilter(Color.rgb(255, 255, 255));
                 Toast toast1 = Toast.makeText(IndividualMatatu.this, "Liked", Toast.LENGTH_LONG);
                 toast1.show();
@@ -107,6 +108,13 @@ public class IndividualMatatu extends AppCompatActivity {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(IndividualMatatu.this,"Share",Toast.LENGTH_LONG);
                 toast.show();
+            }
+        });
+        mRatingBar.getRating();
+        mPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

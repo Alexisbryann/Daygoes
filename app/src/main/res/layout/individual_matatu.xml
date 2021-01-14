@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryWhite">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -146,15 +145,18 @@
                                     android:id="@+id/img_like"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
+                                    android:contentDescription="@string/thumbs_up_icon"
                                     app:layout_constraintEnd_toEndOf="@+id/textView9"
                                     app:layout_constraintStart_toStartOf="@+id/textView9"
                                     app:layout_constraintTop_toBottomOf="@+id/textView9"
-                                    app:srcCompat="@drawable/thumb_up" />
+                                    app:srcCompat="@drawable/thumb_up"
+                                    app:tint="@color/colorPrimaryWhite" />
 
                                 <ImageView
                                     android:id="@+id/img_favourite"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
+                                    android:contentDescription="@string/favourite_icon"
                                     app:layout_constraintEnd_toEndOf="@+id/textView12"
                                     app:layout_constraintStart_toEndOf="@+id/img_like"
                                     app:layout_constraintStart_toStartOf="@+id/textView12"
@@ -165,21 +167,23 @@
                                     android:id="@+id/img_share"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:tint="@color/colorPrimaryBlack"
+                                    android:contentDescription="@string/share_icon"
                                     app:layout_constraintEnd_toEndOf="@+id/textView14"
-                                    app:layout_constraintStart_toEndOf="@+id/img_favourite"
                                     app:layout_constraintStart_toStartOf="@+id/textView14"
                                     app:layout_constraintTop_toBottomOf="@+id/textView14"
-                                    app:srcCompat="@android:drawable/ic_menu_share" />
+                                    app:srcCompat="@android:drawable/ic_menu_share"
+                                    app:tint="@color/colorPrimaryBlack" />
 
                                 <ImageView
                                     android:id="@+id/img_dislike"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
+                                    android:contentDescription="@string/thumbs_down_button"
                                     app:layout_constraintEnd_toEndOf="@+id/textView15"
                                     app:layout_constraintStart_toStartOf="@+id/textView15"
                                     app:layout_constraintTop_toBottomOf="@+id/textView15"
-                                    app:srcCompat="@drawable/thumbs_down" />
+                                    app:srcCompat="@drawable/thumbs_down"
+                                    app:tint="@color/colorPrimaryWhite" />
 
                                 <TextView
                                     android:id="@+id/tv_likes_no"
@@ -232,7 +236,7 @@
                             android:text="@string/pay_with_points"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:backgroundTint="@color/colorAccentGreen"
+                            app:backgroundTint="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
@@ -268,11 +272,12 @@
 
                                 <RatingBar
                                     android:id="@+id/ratingBar"
-                                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                                    style="@android:style/Widget.Holo.Light.RatingBar"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="true"
+                                    android:focusable="true"
                                     android:numStars="5"
-                                    android:progressBackgroundTint="@color/colorAccentGreen"
                                     android:progressTint="@color/colorAccentAmber"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -404,7 +409,7 @@
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
                                     android:gravity="center"
-                                    android:text="plate"
+                                    android:text="@string/plate"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textStyle="bold"
                                     app:layout_constraintEnd_toStartOf="@+id/tv_route"
@@ -439,6 +444,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/cardBg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -467,6 +473,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/share_button"
                 android:tint="@color/colorAccentGreen"
                 app:layout_constraintBottom_toBottomOf="@+id/edt_comment"
                 app:layout_constraintEnd_toEndOf="parent"

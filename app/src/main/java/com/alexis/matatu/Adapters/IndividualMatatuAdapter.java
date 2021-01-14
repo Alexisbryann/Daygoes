@@ -51,7 +51,6 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
         private final MaterialButton mPay;
         private final RatingBar mRatingBar;
 
-
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -67,5 +66,6 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
             mPay = itemView.findViewById(R.id.btn_payWithPoints);
             mRatingBar = itemView.findViewById(R.id.ratingBar);
         }
+
     }
 }

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/colorPrimaryWhite"
-            app:cardCornerRadius="6dp"
+            app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
@@ -31,7 +31,7 @@
                 <ImageView
                     android:id="@+id/imgview_vehicle_photo"
                     android:layout_width="100dp"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:contentDescription="@string/vehicle_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +164,7 @@
 
                 <RatingBar
                     android:id="@+id/ratings"
-                    style="@android:style/Widget.Holo.Light.RatingBar.Indicator"
+                    style="@android:style/Widget.Holo.Light.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -172,16 +172,28 @@
                     android:progressTint="@color/colorAccentAmber"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
                     app:layout_constraintStart_toEndOf="@+id/tv_ratings"
+                    app:layout_constraintStart_toStartOf="@+id/tv_no_plate1"
                     app:layout_constraintTop_toTopOf="@+id/tv_ratings" />
 
                 <View
                     android:id="@+id/divider5"
                     android:layout_width="1dp"
-                    android:layout_height="172dp"
+                    android:layout_height="0dp"
                     android:background="?android:attr/listDivider"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imgview_vehicle_photo"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_no_of_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5 stars"
+                    android:textColor="@color/colorAccentRed"
+                    app:layout_constraintBottom_toBottomOf="@id/ratings"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ratings"
+                    app:layout_constraintTop_toTopOf="@+id/ratings" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

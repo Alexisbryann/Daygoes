@@ -1,24 +1,8 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryWhite</item>
-        <item name="colorAccent">@color/colorAccentGreen</item>
-
-
-    </style>
-
-    <style name="Theme.MaterialComponents.DayNight" parent="Theme.MaterialComponents">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cardBg</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
-        <item name="theme">@style/Theme.MaterialComponents.DayNight</item>
     </style>
-
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/colorPrimaryWhite</item>
-        <item name="colorControlActivated">@color/colorAccentAmber</item>
-    </style>
-
-
 </resources>
