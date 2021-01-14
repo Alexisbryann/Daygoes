@@ -1,16 +1,14 @@
 package com.alexis.matatu.Models;
 
 public class RoutesModel {
-    String From;
-
-
-
-    public RoutesModel(String from) {
-        From = from;
-
+    String Routes;
+    public RoutesModel() {
+    }
+    public RoutesModel(String routes) {
+        Routes = routes;
     }
 
-    public String getFrom() {
-        return From;
+    public String getRoutes() {
+        return Routes;
     }
 }

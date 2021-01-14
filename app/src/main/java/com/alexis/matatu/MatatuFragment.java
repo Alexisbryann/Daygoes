@@ -64,21 +64,22 @@ public class MatatuFragment extends Fragment {
 
         mImg_vehicle = mView.findViewById(R.id.imgview_vehicle_photo);
 
-//        Initialize recyclerview
+//      Initialize recyclerview
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
 
-//        Initialize DB
+//      Initialize DB
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicle details");
 
-//        query db
+//      query db
         FirebaseRecyclerOptions<MatatuModel> options
                 = new FirebaseRecyclerOptions.Builder<MatatuModel>()
                 .setQuery(mDb, MatatuModel.class)
                 .build();
 
+//      Initialize and set adapter
         mMatatuAdapter = new MatatuAdapter(options,MatatuFragment.this,getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
 

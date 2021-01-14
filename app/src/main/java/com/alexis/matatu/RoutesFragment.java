@@ -16,12 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.RoutesAdapter;
+import com.alexis.matatu.Models.MatatuModel;
 import com.alexis.matatu.Models.RoutesModel;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class RoutesFragment extends Fragment {
 
+    private DatabaseReference mDb;
     private ArrayList<RoutesModel> mList;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
@@ -29,7 +34,7 @@ public class RoutesFragment extends Fragment {
     private Toolbar mToolbar;
     private SearchView mSearchView;
     private TextView mAppName;
-    private TextView mTv_from;
+    private TextView mTv_Route;
     private TextView mTv_destination;
     private GridLayoutManager mGridLayoutManager;
 
@@ -43,48 +48,45 @@ public class RoutesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.routes,container,false);
 
+//      Inflate views
         mToolbar = mView.findViewById(R.id.toolbar);
         mSearchView = mView.findViewById(R.id.search_view_routes);
         mAppName = mView.findViewById(R.id.tv_app_name);
+        mTv_Route = mView.findViewById(R.id.tv_route);
 
-        mTv_from = mView.findViewById(R.id.tv_route);
-//        mTv_destination = mView.findViewById(R.id.tv_destination);
-
-
-        mList = new ArrayList<>();
-        mList.add(new RoutesModel("Rongai to CBD"));
-        mList.add(new RoutesModel("Eastleigh to station"));
-        mList.add(new RoutesModel("Westlands to Fire station"));
-        mList.add(new RoutesModel("Kikuyu to Khoja"));
-        mList.add(new RoutesModel("Railways to Rongai"));
-        mList.add(new RoutesModel("Ngong to Agrho house"));
-        mList.add(new RoutesModel("Ngong to Ambassadeur"));
-        mList.add(new RoutesModel("Allsops to Imenti house"));
-        mList.add(new RoutesModel("Kasarani to CBD"));
-        mList.add(new RoutesModel("CBD to Nyayo estate"));
-        mList.add(new RoutesModel("CBD to Githurai 44"));
-        mList.add(new RoutesModel("Rongai to CBD"));
-        mList.add(new RoutesModel("Eastleigh to Bus station"));
-        mList.add(new RoutesModel("Westlands to Fire station"));
-        mList.add(new RoutesModel("Kikuyu to Khoja"));
-        mList.add(new RoutesModel("Railways to Rongai"));
-        mList.add(new RoutesModel("Ngong to Agrho house"));
-        mList.add(new RoutesModel("Ngong to Ambassadeur"));
-        mList.add(new RoutesModel("Allsops to Imenti house"));
-        mList.add(new RoutesModel("Kasarani to CBD"));
-        mList.add(new RoutesModel("CBD to Nyayo estate"));
-        mList.add(new RoutesModel("CBD to Githurai 44"));
-
-
-
+//      Initialize recyclerView
         mRecyclerView = mView.findViewById(R.id.recycler_route);
-//        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mGridLayoutManager = new GridLayoutManager(getContext(),3);
-        mRoutesAdapter = new RoutesAdapter(getContext(),mList);
-//        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+
+//      Initialize DB
+        mDb = FirebaseDatabase.getInstance().getReference().child("Routes");
+
+//      query db
+        FirebaseRecyclerOptions<RoutesModel> options
+                = new FirebaseRecyclerOptions.Builder<RoutesModel>()
+                .setQuery(mDb, RoutesModel.class)
+                .build();
+
+//      Initialize and set adapter
+        mRoutesAdapter = new RoutesAdapter(options,RoutesFragment.this,getContext());
         mRecyclerView.setAdapter(mRoutesAdapter);
 
         return mView;
+    }
+    // Function to tell the app to start getting data from database on starting of the activity
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        mRoutesAdapter.startListening();
+    }
+
+    // Function to tell the app to stop getting data from database on stopping of the activity
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        mRoutesAdapter.stopListening();
     }
 }
