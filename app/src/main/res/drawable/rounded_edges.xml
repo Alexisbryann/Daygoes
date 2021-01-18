@@ -6,7 +6,7 @@
         android:color="@color/colorAccentAmber" >
     </solid>
     <corners
-        android:radius="20dp"   >
+        android:radius="05dp"   >
     </corners>
 
 </shape>

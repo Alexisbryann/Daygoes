@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -38,7 +39,8 @@ public class MatatuFragment extends Fragment {
     private TextView mTv_name;
     private TextView mTv_plate;
     private TextView mTv_route;
-
+    private TextView mTv_no_of_stars;
+    private RatingBar mRatings;
     /*
 1.INITIALIZE FIREBASE DB
 2.INITIALIZE UI
@@ -55,7 +57,6 @@ public class MatatuFragment extends Fragment {
         mView = inflater.inflate(R.layout.vehicles,container,false);
 
         mToolbar = mView.findViewById(R.id.toolbar);
-        mSearchView = mView.findViewById(R.id.search_view_vehicle);
         mAppName = mView.findViewById(R.id.tv_app_name);
 
         mTv_name = mView.findViewById(R.id.tv_vehicle_name1);

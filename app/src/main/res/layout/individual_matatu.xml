@@ -40,7 +40,9 @@
                             android:id="@+id/tv_goes"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
                             android:background="@drawable/rounded_edges"
                             android:gravity="center"
                             android:text="@string/offers_and_entertainment"
@@ -78,7 +80,7 @@
 
                         <FrameLayout
                             android:id="@+id/frameLayout6"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +93,7 @@
 
                                 <TextView
                                     android:id="@+id/textView9"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="@string/like"
@@ -104,7 +106,7 @@
 
                                 <TextView
                                     android:id="@+id/textView12"
-                                    android:layout_width="100dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="4dp"
                                     android:gravity="center"
@@ -118,7 +120,7 @@
 
                                 <TextView
                                     android:id="@+id/textView14"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="4dp"
                                     android:gravity="center"
@@ -132,7 +134,7 @@
 
                                 <TextView
                                     android:id="@+id/textView15"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="4dp"
                                     android:gravity="center"
@@ -141,6 +143,7 @@
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/textView14"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -236,7 +239,7 @@
                             android:includeFontPadding="true"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
-                            android:text="Gifting"
+                            android:text="@string/gifting"
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -283,6 +286,7 @@
                                     android:focusable="true"
                                     android:numStars="5"
                                     android:progressTint="@color/colorAccentAmber"
+                                    android:stepSize="@dimen/material_emphasis_high_type"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/textView13"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -301,7 +305,6 @@
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
 
@@ -399,7 +402,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
                                     android:gravity="center|start"
-                                    android:text="Vehicle name"
+                                    android:text="@string/vehicle_name"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -426,7 +429,7 @@
                                     android:layout_height="0dp"
                                     android:layout_marginEnd="8dp"
                                     android:gravity="start"
-                                    android:text="Capacity"
+                                    android:text="@string/capacity"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textStyle="bold"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -465,12 +468,13 @@
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Enter comment"
+                android:hint="@string/enter_comment"
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:autofillHints="" />
 
             <ImageButton
                 android:id="@+id/btn_send_comment"

@@ -1,5 +1,6 @@
 package com.alexis.matatu.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -33,15 +34,16 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
         mContext = context;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, final int position, @NonNull MatatuModel model) {
 
         Picasso.with(mContext).load(model.getImage()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
-        holder.mTv_route.setText(model.getRoute());
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
         holder.mTv_ratings.setRating(model.getRatings());
+        holder.mTv_no_of_stars.setText(holder.mTv_ratings.getRating() +" Stars");
 
         }
     @NonNull
@@ -54,20 +56,24 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
     public static class FirebaseViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView mTv_name;
-        private final TextView mTv_route;
         private final TextView mTv_capacity;
         private final TextView mTv_plate;
         private final RatingBar mTv_ratings;
         private final ImageView mImg_pic;
+        private final TextView mTv_no_of_stars;
+
+
+        @SuppressLint("SetTextI18n")
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mImg_pic = itemView.findViewById(R.id.imgview_vehicle_photo);
             mTv_name = itemView.findViewById(R.id.tv_vehicle_name1);
-            mTv_route = itemView.findViewById(R.id.tv_route1);
             mTv_capacity = itemView.findViewById(R.id.tv_capacity1);
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
             mTv_ratings = itemView.findViewById(R.id.ratings);
+            mTv_no_of_stars = itemView.findViewById(R.id.tv_no_of_stars);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

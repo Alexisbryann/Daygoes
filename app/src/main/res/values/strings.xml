@@ -13,7 +13,7 @@
     <string name="textview">TextView</string>
     <string name="like">Like</string>
     <string name="comments">Comments</string>
-    <string name="favourite">Favourite</string>
+    <string name="favourite">Add to Favourites</string>
     <string name="share">Share</string>
     <string name="dislike">Dislike</string>
     <string name="offers_and_entertainment">Offers and Entertainment.</string>
@@ -25,5 +25,8 @@
     <string name="thumbs_down_button">Thumbs down button</string>
     <string name="share_icon">Share icon</string>
     <string name="share_button">Share button</string>
+    <string name="_5_stars">5 stars</string>
+    <string name="gifting">Gifting</string>
+    <string name="enter_comment">Enter comment</string>
 
 </resources>
