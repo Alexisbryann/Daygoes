@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,7 +62,7 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
             mFavourite = itemView.findViewById(R.id.img_favourite);
             mShare = itemView.findViewById(R.id.img_share);
             mDislike = itemView.findViewById(R.id.img_dislike);
-            mPay = itemView.findViewById(R.id.btn_payWithPoints);
+            mPay = itemView.findViewById(R.id.btn_gift);
             mRatingBar = itemView.findViewById(R.id.ratingBar);
         }
 

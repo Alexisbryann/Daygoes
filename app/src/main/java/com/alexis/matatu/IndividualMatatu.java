@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -53,7 +52,7 @@ public class IndividualMatatu extends AppCompatActivity {
         mFavourite=findViewById(R.id.img_favourite);
         mShare=findViewById(R.id.img_share);
         mDislike=findViewById(R.id.img_dislike);
-        mPay=findViewById(R.id.btn_payWithPoints);
+        mPay=findViewById(R.id.btn_gift);
         mRatingBar=findViewById(R.id.ratingBar);
 
         //retrieving data using intent
