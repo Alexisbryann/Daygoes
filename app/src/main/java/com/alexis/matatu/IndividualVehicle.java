@@ -19,9 +19,8 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
-public class IndividualMatatu extends AppCompatActivity {
+public class IndividualVehicle extends AppCompatActivity {
     private SliderLayout mSliderShow;
-    private View mView;
     private TextView mTv_name;
     private TextView mTv_plate;
     private TextView mTv_route;
@@ -41,7 +40,7 @@ public class IndividualMatatu extends AppCompatActivity {
 
         inflateImageSlider();
 
-//        inflate the layout for this fragment
+//        inflate the layout
 
         mTv_goes= findViewById(R.id.tv_goes);
         mTv_name= findViewById(R.id.tv_matatu_name);
@@ -79,7 +78,7 @@ public class IndividualMatatu extends AppCompatActivity {
             public void onClick(View v) {
                 mLike.setColorFilter(Color.rgb(0, 100, 0));
                 mDislike.setColorFilter(Color.rgb(255, 255, 255));
-                Toast toast1 = Toast.makeText(IndividualMatatu.this, "Liked", Toast.LENGTH_LONG);
+                Toast toast1 = Toast.makeText(IndividualVehicle.this, "Liked", Toast.LENGTH_LONG);
                 toast1.show();
             }
         });
@@ -88,7 +87,7 @@ public class IndividualMatatu extends AppCompatActivity {
             public void onClick(View v) {
                 mDislike.setColorFilter(Color.rgb(255, 0, 0));
                 mLike.setColorFilter(Color.rgb(255, 255, 255));
-                Toast toast = Toast.makeText(IndividualMatatu.this,"Disliked",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(IndividualVehicle.this,"Disliked",Toast.LENGTH_LONG);
                 toast.show();
             }
         });
@@ -98,14 +97,14 @@ public class IndividualMatatu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mFavourite.setColorFilter(Color.rgb(255, 191, 0));
-                Toast toast = Toast.makeText(IndividualMatatu.this,"Vehicle made favourite",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(IndividualVehicle.this,"Vehicle made favourite",Toast.LENGTH_LONG);
                 toast.show();
             }
         });
         mShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(IndividualMatatu.this,"Share",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(IndividualVehicle.this,"Share",Toast.LENGTH_LONG);
                 toast.show();
             }
         });

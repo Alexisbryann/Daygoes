@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexis.matatu.IndividualMatatu;
 import com.alexis.matatu.IndividualRoute;
 import com.alexis.matatu.Models.RoutesModel;
 import com.alexis.matatu.R;
@@ -51,7 +50,7 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast toast = Toast.makeText(mContext,"Clicked",Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(mContext,mTv_route.getText() ,Toast.LENGTH_LONG);
                     toast.show();
                     Context context = v.getContext();
                     Intent i = new Intent(context, IndividualRoute.class);

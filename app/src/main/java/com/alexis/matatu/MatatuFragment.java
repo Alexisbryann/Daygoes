@@ -3,6 +3,7 @@ package com.alexis.matatu;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.MatatuAdapter;
 import com.alexis.matatu.Models.MatatuModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,6 +43,7 @@ public class MatatuFragment extends Fragment {
     private TextView mTv_route;
     private TextView mTv_no_of_stars;
     private RatingBar mRatings;
+    private ShimmerFrameLayout mShimmerFrameLayout;
     /*
 1.INITIALIZE FIREBASE DB
 2.INITIALIZE UI
@@ -56,13 +59,13 @@ public class MatatuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.vehicles,container,false);
 
+        mShimmerFrameLayout = mView.findViewById(R.id.shimmerLayout);
+
         mToolbar = mView.findViewById(R.id.toolbar);
         mAppName = mView.findViewById(R.id.tv_app_name);
-
         mTv_name = mView.findViewById(R.id.tv_vehicle_name1);
         mTv_plate = mView.findViewById(R.id.tv_no_plate1);
         mTv_route = mView.findViewById(R.id.tv_route1);
-
         mImg_vehicle = mView.findViewById(R.id.imgview_vehicle_photo);
 
 //      Initialize recyclerview
@@ -70,6 +73,9 @@ public class MatatuFragment extends Fragment {
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+        mRecyclerView.setVisibility(View.GONE);
+        mShimmerFrameLayout.startShimmer();
+        mShimmerFrameLayout.setVisibility(View.VISIBLE);
 
 //      Initialize DB
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicle details");
@@ -80,9 +86,20 @@ public class MatatuFragment extends Fragment {
                 .setQuery(mDb, MatatuModel.class)
                 .build();
 
-//      Initialize and set adapter
+        //      Initialize and set adapter
         mMatatuAdapter = new MatatuAdapter(options,MatatuFragment.this,getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                mShimmerFrameLayout.setVisibility(View.GONE);
+                mShimmerFrameLayout.stopShimmer();
+                mRecyclerView.setVisibility(View.VISIBLE);
+            }
+        }, 5000);
 
         return mView;
     }
@@ -92,6 +109,9 @@ public class MatatuFragment extends Fragment {
     {
         super.onStart();
         mMatatuAdapter.startListening();
+//        mRecyclerView.setVisibility(View.INVISIBLE);
+//        mShimmerFrameLayout.setVisibility(View.VISIBLE);
+//        mShimmerFrameLayout.startShimmer();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity
@@ -100,5 +120,6 @@ public class MatatuFragment extends Fragment {
     {
         super.onStop();
         mMatatuAdapter.stopListening();
+
     }
 }

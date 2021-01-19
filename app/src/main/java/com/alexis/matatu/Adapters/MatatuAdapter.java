@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexis.matatu.IndividualMatatu;
+import com.alexis.matatu.IndividualVehicle;
 import com.alexis.matatu.MatatuFragment;
 import com.alexis.matatu.Models.MatatuModel;
 import com.alexis.matatu.R;
@@ -81,7 +81,7 @@ public class MatatuAdapter extends FirebaseRecyclerAdapter<MatatuModel, MatatuAd
                     int position = getAdapterPosition();
 
                     Context context = v.getContext();
-                    Intent i = new Intent(context, IndividualMatatu.class);
+                    Intent i = new Intent(context, IndividualVehicle.class);
                     i.putExtra("NAME_KEY", mTv_name.getText().toString());
                     i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                     i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
