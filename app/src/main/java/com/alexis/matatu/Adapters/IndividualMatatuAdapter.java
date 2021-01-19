@@ -33,7 +33,7 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
     @NonNull
     @Override
     public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.Individual_vehicle,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.individual_vehicle,parent,false);
         return new FirebaseViewHolder(view);
     }
     public class FirebaseViewHolder extends RecyclerView.ViewHolder {
