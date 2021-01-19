@@ -37,7 +37,7 @@ public class IndividualMatatu extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.individual_matatu);
+        setContentView(R.layout.individual_vehicle);
 
         inflateImageSlider();
 
@@ -52,7 +52,7 @@ public class IndividualMatatu extends AppCompatActivity {
         mFavourite=findViewById(R.id.img_favourite);
         mShare=findViewById(R.id.img_share);
         mDislike=findViewById(R.id.img_dislike);
-        mPay=findViewById(R.id.btn_gift);
+        mPay=findViewById(R.id.btn_pay);
         mRatingBar=findViewById(R.id.ratingBar);
 
         //retrieving data using intent

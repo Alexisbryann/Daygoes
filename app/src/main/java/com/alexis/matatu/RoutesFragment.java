@@ -59,6 +59,7 @@ public class RoutesFragment extends Fragment {
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+
 //      Initialize DB
         mDb = FirebaseDatabase.getInstance().getReference().child("Routes");
 

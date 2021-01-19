@@ -1,6 +1,7 @@
 package com.alexis.matatu.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexis.matatu.IndividualMatatu;
 import com.alexis.matatu.Models.RoutesModel;
 import com.alexis.matatu.R;
 import com.alexis.matatu.RoutesFragment;
@@ -18,14 +20,13 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
 
     private final Context mContext;
 
-
     public RoutesAdapter(@NonNull FirebaseRecyclerOptions<RoutesModel> options, RoutesFragment routesFragment, Context context) {
         super(options);
         mContext = context;
     }
     @Override
     protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, int position, @NonNull RoutesModel model) {
-        holder.mTv_route.setText(model.getRoutes());
+        holder.mTv_route.setText(model.getRoute());
     }
 
     @NonNull
@@ -43,6 +44,13 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
             super(itemView);
 
             mTv_route = itemView.findViewById(R.id.tv_route);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 }

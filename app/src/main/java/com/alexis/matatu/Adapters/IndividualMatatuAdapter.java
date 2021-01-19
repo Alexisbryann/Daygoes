@@ -33,7 +33,7 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
     @NonNull
     @Override
     public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.individual_matatu,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.Individual_vehicle,parent,false);
         return new FirebaseViewHolder(view);
     }
     public class FirebaseViewHolder extends RecyclerView.ViewHolder {
@@ -62,7 +62,7 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
             mFavourite = itemView.findViewById(R.id.img_favourite);
             mShare = itemView.findViewById(R.id.img_share);
             mDislike = itemView.findViewById(R.id.img_dislike);
-            mPay = itemView.findViewById(R.id.btn_gift);
+            mPay = itemView.findViewById(R.id.btn_pay);
             mRatingBar = itemView.findViewById(R.id.ratingBar);
         }
 
