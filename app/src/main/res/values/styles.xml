@@ -4,5 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cardBg</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
+<!--        <item name="backgroundTint">@color/colorAccentGreen</item>-->
     </style>
+
 </resources>

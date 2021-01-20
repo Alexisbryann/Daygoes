@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import com.alexis.matatu.Adapters.IndividualRouteAdapter;
 import com.alexis.matatu.Models.IndividualRouteModel;
@@ -29,6 +30,7 @@ public class IndividualRoute extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicles_routes);
+        getSupportActionBar().setTitle("Vehicles on this route");
 
 //      Initialize recyclerView
         mRecyclerView = findViewById(R.id.recycler_vehicles_routes);
@@ -48,10 +50,16 @@ public class IndividualRoute extends AppCompatActivity {
                 = new FirebaseRecyclerOptions.Builder<IndividualRouteModel>()
                 .setQuery(query, IndividualRouteModel.class)
                 .build();
+
 //      Initialize and set adapter
         mIndividualRouteAdapter = new IndividualRouteAdapter(options,this);
         mRecyclerView.setAdapter(mIndividualRouteAdapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     // Function to tell the app to start getting data from database on starting of the activity

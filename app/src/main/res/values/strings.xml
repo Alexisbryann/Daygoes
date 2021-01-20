@@ -17,7 +17,8 @@
     <string name="share">Share</string>
     <string name="dislike">Dislike</string>
     <string name="offers_and_entertainment">Offers and Entertainment.</string>
-    <string name="pay_with_points">pay ride</string>
+    <string name="pay_with_points"><u>Pay ride with points</u></string>
+    <string name="pay_ride">Pay ride</string>
     <string name="rate">Rate</string>
     <string name="thumbs_up_icon">thumbs up icon</string>
     <string name="plate">plate</string>
@@ -28,5 +29,7 @@
     <string name="_5_stars">5 stars</string>
     <string name="gifting">Buy &amp; Gift</string>
     <string name="enter_comment">Enter comment</string>
+    <string name="account_balance"><u>Account balance</u></string>
+    <string name="gift_vehicle"><u>Gift vehicle</u></string>
 
 </resources>

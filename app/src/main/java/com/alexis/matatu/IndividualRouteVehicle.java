@@ -38,6 +38,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_route_vehicle);
+        getSupportActionBar().setTitle("Selected vehicle");
 
         inflateImageSlider();
 
@@ -64,6 +65,13 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mTv_route.setText(route);
 
         iconInitialize();
+        mPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndividualRouteVehicle.this,Pay.class);
+                startActivity(intent);
+            }
+        });
 
     }
     private void iconInitialize() {

@@ -46,9 +46,8 @@
                             android:background="@drawable/rounded_edges"
                             android:gravity="center"
                             android:text="@string/offers_and_entertainment"
-                            android:textColor="@color/colorAccentGreen"
+                            android:textColor="@color/colorAccentRed"
                             android:textSize="18sp"
-                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +100,6 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
-                                    android:textStyle="bold"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +113,6 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
-                                    android:textStyle="bold"
                                     app:layout_constraintStart_toEndOf="@+id/textView9"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -129,7 +126,6 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
-                                    android:textStyle="bold"
                                     app:layout_constraintStart_toEndOf="@+id/textView12"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,7 +139,6 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
-                                    android:textStyle="bold"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/textView14"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -233,17 +228,17 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_pay"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:background="@drawable/round_edges"
+                            android:background="@drawable/ripple"
                             android:fontFamily="@font/almendra"
                             android:includeFontPadding="true"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
-                            android:text="@string/pay_with_points"
+                            android:text="@string/pay_ride"
                             android:textColor="@color/colorPrimaryBlack"
-                            android:textSize="14sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:backgroundTint="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="@+id/frameLayout5"
@@ -347,7 +342,6 @@
                                     android:gravity="center|start"
                                     android:text="@string/vehicle_name"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -361,7 +355,6 @@
                                     android:gravity="center"
                                     android:text="@string/plate"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textStyle="bold"
                                     app:layout_constraintEnd_toStartOf="@+id/tv_sacco"
                                     app:layout_constraintStart_toEndOf="@+id/tv_matatu_name"
                                     app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
@@ -374,7 +367,6 @@
                                     android:gravity="start"
                                     android:text="@string/capacity"
                                     android:textColor="@color/colorPrimaryBlack"
-                                    android:textStyle="bold"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
