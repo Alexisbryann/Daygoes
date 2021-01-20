@@ -44,7 +44,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mTv_goes= findViewById(R.id.tv_goes);
         mTv_name= findViewById(R.id.tv_matatu_name);
         mTv_plate=findViewById(R.id.tv_plate);
-        mTv_route=findViewById(R.id.tv_route);
+        mTv_route=findViewById(R.id.tv_sacco);
         mSlider=findViewById(R.id.slider);
         mLike=findViewById(R.id.img_like);
         mFavourite=findViewById(R.id.img_favourite);

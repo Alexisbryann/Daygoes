@@ -52,7 +52,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_route"
+                    android:id="@+id/tv_sacco"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -74,9 +74,9 @@
                     android:text="@string/capacity"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_route"
-                    app:layout_constraintStart_toStartOf="@+id/tv_route"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_route" />
+                    app:layout_constraintEnd_toEndOf="@id/tv_sacco"
+                    app:layout_constraintStart_toStartOf="@id/tv_sacco"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sacco" />
 
                 <TextView
                     android:id="@+id/tv_no_plate"
@@ -121,38 +121,35 @@
                     app:layout_constraintTop_toTopOf="@+id/tv_vehicle_name" />
 
                 <TextView
-                    android:id="@+id/tv_route1"
+                    android:id="@+id/tv_sacco1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_route"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_sacco"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_vehicle_name1"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name1" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_sacco" />
 
                 <TextView
                     android:id="@+id/tv_capacity1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_capacity"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_route1"
-                    app:layout_constraintStart_toStartOf="@+id/tv_route1"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_route1" />
+                    app:layout_constraintEnd_toEndOf="@id/tv_sacco1"
+                    app:layout_constraintStart_toStartOf="@id/tv_sacco1"
+                    app:layout_constraintTop_toTopOf="@+id/tv_capacity" />
 
                 <TextView
                     android:id="@+id/tv_no_plate1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
@@ -160,7 +157,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tv_no_plate"
                     app:layout_constraintEnd_toEndOf="@+id/tv_capacity1"
                     app:layout_constraintStart_toStartOf="@+id/tv_capacity1"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_capacity1" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_no_plate" />
 
                 <RatingBar
                     android:id="@+id/ratings"
@@ -171,8 +168,7 @@
                     android:progressBackgroundTint="@color/cardBg"
                     android:progressTint="@color/colorAccentAmber"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
-                    app:layout_constraintStart_toEndOf="@+id/tv_ratings"
-                    app:layout_constraintStart_toStartOf="@+id/tv_no_plate1"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_no_of_stars"
                     app:layout_constraintTop_toTopOf="@+id/tv_ratings" />
 
                 <View
@@ -186,13 +182,11 @@
 
                 <TextView
                     android:id="@+id/tv_no_of_stars"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="5 stars"
                     android:textColor="@color/colorAccentRed"
                     app:layout_constraintBottom_toBottomOf="@id/ratings"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ratings"
                     app:layout_constraintTop_toTopOf="@+id/ratings" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

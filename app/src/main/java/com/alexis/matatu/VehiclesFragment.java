@@ -1,13 +1,10 @@
 package com.alexis.matatu;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.SearchView;
@@ -20,16 +17,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexis.matatu.Adapters.MatatuAdapter;
+import com.alexis.matatu.Adapters.VehiclesAdapter;
 import com.alexis.matatu.Models.MatatuModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MatatuFragment extends Fragment {
+public class VehiclesFragment extends Fragment {
 
-    private MatatuAdapter mMatatuAdapter;
+    private VehiclesAdapter mMatatuAdapter;
     private Toolbar mToolbar;
     private SearchView mSearchView;
     private TextView mAppName;
@@ -49,7 +46,7 @@ public class MatatuFragment extends Fragment {
 2.INITIALIZE UI
 3.DATA*/
 
-    public MatatuFragment(){
+    public VehiclesFragment(){
     }
 
     private View mView;
@@ -65,7 +62,7 @@ public class MatatuFragment extends Fragment {
         mAppName = mView.findViewById(R.id.tv_app_name);
         mTv_name = mView.findViewById(R.id.tv_vehicle_name1);
         mTv_plate = mView.findViewById(R.id.tv_no_plate1);
-        mTv_route = mView.findViewById(R.id.tv_route1);
+        mTv_route = mView.findViewById(R.id.tv_sacco1);
         mImg_vehicle = mView.findViewById(R.id.imgview_vehicle_photo);
 
 //      Initialize recyclerview
@@ -87,7 +84,7 @@ public class MatatuFragment extends Fragment {
                 .build();
 
         //      Initialize and set adapter
-        mMatatuAdapter = new MatatuAdapter(options,MatatuFragment.this,getContext());
+        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this,getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
 
         Handler handler = new Handler();
@@ -99,7 +96,7 @@ public class MatatuFragment extends Fragment {
                 mShimmerFrameLayout.stopShimmer();
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
-        }, 5000);
+        }, 2000);
 
         return mView;
     }
@@ -109,9 +106,6 @@ public class MatatuFragment extends Fragment {
     {
         super.onStart();
         mMatatuAdapter.startListening();
-//        mRecyclerView.setVisibility(View.INVISIBLE);
-//        mShimmerFrameLayout.setVisibility(View.VISIBLE);
-//        mShimmerFrameLayout.startShimmer();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity

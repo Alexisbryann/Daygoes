@@ -4,6 +4,7 @@ public class MatatuModel {
 
     private String Image;
     private String Name;
+    private String Sacco;
     private String Route;
     private String Capacity;
     private String Plate;
@@ -11,13 +12,22 @@ public class MatatuModel {
 
     public MatatuModel() {
     }
-    public MatatuModel(String image, String name, String route, String capacity, String plate, int ratings) {
+    public MatatuModel(String image, String name, String sacco, String route, String capacity, String plate, int ratings) {
         Image = image;
         Name = name;
+        Sacco = sacco;
         Route = route;
         Capacity = capacity;
         Plate = plate;
         Ratings = ratings;
+    }
+
+    public String getSacco() {
+        return Sacco;
+    }
+
+    public void setSacco(String sacco) {
+        Sacco = sacco;
     }
 
     public String getImage() {

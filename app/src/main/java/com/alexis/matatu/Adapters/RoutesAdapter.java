@@ -45,7 +45,7 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mTv_route = itemView.findViewById(R.id.tv_route);
+            mTv_route = itemView.findViewById(R.id.tv_sacco);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

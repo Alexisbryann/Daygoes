@@ -52,7 +52,7 @@ public class RoutesFragment extends Fragment {
         mToolbar = mView.findViewById(R.id.toolbar);
         mSearchView = mView.findViewById(R.id.search_view_routes);
         mAppName = mView.findViewById(R.id.tv_app_name);
-        mTv_Route = mView.findViewById(R.id.tv_route);
+        mTv_Route = mView.findViewById(R.id.tv_sacco);
 
 //      Initialize recyclerView
         mRecyclerView = mView.findViewById(R.id.recycler_route);

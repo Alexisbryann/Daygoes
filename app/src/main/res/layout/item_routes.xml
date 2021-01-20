@@ -30,7 +30,7 @@
                 android:background="@color/cardBg">
 
                 <TextView
-                    android:id="@+id/tv_route"
+                    android:id="@+id/tv_sacco"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/almendra"

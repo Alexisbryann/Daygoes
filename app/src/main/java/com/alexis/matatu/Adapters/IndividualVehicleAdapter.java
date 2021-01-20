@@ -18,16 +18,16 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 
-public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualMatatuModel,IndividualMatatuAdapter.FirebaseViewHolder> {
+public class IndividualVehicleAdapter extends FirebaseRecyclerAdapter<IndividualMatatuModel, IndividualVehicleAdapter.FirebaseViewHolder> {
 
     private final Context mContext;
 
-    public IndividualMatatuAdapter(@NonNull FirebaseRecyclerOptions<IndividualMatatuModel> options, Context context) {
+    public IndividualVehicleAdapter(@NonNull FirebaseRecyclerOptions<IndividualMatatuModel> options, Context context) {
         super(options);
         mContext = context;
     }
     @Override
-    protected void onBindViewHolder(@NonNull IndividualMatatuAdapter.FirebaseViewHolder holder, int position, @NonNull IndividualMatatuModel model) {
+    protected void onBindViewHolder(@NonNull IndividualVehicleAdapter.FirebaseViewHolder holder, int position, @NonNull IndividualMatatuModel model) {
 
     }
     @NonNull
@@ -41,7 +41,7 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
         private final TextView mTv_goes;
         private final TextView mTv_name;
         private final TextView mTv_plate;
-        private final TextView mTv_route;
+        private final TextView mTv_Sacco;
         private final SliderLayout mSlider;
         private final ImageView mLike;
         private final ImageView mFavourite;
@@ -56,7 +56,7 @@ public class IndividualMatatuAdapter extends FirebaseRecyclerAdapter<IndividualM
             mTv_goes = itemView.findViewById(R.id.tv_goes);
             mTv_name = itemView.findViewById(R.id.tv_matatu_name);
             mTv_plate = itemView.findViewById(R.id.tv_plate);
-            mTv_route = itemView.findViewById(R.id.tv_route);
+            mTv_Sacco = itemView.findViewById(R.id.tv_sacco);
             mSlider = itemView.findViewById(R.id.slider);
             mLike = itemView.findViewById(R.id.img_like);
             mFavourite = itemView.findViewById(R.id.img_favourite);

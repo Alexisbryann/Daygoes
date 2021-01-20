@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.alexis.matatu.MatatuFragment;
+import com.alexis.matatu.VehiclesFragment;
 import com.alexis.matatu.ProfilesFragment;
 import com.alexis.matatu.RoutesFragment;
 
@@ -23,7 +23,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = null;
         if (position == 0) {
-            fragment = new MatatuFragment();
+            fragment = new VehiclesFragment();
         }else if (position == 1){
             fragment = new RoutesFragment();
         }else if (position == 2){

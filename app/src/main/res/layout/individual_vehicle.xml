@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardBg"
     tools:ignore="MissingDefaultResource">
 
     <FrameLayout
@@ -39,11 +40,9 @@
 
                         <TextView
                             android:id="@+id/tv_goes"
-                            android:layout_width="0dp"
+                            android:layout_width="403dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="4dp"
+                            android:layout_marginTop="8dp"
                             android:background="@drawable/rounded_edges"
                             android:gravity="center"
                             android:text="@string/offers_and_entertainment"
@@ -52,7 +51,7 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
 
                         <FrameLayout
                             android:id="@+id/frameLayout3"
@@ -157,7 +156,7 @@
                                     app:layout_constraintStart_toStartOf="@+id/textView9"
                                     app:layout_constraintTop_toBottomOf="@+id/textView9"
                                     app:srcCompat="@drawable/thumb_up"
-                                    app:tint="@color/colorPrimaryWhite" />
+                                    app:tint="@color/colorShimmer" />
 
                                 <ImageView
                                     android:id="@+id/img_favourite"
@@ -168,7 +167,8 @@
                                     app:layout_constraintStart_toEndOf="@+id/img_like"
                                     app:layout_constraintStart_toStartOf="@+id/textView12"
                                     app:layout_constraintTop_toBottomOf="@+id/textView12"
-                                    app:srcCompat="@drawable/hearts" />
+                                    app:srcCompat="@drawable/hearts"
+                                    app:tint="@color/colorShimmer" />
 
                                 <ImageView
                                     android:id="@+id/img_share"
@@ -179,7 +179,7 @@
                                     app:layout_constraintStart_toStartOf="@+id/textView14"
                                     app:layout_constraintTop_toBottomOf="@+id/textView14"
                                     app:srcCompat="@android:drawable/ic_menu_share"
-                                    app:tint="@color/colorPrimaryBlack" />
+                                    app:tint="@color/colorShimmer" />
 
                                 <ImageView
                                     android:id="@+id/img_dislike"
@@ -190,7 +190,7 @@
                                     app:layout_constraintStart_toStartOf="@+id/textView15"
                                     app:layout_constraintTop_toBottomOf="@+id/textView15"
                                     app:srcCompat="@drawable/thumbs_down"
-                                    app:tint="@color/colorPrimaryWhite" />
+                                    app:tint="@color/colorShimmer" />
 
                                 <TextView
                                     android:id="@+id/tv_likes_no"
@@ -232,10 +232,10 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_pay"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:background="@drawable/rounded_edges"
+                            android:background="@drawable/round_edges"
                             android:fontFamily="@font/almendra"
                             android:includeFontPadding="true"
                             android:paddingStart="8dp"
@@ -245,8 +245,8 @@
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:backgroundTint="@color/colorAccentAmber"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/frameLayout5"
+                            app:layout_constraintStart_toStartOf="@+id/frameLayout5"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
                             app:rippleColor="@color/colorAccentRed" />
 
@@ -307,11 +307,11 @@
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_goes" />
 
                         <FrameLayout
                             android:layout_width="0dp"
-                            android:layout_height="500dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -319,7 +319,8 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/cardBg"
                                 tools:listitem="@layout/item_chat" />
                         </FrameLayout>
 
@@ -351,7 +352,7 @@
                             android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_goes" />
 
                         <View
                             android:id="@+id/divider7"
@@ -391,7 +392,7 @@
                             android:layout_marginTop="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_goes">
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -413,28 +414,28 @@
                                 <TextView
                                     android:id="@+id/tv_plate"
                                     android:layout_width="100dp"
-                                    android:layout_height="0dp"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:gravity="start"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:gravity="center"
                                     android:text="@string/plate"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textStyle="bold"
-                                    app:layout_constraintEnd_toStartOf="@+id/tv_route"
+                                    app:layout_constraintEnd_toStartOf="@+id/tv_sacco"
                                     app:layout_constraintStart_toEndOf="@+id/tv_matatu_name"
                                     app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
 
                                 <TextView
-                                    android:id="@+id/tv_route"
+                                    android:id="@+id/tv_sacco"
                                     android:layout_width="100dp"
-                                    android:layout_height="0dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginEnd="8dp"
                                     android:gravity="start"
                                     android:text="@string/capacity"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textStyle="bold"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/tv_plate" />
+                                    app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
 

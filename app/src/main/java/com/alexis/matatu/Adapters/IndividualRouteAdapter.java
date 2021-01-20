@@ -65,7 +65,7 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
 
             mImg_pic = itemView.findViewById(R.id.imgview_vehicle_photo);
             mTv_name = itemView.findViewById(R.id.tv_vehicle_name1);
-            mTv_route = itemView.findViewById(R.id.tv_route1);
+            mTv_route = itemView.findViewById(R.id.tv_sacco1);
             mTv_capacity = itemView.findViewById(R.id.tv_capacity1);
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
             mTv_ratings = itemView.findViewById(R.id.ratings);
