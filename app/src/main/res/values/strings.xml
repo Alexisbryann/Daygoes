@@ -31,5 +31,6 @@
     <string name="enter_comment">Enter comment</string>
     <string name="account_balance"><u>Account balance</u></string>
     <string name="gift_vehicle"><u>Gift vehicle</u></string>
+    <string name="Enter_phone_number">Enter your Phone number, we will send you a text to verify your identity.</string>
 
 </resources>
