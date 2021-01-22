@@ -35,7 +35,7 @@
 
         <activity
             android:name=".Login"
-            android:theme="@style/Theme.MaterialComponents" />
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity android:name=".IndividualRouteVehicle"/>
 
