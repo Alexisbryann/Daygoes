@@ -50,19 +50,37 @@ public class Login extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
         mResendOTP = findViewById(R.id.btn_resend_otp);
 
+
         mSendOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                String countryExtension = String.valueOf(+254);
                 String phoneNumber = mPhoneNumber.getText().toString();
-//                String completeNumber = countryExtension + phoneNumber;
-
                 if ( phoneNumber.isEmpty()){
                     mPhoneNumber.setError("Phone number can not be empty");
                 }else {
                     mProgressBar.setVisibility(View.VISIBLE);
                     mSendOTP.setEnabled(false);
+
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                            phoneNumber,        // Phone number to verify
+                            60,                 // Timeout duration
+                            TimeUnit.SECONDS,   // Unit of timeout
+                            Login.this,               // Activity (for callback binding)
+                            mCallbacks);        // OnVerificationStateChangedCallbacks
+                }
+            }
+        });
+
+        mResendOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String phoneNumber = mPhoneNumber.getText().toString();
+                if ( phoneNumber.isEmpty()){
+                    mPhoneNumber.setError("Phone number can not be empty");
+                }else {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    mResendOTP.setEnabled(false);
 
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             phoneNumber,        // Phone number to verify
@@ -84,6 +102,7 @@ public class Login extends AppCompatActivity {
                 mSendOTP.setVisibility(View.GONE);
                 mPhoneNumber.setError("OTP sending failed, please resend");
                 mResendOTP.setVisibility(View.VISIBLE);
+                mPhoneNumber.setText("");
             }
 
             @Override

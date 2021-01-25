@@ -38,7 +38,7 @@ public class IndividualVehicleAdapter extends FirebaseRecyclerAdapter<Individual
     }
     public class FirebaseViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mTv_goes;
+//        private final TextView mTv_goes;
         private final TextView mTv_name;
         private final TextView mTv_plate;
         private final TextView mTv_Sacco;
@@ -53,7 +53,7 @@ public class IndividualVehicleAdapter extends FirebaseRecyclerAdapter<Individual
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mTv_goes = itemView.findViewById(R.id.tv_goes);
+//            mTv_goes = itemView.findViewById(R.id.tv_goes);
             mTv_name = itemView.findViewById(R.id.tv_matatu_name);
             mTv_plate = itemView.findViewById(R.id.tv_plate);
             mTv_Sacco = itemView.findViewById(R.id.tv_sacco);

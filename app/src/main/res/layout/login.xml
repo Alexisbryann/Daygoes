@@ -85,7 +85,8 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginEnd="8dp"
                         android:textColorHint="@color/colorPrimaryBlack"
-                        app:boxStrokeColor="@color/colorPrimaryWhite"
+                        app:boxStrokeColor="@color/colorAccentAmber"
+                        app:boxStrokeErrorColor="@color/colorAccentAmber"
                         app:errorEnabled="true"
                         app:errorTextColor="@color/colorAccentRed"
                         app:hintTextColor="@color/colorAccentGreen"
@@ -98,7 +99,7 @@
                             android:id="@+id/enter_phone_no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter phone number" />
+                            android:hint="Enter Phone number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ProgressBar

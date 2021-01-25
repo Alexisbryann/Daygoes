@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -24,14 +25,13 @@ public class IndividualVehicle extends AppCompatActivity {
     private TextView mTv_name;
     private TextView mTv_plate;
     private TextView mTv_route;
-    private TextView mTv_goes;
     private SliderLayout mSlider;
     private ImageView mLike;
     private ImageView mFavourite;
     private ImageView mShare;
     private ImageView mDislike;
-    private MaterialButton mPay;
     private RatingBar mRatingBar;
+    private FloatingActionButton mFabChat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,8 +41,7 @@ public class IndividualVehicle extends AppCompatActivity {
         inflateImageSlider();
 
 //        inflate the layout
-
-        mTv_goes= findViewById(R.id.tv_goes);
+        mFabChat = findViewById(R.id.fab_chat);
         mTv_name= findViewById(R.id.tv_matatu_name);
         mTv_plate=findViewById(R.id.tv_plate);
         mTv_route=findViewById(R.id.tv_sacco);
@@ -51,7 +50,6 @@ public class IndividualVehicle extends AppCompatActivity {
         mFavourite=findViewById(R.id.img_favourite);
         mShare=findViewById(R.id.img_share);
         mDislike=findViewById(R.id.img_dislike);
-        mPay=findViewById(R.id.btn_pay);
         mRatingBar=findViewById(R.id.ratingBar);
 
         //retrieving data using intent
@@ -72,48 +70,33 @@ public class IndividualVehicle extends AppCompatActivity {
         super.onResume();
     }
     private void iconInitialize() {
-        mLike.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                mLike.setColorFilter(Color.rgb(0, 100, 0));
-                mDislike.setColorFilter(Color.rgb(255, 255, 255));
-                Toast toast1 = Toast.makeText(IndividualVehicle.this, "Liked", Toast.LENGTH_LONG);
-                toast1.show();
-            }
+        mLike.setOnClickListener(v -> {
+            mLike.setColorFilter(Color.rgb(0, 100, 0));
+            mDislike.setColorFilter(Color.rgb(255, 255, 255));
+            Toast toast1 = Toast.makeText(IndividualVehicle.this, "Liked", Toast.LENGTH_LONG);
+            toast1.show();
         });
-        mDislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDislike.setColorFilter(Color.rgb(255, 0, 0));
-                mLike.setColorFilter(Color.rgb(255, 255, 255));
-                Toast toast = Toast.makeText(IndividualVehicle.this,"Disliked",Toast.LENGTH_LONG);
-                toast.show();
-            }
+        mDislike.setOnClickListener(v -> {
+            mDislike.setColorFilter(Color.rgb(255, 0, 0));
+            mLike.setColorFilter(Color.rgb(255, 255, 255));
+            Toast toast = Toast.makeText(IndividualVehicle.this,"Disliked",Toast.LENGTH_LONG);
+            toast.show();
         });
 
-        mFavourite.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                mFavourite.setColorFilter(Color.rgb(255, 191, 0));
-                Toast toast = Toast.makeText(IndividualVehicle.this,"Vehicle made favourite",Toast.LENGTH_LONG);
-                toast.show();
-            }
+        mFavourite.setOnClickListener(v -> {
+            mFavourite.setColorFilter(Color.rgb(255, 191, 0));
+            Toast toast = Toast.makeText(IndividualVehicle.this,"Vehicle made favourite",Toast.LENGTH_LONG);
+            toast.show();
         });
-        mShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(IndividualVehicle.this,"Share",Toast.LENGTH_LONG);
-                toast.show();
-            }
+        mShare.setOnClickListener(v -> {
+            Toast toast = Toast.makeText(IndividualVehicle.this,"Share",Toast.LENGTH_LONG);
+            toast.show();
         });
         mRatingBar.getRating();
-        mPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
+        mFabChat.setOnClickListener(v -> {
+            Intent intent = new Intent(IndividualVehicle.this, Chat.class);
+            startActivity(intent);
         });
     }
     private void inflateImageSlider() {

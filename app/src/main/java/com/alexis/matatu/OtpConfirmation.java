@@ -64,7 +64,6 @@ public class OtpConfirmation extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             sendUserToHome();
                             // Sign in success, update UI with the signed-in user's information
-                            // ...
                         } else {
                             // Sign in failed, display a message and update the UI
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -87,9 +86,7 @@ public class OtpConfirmation extends AppCompatActivity {
     }
     public void sendUserToHome(){
         Intent homeIntent = new Intent(OtpConfirmation.this, MainActivity.class);
-        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
-        finish();
+        finishAffinity();
     }
     }

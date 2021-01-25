@@ -26,7 +26,6 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private TextView mTv_name;
     private TextView mTv_plate;
     private TextView mTv_route;
-    private TextView mTv_goes;
     private SliderLayout mSlider;
     private ImageView mLike;
     private ImageView mFavourite;
@@ -42,7 +41,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 
         inflateImageSlider();
 
-        mTv_goes= findViewById(R.id.tv_goes);
+
         mTv_name= findViewById(R.id.tv_matatu_name);
         mTv_plate=findViewById(R.id.tv_plate);
         mTv_route=findViewById(R.id.tv_sacco);
