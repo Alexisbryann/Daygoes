@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -13,9 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,10 +42,8 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
-        mPhoneNumber = findViewById(R.id.enter_phone_no);
-        mSendOTP = findViewById(R.id.button_send_otp);
+        mSendOTP = findViewById(R.id.button_login);
         mProgressBar = findViewById(R.id.progressBar);
-        mResendOTP = findViewById(R.id.btn_resend_otp);
 
 
         mSendOTP.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +106,7 @@ public class Login extends AppCompatActivity {
 //                new android.os.Handler().postDelayed(
 //                        new Runnable() {
 //                            public void run() {
-                Intent otpIntent = new Intent(Login.this, OtpConfirmation.class);
+                Intent otpIntent = new Intent(Login.this, Register.class);
                 otpIntent.putExtra("AuthCredentials", s);
                 startActivity(otpIntent);
             }

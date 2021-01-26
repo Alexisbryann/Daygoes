@@ -32,5 +32,16 @@
     <string name="account_balance"><u>Account balance</u></string>
     <string name="gift_vehicle"><u>Gift vehicle</u></string>
     <string name="Enter_phone_number">Enter your Phone number, we will send you a text to verify your identity.</string>
+    <string name="already_registered_login_here">Already registered ? <u>Login here.</u></string>
+    <string name="login">login</string>
+    <string name="email_icon">email icon</string>
+    <string name="password_icon">Password icon</string>
+    <string name="email_empty">E-mail required.</string>
+    <string name="password_empty">Password required.</string>
+    <string name="register">register</string>
+    <string name="logo">Logo</string>
+    <string name="password">Password</string>
+    <string name="e_mail_address">E-mail address</string>
+    <string name="pass_less_than_six">Password should have 6 or more characters.</string>
 
 </resources>
