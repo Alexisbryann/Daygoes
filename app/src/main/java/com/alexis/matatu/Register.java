@@ -116,8 +116,8 @@ public class Register extends AppCompatActivity {
         }
     }
     public void sendUserToLogin(){
-        Intent homeIntent = new Intent(Register.this, MainActivity.class);
-        startActivity(homeIntent);
+        Intent loginIntent = new Intent(Register.this, Login.class);
+        startActivity(loginIntent);
         finishAffinity();
     }
     }

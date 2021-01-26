@@ -46,7 +46,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/cardBgDark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp"
@@ -61,18 +61,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/login_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/already_registered_login_here"
-                        android:textColor="@color/colorAccentGreen"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
 
                     <ProgressBar
                         android:id="@+id/progressBar2"
@@ -89,13 +77,15 @@
                         android:id="@+id/btn_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
                         android:background="@drawable/ripple"
                         android:text="@string/register"
                         android:textColor="@color/colorPrimaryBlack"
-                        app:layout_constraintBottom_toTopOf="@+id/login_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_information_text" />
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -128,6 +118,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginEnd="8dp"
+                        android:autofillHints=""
                         android:backgroundTint="@color/colorAccentAmber"
                         android:ems="10"
                         android:hapticFeedbackEnabled="true"
@@ -136,8 +127,7 @@
                         android:soundEffectsEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView9"
-                        app:layout_constraintTop_toBottomOf="@id/e_mail"
-                        android:autofillHints="" />
+                        app:layout_constraintTop_toBottomOf="@id/e_mail" />
 
                     <EditText
                         android:id="@+id/e_mail"
@@ -146,6 +136,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginEnd="8dp"
+                        android:autofillHints=""
                         android:backgroundTint="@color/colorAccentAmber"
                         android:ems="10"
                         android:hint="@string/e_mail_address"
@@ -153,8 +144,7 @@
                         android:textColorLink="@color/colorAccentAmber"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView8"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:autofillHints="" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_information_text"
