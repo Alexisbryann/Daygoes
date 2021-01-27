@@ -41,11 +41,15 @@
     <string name="register">register</string>
     <string name="logo">Logo</string>
     <string name="password">Password</string>
-    <string name="e_mail_address">E-mail address</string>
     <string name="pass_less_than_six">Password should have 6 or more characters.</string>
     <string name="auth_failed">Authentication failed, please try again.</string>
     <string name="username_empty">Username required</string>
     <string name="not_yet_registered_register_below">Not yet registered? register below.</string>
-    <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="e_mail_address">E-mail address</string>
+    <string name="we_need_your_registered_email_address_to_send_you_password_reset_instructions">We need your registered email address to send you password reset instructions</string>
+    <string name="reset_password">reset password</string>
+    <string name="back">back</string>
+    <string name="forgot_password1">forgot password ?</string>
 
 </resources>

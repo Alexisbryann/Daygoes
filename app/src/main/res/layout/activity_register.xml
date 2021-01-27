@@ -25,7 +25,7 @@
         android:id="@+id/imageView5"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +35,10 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView33">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,9 +46,9 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/cardBgDark"
-                app:cardCornerRadius="4dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true"
@@ -84,7 +84,7 @@
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_information_text" />
+                        app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -146,46 +146,15 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txt_information_text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/colorAccentRed"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/edt_password" />
-
-                    <TextView
-                        android:id="@+id/txt_information_text1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/colorAccentRed"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/e_mail" />
-
-                    <Button
-                        android:id="@+id/btn_verify"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:background="@drawable/ripple"
-                        android:text="Verify email"
-                        android:textColor="@color/colorPrimaryBlack"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_information_text" />
-
-                    <TextView
-                        android:id="@+id/textView29"
+                        android:id="@+id/tv_login_here"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
                         android:gravity="center"
                         android:text="@string/already_registered_login_here"
                         android:textColor="@color/colorAccentGreen"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
