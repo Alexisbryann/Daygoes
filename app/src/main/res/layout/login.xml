@@ -74,7 +74,6 @@
                         android:ems="10"
                         android:hint="Email address"
                         android:inputType="textEmailAddress"
-                        android:textColorHint="@color/colorPrimaryBlack"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -120,17 +119,40 @@
 
                     <Button
                         android:id="@+id/btn_register"
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/ripple"
                         android:text="register"
                         android:textColor="@color/colorPrimaryBlack"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/button_login"
+                        app:layout_constraintStart_toStartOf="@+id/button_login"
+                        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Not yet registered? register below."
+                        android:textColor="@color/colorPrimaryBlack"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Forgot password?"
+                        android:textColor="@color/colorAccentRed"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

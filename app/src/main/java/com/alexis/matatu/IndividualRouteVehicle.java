@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -67,7 +66,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IndividualRouteVehicle.this,Pay.class);
+                Intent intent = new Intent(IndividualRouteVehicle.this, PayActivity.class);
                 startActivity(intent);
             }
         });
