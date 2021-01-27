@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button mRegister;
     private String mEmail1;
     private String mPassword1;
+    private TextView mForgotPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.txt_password);
         mLogin = findViewById(R.id.button_login);
         mRegister = findViewById(R.id.btn_register);
+        mForgotPass = findViewById(R.id.tv_forgot_password);
         mProgressBar = findViewById(R.id.progressBar);
 
 
@@ -68,6 +71,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        mForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
     private void validateInput() {
