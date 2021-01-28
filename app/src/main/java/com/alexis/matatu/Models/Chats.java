@@ -1,13 +1,15 @@
 package com.alexis.matatu.Models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Chats {
 
     private String chatGroup;
     private String messageText;
     private String messageUser;
-    private long messageTime;
+    private String messageTime;
 
     public Chats(String messageText, String messageUser) {
         this.messageText = messageText;
@@ -15,7 +17,9 @@ public class Chats {
         this.chatGroup = chatGroup;
 
         // Initialize to current time
-        messageTime = new Date().getTime();
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM dd hh:mm a", Locale.getDefault());
+        messageTime = formatter.format(date);
     }
 
     public Chats() {
@@ -42,11 +46,11 @@ public class Chats {
         this.messageUser = messageUser;
     }
 
-    public long getMessageTime() {
+    public String getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(long messageTime) {
+    public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
     }
 

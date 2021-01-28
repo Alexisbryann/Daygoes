@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.alexis.matatu.Models.Chats;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class Chat extends AppCompatActivity {
 
@@ -51,7 +54,7 @@ public class Chat extends AppCompatActivity {
                     public void onClick(View view) {
                         String group = mVehicleName.getText().toString();
                         String msg = mEdtMessage.getText().toString();
-                        String username = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                        String username = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName();
 
                         // Read the input field and push a new instance of Chats to the Firebase database
                         FirebaseDatabase.getInstance()
