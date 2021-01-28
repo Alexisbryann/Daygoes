@@ -48,7 +48,6 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
     }
-
     private void handleReset() {
         String email = mEdtEmail.getText().toString().trim();
 
@@ -66,7 +65,6 @@ public class ForgotPassword extends AppCompatActivity {
                         } else {
                             Toast.makeText(ForgotPassword.this, "Failed to send reset email!", Toast.LENGTH_LONG).show();
                         }
-
                         mProgressBar.setVisibility(View.GONE);
                     }
                 });

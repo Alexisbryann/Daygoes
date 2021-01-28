@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button mRegister;
     private EditText mEmail;
     private EditText mPassword;
-    private Button mVerify;
     private DatabaseReference mDatabase;
     private String mUserId;
     private User mUser;
@@ -56,7 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.e_mail);
         mPassword = findViewById(R.id.edt_password);
         mRegister = findViewById(R.id.btn_register);
-        mVerify = findViewById(R.id.btn_verify);
         mLogin_here = findViewById(R.id.tv_login_here);
         mProgressBar = findViewById(R.id.progressBar2);
 
@@ -85,7 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(RegisterActivity.this, "Verification Link Sent Successfully.", Toast.LENGTH_SHORT).show();
                             mRegister.setVisibility(View.VISIBLE);
-                            mVerify.setVisibility(View.INVISIBLE);
 
                             if (task.isSuccessful()) {
                                 onAuthSuccess(task.getResult().getUser());
