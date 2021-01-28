@@ -13,10 +13,12 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".Chat" />
         <activity android:name=".Account" />
         <activity android:name=".PayActivity" />
         <activity android:name=".IndividualRoute" />
+
+        <activity android:name=".Chat"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity
             android:name=".ForgotPassword"

@@ -1,6 +1,7 @@
 package com.alexis.matatu;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -72,13 +73,13 @@ public class IndividualVehicle extends AppCompatActivity {
     private void iconInitialize() {
         mLike.setOnClickListener(v -> {
             mLike.setColorFilter(Color.rgb(0, 100, 0));
-            mDislike.setColorFilter(Color.rgb(255, 255, 255));
+            mDislike.setColorFilter(Color.rgb(221,221,221));
             Toast toast1 = Toast.makeText(IndividualVehicle.this, "Liked", Toast.LENGTH_LONG);
             toast1.show();
         });
         mDislike.setOnClickListener(v -> {
             mDislike.setColorFilter(Color.rgb(255, 0, 0));
-            mLike.setColorFilter(Color.rgb(255, 255, 255));
+            mLike.setColorFilter(Color.rgb(221,221,221));
             Toast toast = Toast.makeText(IndividualVehicle.this,"Disliked",Toast.LENGTH_LONG);
             toast.show();
         });
@@ -95,8 +96,13 @@ public class IndividualVehicle extends AppCompatActivity {
         mRatingBar.getRating();
 
         mFabChat.setOnClickListener(v -> {
-            Intent intent = new Intent(IndividualVehicle.this, Chat.class);
-            startActivity(intent);
+
+
+            Context context = v.getContext();
+            Intent i = new Intent(context, Chat.class);
+            i.putExtra("NAME_KEY", mTv_name.getText().toString());
+            context.startActivity(i);
+
         });
     }
     private void inflateImageSlider() {

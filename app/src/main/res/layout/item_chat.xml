@@ -36,27 +36,27 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/tv_message"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_username" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/tv_username"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Username"
                         android:textColor="@color/colorPrimaryBlack"
-                        app:layout_constraintEnd_toStartOf="@+id/textView10"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_time_stamp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/tv_time_stamp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="time stamp"
