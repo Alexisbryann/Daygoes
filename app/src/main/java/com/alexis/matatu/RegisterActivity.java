@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -39,8 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String mUserId;
     private User mUser;
     private String mUid;
-    private EditText mUsername;
     private TextView mLogin_here;
+    private String mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                    assert firebaseUser != null;
                     firebaseUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -85,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             mRegister.setVisibility(View.VISIBLE);
 
                             if (task.isSuccessful()) {
-                                onAuthSuccess(task.getResult().getUser());
+                                onAuthSuccess(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()));
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Sign In Failed",
                                         Toast.LENGTH_LONG).show();
@@ -112,10 +117,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
+        mUsername = usernameFromEmail(Objects.requireNonNull(user.getEmail()));
 
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
+        writeNewUser(user.getUid(), mUsername, user.getEmail(),user.getDisplayName());
 
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
@@ -131,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void writeNewUser(String userId, String username, String email) {
-        User user = new User(username, email);
+    private void writeNewUser(String userId, String username, String email, String displayName) {
+        User user = new User(username, email,displayName);
 
         mDatabase.child("Users").child(userId).setValue(user);
     }

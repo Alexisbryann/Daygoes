@@ -1,28 +1,36 @@
 package com.alexis.matatu.Models;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
-public class Chats {
+public class ChatModel {
 
     private String chatGroup;
     private String messageText;
-    private String messageUser;
+    private String messageSender;
     private String messageTime;
 
-    public Chats(String messageText, String messageUser) {
+    public ChatModel(String messageText,String messageSender) {
         this.messageText = messageText;
-        this.messageUser = messageUser;
+        this.messageSender = messageSender;
         this.chatGroup = chatGroup;
 
         // Initialize to current time
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM dd hh:mm a", Locale.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
         messageTime = formatter.format(date);
+
+//        messageSender = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName();
+
     }
 
-    public Chats() {
+    public ChatModel() {
 
     }
 
@@ -38,12 +46,12 @@ public class Chats {
         this.messageText = messageText;
     }
 
-    public String getMessageUser() {
-        return messageUser;
+    public String getMessageSender() {
+        return messageSender;
     }
 
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
+    public void setMessageSender(String messageSender) {
+        this.messageSender = messageSender;
     }
 
     public String getMessageTime() {
