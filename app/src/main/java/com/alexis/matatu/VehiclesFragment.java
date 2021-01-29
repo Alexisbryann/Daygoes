@@ -75,7 +75,7 @@ public class VehiclesFragment extends Fragment {
         mShimmerFrameLayout.setVisibility(View.VISIBLE);
 
 //      Initialize DB
-        mDb = FirebaseDatabase.getInstance().getReference().child("Vehicle details");
+        mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
 
 //      query db
         FirebaseRecyclerOptions<MatatuModel> options

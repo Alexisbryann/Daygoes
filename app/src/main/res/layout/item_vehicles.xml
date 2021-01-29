@@ -156,6 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="@string/textview"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"

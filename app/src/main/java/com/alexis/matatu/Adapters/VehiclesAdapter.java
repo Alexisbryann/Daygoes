@@ -38,7 +38,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<MatatuModel, Vehicl
     @Override
     protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, final int position, @NonNull MatatuModel model) {
 
-        Picasso.with(mContext).load(model.getImage()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
+        Picasso.with(mContext).load(model.getImage1()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
         holder.mTv_sacco.setText(model.getSacco());
         holder.mTv_capacity.setText(model.getCapacity());

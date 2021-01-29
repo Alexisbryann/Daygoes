@@ -2,7 +2,7 @@ package com.alexis.matatu.Models;
 
 public class MatatuModel {
 
-    private String Image;
+    private String Image1;
     private String Name;
     private String Sacco;
     private String Route;
@@ -13,7 +13,7 @@ public class MatatuModel {
     public MatatuModel() {
     }
     public MatatuModel(String image, String name, String sacco, String route, String capacity, String plate, int ratings) {
-        Image = image;
+        Image1 = image;
         Name = name;
         Sacco = sacco;
         Route = route;
@@ -30,12 +30,12 @@ public class MatatuModel {
         Sacco = sacco;
     }
 
-    public String getImage() {
-        return Image;
+    public String getImage1() {
+        return Image1;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setImage1(String image1) {
+        Image1 = image1;
     }
 
     public String getName() {
