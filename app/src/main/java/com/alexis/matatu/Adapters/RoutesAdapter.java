@@ -1,10 +1,14 @@
 package com.alexis.matatu.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +45,13 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
     public class FirebaseViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView mTv_route;
+        private final ImageView mImg_route;
 
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mTv_route = itemView.findViewById(R.id.tv_sacco);
+            mImg_route = itemView.findViewById(R.id.img_more);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,6 +64,21 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
                     context.startActivity(i);
                 }
             });
+
+            mImg_route.setOnClickListener(v -> {
+                Toast.makeText(mContext,"Stops in this route",Toast.LENGTH_LONG).show();
+                // create an alert builder
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("THESE ARE THE STOPS ALONG THIS ROUTE.");
+                    // set the custom layout
+                    builder.setView(R.layout.stops);
+                    // add a button
+                    builder.setPositiveButton("OK", (dialog, which) -> {
+                    });
+                    // create and show the alert dialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                });
         }
     }
 }

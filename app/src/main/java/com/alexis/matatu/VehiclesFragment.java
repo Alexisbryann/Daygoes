@@ -70,7 +70,6 @@ public class VehiclesFragment extends Fragment {
                     loadFavouriteVehicles();
                 }if (selectedItemText.equals("All vehicles")){
                     loadData();
-                    Toast.makeText(getContext(),"Showing All vehicles",Toast.LENGTH_LONG).show();
 
                 }
 
