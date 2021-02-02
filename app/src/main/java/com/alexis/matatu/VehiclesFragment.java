@@ -5,11 +5,10 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toolbar;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,26 +26,17 @@ import com.google.firebase.database.FirebaseDatabase;
 public class VehiclesFragment extends Fragment {
 
     private VehiclesAdapter mMatatuAdapter;
-    private Toolbar mToolbar;
-    private SearchView mSearchView;
-    private TextView mAppName;
+
     private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
     private DatabaseReference mDb;
-    private DatabaseReference childReference;
-    private ImageView mImg_vehicle;
-    private TextView mTv_name;
-    private TextView mTv_plate;
-    private TextView mTv_route;
-    private TextView mTv_no_of_stars;
-    private RatingBar mRatings;
     private ShimmerFrameLayout mShimmerFrameLayout;
+    private Spinner mSpinner;
     /*
 1.INITIALIZE FIREBASE DB
 2.INITIALIZE UI
 3.DATA*/
 
-    public VehiclesFragment(){
+    public VehiclesFragment() {
     }
 
     private View mView;
@@ -54,64 +44,122 @@ public class VehiclesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.vehicles,container,false);
-
+        mView = inflater.inflate(R.layout.vehicles, container, false);
         mShimmerFrameLayout = mView.findViewById(R.id.shimmerLayout);
-
-        mToolbar = mView.findViewById(R.id.toolbar);
-        mAppName = mView.findViewById(R.id.tv_app_name);
-        mTv_name = mView.findViewById(R.id.tv_vehicle_name1);
-        mTv_plate = mView.findViewById(R.id.tv_no_plate1);
-        mTv_route = mView.findViewById(R.id.tv_sacco1);
-        mImg_vehicle = mView.findViewById(R.id.imgview_vehicle_photo);
-
-//      Initialize recyclerview
-        mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
-        mRecyclerView.setVisibility(View.GONE);
-        mShimmerFrameLayout.startShimmer();
-        mShimmerFrameLayout.setVisibility(View.VISIBLE);
-
-//      Initialize DB
+        mSpinner = mView.findViewById(R.id.spinner);
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
 
-//      query db
+        initializeRecyclerAndShimmer();
+        shimmerThread();
+        loadData();
+        loadSpinner();
+
+
+        return mView;
+    }
+
+    private void loadSpinner() {
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItemText = (String) parent.getItemAtPosition(position);
+                if (selectedItemText.equals("Popular vehicles")) {
+                    loadPopularVehicles();
+                }if (selectedItemText.equals("Favourite vehicles")){
+                    loadFavouriteVehicles();
+                }if (selectedItemText.equals("All vehicles")){
+                    loadData();
+                    Toast.makeText(getContext(),"Showing All vehicles",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.spinner_array,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(adapter);
+    }
+
+    private void loadFavouriteVehicles() {
+        //      query db
         FirebaseRecyclerOptions<MatatuModel> options
                 = new FirebaseRecyclerOptions.Builder<MatatuModel>()
                 .setQuery(mDb, MatatuModel.class)
                 .build();
 
         //      Initialize and set adapter
-        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this,getContext());
+        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
+        mMatatuAdapter.startListening();
+        Toast.makeText(getContext(),"Showing your favourite vehicles",Toast.LENGTH_LONG).show();
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                mShimmerFrameLayout.setVisibility(View.GONE);
-                mShimmerFrameLayout.stopShimmer();
-                mRecyclerView.setVisibility(View.VISIBLE);
-            }
-        }, 2000);
-
-        return mView;
     }
+
+    private void loadPopularVehicles() {
+        //      query db
+        FirebaseRecyclerOptions<MatatuModel> options
+                = new FirebaseRecyclerOptions.Builder<MatatuModel>()
+                .setQuery(mDb, MatatuModel.class)
+                .build();
+        //      Initialize and set adapter
+        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
+        mRecyclerView.setAdapter(mMatatuAdapter);
+        mMatatuAdapter.startListening();
+        Toast.makeText(getContext(),"Showing popular vehicles",Toast.LENGTH_LONG).show();
+    }
+
+    private void shimmerThread() {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+
+            mShimmerFrameLayout.setVisibility(View.GONE);
+            mShimmerFrameLayout.stopShimmer();
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }, 6000);
+    }
+
+    private void initializeRecyclerAndShimmer() {
+        //      Initialize recyclerview
+        mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        mRecyclerView.setVisibility(View.GONE);
+        mShimmerFrameLayout.startShimmer();
+        mShimmerFrameLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void loadData() {
+        //      query db
+        FirebaseRecyclerOptions<MatatuModel> options
+                = new FirebaseRecyclerOptions.Builder<MatatuModel>()
+                .setQuery(mDb, MatatuModel.class)
+                .build();
+
+        //      Initialize and set adapter
+        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
+        mMatatuAdapter.startListening();
+        mRecyclerView.setAdapter(mMatatuAdapter);
+    }
+
     // Function to tell the app to start getting data from database on starting of the activity
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
         mMatatuAdapter.startListening();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         super.onStop();
         mMatatuAdapter.stopListening();
 

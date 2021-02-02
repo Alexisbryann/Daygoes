@@ -44,7 +44,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             title = "Routes";
         }
         else if (position==2){
-            title = "Profile";
+            title = "Hype";
         }
 
         return title;

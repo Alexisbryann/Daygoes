@@ -40,7 +40,6 @@ public class IndividualVehicle extends AppCompatActivity {
     private ImageView mLike;
     private ImageView mFavourite;
     private ImageView mShare;
-    private ImageView mDislike;
     private RatingBar mRatingBar;
     private FloatingActionButton mFabChat;
     private String mUserId;
@@ -67,7 +66,6 @@ public class IndividualVehicle extends AppCompatActivity {
         mLike=findViewById(R.id.img_like);
         mFavourite=findViewById(R.id.img_favourite);
         mShare=findViewById(R.id.img_share);
-        mDislike=findViewById(R.id.img_dislike);
         mRatingBar=findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
 
@@ -92,17 +90,9 @@ public class IndividualVehicle extends AppCompatActivity {
     private void iconInitialize() {
         mLike.setOnClickListener(v -> {
             mLike.setColorFilter(Color.rgb(0, 100, 0));
-            mDislike.setColorFilter(Color.rgb(221,221,221));
             Toast toast1 = Toast.makeText(IndividualVehicle.this, "Liked", Toast.LENGTH_LONG);
             toast1.show();
         });
-        mDislike.setOnClickListener(v -> {
-            mDislike.setColorFilter(Color.rgb(255, 0, 0));
-            mLike.setColorFilter(Color.rgb(221,221,221));
-            Toast toast = Toast.makeText(IndividualVehicle.this,"Disliked",Toast.LENGTH_LONG);
-            toast.show();
-        });
-
         mFavourite.setOnClickListener(v -> {
             mFavourite.setColorFilter(Color.rgb(255, 191, 0));
             Toast toast = Toast.makeText(IndividualVehicle.this,"Vehicle made favourite",Toast.LENGTH_LONG);
@@ -115,7 +105,6 @@ public class IndividualVehicle extends AppCompatActivity {
         mRatingBar.getRating();
 
         mFabChat.setOnClickListener(v -> {
-
 
             Context context = v.getContext();
             Intent i = new Intent(context, Chat.class);

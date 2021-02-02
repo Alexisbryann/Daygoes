@@ -29,7 +29,6 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private ImageView mLike;
     private ImageView mFavourite;
     private ImageView mShare;
-    private ImageView mDislike;
     private MaterialButton mPay;
     private RatingBar mRatingBar;
     @Override
@@ -48,7 +47,6 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mLike=findViewById(R.id.img_like);
         mFavourite=findViewById(R.id.img_favourite);
         mShare=findViewById(R.id.img_share);
-        mDislike=findViewById(R.id.img_dislike);
         mPay=findViewById(R.id.btn_pay);
         mRatingBar=findViewById(R.id.ratingBar);
 
@@ -78,21 +76,10 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mLike.setColorFilter(Color.rgb(0, 100, 0));
-                mDislike.setColorFilter(Color.rgb(255, 255, 255));
                 Toast toast1 = Toast.makeText(IndividualRouteVehicle.this, "Liked", Toast.LENGTH_LONG);
                 toast1.show();
             }
         });
-        mDislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDislike.setColorFilter(Color.rgb(255, 0, 0));
-                mLike.setColorFilter(Color.rgb(255, 255, 255));
-                Toast toast = Toast.makeText(IndividualRouteVehicle.this,"Disliked",Toast.LENGTH_LONG);
-                toast.show();
-            }
-        });
-
         mFavourite.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override

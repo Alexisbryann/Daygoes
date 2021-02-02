@@ -98,6 +98,7 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
+                                    app:layout_constraintEnd_toStartOf="@+id/textView14"
                                     app:layout_constraintStart_toEndOf="@+id/textView9"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,27 +106,12 @@
                                     android:id="@+id/textView14"
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
                                     android:gravity="center"
                                     android:text="@string/share"
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
-                                    app:layout_constraintStart_toEndOf="@+id/textView12"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
-                                    android:id="@+id/textView15"
-                                    android:layout_width="80dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:gravity="center"
-                                    android:text="@string/dislike"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="14sp"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/textView14"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <ImageView
@@ -162,17 +148,6 @@
                                     app:srcCompat="@android:drawable/ic_menu_share"
                                     app:tint="@color/colorShimmer" />
 
-                                <ImageView
-                                    android:id="@+id/img_dislike"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:contentDescription="@string/thumbs_down_button"
-                                    app:layout_constraintEnd_toEndOf="@+id/textView15"
-                                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                                    app:layout_constraintTop_toBottomOf="@+id/textView15"
-                                    app:srcCompat="@drawable/thumbs_down"
-                                    app:tint="@color/colorShimmer" />
-
                                 <TextView
                                     android:id="@+id/tv_likes_no"
                                     android:layout_width="wrap_content"
@@ -200,14 +175,6 @@
                                     app:layout_constraintStart_toStartOf="@+id/textView14"
                                     app:layout_constraintTop_toBottomOf="@+id/img_share" />
 
-                                <TextView
-                                    android:id="@+id/tv_dislikes_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintEnd_toEndOf="@+id/textView15"
-                                    app:layout_constraintStart_toEndOf="@+id/img_dislike"
-                                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                                    app:layout_constraintTop_toBottomOf="@+id/img_dislike" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
 

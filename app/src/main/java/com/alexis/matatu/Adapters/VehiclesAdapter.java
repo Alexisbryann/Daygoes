@@ -78,18 +78,15 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<MatatuModel, Vehicl
             mTv_no_of_stars = itemView.findViewById(R.id.tv_no_of_stars);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
+            itemView.setOnClickListener(v -> {
+//                    int position = getAdapterPosition();
 
-                    Context context = v.getContext();
-                    Intent i = new Intent(context, IndividualVehicle.class);
-                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
-                    i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
-                    i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
-                    context.startActivity(i);
-                }
+                Context context = v.getContext();
+                Intent i = new Intent(context, IndividualVehicle.class);
+                i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
+                i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
+                context.startActivity(i);
             });
         }
     }

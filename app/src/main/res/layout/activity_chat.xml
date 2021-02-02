@@ -7,17 +7,6 @@
     android:background="@color/cardBg"
     tools:context=".Chat">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name"
-        tools:listitem="@layout/item_chat" />
-
     <TextView
         android:id="@+id/tv_vehicle_name"
         android:layout_width="0dp"
@@ -36,11 +25,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name"
+        tools:listitem="@layout/item_chat" />
+
     <FrameLayout
         android:id="@+id/frameLayout9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -76,13 +75,20 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_send"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:clickable="true"
+                android:focusable="true"
+                android:tint="@color/cardBg"
+                app:backgroundTint="@color/cardBg"
+                app:fabSize="auto"
                 app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textInputLayout"
-                app:srcCompat="@android:drawable/ic_menu_send" />
+                app:rippleColor="@color/colorAccentGreen"
+                app:srcCompat="@android:drawable/ic_menu_send"
+                app:useCompatPadding="true" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
