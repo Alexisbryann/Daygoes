@@ -44,7 +44,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<MatatuModel, Vehicl
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
         holder.mTv_ratings.setRating(model.getRatings());
-        holder.mTv_no_of_stars.setText(holder.mTv_ratings.getRating() +" Stars");
+        holder.mTv_no_of_stars.setText(model.getRatings() +" Stars");
 
         }
     @NonNull

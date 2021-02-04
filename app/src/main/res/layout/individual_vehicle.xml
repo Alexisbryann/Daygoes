@@ -239,21 +239,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            android:fontFamily="@font/almendra"
-                            android:gravity="center"
-                            android:text="@string/rate"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryBlack"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
-
                         <RatingBar
                             android:id="@+id/ratingBar"
                             style="@android:style/Widget.Holo.Light.RatingBar"
@@ -265,10 +250,24 @@
                             android:progressTint="@color/colorAccentAmber"
                             android:stepSize="@dimen/material_emphasis_high_type"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView13"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <Button
+                            android:id="@+id/btn_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/ripple"
+                            android:text="@string/rate"
+                            android:textColor="@color/colorPrimaryBlack"
+                            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                            app:layout_constraintTop_toTopOf="@+id/ratingBar"
+                            app:rippleColor="@color/colorAccentRed" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </FrameLayout>
 
                 <View

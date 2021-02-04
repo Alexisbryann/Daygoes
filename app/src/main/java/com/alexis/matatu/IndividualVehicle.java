@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.common.internal.service.Common;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class IndividualVehicle extends AppCompatActivity {
 
@@ -45,6 +48,7 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mUserId;
     private TextView mNumOfLikes;
     private String mName;
+    private Button mRate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,17 +61,19 @@ public class IndividualVehicle extends AppCompatActivity {
         mUserId = mAuth.getCurrentUser().getUid();
 
 
+
 //        inflate the layout
         mFabChat = findViewById(R.id.fab_chat);
-        mTv_name= findViewById(R.id.tv_matatu_name);
-        mTv_plate=findViewById(R.id.tv_plate);
-        mTv_route=findViewById(R.id.tv_sacco);
-        mSlider=findViewById(R.id.slider);
-        mLike=findViewById(R.id.img_like);
-        mFavourite=findViewById(R.id.img_favourite);
-        mShare=findViewById(R.id.img_share);
-        mRatingBar=findViewById(R.id.ratingBar);
+        mTv_name = findViewById(R.id.tv_matatu_name);
+        mTv_plate = findViewById(R.id.tv_plate);
+        mTv_route = findViewById(R.id.tv_sacco);
+        mSlider = findViewById(R.id.slider);
+        mLike = findViewById(R.id.img_like);
+        mFavourite = findViewById(R.id.img_favourite);
+        mShare = findViewById(R.id.img_share);
+        mRatingBar = findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
+        mRate = findViewById(R.id.btn_rate);
 
         //retrieving data using intent
         Intent i = getIntent();
@@ -82,11 +88,13 @@ public class IndividualVehicle extends AppCompatActivity {
         displayNumberOfLikes();
         iconInitialize();
     }
+
     @Override
     protected void onResume() {
         iconInitialize();
         super.onResume();
     }
+
     private void iconInitialize() {
         mLike.setOnClickListener(v -> {
             mLike.setColorFilter(Color.rgb(0, 100, 0));
@@ -95,24 +103,31 @@ public class IndividualVehicle extends AppCompatActivity {
         });
         mFavourite.setOnClickListener(v -> {
             mFavourite.setColorFilter(Color.rgb(255, 191, 0));
-            Toast toast = Toast.makeText(IndividualVehicle.this,"Vehicle made favourite",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(IndividualVehicle.this, "Vehicle made favourite", Toast.LENGTH_LONG);
             toast.show();
         });
         mShare.setOnClickListener(v -> {
-            Toast toast = Toast.makeText(IndividualVehicle.this,"Share",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(IndividualVehicle.this, "Share", Toast.LENGTH_LONG);
             toast.show();
         });
-        mRatingBar.getRating();
-
         mFabChat.setOnClickListener(v -> {
 
             Context context = v.getContext();
             Intent i = new Intent(context, Chat.class);
             i.putExtra("NAME_KEY", mTv_name.getText().toString());
             context.startActivity(i);
-
         });
+
+        getRatings();
+
+//        mRate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                submitRating(v);
+//            }
+//        });
     }
+
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------
@@ -130,18 +145,18 @@ public class IndividualVehicle extends AppCompatActivity {
             sliderView.image(s);
             mSliderShow.addSlider(sliderView);
         }
-        mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+        mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
     }
 
 
-    public void displayNumberOfLikes(){
+    public void displayNumberOfLikes() {
         DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Vehicle details").child(mName);
-        likesRef.addValueEventListener(new ValueEventListener(){
+        likesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     long numOfLikes = 0;
-                    if(dataSnapshot.hasChild("likes")){
+                    if (dataSnapshot.hasChild("likes")) {
                         numOfLikes = dataSnapshot.child("Likes").getValue(Long.class);
                         mNumOfLikes.setText((int) numOfLikes);
                     }
@@ -160,20 +175,20 @@ public class IndividualVehicle extends AppCompatActivity {
     }
 
 
-    public void onLikeClicked(View v, String postId, String userId){
+    public void onLikeClicked(View v, String postId, String userId) {
         DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Vehicle details").child(mName).child("likes");
-        likesRef.addListenerForSingleValueEvent(new ValueEventListener(){
+        likesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long numLikes = 0;
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     numLikes = dataSnapshot.getValue(Long.class);
                 }
                 boolean isLiked = mLike.isSelected();
-                if(isLiked){
+                if (isLiked) {
                     //If already liked then user wants to unlike the post
 //                    likesRef.set(numLikes-1);
-                }else {
+                } else {
                     //If not liked already then user wants to like the post
 //                    likesRef.set(numLikes+1);
                 }
@@ -186,4 +201,39 @@ public class IndividualVehicle extends AppCompatActivity {
         });
     }
 
+    public void getRatings() {
+
+        mRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+
+            final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
+                    .child(mName).child("User Ratings").child(mUserId).child("Rating");
+            dbRef.setValue((long) rating);
+            setAverage();
+        });
+    }
+    public void setAverage() {
+        final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
+                .child(mName).child("User Ratings");
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long total = 0;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    long rating = ds.child("Ratings").child(mName).child("Rating").getValue(Long.class);
+                    long rating = ds.child("Rating").getValue(long.class);
+                    total = total + rating;
+                }
+                long average = total / dataSnapshot.getChildrenCount();
+
+                final DatabaseReference newRef = FirebaseDatabase.getInstance().getReference("Ratings")
+                        .child(mName);
+                newRef.child("averageRating").setValue(average);
+            }
+
+            @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+                throw error.toException();
+            }
+        });
+    }
 }
