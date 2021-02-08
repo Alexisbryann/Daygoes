@@ -1,6 +1,6 @@
 package com.alexis.matatu.Models;
 
-public class MatatuModel {
+public class VehicleModel {
 
     private String Image1;
     private String Name;
@@ -8,18 +8,19 @@ public class MatatuModel {
     private String Route;
     private String Capacity;
     private String Plate;
-    private int Ratings;
+    private  float Rating;
 
-    public MatatuModel() {
+    public VehicleModel() {
     }
-    public MatatuModel(String image, String name, String sacco, String route, String capacity, String plate, int ratings) {
+    public VehicleModel(String image, String name, String sacco, String route, String capacity, String plate, float rating) {
         Image1 = image;
         Name = name;
         Sacco = sacco;
         Route = route;
         Capacity = capacity;
         Plate = plate;
-        Ratings = ratings;
+        Rating = rating;
+
     }
 
     public String getSacco() {
@@ -70,11 +71,11 @@ public class MatatuModel {
         Plate = plate;
     }
 
-    public int getRatings() {
-        return Ratings;
+    public float getRating() {
+        return Rating;
     }
 
-    public void setRatings(int ratings) {
-        Ratings = ratings;
+    public void setRating(float rating) {
+        Rating = rating;
     }
 }

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +50,8 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mUserId;
     private TextView mNumOfLikes;
     private String mName;
-    private Button mRate;
+    private float mRating;
+    private TextView mNumOfFavs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,12 +59,8 @@ public class IndividualVehicle extends AppCompatActivity {
         setContentView(R.layout.individual_vehicle);
 
         inflateImageSlider();
-
         mAuth = FirebaseAuth.getInstance();
         mUserId = mAuth.getCurrentUser().getUid();
-
-
-
 //        inflate the layout
         mFabChat = findViewById(R.id.fab_chat);
         mTv_name = findViewById(R.id.tv_matatu_name);
@@ -73,7 +72,7 @@ public class IndividualVehicle extends AppCompatActivity {
         mShare = findViewById(R.id.img_share);
         mRatingBar = findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
-        mRate = findViewById(R.id.btn_rate);
+        mNumOfFavs = findViewById(R.id.tv_favourites_no);
 
         //retrieving data using intent
         Intent i = getIntent();
@@ -86,6 +85,8 @@ public class IndividualVehicle extends AppCompatActivity {
         mTv_route.setText(route);
 
         displayNumberOfLikes();
+        displayNumberOfFavourites();
+        displayRatings();
         iconInitialize();
     }
 
@@ -96,12 +97,13 @@ public class IndividualVehicle extends AppCompatActivity {
     }
 
     private void iconInitialize() {
+        checkLikes();
         mLike.setOnClickListener(v -> {
-            mLike.setColorFilter(Color.rgb(0, 100, 0));
-            Toast toast1 = Toast.makeText(IndividualVehicle.this, "Liked", Toast.LENGTH_LONG);
-            toast1.show();
+            onLikeClicked();
         });
+        checkFavourites();
         mFavourite.setOnClickListener(v -> {
+            onFavouriteClicked();
             mFavourite.setColorFilter(Color.rgb(255, 191, 0));
             Toast toast = Toast.makeText(IndividualVehicle.this, "Vehicle made favourite", Toast.LENGTH_LONG);
             toast.show();
@@ -117,17 +119,8 @@ public class IndividualVehicle extends AppCompatActivity {
             i.putExtra("NAME_KEY", mTv_name.getText().toString());
             context.startActivity(i);
         });
-
-        getRatings();
-
-//        mRate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                submitRating(v);
-//            }
-//        });
+        mRatingBar.setRating(setRatings());
     }
-
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------
@@ -148,58 +141,34 @@ public class IndividualVehicle extends AppCompatActivity {
         mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
     }
 
+    private float setRatings() {
+        DatabaseReference checkRating = FirebaseDatabase.getInstance().getReference("Ratings")
+                .child(mName)
+                .child("User Ratings");
 
-    public void displayNumberOfLikes() {
-        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Vehicle details").child(mName);
-        likesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    long numOfLikes = 0;
-                    if (dataSnapshot.hasChild("likes")) {
-                        numOfLikes = dataSnapshot.child("Likes").getValue(Long.class);
-                        mNumOfLikes.setText((int) numOfLikes);
+        checkRating.orderByChild(mUserId)
+                .equalTo(mUserId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            mRating = Float.parseFloat(checkRating.child(mUserId).child("Rating").toString());
+                            mRatingBar.setRating(mRating);
+                        } else {
+                            getRatings();
+                        }
                     }
 
-                    //Populate numOfLikes on post i.e. textView.setText(""+numOfLikes)
-                    //This is to check if the user has liked the post or not
-                    mLike.setSelected(dataSnapshot.hasChild(mUserId));
-                }
-            }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
-            }
-        });
+
+        return mRating;
     }
 
-
-    public void onLikeClicked(View v, String postId, String userId) {
-        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Vehicle details").child(mName).child("likes");
-        likesRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                long numLikes = 0;
-                if (dataSnapshot.exists()) {
-                    numLikes = dataSnapshot.getValue(Long.class);
-                }
-                boolean isLiked = mLike.isSelected();
-                if (isLiked) {
-                    //If already liked then user wants to unlike the post
-//                    likesRef.set(numLikes-1);
-                } else {
-                    //If not liked already then user wants to like the post
-//                    likesRef.set(numLikes+1);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     public void getRatings() {
 
@@ -207,32 +176,190 @@ public class IndividualVehicle extends AppCompatActivity {
 
             final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
                     .child(mName).child("User Ratings").child(mUserId).child("Rating");
-            dbRef.setValue((long) rating);
+
+            dbRef.setValue((float) rating);
             setAverage();
         });
     }
+
     public void setAverage() {
+
         final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
                 .child(mName).child("User Ratings");
+
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long total = 0;
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    long rating = ds.child("Ratings").child(mName).child("Rating").getValue(Long.class);
                     long rating = ds.child("Rating").getValue(long.class);
                     total = total + rating;
                 }
                 long average = total / dataSnapshot.getChildrenCount();
 
-                final DatabaseReference newRef = FirebaseDatabase.getInstance().getReference("Ratings")
+                final DatabaseReference newRef = FirebaseDatabase.getInstance()
+                        .getReference("Ratings")
                         .child(mName);
+
+                final DatabaseReference vehicleRef = FirebaseDatabase.getInstance().getReference("Vehicles")
+                        .child(mName);
+
                 newRef.child("averageRating").setValue(average);
+
+                vehicleRef.child("rating").setValue(average);
+
             }
 
             @Override
-        public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 throw error.toException();
+            }
+        });
+    }
+
+    private void displayRatings() {
+        getRatings();
+    }
+    private void checkLikes() {
+        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference()
+                .child("Likes")
+                .child(mName)
+                .child(mUserId);
+
+        likesRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    mLike.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+                    mLike.setSelected(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void displayNumberOfLikes() {
+        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference()
+                .child("Likes")
+                .child(mName);
+
+        likesRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        long numOfLikes = dataSnapshot.getChildrenCount();
+                        mNumOfLikes.setText(numOfLikes + " likes");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void onLikeClicked() {
+
+        DatabaseReference liked = FirebaseDatabase.getInstance().getReference().child("Likes")
+                .child(mName).child(mUserId);
+
+        liked.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    Toast.makeText(IndividualVehicle.this, "Already liked this vehicle", Toast.LENGTH_LONG).show();
+
+                } else {
+                    liked.setValue(mUserId);
+                    mLike.setColorFilter(Color.rgb(221,221,221),PorterDuff.Mode.SRC_IN);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void checkFavourites() {
+        DatabaseReference favRef = FirebaseDatabase.getInstance().getReference()
+                .child("Favourites")
+                .child(mName)
+                .child(mUserId);
+
+        favRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    mFavourite.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void displayNumberOfFavourites() {
+        DatabaseReference FavRef = FirebaseDatabase.getInstance().getReference()
+                .child("Favourites")
+                .child(mName);
+
+        FavRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        long numOfFavs = dataSnapshot.getChildrenCount();
+                        mNumOfFavs.setText(numOfFavs + " favourites");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void onFavouriteClicked() {
+
+        DatabaseReference favourites = FirebaseDatabase.getInstance().getReference().child("Favourites")
+                .child(mName).child(mUserId);
+
+        favourites.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(IndividualVehicle.this, "Already added this vehicle to your favourites", Toast.LENGTH_LONG).show();
+
+                } else {
+                    favourites.setValue(mUserId);
+                    mFavourite.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

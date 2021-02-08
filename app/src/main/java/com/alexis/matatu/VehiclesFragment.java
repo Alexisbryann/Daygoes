@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.VehiclesAdapter;
-import com.alexis.matatu.Models.MatatuModel;
+import com.alexis.matatu.Models.VehicleModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -89,9 +89,9 @@ public class VehiclesFragment extends Fragment {
 
     private void loadFavouriteVehicles() {
         //      query db
-        FirebaseRecyclerOptions<MatatuModel> options
-                = new FirebaseRecyclerOptions.Builder<MatatuModel>()
-                .setQuery(mDb, MatatuModel.class)
+        FirebaseRecyclerOptions<VehicleModel> options
+                = new FirebaseRecyclerOptions.Builder<VehicleModel>()
+                .setQuery(mDb, VehicleModel.class)
                 .build();
 
         //      Initialize and set adapter
@@ -104,9 +104,9 @@ public class VehiclesFragment extends Fragment {
 
     private void loadPopularVehicles() {
         //      query db
-        FirebaseRecyclerOptions<MatatuModel> options
-                = new FirebaseRecyclerOptions.Builder<MatatuModel>()
-                .setQuery(mDb, MatatuModel.class)
+        FirebaseRecyclerOptions<VehicleModel> options
+                = new FirebaseRecyclerOptions.Builder<VehicleModel>()
+                .setQuery(mDb, VehicleModel.class)
                 .build();
         //      Initialize and set adapter
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
@@ -122,7 +122,7 @@ public class VehiclesFragment extends Fragment {
             mShimmerFrameLayout.setVisibility(View.GONE);
             mShimmerFrameLayout.stopShimmer();
             mRecyclerView.setVisibility(View.VISIBLE);
-        }, 6000);
+        }, 3000);
     }
 
     private void initializeRecyclerAndShimmer() {
@@ -138,9 +138,9 @@ public class VehiclesFragment extends Fragment {
 
     private void loadData() {
         //      query db
-        FirebaseRecyclerOptions<MatatuModel> options
-                = new FirebaseRecyclerOptions.Builder<MatatuModel>()
-                .setQuery(mDb, MatatuModel.class)
+        FirebaseRecyclerOptions<VehicleModel> options
+                = new FirebaseRecyclerOptions.Builder<VehicleModel>()
+                .setQuery(mDb, VehicleModel.class)
                 .build();
 
         //      Initialize and set adapter
