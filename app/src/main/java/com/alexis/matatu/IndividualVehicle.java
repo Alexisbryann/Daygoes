@@ -50,18 +50,33 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mUserId;
     private TextView mNumOfLikes;
     private String mName;
-    private float mRating;
+    private long mRating;
     private TextView mNumOfFavs;
+    private TextView mTv_rating_comments;
+    private ImageView mDislike;
+    private TextView mNumOfDislikes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_vehicle);
 
-        inflateImageSlider();
+
         mAuth = FirebaseAuth.getInstance();
-        mUserId = mAuth.getCurrentUser().getUid();
-//        inflate the layout
+        mUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        inflateImageSlider();
+        inflateViews();
+        getIntentData();
+        displayNumberOfLikes();
+        displayNumberOfFavourites();
+        displayNumberOfDislikes();
+        displayRatings();
+        iconInitialize();
+    }
+
+    private void inflateViews() {
+//      inflate the layout
         mFabChat = findViewById(R.id.fab_chat);
         mTv_name = findViewById(R.id.tv_matatu_name);
         mTv_plate = findViewById(R.id.tv_plate);
@@ -70,24 +85,24 @@ public class IndividualVehicle extends AppCompatActivity {
         mLike = findViewById(R.id.img_like);
         mFavourite = findViewById(R.id.img_favourite);
         mShare = findViewById(R.id.img_share);
+        mDislike = findViewById(R.id.img_dislike);
         mRatingBar = findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
+        mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
+        mTv_rating_comments = findViewById(R.id.tv_rating_comments);
+    }
 
-        //retrieving data using intent
+    private void getIntentData() {
+        //retrieving data sent via intent
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
         String plate = i.getStringExtra("PLATE_KEY");
         String route = i.getStringExtra("ROUTE_KEY");
-
         mTv_name.setText(mName);
         mTv_plate.setText(plate);
         mTv_route.setText(route);
-
-        displayNumberOfLikes();
-        displayNumberOfFavourites();
-        displayRatings();
-        iconInitialize();
+        getSupportActionBar().setTitle(mName);
     }
 
     @Override
@@ -98,20 +113,19 @@ public class IndividualVehicle extends AppCompatActivity {
 
     private void iconInitialize() {
         checkLikes();
-        mLike.setOnClickListener(v -> {
-            onLikeClicked();
-        });
+        mLike.setOnClickListener(v -> onLikeClicked());
+
         checkFavourites();
-        mFavourite.setOnClickListener(v -> {
-            onFavouriteClicked();
-            mFavourite.setColorFilter(Color.rgb(255, 191, 0));
-            Toast toast = Toast.makeText(IndividualVehicle.this, "Vehicle made favourite", Toast.LENGTH_LONG);
-            toast.show();
-        });
+        mFavourite.setOnClickListener(v -> onFavouriteClicked());
+
         mShare.setOnClickListener(v -> {
             Toast toast = Toast.makeText(IndividualVehicle.this, "Share", Toast.LENGTH_LONG);
             toast.show();
         });
+
+        checkDislikes();
+        mDislike.setOnClickListener(v -> onDislikeClicked());
+
         mFabChat.setOnClickListener(v -> {
 
             Context context = v.getContext();
@@ -119,8 +133,10 @@ public class IndividualVehicle extends AppCompatActivity {
             i.putExtra("NAME_KEY", mTv_name.getText().toString());
             context.startActivity(i);
         });
+
         mRatingBar.setRating(setRatings());
     }
+
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------
@@ -146,16 +162,20 @@ public class IndividualVehicle extends AppCompatActivity {
                 .child(mName)
                 .child("User Ratings");
 
-        checkRating.orderByChild(mUserId)
-                .equalTo(mUserId)
+        checkRating
+                .child(mUserId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            mRating = Float.parseFloat(checkRating.child(mUserId).child("Rating").toString());
+                            mRating =  snapshot.child("Rating").getValue(long.class);
                             mRatingBar.setRating(mRating);
+                            mTv_rating_comments.setText("You have given "+mName+" a " + mRating + " star rating!");
                         } else {
+                            mTv_rating_comments.setText("You are yet to rate " + mName);
                             getRatings();
+
                         }
                     }
 
@@ -170,18 +190,18 @@ public class IndividualVehicle extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     public void getRatings() {
-
         mRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
 
             final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
                     .child(mName).child("User Ratings").child(mUserId).child("Rating");
 
             dbRef.setValue((float) rating);
+            Toast.makeText(IndividualVehicle.this,""+rating+" star!",Toast.LENGTH_LONG).show();
             setAverage();
         });
     }
-
     public void setAverage() {
 
         final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
@@ -207,7 +227,6 @@ public class IndividualVehicle extends AppCompatActivity {
                 newRef.child("averageRating").setValue(average);
 
                 vehicleRef.child("rating").setValue(average);
-
             }
 
             @Override
@@ -232,7 +251,7 @@ public class IndividualVehicle extends AppCompatActivity {
 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    mLike.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+                    mLike.setColorFilter(Color.rgb(0, 100, 0), PorterDuff.Mode.SRC_IN);
                     mLike.setSelected(true);
                 }
             }
@@ -273,22 +292,24 @@ public class IndividualVehicle extends AppCompatActivity {
 
         DatabaseReference liked = FirebaseDatabase.getInstance().getReference().child("Likes")
                 .child(mName).child(mUserId);
+        DatabaseReference disliked = FirebaseDatabase.getInstance().getReference().child("Dislikes")
+                .child(mName);
 
         liked.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-
                     Toast.makeText(IndividualVehicle.this, "Already liked this vehicle", Toast.LENGTH_LONG).show();
-
                 } else {
                     liked.setValue(mUserId);
-                    mLike.setColorFilter(Color.rgb(221,221,221),PorterDuff.Mode.SRC_IN);
+                    disliked.child(mUserId).removeValue();
+                    mDislike.setColorFilter(Color.rgb(221,221,221), PorterDuff.Mode.SRC_IN);
+
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
@@ -363,4 +384,79 @@ public class IndividualVehicle extends AppCompatActivity {
             }
         });
     }
+    private void checkDislikes() {
+
+        DatabaseReference DislikesRef = FirebaseDatabase.getInstance().getReference()
+                .child("Dislikes")
+                .child(mName)
+                .child(mUserId);
+
+        DislikesRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    mDislike.setColorFilter(Color.rgb(255,0,0), PorterDuff.Mode.SRC_IN);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void displayNumberOfDislikes() {
+        DatabaseReference DislikesRef = FirebaseDatabase.getInstance().getReference()
+                .child("Dislikes")
+                .child(mName);
+
+        DislikesRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        long numOfDislikes = dataSnapshot.getChildrenCount();
+                        mNumOfDislikes.setText(numOfDislikes + " Dislikes");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void onDislikeClicked() {
+
+        DatabaseReference liked = FirebaseDatabase.getInstance().getReference().child("Likes")
+                .child(mName);
+        DatabaseReference disliked = FirebaseDatabase.getInstance().getReference().child("Dislikes")
+                .child(mName).child(mUserId);
+
+        disliked.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(IndividualVehicle.this, "Already disliked "+mName, Toast.LENGTH_LONG).show();
+
+                } else {
+                    disliked.setValue(mUserId);
+                    liked.child(mUserId).removeValue();
+                    mDislike.setColorFilter(Color.rgb(255,0,0),PorterDuff.Mode.SRC_IN);
+                    mLike.setColorFilter(Color.rgb(221,221,221), PorterDuff.Mode.SRC_IN);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
