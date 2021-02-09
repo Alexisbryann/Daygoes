@@ -198,7 +198,6 @@ public class IndividualVehicle extends AppCompatActivity {
                     .child(mName).child("User Ratings").child(mUserId).child("Rating");
 
             dbRef.setValue((float) rating);
-            Toast.makeText(IndividualVehicle.this,""+rating+" star!",Toast.LENGTH_LONG).show();
             setAverage();
         });
     }

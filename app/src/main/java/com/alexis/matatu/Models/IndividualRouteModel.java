@@ -1,24 +1,32 @@
 package com.alexis.matatu.Models;
 
 public class IndividualRouteModel {
-    private String Image;
+    private String Image1;
     private String Name;
     private String Route;
     private String Capacity;
     private String Plate;
-    private int Ratings;
+    private  float Rating;
 
     public IndividualRouteModel() {
     }
 
-    public String getImage() {
-        return Image;
+    public IndividualRouteModel(String image1, String name, String route, String capacity, String plate, float rating) {
+        Image1 = image1;
+        Name = name;
+        Route = route;
+        Capacity = capacity;
+        Plate = plate;
+        Rating = rating;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public String getImage1() {
+        return Image1;
     }
 
+    public void setImage1(String image1) {
+        Image1 = image1;
+    }
     public String getName() {
         return Name;
     }
@@ -51,11 +59,11 @@ public class IndividualRouteModel {
         Plate = plate;
     }
 
-    public int getRatings() {
-        return Ratings;
+    public float getRating() {
+        return Rating;
     }
 
-    public void setRatings(int ratings) {
-        Ratings = ratings;
+    public void setRating(float rating) {
+        Rating = rating;
     }
 }

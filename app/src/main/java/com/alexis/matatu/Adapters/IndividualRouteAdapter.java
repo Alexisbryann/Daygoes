@@ -34,13 +34,13 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
     @Override
     protected void onBindViewHolder(@NonNull IndividualRouteAdapter.FirebaseViewHolder holder, int position, @NonNull IndividualRouteModel model) {
 
-        Picasso.with(mContext).load(model.getImage()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
+        Picasso.with(mContext).load(model.getImage1()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
         holder.mTv_route.setText(model.getRoute());
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
-        holder.mTv_ratings.setRating(model.getRatings());
-        holder.mTv_no_of_stars.setText(holder.mTv_ratings.getRating() +" Stars");
+        holder.mRatingBar.setRating(model.getRating());
+        holder.mTv_no_of_stars.setText(holder.mRatingBar.getRating() +" Stars");
     }
 
     @NonNull
@@ -55,7 +55,7 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
         private final TextView mTv_name;
         private final TextView mTv_capacity;
         private final TextView mTv_plate;
-        private final RatingBar mTv_ratings;
+        private final RatingBar mRatingBar;
         private final ImageView mImg_pic;
         private final TextView mTv_no_of_stars;
         private final TextView mTv_route;
@@ -68,7 +68,7 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
             mTv_route = itemView.findViewById(R.id.tv_sacco1);
             mTv_capacity = itemView.findViewById(R.id.tv_capacity1);
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
-            mTv_ratings = itemView.findViewById(R.id.ratings);
+            mRatingBar = itemView.findViewById(R.id.ratings);
             mTv_no_of_stars = itemView.findViewById(R.id.tv_no_of_stars);
 
             itemView.setOnClickListener(new View.OnClickListener() {

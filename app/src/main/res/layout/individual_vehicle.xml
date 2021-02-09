@@ -166,8 +166,8 @@
 
                         <ImageView
                             android:id="@+id/img_like"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:contentDescription="@string/thumbs_up_icon"
                             app:layout_constraintEnd_toEndOf="@+id/textView9"
                             app:layout_constraintStart_toStartOf="@+id/textView9"
@@ -177,8 +177,8 @@
 
                         <ImageView
                             android:id="@+id/img_favourite"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:contentDescription="@string/favourite_icon"
                             app:layout_constraintEnd_toEndOf="@+id/textView12"
                             app:layout_constraintStart_toEndOf="@+id/img_like"
@@ -189,8 +189,8 @@
 
                         <ImageView
                             android:id="@+id/img_share"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:contentDescription="@string/share_icon"
                             app:layout_constraintEnd_toEndOf="@+id/textView14"
                             app:layout_constraintStart_toStartOf="@+id/textView14"
@@ -200,8 +200,9 @@
 
                         <TextView
                             android:id="@+id/tv_likes_no"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             app:layout_constraintEnd_toEndOf="@+id/textView9"
                             app:layout_constraintStart_toEndOf="@+id/img_like"
                             app:layout_constraintStart_toStartOf="@+id/textView9"
@@ -209,8 +210,9 @@
 
                         <TextView
                             android:id="@+id/tv_favourites_no"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             app:layout_constraintEnd_toEndOf="@+id/textView12"
                             app:layout_constraintStart_toEndOf="@+id/img_favourite"
                             app:layout_constraintStart_toStartOf="@+id/textView12"
@@ -225,14 +227,13 @@
                             android:text="@string/dislike"
                             android:textColor="@color/colorPrimaryBlack"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView14"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/img_dislike"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:contentDescription="@string/dislike"
                             app:layout_constraintEnd_toEndOf="@+id/textView10"
                             app:layout_constraintStart_toStartOf="@+id/textView10"
@@ -242,10 +243,11 @@
 
                         <TextView
                             android:id="@+id/tv_dislikes_no"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toEndOf="@+id/img_dislike"
-                            app:layout_constraintStart_toStartOf="@+id/img_dislike"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toEndOf="@+id/textView10"
+                            app:layout_constraintStart_toStartOf="@+id/textView10"
                             app:layout_constraintTop_toBottomOf="@+id/img_dislike" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,10 +21,6 @@ public class IndividualRoute extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private IndividualRouteAdapter mIndividualRouteAdapter;
-    /*
-1.INITIALIZE FIREBASE DB
-2.INITIALIZE UI
-3.DATA*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +38,8 @@ public class IndividualRoute extends AppCompatActivity {
         String name = i.getStringExtra("NAME_KEY");
 
 //      Initialize DB
-        mDb =  FirebaseDatabase.getInstance().getReference().child("Vehicle details");
-        Query query = mDb.orderByChild("Route").equalTo(name);
+        mDb =  FirebaseDatabase.getInstance().getReference().child("Vehicles");
+        Query query = mDb.orderByChild("route").equalTo(name);
 
 //      query db
         FirebaseRecyclerOptions<IndividualRouteModel> options
