@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,18 +24,14 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class VehiclesFragment extends Fragment {
-
     private VehiclesAdapter mMatatuAdapter;
-
     private RecyclerView mRecyclerView;
     private DatabaseReference mDb;
     private ShimmerFrameLayout mShimmerFrameLayout;
     private Spinner mSpinner;
-    /*
-1.INITIALIZE FIREBASE DB
-2.INITIALIZE UI
-3.DATA*/
 
     public VehiclesFragment() {
     }
@@ -45,6 +42,7 @@ public class VehiclesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.vehicles, container, false);
+
         mShimmerFrameLayout = mView.findViewById(R.id.shimmerLayout);
         mSpinner = mView.findViewById(R.id.spinner);
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
@@ -66,9 +64,11 @@ public class VehiclesFragment extends Fragment {
                 String selectedItemText = (String) parent.getItemAtPosition(position);
                 if (selectedItemText.equals("Popular vehicles")) {
                     loadPopularVehicles();
-                }if (selectedItemText.equals("Favourite vehicles")){
+                }
+                if (selectedItemText.equals("Favourite vehicles")) {
                     loadFavouriteVehicles();
-                }if (selectedItemText.equals("All vehicles")){
+                }
+                if (selectedItemText.equals("All vehicles")) {
                     loadData();
 
                 }
@@ -80,7 +80,7 @@ public class VehiclesFragment extends Fragment {
 
             }
         });
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.spinner_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -98,7 +98,7 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
         mMatatuAdapter.startListening();
-        Toast.makeText(getContext(),"Showing your favourite vehicles",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Showing your favourite vehicles", Toast.LENGTH_LONG).show();
 
     }
 
@@ -112,7 +112,7 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
         mMatatuAdapter.startListening();
-        Toast.makeText(getContext(),"Showing popular vehicles",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Showing popular vehicles", Toast.LENGTH_LONG).show();
     }
 
     private void shimmerThread() {

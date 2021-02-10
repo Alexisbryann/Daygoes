@@ -34,8 +34,6 @@ public class RoutesFragment extends Fragment {
     private SearchView mSearchView;
     private TextView mAppName;
     private TextView mTv_Route;
-    private TextView mTv_destination;
-    private GridLayoutManager mGridLayoutManager;
 
     public RoutesFragment(){
     }
@@ -50,7 +48,6 @@ public class RoutesFragment extends Fragment {
 //      Inflate views
         mToolbar = mView.findViewById(R.id.toolbar);
         mSearchView = mView.findViewById(R.id.search_view_routes);
-        mAppName = mView.findViewById(R.id.tv_app_name);
         mTv_Route = mView.findViewById(R.id.tv_sacco);
 
 //      Initialize recyclerView

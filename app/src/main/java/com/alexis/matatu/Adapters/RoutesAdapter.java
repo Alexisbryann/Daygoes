@@ -2,12 +2,10 @@ package com.alexis.matatu.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,7 @@ import com.alexis.matatu.RoutesFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAdapter.FirebaseViewHolder> {
+public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAdapter.FirebaseViewHolder> {
 
     private final Context mContext;
 
@@ -30,6 +28,7 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
         super(options);
         mContext = context;
     }
+
     @Override
     protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, int position, @NonNull RoutesModel model) {
         holder.mTv_route.setText(model.getRoute());
@@ -45,18 +44,18 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
     public class FirebaseViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView mTv_route;
-        private final ImageView mImg_route;
+        private final ImageView mImg_more;
 
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mTv_route = itemView.findViewById(R.id.tv_sacco);
-            mImg_route = itemView.findViewById(R.id.img_more);
+            mImg_more = itemView.findViewById(R.id.img_more);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast toast = Toast.makeText(mContext,mTv_route.getText() ,Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(mContext, mTv_route.getText(), Toast.LENGTH_LONG);
                     toast.show();
                     Context context = v.getContext();
                     Intent i = new Intent(context, IndividualRoute.class);
@@ -65,20 +64,24 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel,RoutesAda
                 }
             });
 
-            mImg_route.setOnClickListener(v -> {
-                Toast.makeText(mContext,"Stops in this route",Toast.LENGTH_LONG).show();
+            mImg_more.setOnClickListener(v -> {
+                Intent intent = new Intent();
+                intent.putExtra("NAME_KEY", mTv_route.getText().toString());
+                Toast.makeText(mContext, "Stops in this route", Toast.LENGTH_LONG).show();
                 // create an alert builder
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("THESE ARE THE STOPS ALONG THIS ROUTE.");
-                    // set the custom layout
-                    builder.setView(R.layout.stops);
-                    // add a button
-                    builder.setPositiveButton("OK", (dialog, which) -> {
-                    });
-                    // create and show the alert dialog
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("THESE ARE THE STOPS ALONG THIS ROUTE.");
+                // set the custom layout
+                LayoutInflater inflater = LayoutInflater.from(mContext);
+                View dialogView = inflater.inflate(R.layout.stops, null);
+                builder.setView(dialogView);
+                // add a button
+                builder.setPositiveButton("OK", (dialog, which) -> {
                 });
+                // create and show the alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            });
         }
     }
 }

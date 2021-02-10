@@ -11,6 +11,9 @@ public class StopsModel {
     private String stop8;
     private String stop9;
 
+    public StopsModel() {
+    }
+
     public StopsModel(String stop1, String stop2, String stop3, String stop4, String stop5, String stop6, String stop7, String stop8, String stop9) {
         this.stop1 = stop1;
         this.stop2 = stop2;
@@ -21,9 +24,6 @@ public class StopsModel {
         this.stop7 = stop7;
         this.stop8 = stop8;
         this.stop9 = stop9;
-    }
-
-    public StopsModel() {
     }
 
     public String getStop1() {

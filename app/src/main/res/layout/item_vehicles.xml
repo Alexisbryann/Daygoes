@@ -168,13 +168,14 @@
                 <RatingBar
                     android:id="@+id/ratings"
                     style="@android:style/Widget.Material.RatingBar.Small"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:progressBackgroundTint="@color/colorPrimaryWhite"
+                    android:progressBackgroundTint="@color/design_default_color_secondary_variant"
                     android:progressTint="@color/colorAccentAmber"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
-                    app:layout_constraintStart_toEndOf="@+id/tv_no_plate"
+                    app:layout_constraintStart_toEndOf="@+id/tv_ratings"
+                    app:layout_constraintStart_toStartOf="@+id/tv_no_plate1"
                     app:layout_constraintTop_toTopOf="@+id/tv_ratings" />
 
                 <View
@@ -193,6 +194,8 @@
                     android:layout_marginStart="8dp"
                     android:gravity="center"
                     android:textColor="@color/colorAccentRed"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/ratings"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ratings"

@@ -4,7 +4,23 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cardBg</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
-<!--        <item name="backgroundTint">@color/colorAccentAmber</item>-->
+        <!--        <item name="backgroundTint">@color/colorAccentAmber</item>-->
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="almendraText">
+        <item name="android:fontFamily">@font/almendra</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
