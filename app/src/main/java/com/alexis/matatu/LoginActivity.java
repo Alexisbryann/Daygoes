@@ -1,7 +1,9 @@
 package com.alexis.matatu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -104,6 +106,15 @@ public class LoginActivity extends AppCompatActivity {
                         finishAffinity();
                     }
                 });
+        sendToSharedPref();
+    }
+
+    private void sendToSharedPref() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email",mEmail1 );
+        editor.apply();
     }
 
 

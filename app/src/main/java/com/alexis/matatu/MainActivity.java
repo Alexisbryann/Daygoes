@@ -11,11 +11,15 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.TextView;
 
 
 import com.alexis.matatu.Adapters.ViewPagerAdapter;
@@ -23,6 +27,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -31,12 +37,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
+    private NavigationView mNavigationView;
+    private View mHeaderView;
+    private TextView mUsername;
+    private TextView mEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -56,8 +71,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = findViewById(R.id.nav_view);
+        mHeaderView = mNavigationView.getHeaderView(0);
+
+        mUsername = mHeaderView.findViewById(R.id.tv_username);
+        mEmail = mHeaderView.findViewById(R.id.tv_email);
+
+        // Set username & email
+
+//        SharedPreferences sharedPreferences = PreferenceManager
+//                .getDefaultSharedPreferences(this);
+//        String email = sharedPreferences.getString("email", "");
+        String email = mCurrentUser.getEmail();
+        String username = mCurrentUser.getDisplayName();
+        mUsername.setText(username);
+        mEmail.setText(email);
+
+        mNavigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -105,6 +135,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        if (id == R.id.edit_profile){
+            Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(i);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
