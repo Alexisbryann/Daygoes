@@ -148,8 +148,7 @@
                                     app:layout_constraintEnd_toEndOf="@+id/textView14"
                                     app:layout_constraintStart_toStartOf="@+id/textView14"
                                     app:layout_constraintTop_toBottomOf="@+id/textView14"
-                                    app:srcCompat="@android:drawable/ic_menu_share"
-                                    app:tint="@color/colorShimmer" />
+                                    app:srcCompat="@drawable/share" />
 
                                 <TextView
                                     android:id="@+id/tv_likes_no"

@@ -19,16 +19,19 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.alexis.matatu.Adapters.ViewPagerAdapter;
+import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView mEmail;
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
+    private ImageView mImgLogo;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
@@ -76,67 +80,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mUsername = mHeaderView.findViewById(R.id.tv_username);
         mEmail = mHeaderView.findViewById(R.id.tv_email);
+        mImgLogo = mHeaderView.findViewById(R.id.img_logo);
 
         // Set username & email
 
-//        SharedPreferences sharedPreferences = PreferenceManager
-//                .getDefaultSharedPreferences(this);
-//        String email = sharedPreferences.getString("email", "");
         String email = mCurrentUser.getEmail();
         String username = mCurrentUser.getDisplayName();
+        Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
         mUsername.setText(username);
         mEmail.setText(email);
 
         mNavigationView.setNavigationItemSelectedListener(this);
+        mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
+
 
     }
 
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START))
-        {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else
-        {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item)
-    {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.edit_profile){
+        if (id == R.id.edit_profile) {
             Intent i = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(i);
         }

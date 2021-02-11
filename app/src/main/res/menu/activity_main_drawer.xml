@@ -8,5 +8,29 @@
             android:id="@+id/edit_profile"
             android:icon="@drawable/profile"
             android:title="Edit profile" />
+        <item
+            android:id="@+id/about_app"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="About App" />
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/feedback"
+            android:title="Feedback" />
+        <item
+            android:id="@+id/help_center"
+            android:icon="@drawable/helpccenter"
+            android:title="Help Center" />
+        <item
+            android:id="@+id/sign_out"
+            android:icon="@drawable/signout"
+            android:title="Sign out" />
+        <item
+            android:id="@+id/app_tour"
+            android:icon="@drawable/tour"
+            android:title="App Tour" />
+        <item
+            android:id="@+id/explore"
+            android:icon="@drawable/explore"
+            android:title="Explore" />
     </group>
 </menu>
