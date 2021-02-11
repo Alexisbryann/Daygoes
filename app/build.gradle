@@ -80,4 +80,8 @@ dependencies {
 
 //    Browser for OTP recapcha
     implementation 'androidx.browser:browser:1.3.0'
+
+//    tapview
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
+
 }

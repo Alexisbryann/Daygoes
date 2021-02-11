@@ -21,12 +21,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.alexis.matatu.Adapters.ViewPagerAdapter;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
+import com.alexis.matatu.usersession.UserSession;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private ImageView mImgLogo;
+    private UserSession session;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
@@ -93,10 +98,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
 
+//        if (session.getFirstTime()) {
+//            //tap target view
+//            tapview();
+//            session.setFirstTime(false);
+//        }
+
 
     }
 
+    private void tapview() {
 
+        new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forToolbarNavigationIcon(mToolbar, "Navigation Drawer", "You can Edit profile, read about the app, give us feedback,contact help, sign out, get an app tour and explore the app from here!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorPrimaryBlack)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorAccentAmber),
+
+                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "YYou can select to filter vehicles by either popularity or your favourites!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorAccentAmber)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorShimmer),
+
+                        TapTarget.forView(findViewById(R.id.tabLayout), "Swipe tabs", "Here you can choose whether to view vehicles, routes or hype!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorAccentAmber)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .drawShadow(true)
+                                .cancelable(false)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorShimmer))
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+//                        session.setFirstTime(false);
+                        Toast.makeText(MainActivity.this, " You are ready to go !", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                    }
+                }).start();
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -108,20 +176,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }
@@ -134,6 +190,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.edit_profile) {
             Intent i = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(i);
+        }
+        if (id== R.id.explore){
+            tapview();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
