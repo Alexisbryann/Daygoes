@@ -69,6 +69,8 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="navigation_drawer">Navigation drawer</string>
     <string name="edit_profile">Edit profile</string>
+    <string name="username">Username</string>
+    <string name="profile_icon">Profile icon</string>
 
 
 </resources>

@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -22,6 +25,7 @@ public class ForgotPassword extends AppCompatActivity {
     private Button mBack;
     private FirebaseAuth mAuth;
     private ProgressBar mProgressBar;
+    private ImageView mImgLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class ForgotPassword extends AppCompatActivity {
         mResetPassword = findViewById(R.id.btn_reset_password);
         mBack = findViewById(R.id.btn_back);
         mProgressBar = findViewById(R.id.progressBar);
+        mImgLogo = findViewById(R.id.img_logo);
+
+        Picasso.with(ForgotPassword.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
 
         mResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override

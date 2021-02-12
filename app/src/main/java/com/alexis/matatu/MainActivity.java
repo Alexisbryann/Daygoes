@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 
 import com.alexis.matatu.Adapters.ViewPagerAdapter;
+import com.alexis.matatu.Models.User;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.alexis.matatu.usersession.UserSession;
 import com.daimajia.slider.library.SliderLayout;
@@ -35,6 +36,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser mCurrentUser;
     private ImageView mImgLogo;
     private UserSession session;
+    private DatabaseReference mDatabase;
+    private String mUid;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
@@ -61,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUid = mCurrentUser.getUid();
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -89,10 +99,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Set username & email
 
+//        String username = getUsername();
         String email = mCurrentUser.getEmail();
-        String username = mCurrentUser.getDisplayName();
         Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
-        mUsername.setText(username);
+//        mUsername.setText(username);
+        mDatabase.child("Users").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User username = dataSnapshot.child(mUid).getValue(User.class);
+                mUsername.setText("Welcome "+username.getUsername());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         mEmail.setText(email);
 
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -103,10 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            tapview();
 //            session.setFirstTime(false);
 //        }
-
-
     }
-
     private void tapview() {
 
         new TapTargetSequence(this)
@@ -193,6 +213,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id== R.id.explore){
             tapview();
+        }
+        if (id==R.id.sign_out){
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

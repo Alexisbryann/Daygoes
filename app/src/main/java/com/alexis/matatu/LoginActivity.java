@@ -7,15 +7,18 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.squareup.picasso.Picasso;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private String mEmail1;
     private String mPassword1;
     private TextView mForgotPass;
+    private ImageView mImgLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         mRegister = findViewById(R.id.btn_register);
         mForgotPass = findViewById(R.id.tv_forgot_password);
         mProgressBar = findViewById(R.id.progressBar);
+        mImgLogo = findViewById(R.id.img_logo);
+
+        Picasso.with(LoginActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
+
 
 
         mLogin.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     private void handleLogin() {
 
         mProgressBar.setVisibility(View.VISIBLE);
-        mLogin.setVisibility(View.INVISIBLE);
+        mLogin.setEnabled(false);
         //login user
         mAuth.signInWithEmailAndPassword(mEmail1, mPassword1)
                 .addOnCompleteListener(task -> {
@@ -101,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, LoginActivity.this.getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
                     } else {
                         mProgressBar.setVisibility(View.INVISIBLE);
-                        mLogin.setVisibility(View.VISIBLE);
+                        mLogin.setEnabled(true);
                         LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finishAffinity();
                     }

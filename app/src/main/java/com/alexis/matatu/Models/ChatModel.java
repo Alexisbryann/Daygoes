@@ -34,6 +34,9 @@ public class ChatModel {
 
     }
 
+//    public ChatModel(String msg, User messageSender) {
+//    }
+
     public String getChatGroup() {return chatGroup;}
 
     public void setChatGroup(String chatGroup) {this.chatGroup = chatGroup;}

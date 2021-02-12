@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexis.matatu.Models.User;
+import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -34,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private ProgressBar mProgressBar;
 
-    String email, password;
+    String email, password, mUsername2;
     private Button mRegister;
     private EditText mEmail;
     private EditText mPassword;
@@ -44,7 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String mUid;
     private TextView mLogin_here;
     private String mUsername;
-
+    private ImageView mImgLogo;
+    private EditText mUsername1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +59,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        mUsername1 = findViewById(R.id.edt_username);
         mEmail = findViewById(R.id.e_mail);
         mPassword = findViewById(R.id.edt_password);
         mRegister = findViewById(R.id.btn_register);
         mLogin_here = findViewById(R.id.tv_login_here);
         mProgressBar = findViewById(R.id.progressBar2);
+        mImgLogo = findViewById(R.id.img_logo);
+
+        Picasso.with(RegisterActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
 
         mRegister.setOnClickListener(view -> {
             validateData();
@@ -72,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUserToDatabase() {
 
         mProgressBar.setVisibility(View.VISIBLE);
-        mRegister.setVisibility(View.INVISIBLE);
+        mRegister.setEnabled(false);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
@@ -87,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(RegisterActivity.this, "Verification Link Sent Successfully.", Toast.LENGTH_SHORT).show();
-                            mRegister.setVisibility(View.VISIBLE);
+                            mRegister.setEnabled(true);
 
                             if (task.isSuccessful()) {
                                 onAuthSuccess(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()));
@@ -117,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void onAuthSuccess(FirebaseUser user) {
-        mUsername = usernameFromEmail(Objects.requireNonNull(user.getEmail()));
+        mUsername = mUsername2;
 
         // Write new user
         writeNewUser(user.getUid(), mUsername, user.getEmail(),user.getDisplayName());
@@ -127,13 +135,13 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
+//    private String usernameFromEmail(String email) {
+//        if (email.contains("@")) {
+//            return email.split("@")[0];
+//        } else {
+//            return email;
+//        }
+//    }
 
 
     private void writeNewUser(String userId, String username, String email, String displayName) {
@@ -143,9 +151,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void validateData() {
+        mUsername2 = mUsername1.getText().toString().trim();
         email = mEmail.getText().toString().trim();
         password = mPassword.getText().toString();
 
+        if (mUsername2.isEmpty()) {
+            mUsername1.setError(RegisterActivity.this.getString(R.string.email_empty));
+        }
         if (email.isEmpty()) {
             mEmail.setError(RegisterActivity.this.getString(R.string.email_empty));
         }

@@ -1,5 +1,6 @@
 package com.alexis.matatu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +17,16 @@ import android.widget.Toast;
 import com.alexis.matatu.Adapters.ChatAdapter;
 import com.alexis.matatu.Adapters.VehiclesAdapter;
 import com.alexis.matatu.Models.ChatModel;
+import com.alexis.matatu.Models.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Chat extends AppCompatActivity {
 
@@ -31,7 +37,12 @@ public class Chat extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
 
+    private String mUsername;
+    private String mUid;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
     private DatabaseReference mDb;
+    private DatabaseReference mDb1;
     private ChatAdapter mChatAdapter;
 
     @SuppressLint("SetTextI18n")
@@ -59,6 +70,10 @@ public class Chat extends AppCompatActivity {
 //      Initialize DB
         assert name != null;
         mDb = FirebaseDatabase.getInstance().getReference().child("Chats").child(groupName);
+        mDb1 = FirebaseDatabase.getInstance().getReference().child("Users");
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+        mUid = mCurrentUser.getUid();
 
 //      query db
         FirebaseRecyclerOptions<ChatModel> options
@@ -69,6 +84,21 @@ public class Chat extends AppCompatActivity {
         //      Initialize and set adapter
         mChatAdapter = new ChatAdapter(options, Chat.this,this);
         mRecyclerView.setAdapter(mChatAdapter);
+
+        mDb1.child("Users").addValueEventListener(new ValueEventListener() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsername = dataSnapshot.child(mUid).child("username").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         mSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +115,7 @@ public class Chat extends AppCompatActivity {
             public void onClick(View view) {
                 String group = mVehicleName.getText().toString();
                 String msg = mEdtMessage.getText().toString().trim();
-                String user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                String messageSender = mUsername;
 
                 if (msg.isEmpty()) {
                     Toast.makeText(Chat.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
@@ -96,7 +126,7 @@ public class Chat extends AppCompatActivity {
                             .getReference()
                             .child("Chats").child(group)
                             .push()
-                            .setValue(new ChatModel(msg,user));
+                            .setValue(new ChatModel(msg,messageSender));
 
                     // Clear the input
                     mEdtMessage.setText("");
