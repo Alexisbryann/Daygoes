@@ -12,9 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -129,9 +132,27 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (mCurrentUser != null) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             sendUserToHome();
-        }
+//        }
+//        assert mCurrentUser != null;
+//        mCurrentUser.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if(task.isSuccessful()){
+//                    User still exists and credentials are valid
+//                    sendUserToHome();
+//
+//                }else {
+//                    User has been disabled, deleted or login credentials are no longer valid,so send them to Login screen
+//                    Intent intent = new Intent(LoginActivity.this,LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
+                }
+//            }
+//        });
+
+
     }
 
     public void sendUserToHome() {

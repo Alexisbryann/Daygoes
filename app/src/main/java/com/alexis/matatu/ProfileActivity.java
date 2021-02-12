@@ -18,28 +18,41 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button changeEmail, changePassword;
-    private EditText oldEmail, newEmail, password, newPassword;
+    private Button changeEmail, changePassword, changeUsername;
+    private EditText oldEmail, newEmail, password, newPassword, oldUsername, newUsername;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private ProgressBar mProgressBar;
     private ProgressBar mProgressBar1;
     private ImageView mImgLogo;
+    private ProgressBar mProgressBar2;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
+    private String mUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        getSupportActionBar().setTitle("PROFILE");
+
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+        mUid = mCurrentUser.getUid();
 
         mImgLogo = findViewById(R.id.img_logo);
 
@@ -55,16 +68,22 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
 
-        changeEmail =  findViewById(R.id.changeEmail);
-        changePassword =  findViewById(R.id.changePass);
+        changeEmail = findViewById(R.id.changeEmail);
+        changePassword = findViewById(R.id.changePass);
+        changeUsername = findViewById(R.id.changeUsername);
 
-        oldEmail =  findViewById(R.id.old_email);
-        newEmail =  findViewById(R.id.new_email);
-        password =  findViewById(R.id.password);
+        oldEmail = findViewById(R.id.old_email);
+        newEmail = findViewById(R.id.new_email);
+
+        password = findViewById(R.id.password);
         newPassword = findViewById(R.id.newPassword);
+
+        oldUsername = findViewById(R.id.old_username);
+        newUsername = findViewById(R.id.new_username);
 
         mProgressBar = findViewById(R.id.progressBar);
         mProgressBar1 = findViewById(R.id.progressBar1);
+        mProgressBar2 = findViewById(R.id.progressBar2);
 
 
         changeEmail.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +106,9 @@ public class ProfileActivity extends AppCompatActivity {
                             });
                 } else if (newEmail.getText().toString().trim().equals("")) {
                     newEmail.setError("Enter email");
+                    mProgressBar.setVisibility(View.GONE);
+                }else if (oldEmail.getText().toString().trim().equals("")) {
+                    oldEmail.setError("Enter old email");
                     mProgressBar.setVisibility(View.GONE);
                 }
             }
@@ -118,6 +140,35 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if (newPassword.getText().toString().trim().equals("")) {
                     newPassword.setError("Enter password");
                     mProgressBar1.setVisibility(View.GONE);
+                }
+                else if (password.getText().toString().trim().equals("")) {
+                    password.setError("Enter old password");
+                    mProgressBar1.setVisibility(View.GONE);
+                }
+            }
+        });
+        changeUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String username = newUsername.getText().toString();
+
+                DatabaseReference userReference = FirebaseDatabase.getInstance().getReference()
+                        .child("Users")
+                        .child("Users")
+                        .child(mUid)
+                        .child("username");
+
+                if (user != null && username.equals("")) {
+                    newUsername.setError("Enter new username");
+                }
+                if (user != null && oldUsername.getText().toString().equals("")) {
+                    oldUsername.setError("Enter Old username");
+                }
+                else {
+                    userReference.setValue(username);
+                    Toast.makeText(ProfileActivity.this,"Username successfully changed.",Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });

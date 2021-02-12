@@ -98,11 +98,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mImgLogo = mHeaderView.findViewById(R.id.img_logo);
 
         // Set username & email
-
-//        String username = getUsername();
         String email = mCurrentUser.getEmail();
         Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
-//        mUsername.setText(username);
         mDatabase.child("Users").addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override

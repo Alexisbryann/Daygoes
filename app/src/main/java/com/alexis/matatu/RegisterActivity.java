@@ -134,7 +134,6 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 //    private String usernameFromEmail(String email) {
 //        if (email.contains("@")) {
 //            return email.split("@")[0];

@@ -42,7 +42,7 @@
     <string name="logo">Logo</string>
     <string name="password">Password</string>
     <string name="pass_less_than_six">Password should have 6 or more characters.</string>
-    <string name="auth_failed">Authentication failed, please try again.</string>
+    <string name="auth_failed">Authentication failed, Have you registered?.</string>
     <string name="username_empty">Username required</string>
     <string name="not_yet_registered_register_below">Not yet registered? register below.</string>
     <string name="forgot_password"><u>Forgot password?</u></string>

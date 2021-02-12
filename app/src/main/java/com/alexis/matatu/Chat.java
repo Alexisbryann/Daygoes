@@ -103,34 +103,26 @@ public class Chat extends AppCompatActivity {
         mSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendChat();
-            }
-        });
+                mSend.setOnClickListener(view -> {
+                    String group = mVehicleName.getText().toString();
+                    String msg = mEdtMessage.getText().toString().trim();
+                    String messageSender = mUsername;
 
-    }
+                    if (msg.isEmpty()) {
+                        Toast.makeText(Chat.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Read the input field and push a new instance of ChatModel to the Firebase database
+                        FirebaseDatabase.getInstance()
+                                .getReference()
+                                .child("Chats").child(group)
+                                .push()
+                                .setValue(new ChatModel(msg,messageSender));
 
-    private void sendChat() {
-        mSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String group = mVehicleName.getText().toString();
-                String msg = mEdtMessage.getText().toString().trim();
-                String messageSender = mUsername;
-
-                if (msg.isEmpty()) {
-                    Toast.makeText(Chat.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
+                        // Clear the input
+                    }
                     mEdtMessage.setText("");
-                } else {
-                    // Read the input field and push a new instance of ChatModel to the Firebase database
-                    FirebaseDatabase.getInstance()
-                            .getReference()
-                            .child("Chats").child(group)
-                            .push()
-                            .setValue(new ChatModel(msg,messageSender));
+                });
 
-                    // Clear the input
-                    mEdtMessage.setText("");
-                }
             }
         });
 

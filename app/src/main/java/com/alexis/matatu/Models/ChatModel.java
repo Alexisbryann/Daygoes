@@ -26,16 +26,11 @@ public class ChatModel {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
         messageTime = formatter.format(date);
 
-//        messageSender = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName();
-
     }
 
     public ChatModel() {
 
     }
-
-//    public ChatModel(String msg, User messageSender) {
-//    }
 
     public String getChatGroup() {return chatGroup;}
 
