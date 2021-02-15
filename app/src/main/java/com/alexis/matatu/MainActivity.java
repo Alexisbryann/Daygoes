@@ -99,23 +99,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mEmail = mHeaderView.findViewById(R.id.tv_email);
         mImgLogo = mHeaderView.findViewById(R.id.img_logo);
 
-        // Set username & email
-
-        mUsername1 = getIntent().getStringExtra("Username");
-        mPhone = getIntent().getStringExtra("Phone");
         Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
-
-        mEmail.setText(mPhone);
-        mUsername.setText("Welcome " + mUsername1);
 
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
+        setName();
 
 //        if (session.getFirstTime()) {
 //            //tap target view
 //            tapview();
 //            session.setFirstTime(false);
 //        }
+    }
+
+    private void setName() {
+        SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
+        mPhone = prefs.getString("phone", "");
+        mUsername1 = prefs.getString("username", "");
+        mEmail.setText(mPhone);
+        mUsername.setText("Welcome " + mUsername1);
     }
 
     private void tapview() {
@@ -186,7 +188,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

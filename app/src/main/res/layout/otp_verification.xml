@@ -10,87 +10,136 @@
         android:id="@+id/img_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_view_enter_otp"
-        android:layout_width="0dp"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:text="Enter the one time pin sent to you as text message"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/almendra"
+        android:text="@string/app_name"
+        android:textAllCaps="true"
         android:textColor="@color/colorPrimaryBlack"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_logo" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_verify_otp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ripple"
-        android:text="verify otp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/colorPrimaryBlack"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/information"
-        app:rippleColor="@color/design_default_color_error" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/button_verify_otp"
-        app:layout_constraintStart_toEndOf="@+id/button_verify_otp"
-        app:layout_constraintTop_toTopOf="@+id/button_verify_otp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:textColorHint="@color/colorPrimaryBlack"
-        app:boxBackgroundColor="@color/cardBg"
-        app:boxStrokeColor="@color/colorAccentAmber"
-        app:boxStrokeWidth="2dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:errorEnabled="true"
-        app:errorTextColor="@color/design_default_color_error"
-        app:hintTextColor="@color/colorPrimaryBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_enter_otp">
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_enter_otp"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="Enter the otp sent to you"
-            android:textColor="@color/colorPrimaryBlack" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/information"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/colorAccentRed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/cardBgDark"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="16dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:textColorHint="@color/colorPrimaryBlack"
+                        app:boxStrokeColor="@color/colorAccentAmber"
+                        app:boxStrokeErrorColor="@color/colorAccentRed"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:errorEnabled="true"
+                        app:errorTextColor="@color/design_default_color_error"
+                        app:hintTextColor="@color/colorPrimaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_enter_otp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_enter_otp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/cardBgDark"
+                            android:gravity="center"
+                            android:hint="@string/enter_the_otp_sent_to_you"
+                            android:textColor="@color/colorPrimaryBlack" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/information"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/colorAccentRed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+                    <TextView
+                        android:id="@+id/text_view_enter_otp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/enter_the_one_time_pin_sent_to_you_as_text_message"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/colorPrimaryBlack"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar2"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:progressTint="@color/colorAccentAmber"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="@+id/button_verify_otp"
+                        app:layout_constraintStart_toEndOf="@+id/button_verify_otp"
+                        app:layout_constraintTop_toTopOf="@+id/button_verify_otp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_verify_otp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/ripple"
+                        android:text="@string/verify_otp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/colorPrimaryBlack"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/information"
+                        app:rippleColor="@color/design_default_color_error" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

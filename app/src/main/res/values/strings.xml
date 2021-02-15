@@ -74,6 +74,9 @@
     <string name="enter_username">Enter username</string>
     <string name="send_otp">send otp</string>
     <string name="enter_phone_number">Enter phone number</string>
+    <string name="enter_the_otp_sent_to_you">Enter the otp sent to you</string>
+    <string name="enter_the_one_time_pin_sent_to_you_as_text_message">Enter the one time pin sent to you as text message</string>
+    <string name="verify_otp">verify otp</string>
 
 
 </resources>
