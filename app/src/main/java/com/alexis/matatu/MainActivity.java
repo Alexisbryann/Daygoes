@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private UserSession session;
     private DatabaseReference mDatabase;
     private String mUid;
+    private String mUsername1;
+    private String mPhone;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
@@ -98,22 +100,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mImgLogo = mHeaderView.findViewById(R.id.img_logo);
 
         // Set username & email
-        String email = mCurrentUser.getEmail();
+
+        mUsername1 = getIntent().getStringExtra("Username");
+        mPhone = getIntent().getStringExtra("Phone");
         Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
-        mDatabase.child("Users").addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User username = dataSnapshot.child(mUid).getValue(User.class);
-                mUsername.setText("Welcome "+username.getUsername());
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        mEmail.setText(email);
+        mEmail.setText(mPhone);
+        mUsername.setText("Welcome " + mUsername1);
 
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
@@ -124,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            session.setFirstTime(false);
 //        }
     }
+
     private void tapview() {
 
         new TapTargetSequence(this)
@@ -182,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }).start();
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -208,10 +203,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(i);
         }
-        if (id== R.id.explore){
+        if (id == R.id.explore) {
             tapview();
         }
-        if (id==R.id.sign_out){
+        if (id == R.id.sign_out) {
             mAuth.signOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);

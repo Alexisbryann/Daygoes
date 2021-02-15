@@ -82,36 +82,32 @@ public class RegisterActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.VISIBLE);
         mRegister.setEnabled(false);
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
 
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                assert firebaseUser != null;
+                firebaseUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(RegisterActivity.this, "Verification Link Sent Successfully.", Toast.LENGTH_SHORT).show();
+                        mRegister.setEnabled(true);
 
-                    assert firebaseUser != null;
-                    firebaseUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(RegisterActivity.this, "Verification Link Sent Successfully.", Toast.LENGTH_SHORT).show();
-                            mRegister.setEnabled(true);
-
-                            if (task.isSuccessful()) {
-                                onAuthSuccess(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()));
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Sign In Failed",
-                                        Toast.LENGTH_LONG).show();
-                            }
-
+                        if (task.isSuccessful()) {
+                            onAuthSuccess(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()));
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Sign In Failed",
+                                    Toast.LENGTH_LONG).show();
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegisterActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RegisterActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -128,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         mUsername = mUsername2;
 
         // Write new user
-        writeNewUser(user.getUid(), mUsername, user.getEmail(),user.getDisplayName());
+//        writeNewUser(user.getUid(), mUsername, user.getEmail(),user.getDisplayName());
 
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
@@ -143,11 +139,11 @@ public class RegisterActivity extends AppCompatActivity {
 //    }
 
 
-    private void writeNewUser(String userId, String username, String email, String displayName) {
-        User user = new User(username, email,displayName);
-
-        mDatabase.child("Users").child(userId).setValue(user);
-    }
+//    private void writeNewUser(String userId, String username, String email, String displayName) {
+//        User user = new User(username, email,displayName);
+//
+//        mDatabase.child("Users").child(userId).setValue(user);
+//    }
 
     private void validateData() {
         mUsername2 = mUsername1.getText().toString().trim();

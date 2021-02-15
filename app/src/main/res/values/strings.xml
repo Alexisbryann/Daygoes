@@ -71,6 +71,9 @@
     <string name="edit_profile">Edit profile</string>
     <string name="username">Username</string>
     <string name="profile_icon">Profile icon</string>
+    <string name="enter_username">Enter username</string>
+    <string name="send_otp">send otp</string>
+    <string name="enter_phone_number">Enter phone number</string>
 
 
 </resources>

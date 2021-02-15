@@ -24,8 +24,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/cardBgDark"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="16dp"
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true"
                 app:contentPadding="4dp"
@@ -40,15 +40,17 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_send_otp"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@drawable/ripple"
-                        android:text="@string/login"
+                        android:text="@string/send_otp"
                         android:textColor="@color/colorPrimaryBlack"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_password"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_information_text"
                         app:rippleColor="@color/colorAccentRed" />
 
                     <ProgressBar
@@ -56,7 +58,6 @@
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:progressBackgroundTint="@color/colorAccentAmber"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/button_send_otp"
@@ -64,49 +65,34 @@
                         app:layout_constraintStart_toEndOf="@+id/button_send_otp"
                         app:layout_constraintTop_toTopOf="@+id/button_send_otp" />
 
-                    <EditText
-                        android:id="@+id/txt_username"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/editTextUsername"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
-                        android:autofillHints=""
-                        android:backgroundTint="@color/colorAccentAmber"
-                        android:ems="10"
-                        android:hint="@string/e_mail_address"
-                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/colorPrimaryBlack"
+                        app:boxStrokeColor="@color/colorAccentAmber"
+                        app:boxStrokeErrorColor="@color/design_default_color_error"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:counterOverflowTextColor="@color/design_default_color_on_secondary"
+                        app:errorEnabled="true"
+                        app:errorTextColor="@color/design_default_color_error"
+                        app:hintTextColor="@color/colorPrimaryBlack"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:text="@string/not_yet_registered_register_below"
-                        android:textColor="@color/colorAccentGreen"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/button_send_otp" />
-
-                    <EditText
-                        android:id="@+id/txt_password"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:autofillHints=""
-                        android:backgroundTint="@color/colorAccentAmber"
-                        android:ems="10"
-                        android:hint="@string/password"
-                        android:inputType="textPassword"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView6"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextUsername1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/cardBgDark"
+                            android:hint="@string/enter_username"
+                            android:textColor="@color/colorPrimaryBlack" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
                         android:id="@+id/imageView3"
@@ -114,10 +100,10 @@
                         android:layout_height="40dp"
                         android:layout_marginStart="8dp"
                         android:contentDescription="@string/email_icon"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_email"
+                        app:layout_constraintBottom_toBottomOf="@+id/editTextUsername"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_email"
-                        app:srcCompat="@android:drawable/ic_dialog_email"
+                        app:layout_constraintTop_toTopOf="@+id/editTextUsername"
+                        app:srcCompat="@drawable/profile"
                         app:tint="@color/colorAccentAmber" />
 
                     <ImageView
@@ -126,38 +112,50 @@
                         android:layout_height="40dp"
                         android:layout_marginStart="8dp"
                         android:contentDescription="@string/password_icon"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_password"
+                        app:layout_constraintBottom_toBottomOf="@+id/editTextPhone"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_password"
-                        app:srcCompat="@drawable/password__1"
+                        app:layout_constraintTop_toTopOf="@+id/editTextPhone"
+                        app:srcCompat="@drawable/smartphone"
                         app:tint="@color/colorAccentAmber" />
 
-                    <Button
-                        android:id="@+id/btn_register"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/editTextPhone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/ripple"
-                        android:text="@string/register"
-                        android:textColor="@color/colorPrimaryBlack"
-                        app:layout_constraintEnd_toEndOf="@+id/button_send_otp"
-                        app:layout_constraintStart_toStartOf="@+id/button_send_otp"
-                        app:layout_constraintTop_toBottomOf="@+id/textView20"
-                        app:rippleColor="@color/colorAccentRed" />
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:textColorHint="@color/colorPrimaryBlack"
+                        app:boxStrokeColor="@color/colorAccentAmber"
+                        app:boxStrokeErrorColor="@color/design_default_color_error"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:counterOverflowTextColor="@color/design_default_color_on_secondary"
+                        app:errorEnabled="true"
+                        app:errorTextColor="@color/design_default_color_error"
+                        app:hintTextColor="@color/colorPrimaryBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextUsername">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPhone1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/cardBgDark"
+                            android:hint="@string/enter_phone_number"
+                            android:textColor="@color/colorPrimaryBlack" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
-                        android:id="@+id/tv_forgot_password"
+                        android:id="@+id/text_view_information_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="24dp"
-                        android:text="@string/forgot_password"
+                        android:layout_marginTop="8dp"
                         android:textColor="@color/colorAccentRed"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+                        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -169,6 +167,7 @@
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/almendra"
         android:text="@string/app_name"
         android:textAllCaps="true"
@@ -183,10 +182,9 @@
         android:id="@+id/img_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

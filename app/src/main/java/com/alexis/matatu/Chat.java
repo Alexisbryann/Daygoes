@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -44,6 +46,8 @@ public class Chat extends AppCompatActivity {
     private DatabaseReference mDb;
     private DatabaseReference mDb1;
     private ChatAdapter mChatAdapter;
+    private String mPhone;
+    private String mUsername1;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -62,7 +66,11 @@ public class Chat extends AppCompatActivity {
         mVehicleName.setText(name + " chat group");
         String groupName = name + " chat group";
 
-        //      Initialize recyclerview
+        SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
+        mPhone = prefs.getString("phone", "");
+        mUsername1 = prefs.getString("username", "");
+
+//      Initialize recyclerview
         mRecyclerView = findViewById(R.id.rv_chat);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -82,23 +90,8 @@ public class Chat extends AppCompatActivity {
                 .build();
 
         //      Initialize and set adapter
-        mChatAdapter = new ChatAdapter(options, Chat.this,this);
+        mChatAdapter = new ChatAdapter(options, Chat.this, this);
         mRecyclerView.setAdapter(mChatAdapter);
-
-        mDb1.child("Users").addValueEventListener(new ValueEventListener() {
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUsername = dataSnapshot.child(mUid).child("username").getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
 
         mSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +99,7 @@ public class Chat extends AppCompatActivity {
                 mSend.setOnClickListener(view -> {
                     String group = mVehicleName.getText().toString();
                     String msg = mEdtMessage.getText().toString().trim();
-                    String messageSender = mUsername;
+                    String messageSender = mUsername1;
 
                     if (msg.isEmpty()) {
                         Toast.makeText(Chat.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
@@ -116,7 +109,7 @@ public class Chat extends AppCompatActivity {
                                 .getReference()
                                 .child("Chats").child(group)
                                 .push()
-                                .setValue(new ChatModel(msg,messageSender));
+                                .setValue(new ChatModel(msg, messageSender));
 
                         // Clear the input
                     }
@@ -130,16 +123,14 @@ public class Chat extends AppCompatActivity {
 
     // Function to tell the app to start getting data from database on starting of the activity
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
         mChatAdapter.startListening();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         super.onStop();
         mChatAdapter.stopListening();
 
