@@ -5,133 +5,178 @@
     android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardBg"
     tools:context=".PayActivity">
 
-    <FrameLayout
-        android:id="@+id/frame"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/constraint"
-        app:layout_constraintEnd_toEndOf="@id/constraint"
-        app:layout_constraintStart_toStartOf="@id/constraint"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/cardBg"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="false"
-            app:layout_constraintBottom_toBottomOf="@id/frame"
-            app:layout_constraintStart_toStartOf="@id/frame"
-            app:layout_constraintTop_toTopOf="@id/frame">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/text_view_phone_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
-                    android:text="Phone number"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_send_money" />
-
-                <TextView
-                    android:id="@+id/tv_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="32dp"
-                    android:text="Amount"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_phone_number" />
-
-                <TextView
-                    android:id="@+id/text_amount"
+                <FrameLayout
+                    android:id="@+id/frame"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
-                    app:layout_constraintEnd_toEndOf="@+id/edt_enter_phone"
-                    app:layout_constraintStart_toStartOf="@+id/edt_enter_phone"
-                    app:layout_constraintTop_toTopOf="@+id/tv_amount" />
-
-                <Button
-                    android:id="@+id/button_OK"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/ripple"
-                    android:text="OK"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorPrimaryBlack"
-                    android:textSize="25sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_error_message" />
-
-                <EditText
-                    android:id="@+id/edt_enter_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="24dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="Enter number"
-                    android:inputType="phone"
-                    app:layout_constraintStart_toEndOf="@+id/text_view_phone_number"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_send_money" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar5"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/button_OK"
-                    app:layout_constraintStart_toStartOf="@+id/button_OK"
-                    app:layout_constraintTop_toBottomOf="@+id/text_amount" />
-
-                <TextView
-                    android:id="@+id/text_view_send_money"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="Send money"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/img_logo">
 
-                <TextView
-                    android:id="@+id/text_view_error_message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorAccentRed"
-                    android:visibility="invisible"
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="@color/cardBgDark"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="16dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="4dp"
+                        app:layout_constraintBottom_toBottomOf="@id/frame"
+                        app:layout_constraintStart_toStartOf="@id/frame"
+                        app:layout_constraintTop_toTopOf="@id/frame">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="307dp">
+
+                            <TextView
+                                android:id="@+id/text_view_phone_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="11dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="Phone number"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="20sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/edt_enter_phone"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/edt_enter_phone" />
+
+                            <TextView
+                                android:id="@+id/tv_amount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="19dp"
+                                android:text="Amount in ksh"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="20sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/editTextPhone2"
+                                app:layout_constraintEnd_toEndOf="@+id/text_view_phone_number"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/editTextPhone2" />
+
+                            <Button
+                                android:id="@+id/button_OK"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ripple"
+                                android:text="OK"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/colorPrimaryBlack"
+                                android:textSize="25sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.498"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/text_view_error_message" />
+
+                            <EditText
+                                android:id="@+id/edt_enter_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:autofillHints=""
+                                android:ems="10"
+                                android:hint="Enter number"
+                                android:inputType="phone"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/text_view_phone_number"
+                                app:layout_constraintTop_toBottomOf="@+id/text_view_send_money" />
+
+                            <ProgressBar
+                                android:id="@+id/progressBar5"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:visibility="invisible"
+                                app:layout_constraintEnd_toEndOf="@+id/button_OK"
+                                app:layout_constraintStart_toStartOf="@+id/button_OK"
+                                app:layout_constraintTop_toBottomOf="@+id/editTextPhone2" />
+
+                            <TextView
+                                android:id="@+id/text_view_send_money"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:gravity="center"
+                                android:text="Send money via mpesa"
+                                android:textAllCaps="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="18sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/text_view_error_message"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/colorAccentRed"
+                                android:visibility="invisible"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/progressBar5" />
+
+                            <EditText
+                                android:id="@+id/editTextPhone2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:ems="10"
+                                android:inputType="phone"
+                                app:layout_constraintEnd_toEndOf="@+id/edt_enter_phone"
+                                app:layout_constraintStart_toStartOf="@+id/edt_enter_phone"
+                                app:layout_constraintTop_toBottomOf="@+id/edt_enter_phone" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBar5" />
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

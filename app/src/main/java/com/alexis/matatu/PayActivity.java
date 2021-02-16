@@ -10,6 +10,6 @@ public class PayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
-        getSupportActionBar().setTitle("PayActivity Ride");
+        getSupportActionBar().setTitle("Pay Ride");
     }
 }

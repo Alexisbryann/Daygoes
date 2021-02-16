@@ -160,8 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .transparentTarget(true)
                                 .outerCircleColor(R.color.colorShimmer))
                 .listener(new TapTargetSequence.Listener() {
-                    // This listener will tell us when interesting(tm) events happen in regards
-                    // to the sequence
+                    // This listener will tell us when interesting(tm) events happen in regards to the sequence
                     @Override
                     public void onSequenceFinish() {
 //                        session.setFirstTime(false);
