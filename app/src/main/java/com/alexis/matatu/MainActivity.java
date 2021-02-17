@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setName();
 
 //        if (session.getFirstTime()) {
-//            //tap target view
+//            tap target view
 //            tapview();
 //            session.setFirstTime(false);
 //        }
@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -200,10 +201,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.edit_profile) {
-//            Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-//            startActivity(i);
-//        }
+        if (id == R.id.app_tour) {
+//            session.setFirstTimeLaunch(true);
+            Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if (id == R.id.help_center) {
+            startActivity(new Intent(MainActivity.this, HelpCenter.class));
+        }
         if (id == R.id.explore) {
             tapview();
         }

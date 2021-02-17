@@ -31,16 +31,16 @@ public class WelcomeActivity  extends AppCompatActivity {
         private Button btnSkip, btnNext;
         private UserSession prefManager;
 
-        @Override
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
             // Checking for first time launch - before calling setContentView()
-            prefManager = new UserSession(this);
-            if (!prefManager.isFirstTimeLaunch()) {
-                launchHomeScreen();
-                finish();
-            }
+//            prefManager = new UserSession(this);
+//            if (!prefManager.isFirstTimeLaunch()) {
+//                launchHomeScreen();
+//                finish();
+//            }
 
             UserSession userSession = new UserSession(this);
 
@@ -123,16 +123,16 @@ public class WelcomeActivity  extends AppCompatActivity {
         }
 
         private void launchHomeScreen() {
-            prefManager.setFirstTimeLaunch(false);
-            if(prefManager.isLoggedIn()) {
-                Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(i);
-            }else{
+//            prefManager.setFirstTimeLaunch(false);
+//            if(prefManager.isLoggedIn()) {
+//                Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
+//                startActivity(i);
+//            }else{
 //            Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
 //            startActivity(i);
                 Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(i);
-            }
+//            }
             finish();
         }
 

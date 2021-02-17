@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".NewVehicles" />
         <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+        <activity
             android:name=".OtpConfirmationActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
@@ -38,6 +41,9 @@
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HelpCenter"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IndividualVehicle"

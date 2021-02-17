@@ -21,6 +21,10 @@
         android:icon="@drawable/explore"
         android:title="Explore" />
     <item
+        android:id="@+id/app_tour"
+        android:icon="@drawable/tour"
+        android:title="app tour" />
+    <item
         android:id="@+id/sign_out"
         android:icon="@drawable/signout"
         android:title="Sign out" />

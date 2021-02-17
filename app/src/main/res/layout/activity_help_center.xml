@@ -24,8 +24,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/toolbarwrap"
+        android:layout_marginTop="12dp"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical">
 
@@ -37,12 +37,12 @@
             android:padding="20dp"
             android:theme="@style/AppTheme">
 
-            <!--            <com.airbnb.lottie.LottieAnimationView-->
-            <!--                android:layout_width="300dp"-->
-            <!--                app:lottie_fileName="penguin.json"-->
-            <!--                android:layout_height="300dp"-->
-            <!--                app:lottie_loop="true"-->
-            <!--                app:lottie_autoPlay="true"/>-->
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="penguin.json"
+                app:lottie_loop="true" />
 
             <TextView
                 android:layout_width="match_parent"
