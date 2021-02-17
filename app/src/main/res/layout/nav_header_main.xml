@@ -23,8 +23,7 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:layout_constraintBottom_toTopOf="@+id/tv_username"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nganya4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_username"

@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.alexis.matatu.Adapters.ChatAdapter;
-import com.alexis.matatu.Models.ChatModel;
+import com.alexis.matatu.Adapters.NewVehiclesAdapter;
+import com.alexis.matatu.Models.NewVehiclesModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +22,8 @@ public class NewVehicles extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private DatabaseReference mDb;
     private String mUid;
+    private NewVehiclesAdapter mNewVehiclesAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +31,35 @@ public class NewVehicles extends AppCompatActivity {
         setContentView(R.layout.new_vehicles);
 
 //        Initialize recyclerview
-        mRecyclerView = findViewById(R.id.rv_new_vehicle);
+//        mRecyclerView = findViewById(R.id.rv_new_vehicles);
         mLinearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
 //      Initialize DB
-        mDb = FirebaseDatabase.getInstance().getReference().child("Chats");
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-        mUid = mCurrentUser.getUid();
+        mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+
 
 //      query db
-        FirebaseRecyclerOptions<ChatModel> options
-                = new FirebaseRecyclerOptions.Builder<ChatModel>()
-                .setQuery(mDb, ChatModel.class)
+        FirebaseRecyclerOptions<NewVehiclesModel> options
+                = new FirebaseRecyclerOptions.Builder<NewVehiclesModel>()
+                .setQuery(mDb, NewVehiclesModel.class)
                 .build();
 
         //      Initialize and set adapter
-//        mChatAdapter = new ChatAdapter(options, Chat.this, this);
-//        mRecyclerView.setAdapter(mChatAdapter);
+//        mNewVehiclesAdapter = new NewVehiclesAdapter(options,this, mImageList);
+//        mRecyclerView.setAdapter(mNewVehiclesAdapter);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mNewVehiclesAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mNewVehiclesAdapter.stopListening();
     }
 }

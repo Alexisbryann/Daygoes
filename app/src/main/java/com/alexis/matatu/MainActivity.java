@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
+        mHeaderView.setBackgroundColor(getResources().getColor(R.color.cardBgDark));
         setName();
 
 //        if (session.getFirstTime()) {
@@ -199,16 +200,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.edit_profile) {
-            Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-            startActivity(i);
-        }
+//        if (id == R.id.edit_profile) {
+//            Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+//            startActivity(i);
+//        }
         if (id == R.id.explore) {
             tapview();
         }
         if (id == R.id.sign_out) {
             mAuth.signOut();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, Login1.class);
             startActivity(intent);
             finish();
         }

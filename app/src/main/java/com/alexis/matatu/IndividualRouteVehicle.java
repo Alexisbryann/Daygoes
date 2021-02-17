@@ -50,6 +50,14 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mName;
     private long mRating;
     private TextView mTv_rating_comments;
+    private DatabaseReference mDb;
+    private String mImage1;
+    private String mImage2;
+    private String mImage3;
+    private String mImage4;
+    private String mImage5;
+    private String mPlate;
+    private String mRoute;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +66,12 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+
+        Intent i = getIntent();
+        mName = i.getStringExtra("NAME_KEY");
+        mPlate = i.getStringExtra("PLATE_KEY");
+        mRoute = i.getStringExtra("ROUTE_KEY");
 
         inflateImageSlider();
         inflateViews();
@@ -73,13 +87,10 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 
     private void getIntentData() {
         //retrieving data using intent
-        Intent i = getIntent();
-        mName = i.getStringExtra("NAME_KEY");
-        String plate = i.getStringExtra("PLATE_KEY");
-        String route = i.getStringExtra("ROUTE_KEY");
+
         mTv_name.setText(mName);
-        mTv_plate.setText(plate);
-        mTv_route.setText(route);
+        mTv_plate.setText(mPlate);
+        mTv_route.setText(mRoute);
         getSupportActionBar().setTitle(mName);
     }
 
@@ -127,19 +138,41 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         // Using Image Slider -----------------------------------------------------------------------
         mSliderShow = findViewById(R.id.slider);
 
-        //populating Image slider
-        ArrayList<String> sliderImages = new ArrayList<>();
-        sliderImages.add("https://firebasestorage.googleapis.com/v0/b/simple-shopping-290e2.appspot.com/o/nganya1.jpg?alt=media&token=8bdc129a-587b-40c9-bf07-135fc45a26af");
-        sliderImages.add("https://firebasestorage.googleapis.com/v0/b/simple-shopping-290e2.appspot.com/o/nganya2.jpg?alt=media&token=f41c9793-2214-4e89-a2d5-8bf47772d57b");
-        sliderImages.add("https://firebasestorage.googleapis.com/v0/b/simple-shopping-290e2.appspot.com/o/nganya3.jpg?alt=media&token=365909ab-0474-4a6b-9a78-dc8179d2add7");
-        sliderImages.add("https://firebasestorage.googleapis.com/v0/b/simple-shopping-290e2.appspot.com/o/nganya4.jpg?alt=media&token=db170175-c382-47c5-a226-4ea425e6c028");
+        mDb.child(mName).addListenerForSingleValueEvent(new ValueEventListener() {
 
-        for (String s : sliderImages) {
-            DefaultSliderView sliderView = new DefaultSliderView(this);
-            sliderView.image(s);
-            mSliderShow.addSlider(sliderView);
-        }
-        mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    mImage1 = dataSnapshot.child("image1").getValue(String.class);
+                    mImage2 = dataSnapshot.child("image2").getValue(String.class);
+                    mImage3 = dataSnapshot.child("image3").getValue(String.class);
+                    mImage4 = dataSnapshot.child("image4").getValue(String.class);
+                    mImage5 = dataSnapshot.child("image5").getValue(String.class);
+
+                    ArrayList<String> sliderImages = new ArrayList<>();
+
+                    sliderImages.add(mImage1);
+                    sliderImages.add(mImage2);
+                    sliderImages.add(mImage3);
+                    sliderImages.add(mImage4);
+                    sliderImages.add(mImage5);
+
+                    for (String s : sliderImages) {
+                        DefaultSliderView sliderView = new DefaultSliderView(IndividualRouteVehicle.this);
+                        sliderView.image(s);
+                        mSliderShow.addSlider(sliderView);
+                    }
+                    mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private float setRatings() {

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,21 +16,36 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexis.matatu.Adapters.NewVehiclesAdapter;
 import com.alexis.matatu.Adapters.VehiclesAdapter;
+import com.alexis.matatu.Models.NewVehiclesModel;
 import com.alexis.matatu.Models.VehicleModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class VehiclesFragment extends Fragment {
+
+    private RecyclerView mRecyclerView1;
+    private LinearLayoutManager mLinearLayoutManager1;
+    private NewVehiclesAdapter mNewVehiclesAdapter;
+
     private VehiclesAdapter mMatatuAdapter;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDb;
     private ShimmerFrameLayout mShimmerFrameLayout;
     private Spinner mSpinner;
+    private String mImage;
+    private ArrayList<NewVehiclesModel> mImageList;
+
+    private DatabaseReference mDb;
+    private DatabaseReference mDb1;
+    private DatabaseReference mDb2;
 
     public VehiclesFragment() {
     }
@@ -45,15 +59,41 @@ public class VehiclesFragment extends Fragment {
 
         mShimmerFrameLayout = mView.findViewById(R.id.shimmerLayout);
         mSpinner = mView.findViewById(R.id.spinner);
+
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+        mDb1 = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+        mDb2 = FirebaseDatabase.getInstance().getReference().child("Vehicles");
 
         initializeRecyclerAndShimmer();
+//        loadNew();
         shimmerThread();
         loadData();
         loadSpinner();
 
 
         return mView;
+    }
+
+    private void loadNew() {
+//        Initialize recyclerview
+
+//        mRecyclerView1 = mView.findViewById(R.id.rv_new_vehicles);
+//        mLinearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        mRecyclerView1.setLayoutManager(mLinearLayoutManager1);
+
+//      Initialize DB
+//        mDb1 = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+
+//      query db
+//        FirebaseRecyclerOptions<NewVehiclesModel> options
+//                = new FirebaseRecyclerOptions.Builder<NewVehiclesModel>()
+//                .setQuery(mDb1, NewVehiclesModel.class)
+//                .build();
+
+        //      Initialize and set adapter
+//        mNewVehiclesAdapter = new NewVehiclesAdapter(options, getContext());
+//        mRecyclerView1.setAdapter(mNewVehiclesAdapter);
+
     }
 
     private void loadSpinner() {
@@ -67,10 +107,6 @@ public class VehiclesFragment extends Fragment {
                 }
                 if (selectedItemText.equals("Favourite vehicles")) {
                     loadFavouriteVehicles();
-                }
-                if (selectedItemText.equals("All vehicles")) {
-                    loadData();
-
                 }
 
             }
@@ -98,7 +134,7 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
         mMatatuAdapter.startListening();
-        Toast.makeText(getContext(), "Showing your favourite vehicles", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), "Showing your favourite vehicles", Toast.LENGTH_LONG).show();
 
     }
 
@@ -112,7 +148,7 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
         mMatatuAdapter.startListening();
-        Toast.makeText(getContext(), "Showing popular vehicles", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), "Showing popular vehicles", Toast.LENGTH_LONG).show();
     }
 
     private void shimmerThread() {
@@ -154,6 +190,7 @@ public class VehiclesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mMatatuAdapter.startListening();
+//        mNewVehiclesAdapter.startListening();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity
@@ -161,6 +198,7 @@ public class VehiclesFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mMatatuAdapter.stopListening();
+//        mNewVehiclesAdapter.stopListening();
 
     }
 }

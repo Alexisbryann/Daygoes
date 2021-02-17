@@ -19,7 +19,7 @@
             android:layout_height="50dp"
             android:contentDescription="@string/logo"
             android:padding="5dp"
-            app:srcCompat="@drawable/nganya3" />
+            app:srcCompat="@drawable/logo" />
     </LinearLayout>
 
         <!-- Parent layout for holding the Title and the Body-->

@@ -40,7 +40,7 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
         RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(), R.layout.notification);
         remoteViews.setTextViewText(R.id.title, title);
         remoteViews.setTextViewText(R.id.message, message);
-        remoteViews.setImageViewResource(R.id.icon, R.drawable.nganya3);
+        remoteViews.setImageViewResource(R.id.icon, R.drawable.logo);
 
         return remoteViews;
     }
@@ -66,7 +66,7 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
                 = new NotificationCompat
                 .Builder(getApplicationContext(),
                 channel_id)
-                .setSmallIcon(R.drawable.nganya3)
+                .setSmallIcon(R.drawable.logo)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setOnlyAlertOnce(true)

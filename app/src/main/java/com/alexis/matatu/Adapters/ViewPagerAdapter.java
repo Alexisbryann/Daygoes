@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.alexis.matatu.VehiclesFragment;
-import com.alexis.matatu.ProfilesFragment;
+import com.alexis.matatu.HypeFragment;
 import com.alexis.matatu.RoutesFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -27,7 +27,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }else if (position == 1){
             fragment = new RoutesFragment();
         }else if (position == 2){
-            fragment = new ProfilesFragment();
+            fragment = new HypeFragment();
         }
         assert fragment != null;
         return fragment;    }

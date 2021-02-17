@@ -17,6 +17,7 @@ import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -36,12 +37,12 @@ public class OtpConfirmationActivity extends AppCompatActivity {
     private TextInputEditText mOtpVerification;
     private Button mVerifyOtp;
     private ProgressBar mProgressBar;
-    private TextView mInformation;
     private String mUsername;
     private String mPhone;
     private DatabaseReference mDatabase;
     private String mUid;
     private ImageView mImgLogo;
+    private TextInputLayout mInformation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,10 +59,11 @@ public class OtpConfirmationActivity extends AppCompatActivity {
         mPhone = getIntent().getStringExtra("Phone");
 
         mImgLogo = findViewById(R.id.img_logo);
+        mInformation = findViewById(R.id.edit_text_enter_otp1);
         mOtpVerification = findViewById(R.id.edit_text_enter_otp);
         mVerifyOtp = findViewById(R.id.button_verify_otp);
         mProgressBar = findViewById(R.id.progressBar2);
-        mInformation = findViewById(R.id.information);
+//        mInformation = findViewById(R.id.information);
         Picasso.with(OtpConfirmationActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
 
 //        mInformation = findViewById(R.id.text_view_otp_information);
@@ -72,8 +74,7 @@ public class OtpConfirmationActivity extends AppCompatActivity {
                 String Otp = mOtpVerification.getText().toString();
 
                 if (Otp.isEmpty()) {
-                    mInformation.setVisibility(View.VISIBLE);
-                    mInformation.setText("Please enter the otp sent to you");
+                    mInformation.setError("Please enter the otp sent to you");
                 } else {
                     mProgressBar.setVisibility(View.VISIBLE);
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mAuthVerificationId, Otp);
@@ -96,8 +97,8 @@ public class OtpConfirmationActivity extends AppCompatActivity {
                             // Sign in failed, display a message and update the UI
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                mInformation.setVisibility(View.VISIBLE);
-                                mInformation.setText("OTP verification failed, please try again.");
+//                                mInformation.setVisibility(View.VISIBLE);
+                                mInformation.setError("OTP verification failed, please try again.");
                             }
                         }
                         mVerifyOtp.setEnabled(true);
