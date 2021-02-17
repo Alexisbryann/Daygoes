@@ -158,7 +158,7 @@ public class VehiclesFragment extends Fragment {
             mShimmerFrameLayout.setVisibility(View.GONE);
             mShimmerFrameLayout.stopShimmer();
             mRecyclerView.setVisibility(View.VISIBLE);
-        }, 1000);
+        }, 4000);
     }
 
     private void initializeRecyclerAndShimmer() {
