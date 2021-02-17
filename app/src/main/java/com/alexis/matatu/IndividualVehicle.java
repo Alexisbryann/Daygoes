@@ -304,7 +304,7 @@ public class IndividualVehicle extends AppCompatActivity {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         long numOfLikes = dataSnapshot.getChildrenCount();
-                        mNumOfLikes.setText(numOfLikes + " likes");
+                        mNumOfLikes.setText(numOfLikes + "");
                     }
                 }
             }
@@ -327,7 +327,7 @@ public class IndividualVehicle extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Toast.makeText(IndividualVehicle.this, "Already liked this vehicle", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IndividualVehicle.this, "Already liked " + mName, Toast.LENGTH_LONG).show();
                 } else {
                     liked.setValue(mUserId);
                     disliked.child(mUserId).removeValue();
@@ -379,7 +379,7 @@ public class IndividualVehicle extends AppCompatActivity {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         long numOfFavs = dataSnapshot.getChildrenCount();
-                        mNumOfFavs.setText(numOfFavs + " favourites");
+                        mNumOfFavs.setText(numOfFavs +"");
                     }
                 }
             }
@@ -400,7 +400,7 @@ public class IndividualVehicle extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Toast.makeText(IndividualVehicle.this, "Already added this vehicle to your favourites", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IndividualVehicle.this, "Already added " + mName+" to your favourites", Toast.LENGTH_LONG).show();
 
                 } else {
                     favourites.setValue(mUserId);
@@ -452,7 +452,7 @@ public class IndividualVehicle extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         long numOfDislikes = dataSnapshot.getChildrenCount();
-                        mNumOfDislikes.setText(numOfDislikes + " Dislikes");
+                        mNumOfDislikes.setText(numOfDislikes + "");
                     }
                 }
             }

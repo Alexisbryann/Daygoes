@@ -84,4 +84,8 @@ dependencies {
 //    tapview
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
 
+//    Lottie animation
+    implementation 'com.airbnb.android:lottie:3.4.1'
+
+
 }
