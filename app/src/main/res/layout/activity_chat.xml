@@ -74,22 +74,17 @@
                     android:hint="Write a comment" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageButton
                 android:id="@+id/fab_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
-                android:focusable="true"
-                android:tint="@color/cardBg"
-                app:backgroundTint="@color/cardBg"
-                app:fabSize="auto"
+                android:tint="@color/colorAccentAmber"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_enter_otp1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/edit_text_enter_otp1"
-                app:rippleColor="@color/colorAccentGreen"
-                app:srcCompat="@android:drawable/ic_menu_send"
-                app:useCompatPadding="true" />
+                app:srcCompat="@android:drawable/ic_menu_send" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
