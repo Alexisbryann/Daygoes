@@ -10,6 +10,7 @@ import android.widget.Toolbar;
 
 import com.alexis.matatu.Adapters.IndividualRouteAdapter;
 import com.alexis.matatu.Models.IndividualRouteModel;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +28,9 @@ public class IndividualRoute extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicles_routes);
         getSupportActionBar().setTitle("Vehicles on this route");
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
 //      Initialize recyclerView
         mRecyclerView = findViewById(R.id.recycler_vehicles_routes);
@@ -56,6 +60,8 @@ public class IndividualRoute extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
     }
 
     // Function to tell the app to start getting data from database on starting of the activity

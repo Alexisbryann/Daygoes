@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alexis.matatu.Models.User;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
+import com.alexis.matatu.usersession.UserSession;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class OtpConfirmationActivity extends AppCompatActivity {
+    private UserSession session;
     private FirebaseAuth mAuth;
     private String mAuthVerificationId;
     private FirebaseUser mCurrentUser;
@@ -49,9 +52,12 @@ public class OtpConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.otp_verification);
 
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
+
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-//        mUid = mCurrentUser.getUid();
+        session= new UserSession(getApplicationContext());
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mAuthVerificationId = getIntent().getStringExtra("AuthCredentials");
@@ -90,6 +96,7 @@ public class OtpConfirmationActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //create shared preference and store data
                             sendUserToHome();
                             // Sign in success, update UI with the signed-in user's information
                             // ...
@@ -106,6 +113,8 @@ public class OtpConfirmationActivity extends AppCompatActivity {
                     }
                 });
         writeNewUser(mUid, mUsername, mPhone);
+
+
     }
 
     //    private void writeNewUser(String userId, String username, String phone) {
@@ -125,6 +134,8 @@ public class OtpConfirmationActivity extends AppCompatActivity {
     }
 
     public void sendUserToHome() {
+
+        session.createLoginSession(mUsername,mPhone);
 
         Intent homeIntent = new Intent(OtpConfirmationActivity.this, MainActivity.class);
         homeIntent.putExtra("Username", mUsername);

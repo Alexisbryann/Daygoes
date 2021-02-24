@@ -22,6 +22,7 @@ import com.alexis.matatu.Adapters.ChatAdapter;
 import com.alexis.matatu.Adapters.VehiclesAdapter;
 import com.alexis.matatu.Models.ChatModel;
 import com.alexis.matatu.Models.User;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +57,9 @@ public class Chat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
         mVehicleName = findViewById(R.id.tv_vehicle_name);
         mSend = findViewById(R.id.fab_send);

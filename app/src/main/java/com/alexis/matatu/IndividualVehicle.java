@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alexis.matatu.Models.SliderModel;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,6 +64,9 @@ public class IndividualVehicle extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_vehicle);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
@@ -113,6 +117,8 @@ public class IndividualVehicle extends AppCompatActivity {
     protected void onResume() {
         iconInitialize();
         super.onResume();
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
     }
 
     private void iconInitialize() {

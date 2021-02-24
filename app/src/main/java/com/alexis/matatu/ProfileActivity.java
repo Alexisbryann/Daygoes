@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,9 +39,19 @@ public class ProfileActivity extends AppCompatActivity {
     private String mUid;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
         getSupportActionBar().setTitle("PROFILE");
 

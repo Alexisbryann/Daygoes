@@ -91,6 +91,9 @@ dependencies {
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.daimajia.easing:library:2.0@aar'
 
+//    fancy dialog builder
+    implementation 'com.geniusforapp.fancydialog:FancyDialog:0.1.4'
+
 
 
 }

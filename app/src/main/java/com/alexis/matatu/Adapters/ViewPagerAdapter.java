@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.alexis.matatu.VehiclesFragment;
-import com.alexis.matatu.HypeFragment;
-import com.alexis.matatu.RoutesFragment;
+import com.alexis.matatu.Fragments.VehiclesFragment;
+import com.alexis.matatu.Fragments.HypeFragment;
+import com.alexis.matatu.Fragments.RoutesFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm) {

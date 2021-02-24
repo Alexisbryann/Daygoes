@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,14 +17,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.IndividualRoute;
 import com.alexis.matatu.Models.RoutesModel;
+import com.alexis.matatu.Models.StopsModel;
 import com.alexis.matatu.R;
-import com.alexis.matatu.RoutesFragment;
+import com.alexis.matatu.Fragments.RoutesFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAdapter.FirebaseViewHolder> {
 
     private final Context mContext;
+    private ArrayList<String> mStops;
 
     public RoutesAdapter(@NonNull FirebaseRecyclerOptions<RoutesModel> options, RoutesFragment routesFragment, Context context) {
         super(options);
@@ -46,6 +57,7 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
         private final TextView mTv_route;
         private final ImageView mImg_more;
 
+
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -65,23 +77,56 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
             });
 
             mImg_more.setOnClickListener(v -> {
-                Intent intent = new Intent();
-                intent.putExtra("NAME_KEY", mTv_route.getText().toString());
-                Toast.makeText(mContext, "Stops in this route", Toast.LENGTH_LONG).show();
-                // create an alert builder
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("THESE ARE THE STOPS ALONG THIS ROUTE.");
-                // set the custom layout
-                LayoutInflater inflater = LayoutInflater.from(mContext);
-                View dialogView = inflater.inflate(R.layout.stops, null);
-                builder.setView(dialogView);
-                // add a button
-                builder.setPositiveButton("OK", (dialog, which) -> {
-                });
-                // create and show the alert dialog
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                showDialog();
             });
+        }
+
+        private void showDialog() {
+            String route = mTv_route.getText().toString();
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Routes");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+//                            mStops = dataSnapshot.child(route).getValue(String.class);
+                        String stop1 = dataSnapshot.child(route).getValue(StopsModel.class).getStop1();
+                        String stop2 = dataSnapshot.child(route).getValue(StopsModel.class).getStop2();
+                        String stop3 = dataSnapshot.child(route).getValue(StopsModel.class).getStop3();
+                        String stop4 = dataSnapshot.child(route).getValue(StopsModel.class).getStop4();
+                        String stop5 = dataSnapshot.child(route).getValue(StopsModel.class).getStop5();
+                        String stop6 = dataSnapshot.child(route).getValue(StopsModel.class).getStop6();
+                        String stop7 = dataSnapshot.child(route).getValue(StopsModel.class).getStop7();
+                        String stop8 = dataSnapshot.child(route).getValue(StopsModel.class).getStop8();
+                        String stop9 = dataSnapshot.child(route).getValue(StopsModel.class).getStop9();
+
+                        mStops = new ArrayList<>();
+
+                        mStops.add(stop1);
+                        mStops.add(stop2);
+                        mStops.add(stop3);
+                        mStops.add(stop4);
+                        mStops.add(stop5);
+                        mStops.add(stop6);
+                        mStops.add(stop7);
+                        mStops.add(stop8);
+                        mStops.add(stop9);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+
+            });
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("Stops along this route");
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1);
+            builder.setAdapter((ListAdapter) mStops, (dialog, which) -> dialog.dismiss());
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 }

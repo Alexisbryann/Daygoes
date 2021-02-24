@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.IndividualVehicle;
-import com.alexis.matatu.VehiclesFragment;
+import com.alexis.matatu.Fragments.VehiclesFragment;
 import com.alexis.matatu.Models.VehicleModel;
 import com.alexis.matatu.R;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;

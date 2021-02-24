@@ -11,9 +11,9 @@
         android:id="@+id/tv_vehicle_name"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/rounded_edges"
         android:backgroundTint="@color/cardBgDark"
         android:fontFamily="@font/almendra"
@@ -56,16 +56,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+                app:srcCompat="@android:drawable/ic_menu_gallery"
+                app:tint="@color/colorAccentGreen" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_text_enter_otp1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/colorAccentGreen"
+                app:endIconTint="@color/colorAccentAmber"
+                app:hintTextColor="@color/colorAccentGreen"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/fab_send"
                 app:layout_constraintStart_toEndOf="@+id/img_upload_media"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconTint="@color/colorAccentAmber">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_message"
@@ -76,11 +81,11 @@
 
             <ImageButton
                 android:id="@+id/fab_send"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
-                android:tint="@color/colorAccentAmber"
+                android:tint="@color/colorAccentGreen"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_enter_otp1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/edit_text_enter_otp1"

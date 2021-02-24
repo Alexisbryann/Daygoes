@@ -11,6 +11,7 @@ import com.alexis.matatu.Adapters.ChatAdapter;
 import com.alexis.matatu.Adapters.StopsAdapter;
 import com.alexis.matatu.Models.ChatModel;
 import com.alexis.matatu.Models.StopsModel;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +28,9 @@ public class Stops extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stops);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
         //      Initialize recyclerview
         mRecyclerView = findViewById(R.id.rv_stops);

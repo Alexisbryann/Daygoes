@@ -1,4 +1,4 @@
-package com.alexis.matatu;
+package com.alexis.matatu.Fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,13 +19,12 @@ import com.alexis.matatu.Adapters.NewVehiclesAdapter;
 import com.alexis.matatu.Adapters.VehiclesAdapter;
 import com.alexis.matatu.Models.NewVehiclesModel;
 import com.alexis.matatu.Models.VehicleModel;
+import com.alexis.matatu.Network.CheckInternetConnection;
+import com.alexis.matatu.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -56,6 +54,9 @@ public class VehiclesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.vehicles, container, false);
+
+        //check Internet Connection
+        new CheckInternetConnection(getContext()).checkConnection();
 
         mShimmerFrameLayout = mView.findViewById(R.id.shimmerLayout);
         mSpinner = mView.findViewById(R.id.spinner);
@@ -162,6 +163,7 @@ public class VehiclesFragment extends Fragment {
     }
 
     private void initializeRecyclerAndShimmer() {
+
         //      Initialize recyclerview
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

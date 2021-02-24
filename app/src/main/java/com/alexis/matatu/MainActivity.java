@@ -20,12 +20,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.alexis.matatu.Adapters.ViewPagerAdapter;
 import com.alexis.matatu.Models.User;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.alexis.matatu.usersession.UserSession;
 import com.daimajia.slider.library.SliderLayout;
@@ -44,6 +46,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -59,15 +62,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView mImgLogo;
     private UserSession session;
     private DatabaseReference mDatabase;
-    private String mUid;
-    private String mUsername1;
-    private String mPhone;
+    private String mUid,mUsername1,mPhone;
+    private String name, mobile;
+    private HashMap<String, String> user;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
+
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -104,13 +111,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
         mHeaderView.setBackgroundColor(getResources().getColor(R.color.cardBgDark));
+        getValues();
         setName();
 
-//        if (session.getFirstTime()) {
+        if (session.getFirstTime()) {
 //            tap target view
-//            tapview();
-//            session.setFirstTime(false);
-//        }
+            tapview();
+            session.setFirstTime(false);
+        }
     }
 
     private void setName() {
@@ -119,6 +127,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUsername1 = prefs.getString("username", "");
         mEmail.setText(mPhone);
         mUsername.setText("Welcome " + mUsername1);
+    }
+    private void getValues() {
+
+        //create new session object by passing application context
+        session = new UserSession(getApplicationContext());
+
+        //validating session
+        session.isLoggedIn();
+
+        //get User details if logged in
+        user = session.getUserDetails();
+
+        name = user.get(UserSession.KEY_NAME);
+        mobile = user.get(UserSession.KEY_MOBiLE);
     }
 
     private void tapview() {
@@ -137,17 +159,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .transparentTarget(true)
                                 .outerCircleColor(R.color.colorAccentAmber),
 
-                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "YYou can select to filter vehicles by either popularity or your favourites!")
-                                .targetCircleColor(R.color.colorAccentRed)
-                                .titleTextColor(R.color.colorAccentAmber)
-                                .titleTextSize(25)
-                                .descriptionTextSize(15)
-                                .descriptionTextColor(R.color.colorPrimaryBlack)
-                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                                .tintTarget(true)
-                                .transparentTarget(true)
-                                .outerCircleColor(R.color.colorShimmer),
+//                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
+//                                .targetCircleColor(R.color.colorAccentRed)
+//                                .titleTextColor(R.color.colorAccentAmber)
+//                                .titleTextSize(25)
+//                                .descriptionTextSize(15)
+//                                .descriptionTextColor(R.color.colorPrimaryBlack)
+//                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+//                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+//                                .tintTarget(true)
+//                                .transparentTarget(true)
+//                                .outerCircleColor(R.color.colorShimmer),
 
                         TapTarget.forView(findViewById(R.id.tabLayout), "Swipe tabs", "Here you can choose whether to view vehicles, routes or hype!")
                                 .targetCircleColor(R.color.colorAccentRed)
@@ -202,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.app_tour) {
-//            session.setFirstTimeLaunch(true);
+            session.setFirstTimeLaunch(true);
             Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(intent);
             finish();
@@ -218,6 +240,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, Login1.class);
             startActivity(intent);
             finish();
+//            session.logoutUser();
+//            finish();
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.button.MaterialButton;
@@ -60,9 +61,19 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mRoute;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_route_vehicle);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
         mAuth = FirebaseAuth.getInstance();
         mUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();

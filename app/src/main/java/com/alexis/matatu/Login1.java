@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
+import com.alexis.matatu.usersession.UserSession;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -53,6 +55,9 @@ public class Login1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login1);
+
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -143,7 +148,6 @@ public class Login1 extends AppCompatActivity {
     }
 
     private void sendToSharedPref() {
-
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

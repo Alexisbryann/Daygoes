@@ -1,8 +1,12 @@
 package com.alexis.matatu;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +28,18 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Making notification bar transparent
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
         setContentView(R.layout.activity_splash);
 
         session =new UserSession(SplashActivity.this);
         mImgLogo = findViewById(R.id.img_logo);
         Picasso.with(SplashActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
+
+        // making notification bar transparent
+        changeStatusBarColor();
 
         YoYo.with(Techniques.BounceInUp)
                 .duration(7000)
@@ -53,5 +64,10 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+    private void changeStatusBarColor() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(Color.TRANSPARENT);
     }
 }

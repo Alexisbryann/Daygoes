@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 
+import com.alexis.matatu.Login1;
 import com.alexis.matatu.LoginActivity;
 
 import java.util.HashMap;
@@ -36,20 +37,8 @@ public class UserSession {
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
 
-    // Email address (make variable public to access from outside)
-    public static final String KEY_EMAIL = "email";
-
     // Mobile number (make variable public to access from outside)
     public static final String KEY_MOBiLE = "mobile";
-
-    // user avatar (make variable public to access from outside)
-    public static final String KEY_PHOTO = "photo";
-
-    // number of items in our cart
-    public static final String KEY_CART = "cartvalue";
-
-    // number of items in our wishlist
-    public static final String KEY_WISHLIST = "wishlistvalue";
 
     // check first time app launch
     public static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
@@ -59,26 +48,23 @@ public class UserSession {
         this.context = context;
         pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+        editor.apply();
     }
 
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, String email, String mobile, String photo){
+    public void createLoginSession(String name, String mobile){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
         // Storing name in pref
         editor.putString(KEY_NAME, name);
 
-        // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
 
         // Storing phone number in pref
         editor.putString(KEY_MOBiLE, mobile);
 
-        // Storing image url in pref
-        editor.putString(KEY_PHOTO, photo);
 
         // commit changes
         editor.commit();
@@ -93,7 +79,7 @@ public class UserSession {
         // Check login status
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(context, LoginActivity.class);
+            Intent i = new Intent(context, Login1.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -113,17 +99,13 @@ public class UserSession {
      * */
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<>();
+
         // user name
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
-
-        // user email id
-        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
 
         // user phone number
         user.put(KEY_MOBiLE, pref.getString(KEY_MOBiLE, null));
 
-        // user avatar
-        user.put(KEY_PHOTO, pref.getString(KEY_PHOTO, null)) ;
 
         // return user
         return user;
@@ -138,7 +120,7 @@ public class UserSession {
         editor.commit();
 
         // After logout redirect user to Login Activity
-        Intent i = new Intent(context, LoginActivity.class);
+        Intent i = new Intent(context, Login1.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
