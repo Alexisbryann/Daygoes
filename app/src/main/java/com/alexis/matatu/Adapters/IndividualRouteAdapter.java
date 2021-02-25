@@ -40,7 +40,7 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
         holder.mRatingBar.setRating(model.getRating());
-        holder.mTv_no_of_stars.setText(holder.mRatingBar.getRating() +" Stars");
+        holder.mTv_no_of_stars.setText(holder.mRatingBar.getRating() +"");
     }
 
     @NonNull
@@ -71,16 +71,13 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
             mRatingBar = itemView.findViewById(R.id.ratings);
             mTv_no_of_stars = itemView.findViewById(R.id.tv_no_of_stars);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent i = new Intent(context, IndividualRouteVehicle.class);
-                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
-                    i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
-                    i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
-                    context.startActivity(i);
-                }
+            itemView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                Intent i = new Intent(context, IndividualRouteVehicle.class);
+                i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
+                i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
+                context.startActivity(i);
             });
 
         }

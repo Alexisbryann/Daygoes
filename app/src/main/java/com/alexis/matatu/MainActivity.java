@@ -159,29 +159,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .transparentTarget(true)
                                 .outerCircleColor(R.color.colorAccentAmber),
 
-//                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
-//                                .targetCircleColor(R.color.colorAccentRed)
-//                                .titleTextColor(R.color.colorAccentAmber)
-//                                .titleTextSize(25)
-//                                .descriptionTextSize(15)
-//                                .descriptionTextColor(R.color.colorPrimaryBlack)
-//                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-//                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-//                                .tintTarget(true)
-//                                .transparentTarget(true)
-//                                .outerCircleColor(R.color.colorShimmer),
+                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
+                                .targetCircleColor(R.color.colorShimmer)
+                                .titleTextColor(R.color.colorPrimaryBlack)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorAccentRed),
 
                         TapTarget.forView(findViewById(R.id.tabLayout), "Swipe tabs", "Here you can choose whether to view vehicles, routes or hype!")
                                 .targetCircleColor(R.color.colorAccentRed)
                                 .titleTextColor(R.color.colorAccentAmber)
                                 .titleTextSize(25)
                                 .descriptionTextSize(15)
-                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .descriptionTextColor(R.color.colorPrimaryWhite)
                                 .drawShadow(true)
                                 .cancelable(false)// Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(true)
                                 .transparentTarget(true)
-                                .outerCircleColor(R.color.colorShimmer))
+                                .outerCircleColor(R.color.colorAccentGreen))
                 .listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards to the sequence
                     @Override

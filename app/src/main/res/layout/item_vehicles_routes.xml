@@ -110,7 +110,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -124,7 +123,6 @@
                     android:id="@+id/tv_sacco1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -137,7 +135,6 @@
                     android:id="@+id/tv_capacity1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -150,7 +147,6 @@
                     android:id="@+id/tv_no_plate1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/textview"
                     android:textColor="@color/colorAccentGreen"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -165,10 +161,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:progressBackgroundTint="@color/cardBg"
+                    android:progressBackgroundTint="@color/colorPrimaryWhite"
                     android:progressTint="@color/colorAccentAmber"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_no_of_stars"
+                    app:layout_constraintStart_toEndOf="@+id/tv_no_plate"
+                    app:layout_constraintStart_toStartOf="@+id/tv_no_plate1"
                     app:layout_constraintTop_toTopOf="@+id/tv_ratings" />
 
                 <View
@@ -184,9 +181,11 @@
                     android:id="@+id/tv_no_of_stars"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:textColor="@color/colorAccentRed"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/ratings"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ratings"
                     app:layout_constraintTop_toTopOf="@+id/ratings" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

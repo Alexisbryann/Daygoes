@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 7000;
+    private static int SPLASH_TIME_OUT = 3000;
 
     //to get user session data
     private UserSession session;
@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
         changeStatusBarColor();
 
         YoYo.with(Techniques.BounceInUp)
-                .duration(7000)
+                .duration(3000)
                 .playOn(findViewById(R.id.img_logo));
 
         YoYo.with(Techniques.FadeInLeft)
