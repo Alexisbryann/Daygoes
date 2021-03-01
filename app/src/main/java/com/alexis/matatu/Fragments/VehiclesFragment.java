@@ -135,8 +135,6 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
         mMatatuAdapter.startListening();
-//        Toast.makeText(getContext(), "Showing your favourite vehicles", Toast.LENGTH_LONG).show();
-
     }
 
     private void loadPopularVehicles() {
@@ -149,7 +147,6 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mRecyclerView.setAdapter(mMatatuAdapter);
         mMatatuAdapter.startListening();
-//        Toast.makeText(getContext(), "Showing popular vehicles", Toast.LENGTH_LONG).show();
     }
 
     private void shimmerThread() {
@@ -159,7 +156,7 @@ public class VehiclesFragment extends Fragment {
             mShimmerFrameLayout.setVisibility(View.GONE);
             mShimmerFrameLayout.stopShimmer();
             mRecyclerView.setVisibility(View.VISIBLE);
-        }, 4000);
+        }, 2000);
     }
 
     private void initializeRecyclerAndShimmer() {

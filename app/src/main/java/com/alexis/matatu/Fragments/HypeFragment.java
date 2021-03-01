@@ -24,7 +24,8 @@ import com.alexis.matatu.VehicleOffers;
 import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
 
-public class HypeFragment extends Fragment { private DatabaseReference mDb;
+public class HypeFragment extends Fragment {
+    private DatabaseReference mDb;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private HypeAdapter mHypeAdapter;
@@ -32,7 +33,7 @@ public class HypeFragment extends Fragment { private DatabaseReference mDb;
     private Button mOffers;
     private Button mScene;
 
-    public HypeFragment(){
+    public HypeFragment() {
     }
 
     private View mView;
@@ -40,7 +41,7 @@ public class HypeFragment extends Fragment { private DatabaseReference mDb;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.hype,container,false);
+        mView = inflater.inflate(R.layout.hype, container, false);
 
         mImgLogo = mView.findViewById(R.id.img_logo);
         Picasso.with(getContext()).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
@@ -62,26 +63,6 @@ public class HypeFragment extends Fragment { private DatabaseReference mDb;
             }
         });
 
-
-//      Initialize recyclerView
-//        mRecyclerView = mView.findViewById(R.id.recycler_route);
-//        mLinearLayoutManager = new LinearLayoutManager(getContext());
-//        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
-
-//      Initialize DB
-//        mDb = FirebaseDatabase.getInstance().getReference().child("Routes");
-
-//      query db
-//        FirebaseRecyclerOptions<HypeModel> options
-//                = new FirebaseRecyclerOptions.Builder<HypeModel>()
-//                .setQuery(mDb, HypeModel.class)
-//                .build();
-
-//      Initialize and set adapter
-//        mHypeAdapter = new HypeAdapter(options,HypeFragment.this,getContext());
-//        mRecyclerView.setAdapter(mHypeAdapter);
-
         return mView;
     }
 
@@ -93,22 +74,6 @@ public class HypeFragment extends Fragment { private DatabaseReference mDb;
     private void offers() {
         Intent intent = new Intent(getContext(), VehicleOffers.class);
         startActivity(intent);
-    }
-
-    // Function to tell the app to start getting data from database on starting of the activity
-    @Override
-    public void onStart()
-    {
-        super.onStart();
-//        mHypeAdapter.startListening();
-    }
-
-    // Function to tell the app to stop getting data from database on stopping of the activity
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-//        mHypeAdapter.stopListening();
     }
 
 }
