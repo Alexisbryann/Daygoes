@@ -27,11 +27,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_offers"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/almendra"
-                android:text="vehicle offers"
+                android:text="offers"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryBlack"
                 android:textStyle="bold"
@@ -80,7 +80,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:text='Offers from various vehicles are found here, you can also view comments made on all vehicles by selecting "THE SCENE".'
+        android:text="@string/scene"
         android:textColor="@color/colorAccentGreen"
         android:textSize="18sp"
         android:textStyle="bold"

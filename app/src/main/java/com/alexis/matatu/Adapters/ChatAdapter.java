@@ -10,23 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Chat;
-import com.alexis.matatu.Models.ChatModel;
+import com.alexis.matatu.Models.ChatModel1;
 import com.alexis.matatu.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 
-public class ChatAdapter extends FirebaseRecyclerAdapter<ChatModel, ChatAdapter.FirebaseViewHolder> {
+public class ChatAdapter extends FirebaseRecyclerAdapter<ChatModel1, ChatAdapter.FirebaseViewHolder> {
 
     private final Context mContext;
 
-    public ChatAdapter(@NonNull FirebaseRecyclerOptions<ChatModel> options, Chat chat, Context context) {
+    public ChatAdapter(@NonNull FirebaseRecyclerOptions<ChatModel1> options, Chat chat, Context context) {
         super(options);
         mContext = context;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ChatAdapter.FirebaseViewHolder holder, int position, @NonNull ChatModel model) {
+    protected void onBindViewHolder(@NonNull ChatAdapter.FirebaseViewHolder holder, int position, @NonNull ChatModel1 model) {
         holder.mUsername.setText(model.getMessageSender());
         holder.mTimestamp.setText(model.getMessageTime());
         holder.mMessage.setText(model.getMessageText());

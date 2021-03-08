@@ -4,17 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ChatModel {
+public class ChatModel1 {
 
-    private String chatGroup;
     private String messageText;
     private String messageSender;
     private String messageTime;
 
-    public ChatModel(String messageText, String messageSender, String chatGroup) {
+    public ChatModel1(String messageText, String messageSender) {
         this.messageText = messageText;
         this.messageSender = messageSender;
-        this.chatGroup = chatGroup;
 
         // Initialize to current time
         Date date = new Date();
@@ -23,16 +21,8 @@ public class ChatModel {
 
     }
 
-    public ChatModel() {
+    public ChatModel1() {
 
-    }
-
-    public String getChatGroup() {
-        return chatGroup;
-    }
-
-    public void setChatGroup(String chatGroup) {
-        this.chatGroup = chatGroup;
     }
 
     public String getMessageText() {

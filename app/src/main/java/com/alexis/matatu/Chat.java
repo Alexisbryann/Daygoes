@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.alexis.matatu.Adapters.ChatAdapter;
 import com.alexis.matatu.Adapters.VehiclesAdapter;
 import com.alexis.matatu.Models.ChatModel;
+import com.alexis.matatu.Models.ChatModel1;
+import com.alexis.matatu.Models.ChatModel2;
 import com.alexis.matatu.Models.User;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -47,7 +49,7 @@ public class Chat extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private DatabaseReference mDb;
-    private DatabaseReference mDb1;
+//    private DatabaseReference mDb1;
     private ChatAdapter mChatAdapter;
     private String mPhone;
     private String mUsername1;
@@ -70,7 +72,7 @@ public class Chat extends AppCompatActivity {
         Intent i = getIntent();
         String name = i.getStringExtra("NAME_KEY");
         mVehicleName.setText(name + " chat group");
-        String groupName = name + " chat group";
+        String groupName = name + " posts";
 
         SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
         mPhone = prefs.getString("phone", "");
@@ -84,15 +86,15 @@ public class Chat extends AppCompatActivity {
 //      Initialize DB
         assert name != null;
         mDb = FirebaseDatabase.getInstance().getReference().child("Chats").child(groupName);
-        mDb1 = FirebaseDatabase.getInstance().getReference().child("Users");
+//        mDb1 = FirebaseDatabase.getInstance().getReference().child("Users");
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
         mUid = mCurrentUser.getUid();
 
 //      query db
-        FirebaseRecyclerOptions<ChatModel> options
-                = new FirebaseRecyclerOptions.Builder<ChatModel>()
-                .setQuery(mDb, ChatModel.class)
+        FirebaseRecyclerOptions<ChatModel1> options
+                = new FirebaseRecyclerOptions.Builder<ChatModel1>()
+                .setQuery(mDb, ChatModel1.class)
                 .build();
 
         //      Initialize and set adapter
@@ -103,7 +105,7 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSend.setOnClickListener(view -> {
-                    String group = mVehicleName.getText().toString();
+//                    String group = mVehicleName.getText().toString();
                     String msg = mEdtMessage.getText().toString().trim();
                     String messageSender = mUsername1;
 
@@ -113,9 +115,14 @@ public class Chat extends AppCompatActivity {
                         // Read the input field and push a new instance of ChatModel to the Firebase database
                         FirebaseDatabase.getInstance()
                                 .getReference()
-                                .child("Chats").child(group)
+                                .child("Chats").child(groupName)
                                 .push()
-                                .setValue(new ChatModel(msg, messageSender));
+                                .setValue(new ChatModel(msg, messageSender,null));
+                        FirebaseDatabase.getInstance()
+                                .getReference()
+                                .child("ChatGroups")
+                                .child(groupName)
+                                .setValue(new ChatModel2(groupName));
 
                         // Clear the input
                     }

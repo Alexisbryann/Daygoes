@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .transparentTarget(true)
                                 .outerCircleColor(R.color.colorAccentAmber),
 
-                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
+                        TapTarget.forView(findViewById(R.id.toolbar), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
                                 .targetCircleColor(R.color.colorShimmer)
                                 .titleTextColor(R.color.colorPrimaryBlack)
                                 .titleTextSize(25)
@@ -235,15 +235,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.explore) {
             tapview();
         }
-        if (id == R.id.sign_out) {
-            mAuth.signOut();
-            Intent intent = new Intent(MainActivity.this, Login1.class);
-            startActivity(intent);
-            finish();
+//        if (id == R.id.sign_out) {
+////            mAuth.signOut();
+//            Intent intent = new Intent(MainActivity.this, Login1.class);
+//            startActivity(intent);
+////            finish();
 //            session.logoutUser();
 //            finish();
-
-        }
+//
+//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

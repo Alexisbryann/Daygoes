@@ -19,8 +19,4 @@
         android:id="@+id/app_tour"
         android:icon="@drawable/tour"
         android:title="@string/app_tour" />
-    <item
-        android:id="@+id/sign_out"
-        android:icon="@drawable/signout"
-        android:title="@string/sign_out" />
 </menu>
