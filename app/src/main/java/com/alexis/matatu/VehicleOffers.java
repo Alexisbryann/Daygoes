@@ -67,16 +67,17 @@ public class VehicleOffers extends AppCompatActivity {
         mRv_offers.setLayoutManager(mLinearLayoutManager);
 
 //      query db
-        mDb1 = FirebaseDatabase.getInstance().getReference().child("Offers").child(mSelectedRoute);
+        mDb1 = FirebaseDatabase.getInstance().getReference().child("Offers");
         FirebaseRecyclerOptions<OffersModel> options
                 = new FirebaseRecyclerOptions.Builder<OffersModel>()
                 .setQuery(mDb1, OffersModel.class)
                 .build();
 
 //      Initialize and set adapter
-        mOffersAdapter = new OffersAdapter(options, VehicleOffers.this, this);
+        mOffersAdapter = new OffersAdapter(options, VehicleOffers.this);
         mOffersAdapter.startListening();
         mRv_offers.setAdapter(mOffersAdapter);
+
     }
 
     private void loadSpinnerRoute() {
@@ -103,5 +104,4 @@ public class VehicleOffers extends AppCompatActivity {
             }
         });
     }
-
 }

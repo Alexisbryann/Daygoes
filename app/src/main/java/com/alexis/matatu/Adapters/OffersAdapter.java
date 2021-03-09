@@ -20,7 +20,7 @@ public class OffersAdapter extends FirebaseRecyclerAdapter<OffersModel,OffersAda
 
     private final Context mContext;
 
-    public OffersAdapter(FirebaseRecyclerOptions<OffersModel> options, VehicleOffers vehicleOffers, Context context ) {
+    public OffersAdapter(FirebaseRecyclerOptions<OffersModel> options,  Context context ) {
         super(options);
         mContext = context;
     }
