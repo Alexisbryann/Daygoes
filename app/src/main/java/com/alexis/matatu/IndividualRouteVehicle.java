@@ -398,11 +398,15 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Toast.makeText(IndividualRouteVehicle.this, "Already added " + mName + " to your favourites", Toast.LENGTH_LONG).show();
+                    dataSnapshot.getRef().removeValue();
+                    mFavourite.setColorFilter(Color.rgb(221,221,221), PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(IndividualRouteVehicle.this, "Removed " + mName + " from your favourites", Toast.LENGTH_LONG).show();
 
                 } else {
                     favourites.setValue(mUserId);
                     mFavourite.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(IndividualRouteVehicle.this, "Added " + mName + " to your favourites", Toast.LENGTH_LONG).show();
+
                 }
             }
 
