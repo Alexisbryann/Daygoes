@@ -58,7 +58,7 @@ public class OtpConfirmationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
         session= new UserSession(getApplicationContext());
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mAuthVerificationId = getIntent().getStringExtra("AuthCredentials");
         mUsername = getIntent().getStringExtra("Username");

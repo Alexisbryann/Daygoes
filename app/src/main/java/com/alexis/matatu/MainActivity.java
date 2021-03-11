@@ -14,6 +14,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.fonts.Font;
+import android.graphics.fonts.FontFamily;
+import android.graphics.fonts.FontStyle;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -115,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setName();
 
         if (session.getFirstTime()) {
-//            tap target view
             tapview();
             session.setFirstTime(false);
         }
@@ -158,18 +161,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .tintTarget(true)
                                 .transparentTarget(true)
                                 .outerCircleColor(R.color.colorAccentAmber),
+//
+//                        TapTarget.forView(findViewById(R.id.rv_new_vehicles), "New Vehicles", "Newest vehicles will be added here!")
+//                                .targetCircleColor(R.color.colorAccentRed)
+//                                .titleTextColor(R.color.colorPrimaryBlack)
+//                                .titleTextSize(25)
+//                                .descriptionTextSize(15).descriptionTypeface(Typeface.DEFAULT_BOLD)
+//                                .descriptionTextColor(R.color.colorPrimaryWhite)
+//                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+//                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+//                                .tintTarget(true)
+//                                .transparentTarget(true)
+//                                .outerCircleColor(R.color.colorAccentGreen),
 
-                        TapTarget.forView(findViewById(R.id.toolbar), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
-                                .targetCircleColor(R.color.colorShimmer)
-                                .titleTextColor(R.color.colorPrimaryBlack)
-                                .titleTextSize(25)
-                                .descriptionTextSize(15)
-                                .descriptionTextColor(R.color.colorPrimaryBlack)
-                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                                .tintTarget(true)
-                                .transparentTarget(true)
-                                .outerCircleColor(R.color.colorAccentRed),
+//                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
+//                                .targetCircleColor(R.color.colorAccentRed)
+//                                .titleTextColor(R.color.colorPrimaryBlack)
+//                                .titleTextSize(25)
+//                                .descriptionTextSize(15)
+//                                .descriptionTextColor(R.color.colorPrimaryBlack)
+//                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+//                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+//                                .tintTarget(true)
+//                                .transparentTarget(true)
+//                                .outerCircleColor(R.color.colorAccentAmber),
 
                         TapTarget.forView(findViewById(R.id.tabLayout), "Swipe tabs", "Here you can choose whether to view vehicles, routes or hype!")
                                 .targetCircleColor(R.color.colorAccentRed)
@@ -186,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // This listener will tell us when interesting(tm) events happen in regards to the sequence
                     @Override
                     public void onSequenceFinish() {
-//                        session.setFirstTime(false);
+                        session.setFirstTime(false);
                         Toast.makeText(MainActivity.this, " You are ready to go !", Toast.LENGTH_SHORT).show();
                     }
 
@@ -200,6 +215,76 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }).start();
     }
+    private void tapview1() {
+
+        new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forToolbarNavigationIcon(mToolbar, "Navigation Drawer", "You can Edit profile, read about the app, give us feedback,contact help, sign out, get an app tour and explore the app from here!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorPrimaryBlack)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorAccentAmber),
+
+                        TapTarget.forView(findViewById(R.id.rv_new_vehicles), "New Vehicles", "Newest vehicles will be added here!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorPrimaryBlack)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15).descriptionTypeface(Typeface.DEFAULT_BOLD)
+                                .descriptionTextColor(R.color.colorPrimaryWhite)
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorAccentGreen),
+
+                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorPrimaryBlack)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryBlack)
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorAccentAmber),
+
+                        TapTarget.forView(findViewById(R.id.tabLayout), "Swipe tabs", "Here you can choose whether to view vehicles, routes or hype!")
+                                .targetCircleColor(R.color.colorAccentRed)
+                                .titleTextColor(R.color.colorAccentAmber)
+                                .titleTextSize(25)
+                                .descriptionTextSize(15)
+                                .descriptionTextColor(R.color.colorPrimaryWhite)
+                                .drawShadow(true)
+                                .cancelable(false)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.colorAccentGreen))
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        session.setFirstTime(false);
+                        Toast.makeText(MainActivity.this, " You are ready to go !", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                    }
+                }).start();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -233,17 +318,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, HelpCenter.class));
         }
         if (id == R.id.explore) {
-            tapview();
+            tapview1();
         }
-//        if (id == R.id.sign_out) {
-////            mAuth.signOut();
-//            Intent intent = new Intent(MainActivity.this, Login1.class);
-//            startActivity(intent);
-////            finish();
-//            session.logoutUser();
-//            finish();
-//
-//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

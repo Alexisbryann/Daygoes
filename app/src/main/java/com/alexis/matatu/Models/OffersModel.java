@@ -4,14 +4,15 @@ public class OffersModel {
     String offer;
     String route;
     String vehicle;
+    public OffersModel() {
+    }
 
     public OffersModel(String offer, String route, String vehicle) {
         this.offer = offer;
         this.route = route;
         this.vehicle = vehicle;
     }
-    public OffersModel() {
-    }
+
     public String getOffer() {
         return offer;
     }

@@ -60,15 +60,14 @@ public class Chat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        //check Internet Connection
+//      check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
         mVehicleName = findViewById(R.id.tv_vehicle_name);
         mSend = findViewById(R.id.fab_send);
-        mMedia = findViewById(R.id.img_upload_media);
         mEdtMessage = findViewById(R.id.edt_message);
 
-//        receive intent data passed.
+//      receive intent data passed.
         Intent i = getIntent();
         String name = i.getStringExtra("NAME_KEY");
         mVehicleName.setText(name + " chat group");

@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class VehicleOffers extends AppCompatActivity {
     private Spinner mSpinner_route;
@@ -38,35 +39,16 @@ public class VehicleOffers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_offers);
-        getSupportActionBar().setTitle("OFFERS");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("OFFERS");
 
-        mDb = FirebaseDatabase.getInstance().getReference().child("Route");
-
-        mSpinner_route = findViewById(R.id.spinner_route);
-        loadSpinnerRoute();
-
-        mSpinner_route.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mSelectedRoute = (String) parent.getItemAtPosition(position);
-                loadOffers();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-    }
-
-    private void loadOffers() {
-
-//      Initialize recyclerView
+//        mDb = FirebaseDatabase.getInstance().getReference().child("Offers");
+        //      Initialize recyclerView
         mRv_offers = findViewById(R.id.rv_offers);
         mLinearLayoutManager = new LinearLayoutManager(VehicleOffers.this);
         mRv_offers.setLayoutManager(mLinearLayoutManager);
 
 //      query db
+//        String vehicle = mSpinner_route.getSelectedItem().toString();
         mDb1 = FirebaseDatabase.getInstance().getReference().child("Offers");
         FirebaseRecyclerOptions<OffersModel> options
                 = new FirebaseRecyclerOptions.Builder<OffersModel>()
@@ -75,33 +57,83 @@ public class VehicleOffers extends AppCompatActivity {
 
 //      Initialize and set adapter
         mOffersAdapter = new OffersAdapter(options, VehicleOffers.this);
-        mOffersAdapter.startListening();
         mRv_offers.setAdapter(mOffersAdapter);
+        mOffersAdapter.startListening();
+
+//        mSpinner_route = findViewById(R.id.spinner_route);
+//        loadSpinnerRoute();
+//        mDb.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                final List<String> routes = new ArrayList<>();
+//
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    String routeName = snapshot.getKey();
+//                    routes.add(routeName);
+//                }
+//
+//                ArrayAdapter<String> routesAdapter = new ArrayAdapter<>(VehicleOffers.this, android.R.layout.simple_spinner_item, routes);
+//                routesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                mSpinner_route.setAdapter(routesAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
 
-    private void loadSpinnerRoute() {
+//    private void loadOffers() {
+//
+////      Initialize recyclerView
+//        mRv_offers = findViewById(R.id.rv_offers);
+//        mLinearLayoutManager = new LinearLayoutManager(VehicleOffers.this);
+//        mRv_offers.setLayoutManager(mLinearLayoutManager);
+//
+////      query db
+//        String vehicle = mSpinner_route.getSelectedItem().toString();
+//        mDb1 = FirebaseDatabase.getInstance().getReference().child("Offers").child(vehicle);
+//        FirebaseRecyclerOptions<OffersModel> options
+//                = new FirebaseRecyclerOptions.Builder<OffersModel>()
+//                .setQuery(mDb1, OffersModel.class)
+//                .build();
+//
+////      Initialize and set adapter
+//        mOffersAdapter = new OffersAdapter(options, VehicleOffers.this);
+//
+//        mRv_offers.setAdapter(mOffersAdapter);
+////        mOffersAdapter.startListening();
+//
+//
+//
+//    }
 
-        mDb.addListenerForSingleValueEvent(new ValueEventListener() {
+//    private void loadSpinnerRoute() {
+//
+//        mDb.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                final List<String> routes = new ArrayList<>();
+//
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    String routeName = snapshot.getKey();
+//                    routes.add(routeName);
+//                }
+//
+//                ArrayAdapter<String> routesAdapter = new ArrayAdapter<>(VehicleOffers.this, android.R.layout.simple_spinner_item, routes);
+//                routesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                mSpinner_route.setAdapter(routesAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final List<String> routes = new ArrayList<>();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String routeName = snapshot.getKey();
-                    routes.add(routeName);
-                }
-
-                ArrayAdapter<String> routesAdapter = new ArrayAdapter<>(VehicleOffers.this, android.R.layout.simple_spinner_item, routes);
-                routesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                mSpinner_route.setAdapter(routesAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 }

@@ -305,7 +305,7 @@
                     android:background="@color/colorAccentAmber"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_make_post" />
 
                 <View
                     android:id="@+id/divider9"
@@ -350,7 +350,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button"
+                    android:id="@+id/btn_make_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

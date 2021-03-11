@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,8 @@ import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.alexis.matatu.VehicleOffers;
 import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class HypeFragment extends Fragment {
     private DatabaseReference mDb;
@@ -74,6 +77,16 @@ public class HypeFragment extends Fragment {
     private void offers() {
         Intent intent = new Intent(getContext(), VehicleOffers.class);
         startActivity(intent);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
     }
 
 }

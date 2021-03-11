@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryWhite">
+    android:background="@drawable/background">
 
     <FrameLayout
         android:id="@+id/frameLayout4"
@@ -13,7 +13,7 @@
         android:background="@color/cardBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/rv_new_vehicles">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,13 +22,10 @@
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="50dp"
                 android:gravity="center"
                 android:popupBackground="@color/cardBg"
                 android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,17 +35,17 @@
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
+        app:layout_constraintTop_toTopOf="parent"
         app:shimmer_duration="1000">
 
         <!-- Adding 8 rows of placeholders -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <include layout="@layout/shimmer_placeholder" />
@@ -73,10 +70,21 @@
         android:id="@+id/rv_matatu_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+
         tools:listitem="@layout/item_vehicles" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_new_vehicles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_new_vehicles" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

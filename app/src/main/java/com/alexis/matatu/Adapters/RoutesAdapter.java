@@ -2,6 +2,7 @@ package com.alexis.matatu.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.IndividualRoute;
+import com.alexis.matatu.MainActivity;
 import com.alexis.matatu.Models.RoutesModel;
 import com.alexis.matatu.Models.StopsModel;
 import com.alexis.matatu.R;
@@ -29,11 +31,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAdapter.FirebaseViewHolder> {
 
     private final Context mContext;
-    private ArrayList<String> mStops;
+    private List<String> mStops;
 
     public RoutesAdapter(@NonNull FirebaseRecyclerOptions<RoutesModel> options, RoutesFragment routesFragment, Context context) {
         super(options);
@@ -82,51 +86,61 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
         }
 
         private void showDialog() {
+
             String route = mTv_route.getText().toString();
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("Stops along this route.");
+            builder.setNegativeButton("OK", null);
+
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Routes");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-//                            mStops = dataSnapshot.child(route).getValue(String.class);
-                        String stop1 = dataSnapshot.child(route).getValue(StopsModel.class).getStop1();
-                        String stop2 = dataSnapshot.child(route).getValue(StopsModel.class).getStop2();
-                        String stop3 = dataSnapshot.child(route).getValue(StopsModel.class).getStop3();
-                        String stop4 = dataSnapshot.child(route).getValue(StopsModel.class).getStop4();
-                        String stop5 = dataSnapshot.child(route).getValue(StopsModel.class).getStop5();
-                        String stop6 = dataSnapshot.child(route).getValue(StopsModel.class).getStop6();
-                        String stop7 = dataSnapshot.child(route).getValue(StopsModel.class).getStop7();
-                        String stop8 = dataSnapshot.child(route).getValue(StopsModel.class).getStop8();
-                        String stop9 = dataSnapshot.child(route).getValue(StopsModel.class).getStop9();
+                        String stop1 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop1();
+                        String stop2 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop2();
+                        String stop3 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop3();
+                        String stop4 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop4();
+                        String stop5 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop5();
+                        String stop6 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop6();
+                        String stop7 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop7();
+                        String stop8 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop8();
+                        String stop9 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop9();
 
-                        mStops = new ArrayList<>();
+                        final List<String> Stops = new ArrayList<>();
+                        Stops.add(stop1);
+                        Stops.add(stop2);
+                        Stops.add(stop3);
+                        Stops.add(stop4);
+                        Stops.add(stop5);
+                        Stops.add(stop6);
+                        Stops.add(stop7);
+                        Stops.add(stop8);
+                        Stops.add(stop9);
 
-                        mStops.add(stop1);
-                        mStops.add(stop2);
-                        mStops.add(stop3);
-                        mStops.add(stop4);
-                        mStops.add(stop5);
-                        mStops.add(stop6);
-                        mStops.add(stop7);
-                        mStops.add(stop8);
-                        mStops.add(stop9);
-
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(mContext,
+                                android.R.layout.simple_dropdown_item_1line, Stops);
+                        builder.setAdapter(dataAdapter, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(mContext,"You have selected " + Stops.get(which),Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
+
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
 
+
             });
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            builder.setTitle("Stops along this route");
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1);
-            builder.setAdapter((ListAdapter) mStops, (dialog, which) -> dialog.dismiss());
-            AlertDialog dialog = builder.create();
-            dialog.show();
         }
     }
 }
+

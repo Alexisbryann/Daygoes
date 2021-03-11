@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".Chat">
+    android:background="@color/cardBg"
+    tools:context=".Posts">
 
     <TextView
-        android:id="@+id/tv_vehicle_name"
+        android:id="@+id/tv_vehicle_name_posts"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="4dp"
@@ -27,15 +27,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
+        android:id="@+id/rv_posts"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name"
-        tools:listitem="@layout/item_chat" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name_posts"
+        tools:listitem="@layout/item_posts" />
 
     <FrameLayout
         android:id="@+id/frameLayout9"
@@ -49,28 +48,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/img_upload_media_posts"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_gallery"
+                app:tint="@color/colorAccentGreen" />
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_text_enter_otp1"
+                android:id="@+id/edit_text_posts"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/colorAccentGreen"
                 app:endIconTint="@color/colorAccentAmber"
                 app:hintTextColor="@color/colorAccentGreen"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/fab_send"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_send_posts"
+                app:layout_constraintStart_toEndOf="@+id/img_upload_media_posts"
                 app:layout_constraintTop_toTopOf="parent"
                 app:startIconTint="@color/colorAccentAmber">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_message"
+                    android:id="@+id/edt_message_posts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Write a comment" />
+                    android:hint="Make post" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
-                android:id="@+id/fab_send"
+                android:id="@+id/fab_send_posts"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="8dp"
@@ -93,4 +103,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name" />
+
+    <ImageView
+        android:id="@+id/img_pic_post"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_posts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
