@@ -16,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alexis.matatu.Models.FavouriteVehicleModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -59,7 +62,13 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mImage5;
     private String mPlate;
     private String mRoute;
-
+    private String mName1;
+    private String mImage11;
+    private String mCapacity;
+    private String mSacco;
+    private String mPlate1;
+    private String mRatings;
+    private String mRoute1;
     @Override
     protected void onResume() {
         super.onResume();
@@ -393,18 +402,56 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 
         DatabaseReference favourites = FirebaseDatabase.getInstance().getReference().child("Favourites")
                 .child(mName).child(mUserId);
+        DatabaseReference favourited = FirebaseDatabase.getInstance().getReference().child("Favourited")
+                .child(mUserId).child(mName);
 
         favourites.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     dataSnapshot.getRef().removeValue();
-                    mFavourite.setColorFilter(Color.rgb(221,221,221), PorterDuff.Mode.SRC_IN);
+                    favourited.getRef().removeValue();
+                    mFavourite.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
                     Toast.makeText(IndividualRouteVehicle.this, "Removed " + mName + " from your favourites", Toast.LENGTH_LONG).show();
 
                 } else {
-                    favourites.setValue(mUserId);
+
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                            .child("Vehicles")
+                            .child(mName);
+
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+
+                                mName1 = snapshot.child("name").getValue(String.class);
+                                mImage11 = snapshot.child("image1").getValue(String.class);
+                                mCapacity = snapshot.child("capacity").getValue(String.class);
+                                mSacco = snapshot.child("sacco").getValue(String.class);
+                                mPlate1 = snapshot.child("plate").getValue(String.class);
+                                mRatings = snapshot.child("ratings").getValue(String.class);
+                                mRoute1 = snapshot.child("route").getValue(String.class);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                     mFavourite.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN);
+                    favourites.setValue(mUserId).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                favourited.setValue(new FavouriteVehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
+
+                            }
+                        }
+                    });
                     Toast.makeText(IndividualRouteVehicle.this, "Added " + mName + " to your favourites", Toast.LENGTH_LONG).show();
 
                 }

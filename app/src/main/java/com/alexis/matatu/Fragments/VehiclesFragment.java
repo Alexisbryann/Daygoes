@@ -150,12 +150,12 @@ public class VehiclesFragment extends Fragment {
 
     private void loadFavouriteVehicles() {
 
-        DatabaseReference mDb4 = FirebaseDatabase.getInstance().getReference().child("Favourites");
+        DatabaseReference mDb4 = FirebaseDatabase.getInstance().getReference().child("Favourited").child(mUserId);
 //      query db
-        Query query = mDb4.orderByChild(mUserId);
+//        Query query = mDb4.orderByChild(mUserId);
         FirebaseRecyclerOptions<VehicleModel> options
                 = new FirebaseRecyclerOptions.Builder<VehicleModel>()
-                .setQuery(query, VehicleModel.class)
+                .setQuery(mDb4,VehicleModel.class)
                 .build();
 
 //      Initialize and set adapter

@@ -23,6 +23,8 @@ import com.alexis.matatu.Models.VehicleModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -152,19 +154,18 @@ public class IndividualVehicle extends AppCompatActivity {
 
     private void iconInitialize() {
         checkLikes();
-        mLike.setOnClickListener(v -> onLikeClicked());
-
         checkFavourites();
-        mFavourite.setOnClickListener(v -> onFavouriteClicked());
+        checkDislikes();
 
+        mLike.setOnClickListener(v -> onLikeClicked());
+        mFavourite.setOnClickListener(v -> onFavouriteClicked());
         mShare.setOnClickListener(v -> {
             Toast toast = Toast.makeText(IndividualVehicle.this, "Share", Toast.LENGTH_LONG);
             toast.show();
         });
 
-        checkDislikes();
-        mDislike.setOnClickListener(v -> onDislikeClicked());
 
+        mDislike.setOnClickListener(v -> onDislikeClicked());
         mFabChat.setOnClickListener(v -> {
 
             Context context = v.getContext();
@@ -429,27 +430,24 @@ public class IndividualVehicle extends AppCompatActivity {
 
         DatabaseReference favourites = FirebaseDatabase.getInstance().getReference().child("Favourites")
                 .child(mName).child(mUserId);
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                .child("Vehicles")
-                .child(mName);
-//        DatabaseReference remove = FirebaseDatabase.getInstance()
-//                .getReference()
-//                .child("Favourites")
-//                .child("Vehicles")
-//                .child(mUserId);
+        DatabaseReference favourited = FirebaseDatabase.getInstance().getReference().child("Favourited")
+                .child(mUserId).child(mName);
 
         favourites.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-
                     dataSnapshot.getRef().removeValue();
-
+                    favourited.getRef().removeValue();
                     mFavourite.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
                     Toast.makeText(IndividualVehicle.this, "Removed " + mName + " from your favourites", Toast.LENGTH_LONG).show();
 
                 } else {
+
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                            .child("Vehicles")
+                            .child(mName);
+
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -471,15 +469,19 @@ public class IndividualVehicle extends AppCompatActivity {
 
                         }
                     });
-                    FirebaseDatabase.getInstance()
-                            .getReference()
-                            .child("Favourites")
-                            .child(mName)
-                            .child(mUserId)
-                            .setValue(new FavouriteVehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
-//                    favourites.setValue(mUserId);
-                    Toast.makeText(IndividualVehicle.this, "Added " + mName + " to your favourites", Toast.LENGTH_LONG).show();
+
                     mFavourite.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN);
+                    favourites.setValue(mUserId).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                favourited.setValue(new FavouriteVehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
+
+                            }
+                        }
+                    });
+                    Toast.makeText(IndividualVehicle.this, "Added " + mName + " to your favourites", Toast.LENGTH_LONG).show();
+
                 }
             }
 
