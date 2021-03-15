@@ -72,7 +72,7 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mCapacity;
     private String mSacco;
     private String mPlate1;
-    private String mRatings;
+    private long mRatings;
     private String mRoute1;
     private ArrayList<String> mVehicleDetails;
 
@@ -458,7 +458,7 @@ public class IndividualVehicle extends AppCompatActivity {
                                 mCapacity = snapshot.child("capacity").getValue(String.class);
                                 mSacco = snapshot.child("sacco").getValue(String.class);
                                 mPlate1 = snapshot.child("plate").getValue(String.class);
-                                mRatings = snapshot.child("ratings").getValue(String.class);
+                                mRatings = snapshot.child("rating").getValue(long.class);
                                 mRoute1 = snapshot.child("route").getValue(String.class);
 
                             }
@@ -475,7 +475,7 @@ public class IndividualVehicle extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                favourited.setValue(new FavouriteVehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
+                                favourited.setValue(new VehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
 
                             }
                         }
