@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -69,6 +70,8 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mPlate1;
     private String mRatings;
     private String mRoute1;
+    private Button mBtn_make_posts;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -102,7 +105,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         displayNumberOfDislikes();
         displayRatings();
         iconInitialize();
-
+        make_post();
     }
 
     private void getIntentData() {
@@ -123,12 +126,25 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mFavourite=findViewById(R.id.img_favourite);
         mDislike = findViewById(R.id.img_dislike);
         mShare=findViewById(R.id.img_share);
-        mPay=findViewById(R.id.btn_pay);
+//        mPay=findViewById(R.id.btn_make_post);
         mRatingBar=findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
         mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
         mTv_rating_comments = findViewById(R.id.tv_rating_comments);
+        mBtn_make_posts = findViewById(R.id.btn_make_post);
+    }
+    private void make_post() {
+        mBtn_make_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = mTv_name.getText().toString() + " posts";
+                Context context = v.getContext();
+                Intent i = new Intent(context, Posts.class);
+                i.putExtra("NAME_KEY", name);
+                context.startActivity(i);
+            }
+        });
     }
 
     private void iconInitialize() {
@@ -148,10 +164,10 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 
         mRatingBar.setRating(setRatings());
 
-        mPay.setOnClickListener(v -> {
-            Intent intent = new Intent(IndividualRouteVehicle.this, PayActivity.class);
-            startActivity(intent);
-        });
+//        mPay.setOnClickListener(v -> {
+//            Intent intent = new Intent(IndividualRouteVehicle.this, PayActivity.class);
+//            startActivity(intent);
+//        });
     }
     private void inflateImageSlider() {
 

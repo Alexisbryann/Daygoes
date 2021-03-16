@@ -2,6 +2,6 @@
 <resources>
     <string-array name="spinner_array">
         <item>Popular vehicles</item>
-        <item>Favourite vehicles</item>
+        <item>My favourites</item>
     </string-array>
 </resources>

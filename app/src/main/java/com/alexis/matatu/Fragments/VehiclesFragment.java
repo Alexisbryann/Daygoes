@@ -130,7 +130,7 @@ public class VehiclesFragment extends Fragment {
                 if (selectedItemText.equals("Popular vehicles")) {
                     loadPopularVehicles();
                 }
-                if (selectedItemText.equals("Favourite vehicles")) {
+                if (selectedItemText.equals("My favourites")) {
                     loadFavouriteVehicles();
                 }
 
@@ -152,10 +152,10 @@ public class VehiclesFragment extends Fragment {
 
         DatabaseReference mDb4 = FirebaseDatabase.getInstance().getReference().child("Favourited").child(mUserId);
 //      query db
-//        Query query = mDb4.orderByChild(mUserId);
+        Query query = mDb4.orderByChild("name");
         FirebaseRecyclerOptions<VehicleModel> options
                 = new FirebaseRecyclerOptions.Builder<VehicleModel>()
-                .setQuery(mDb4,VehicleModel.class)
+                .setQuery(query,VehicleModel.class)
                 .build();
 
 //      Initialize and set adapter

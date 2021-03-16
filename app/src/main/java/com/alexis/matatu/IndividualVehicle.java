@@ -65,7 +65,6 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mImage3;
     private String mImage4;
     private String mImage5;
-    private Button mBtn_make_posts;
     private long mNumOfLikes1;
     private String mName1;
     private String mImage11;
@@ -101,21 +100,9 @@ public class IndividualVehicle extends AppCompatActivity {
         displayNumberOfDislikes();
         displayRatings();
         iconInitialize();
-        make_post();
     }
 
-    private void make_post() {
-        mBtn_make_posts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = mTv_name.getText().toString() + " posts";
-                Context context = v.getContext();
-                Intent i = new Intent(context, Posts.class);
-                i.putExtra("NAME_KEY", name);
-                context.startActivity(i);
-            }
-        });
-    }
+
 
     private void inflateViews() {
 //      inflate the layout
@@ -133,7 +120,7 @@ public class IndividualVehicle extends AppCompatActivity {
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
         mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
         mTv_rating_comments = findViewById(R.id.tv_rating_comments);
-        mBtn_make_posts = findViewById(R.id.btn_make_post);
+
     }
 
     private void getIntentData() {

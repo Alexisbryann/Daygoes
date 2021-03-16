@@ -13,8 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alexis.matatu.IndividualVehicle;
 import com.alexis.matatu.Fragments.VehiclesFragment;
+import com.alexis.matatu.MapsActivity;
 import com.alexis.matatu.Models.VehicleModel;
 import com.alexis.matatu.R;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
@@ -63,6 +65,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
         private final TextView mTv_no_of_stars;
         private final TextView mTv_sacco;
         private final TextView mTv_name;
+        private final LottieAnimationView mLocation;
 
 
         @SuppressLint("SetTextI18n")
@@ -76,6 +79,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
             mRatingBar = itemView.findViewById(R.id.ratings);
             mTv_no_of_stars = itemView.findViewById(R.id.tv_no_of_stars);
+            mLocation = itemView.findViewById(R.id.location);
 
             itemView.setOnClickListener(v -> {
 
@@ -85,6 +89,17 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
                 context.startActivity(i);
+            });
+
+            mLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent i = new Intent(context, MapsActivity.class);
+                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                    context.startActivity(i);
+
+                }
             });
     }
     }

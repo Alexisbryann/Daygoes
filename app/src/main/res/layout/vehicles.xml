@@ -26,8 +26,21 @@
                 android:gravity="center"
                 android:popupBackground="@color/cardBg"
                 android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/search_vehicle"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SearchView
+                android:id="@+id/search_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:commitIcon="@android:drawable/ic_menu_search"
+                android:iconifiedByDefault="true"
+                android:queryHint="Search vehicle"
+                android:soundEffectsEnabled="true"
+                android:splitMotionEvents="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

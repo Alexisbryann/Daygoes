@@ -34,10 +34,23 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/vehicle_image"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/location"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintStart_toStartOf="@+id/imgview_vehicle_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/imgview_vehicle_photo"
+                    app:lottie_autoPlay="true"
+                    app:lottie_colorFilter="@color/dot_dark_screen1"
+                    app:lottie_fileName="ripple.json"
+                    app:lottie_loop="true" />
+
 
                 <TextView
                     android:id="@+id/tv_vehicle_name"

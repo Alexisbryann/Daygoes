@@ -63,7 +63,7 @@ public class IndividualVehicleAdapter extends FirebaseRecyclerAdapter<Individual
             mLike = itemView.findViewById(R.id.img_like);
             mFavourite = itemView.findViewById(R.id.img_favourite);
             mShare = itemView.findViewById(R.id.img_share);
-            mPay = itemView.findViewById(R.id.btn_pay);
+            mPay = itemView.findViewById(R.id.btn_make_post);
             mRatingBar = itemView.findViewById(R.id.ratingBar);
         }
 
