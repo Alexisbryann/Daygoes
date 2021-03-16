@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,7 +14,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.internal.IStreetViewPanoramaDelegate;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.firebase.database.ChildEventListener;
@@ -52,15 +57,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                Double Latitude =  snapshot.child("latitude").getValue(Double.class);
+                Double Latitude = snapshot.child("latitude").getValue(Double.class);
                 Double Longitude = snapshot.child("longitude").getValue(Double.class);
 
 
                 LatLng location = new LatLng(Latitude, Longitude);
 
-                mMap.addMarker(new MarkerOptions()
+                Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(location)
                         .title(mName));
+                int height = 30;
+                int width = 30;
+                Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.trolleybus);
+                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+                marker.setIcon(smallMarkerIcon);
+                marker.showInfoWindow();
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
