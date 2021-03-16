@@ -49,12 +49,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mLocation.addValueEventListener(new ValueEventListener() {
 
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                Double Latitude = snapshot.child("latitude").getValue(Double.class);
+                Double Latitude =  snapshot.child("latitude").getValue(Double.class);
                 Double Longitude = snapshot.child("longitude").getValue(Double.class);
+
 
                 LatLng location = new LatLng(Latitude, Longitude);
 

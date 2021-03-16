@@ -8,20 +8,49 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:409500760965:android:dbab22759879d5f0bde2ec",
+        "android_client_info": {
+          "package_name": "com.alexis.daygoesadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409500760965-545g8fogb15jog5270vi9cppip0t9ls6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alexis.daygoesadmin",
+            "certificate_hash": "8151924871e64eae42c2d69c037a507728af2258"
+          }
+        },
+        {
+          "client_id": "409500760965-cc0orndl2d64ccf12c4gg08migs9ggir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH447MN7N6SBsHoQzeUR4dHN6pUd9tO4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409500760965-cc0orndl2d64ccf12c4gg08migs9ggir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:409500760965:android:a5dbe486e360ef13bde2ec",
         "android_client_info": {
           "package_name": "com.alexis.matatu"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "409500760965-e6irb700cos68bqenhd3kc0drkibsj40.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.alexis.matatu",
-            "certificate_hash": "8151924871e64eae42c2d69c037a507728af2258"
-          }
-        },
         {
           "client_id": "409500760965-cc0orndl2d64ccf12c4gg08migs9ggir.apps.googleusercontent.com",
           "client_type": 3
