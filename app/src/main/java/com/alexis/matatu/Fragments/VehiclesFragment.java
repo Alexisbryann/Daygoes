@@ -8,36 +8,27 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.NewVehiclesAdapter;
 import com.alexis.matatu.Adapters.VehiclesAdapter;
-import com.alexis.matatu.MainActivity;
 import com.alexis.matatu.Models.NewVehiclesModel;
 import com.alexis.matatu.Models.VehicleModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.R;
-import com.alexis.matatu.usersession.UserSession;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class VehiclesFragment extends Fragment {
@@ -53,17 +44,12 @@ public class VehiclesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ShimmerFrameLayout mShimmerFrameLayout;
     private Spinner mSpinner;
-    private String mImage;
-    private ArrayList<NewVehiclesModel> mImageList;
 
     private DatabaseReference mDb;
     private DatabaseReference mDb1;
-    private DatabaseReference mDb2;
-    private String mSelection;
 
-    private UserSession session;
-    private HashMap<String, String> user;
-    private String name, mobile;
+    private androidx.appcompat.widget.SearchView mVehicle_search;
+    private String mSearchText;
 
 
     public VehiclesFragment() {
@@ -81,20 +67,60 @@ public class VehiclesFragment extends Fragment {
 
         mShimmerFrameLayout = mView.findViewById(R.id.shimmerLayout);
         mSpinner = mView.findViewById(R.id.spinner);
+        mVehicle_search = mView.findViewById(R.id.search_vehicle);
 
         mDb = FirebaseDatabase.getInstance().getReference();
-        mDb1 = FirebaseDatabase.getInstance().getReference().child("Vehicles");
-        mDb2 = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+        mDb1 = mDb.child("Vehicles");
         mAuth = FirebaseAuth.getInstance();
         mUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         initializeRecyclerAndShimmer();
+        search();
         loadNew();
         shimmerThread();
         loadData();
         loadSpinner();
 
         return mView;
+    }
+
+    private void search() {
+        mVehicle_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                setRecycler();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mSearchText = String.valueOf(mVehicle_search.getQuery());
+
+                return false;
+            }
+
+        });
+
+
+    }
+
+    private void setRecycler() {
+//      query db
+        DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+        Query query = DB.orderByChild("name").equalTo(mSearchText);
+
+        FirebaseRecyclerOptions<VehicleModel> options
+                = new FirebaseRecyclerOptions.Builder<VehicleModel>()
+                .setQuery(query, VehicleModel.class)
+                .build();
+
+//              Initialize and set adapter
+        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
+        mMatatuAdapter.startListening();
+        mRecyclerView.setAdapter(mMatatuAdapter);
     }
 
     private void loadNew() {
@@ -114,7 +140,7 @@ public class VehiclesFragment extends Fragment {
                 .setQuery(mDb1.limitToLast(10), NewVehiclesModel.class)
                 .build();
 
-//              Initialize and set adapter
+//      Initialize and set adapter
         mNewVehiclesAdapter = new NewVehiclesAdapter(options, getContext());
         mRecyclerView1.setAdapter(mNewVehiclesAdapter);
         mNewVehiclesAdapter.startListening();
@@ -155,7 +181,7 @@ public class VehiclesFragment extends Fragment {
         Query query = mDb4.orderByChild("name");
         FirebaseRecyclerOptions<VehicleModel> options
                 = new FirebaseRecyclerOptions.Builder<VehicleModel>()
-                .setQuery(query,VehicleModel.class)
+                .setQuery(query, VehicleModel.class)
                 .build();
 
 //      Initialize and set adapter
@@ -222,7 +248,6 @@ public class VehiclesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mMatatuAdapter.startListening();
-//        mNewVehiclesAdapter.startListening();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity
@@ -230,7 +255,6 @@ public class VehiclesFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mMatatuAdapter.stopListening();
-//        mNewVehiclesAdapter.stopListening();
 
     }
 
