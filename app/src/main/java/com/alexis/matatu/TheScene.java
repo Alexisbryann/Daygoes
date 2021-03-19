@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.alexis.matatu.Adapters.SceneAdapter;
 import com.alexis.matatu.Models.SceneModel;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +32,9 @@ public class TheScene extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_scene);
         getSupportActionBar().setTitle("The Scene");
+
+        //      check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
 //      Inflate views
 

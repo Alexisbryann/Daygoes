@@ -15,6 +15,7 @@ import com.alexis.matatu.Adapters.ChatAdapter;
 import com.alexis.matatu.Adapters.OffersAdapter;
 import com.alexis.matatu.Models.ChatModel;
 import com.alexis.matatu.Models.OffersModel;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +41,9 @@ public class VehicleOffers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_offers);
         Objects.requireNonNull(getSupportActionBar()).setTitle("OFFERS");
+
+        //      check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
 
 //        mDb = FirebaseDatabase.getInstance().getReference().child("Offers");
         //      Initialize recyclerView

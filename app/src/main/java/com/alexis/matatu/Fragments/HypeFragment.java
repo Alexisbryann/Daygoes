@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.HypeAdapter;
+import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.PayActivity;
 import com.alexis.matatu.R;
 import com.alexis.matatu.TheScene;
@@ -45,6 +46,9 @@ public class HypeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.hype, container, false);
+
+        //check Internet Connection
+        new CheckInternetConnection(getContext()).checkConnection();
 
         mImgLogo = mView.findViewById(R.id.img_logo);
         Picasso.with(getContext()).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);

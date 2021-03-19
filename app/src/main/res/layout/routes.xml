@@ -17,14 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view_routes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:accessibilityHeading="true"
-        android:accessibilityLiveRegion="assertive"
-        android:accessibilityPaneTitle="Search route"
-        android:iconifiedByDefault="false"
+        android:iconifiedByDefault="true"
         android:queryHint="Search route"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
