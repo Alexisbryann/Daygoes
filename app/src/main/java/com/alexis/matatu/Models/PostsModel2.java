@@ -4,14 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class PostsModel1 {
+public class PostsModel2 {
 
     private String messageText;
     private String messageSender;
     private String messageTime;
     private String url;
 
-    public PostsModel1(String messageText, String messageSender, String url) {
+    public PostsModel2(String messageText, String messageSender, String url) {
         this.messageText = messageText;
         this.messageSender = messageSender;
         this.url = url;
@@ -23,7 +23,7 @@ public class PostsModel1 {
 
     }
 
-    public PostsModel1() {
+    public PostsModel2() {
 
     }
 
@@ -50,6 +50,7 @@ public class PostsModel1 {
     public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
     }
+
     public String getUrl() {
         return url;
     }
@@ -57,5 +58,4 @@ public class PostsModel1 {
     public void setUrl(String url) {
         this.url = url;
     }
-
 }

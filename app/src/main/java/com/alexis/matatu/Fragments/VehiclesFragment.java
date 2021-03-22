@@ -148,7 +148,6 @@ public class VehiclesFragment extends Fragment {
                 if (selectedItemText.equals("My favourites")) {
                     loadFavouriteVehicles();
                 }
-
             }
 
             @Override

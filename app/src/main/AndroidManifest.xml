@@ -81,6 +81,9 @@
             android:name=".Login1"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity android:name=".IndividualRouteVehicle" />
+        <activity
+            android:name=".PostImage"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
