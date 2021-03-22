@@ -3,9 +3,15 @@ package com.alexis.matatu;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.alexis.matatu.Models.FavouriteVehicleModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
@@ -30,7 +37,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -71,6 +85,10 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mRatings;
     private String mRoute1;
     private Button mBtn_make_posts;
+
+    String fileUri;
+    String URL = mImage1;
+    ImageView imageView;
 
     @Override
     protected void onResume() {
@@ -118,22 +136,26 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     }
 
     private void inflateViews() {
-        mTv_name= findViewById(R.id.tv_matatu_name);
-        mTv_plate=findViewById(R.id.tv_plate);
-        mTv_route=findViewById(R.id.tv_sacco);
-        mSlider=findViewById(R.id.slider);
-        mLike=findViewById(R.id.img_like);
-        mFavourite=findViewById(R.id.img_favourite);
+        mTv_name = findViewById(R.id.tv_matatu_name);
+        mTv_plate = findViewById(R.id.tv_plate);
+        mTv_route = findViewById(R.id.tv_sacco);
+        mSlider = findViewById(R.id.slider);
+        mLike = findViewById(R.id.img_like);
+        mFavourite = findViewById(R.id.img_favourite);
         mDislike = findViewById(R.id.img_dislike);
-        mShare=findViewById(R.id.img_share);
+        mShare = findViewById(R.id.img_share);
 //        mPay=findViewById(R.id.btn_make_post);
-        mRatingBar=findViewById(R.id.ratingBar);
+        mRatingBar = findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
         mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
         mTv_rating_comments = findViewById(R.id.tv_rating_comments);
         mBtn_make_posts = findViewById(R.id.btn_make_post);
+        imageView = findViewById(R.id.image);
+
+
     }
+
     private void make_post() {
         mBtn_make_posts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +177,9 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mFavourite.setOnClickListener(v -> onFavouriteClicked());
 
         mShare.setOnClickListener(v -> {
-            Toast toast = Toast.makeText(IndividualRouteVehicle.this, "Share", Toast.LENGTH_LONG);
-            toast.show();
+            //Here I am creating a bitmap from the application icon
+            Bitmap bitmap = BitmapFactory.decodeResource(IndividualRouteVehicle.this.getResources(), R.mipmap.ic_launcher);
+            shareImage(bitmap);
         });
 
         checkDislikes();
@@ -169,6 +192,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 //            startActivity(intent);
 //        });
     }
+
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------
@@ -210,6 +234,33 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+    private void shareImage(Bitmap bitmap){
+        // save bitmap to cache directory
+        try {
+            File cachePath = new File(this.getCacheDir(), "images");
+
+            cachePath.mkdirs(); // don't forget to make the directory
+            FileOutputStream stream = new FileOutputStream(cachePath +"/"+ mImage1); // overwrites this image every time
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            stream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File imagePath = new File(this.getCacheDir(), "images");
+        File newFile = new File(imagePath, "image.png");
+        Uri contentUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".fileprovider", newFile);
+
+        if (contentUri != null) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
+            shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            shareIntent.setType("image/png");
+            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+        }
+    }
 
     private float setRatings() {
         DatabaseReference checkRating = FirebaseDatabase.getInstance().getReference("Ratings")
@@ -223,9 +274,9 @@ public class IndividualRouteVehicle extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            mRating =  snapshot.child("Rating").getValue(long.class);
+                            mRating = snapshot.child("Rating").getValue(long.class);
                             mRatingBar.setRating(mRating);
-                            mTv_rating_comments.setText("You have given "+mName+" a " + mRating + " star rating!");
+                            mTv_rating_comments.setText("You have given " + mName + " a " + mRating + " star rating!");
                         } else {
                             mTv_rating_comments.setText("You are yet to rate " + mName);
                             getRatings();
@@ -255,6 +306,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             setAverage();
         });
     }
+
     public void setAverage() {
 
         final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Ratings")
@@ -292,6 +344,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private void displayRatings() {
         getRatings();
     }
+
     private void checkLikes() {
         DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference()
                 .child("Likes")
@@ -315,6 +368,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+
     public void displayNumberOfLikes() {
         DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference()
                 .child("Likes")
@@ -356,7 +410,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
                 } else {
                     liked.setValue(mUserId);
                     disliked.child(mUserId).removeValue();
-                    mDislike.setColorFilter(Color.rgb(221,221,221), PorterDuff.Mode.SRC_IN);
+                    mDislike.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -367,6 +421,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+
     private void checkFavourites() {
         DatabaseReference favRef = FirebaseDatabase.getInstance().getReference()
                 .child("Favourites")
@@ -389,6 +444,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+
     public void displayNumberOfFavourites() {
         DatabaseReference FavRef = FirebaseDatabase.getInstance().getReference()
                 .child("Favourites")
@@ -462,7 +518,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
                     favourites.setValue(mUserId).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 favourited.setValue(new FavouriteVehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
 
                             }
@@ -479,6 +535,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+
     private void checkDislikes() {
 
         DatabaseReference DislikesRef = FirebaseDatabase.getInstance().getReference()
@@ -492,7 +549,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    mDislike.setColorFilter(Color.rgb(255,0,0), PorterDuff.Mode.SRC_IN);
+                    mDislike.setColorFilter(Color.rgb(255, 0, 0), PorterDuff.Mode.SRC_IN);
                 }
             }
 
@@ -502,6 +559,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+
     public void displayNumberOfDislikes() {
         DatabaseReference DislikesRef = FirebaseDatabase.getInstance().getReference()
                 .child("Dislikes")
@@ -526,6 +584,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
+
     public void onDislikeClicked() {
 
         DatabaseReference liked = FirebaseDatabase.getInstance().getReference().child("Likes")
@@ -537,13 +596,13 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Toast.makeText(IndividualRouteVehicle.this, "Already disliked "+mName, Toast.LENGTH_LONG).show();
+                    Toast.makeText(IndividualRouteVehicle.this, "Already disliked " + mName, Toast.LENGTH_LONG).show();
 
                 } else {
                     disliked.setValue(mUserId);
                     liked.child(mUserId).removeValue();
-                    mDislike.setColorFilter(Color.rgb(255,0,0),PorterDuff.Mode.SRC_IN);
-                    mLike.setColorFilter(Color.rgb(221,221,221), PorterDuff.Mode.SRC_IN);
+                    mDislike.setColorFilter(Color.rgb(255, 0, 0), PorterDuff.Mode.SRC_IN);
+                    mLike.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
                 }
             }
 
@@ -553,7 +612,6 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

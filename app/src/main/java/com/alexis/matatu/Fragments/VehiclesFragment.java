@@ -33,12 +33,7 @@ import java.util.Objects;
 
 public class VehiclesFragment extends Fragment {
 
-    private FirebaseAuth mAuth;
     private String mUserId;
-
-    private RecyclerView mRecyclerView1;
-    private LinearLayoutManager mLinearLayoutManager1;
-    private NewVehiclesAdapter mNewVehiclesAdapter;
 
     private VehiclesAdapter mMatatuAdapter;
     private RecyclerView mRecyclerView;
@@ -50,6 +45,7 @@ public class VehiclesFragment extends Fragment {
 
     private androidx.appcompat.widget.SearchView mVehicle_search;
     private String mSearchText;
+    private LinearLayoutManager mLinearLayoutManager;
 
 
     public VehiclesFragment() {
@@ -71,14 +67,12 @@ public class VehiclesFragment extends Fragment {
 
         mDb = FirebaseDatabase.getInstance().getReference();
         mDb1 = mDb.child("Vehicles");
-        mAuth = FirebaseAuth.getInstance();
-        mUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        mUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
-        initializeRecyclerAndShimmer();
+        loadData();
         search();
         loadNew();
-        shimmerThread();
-        loadData();
         loadSpinner();
 
         return mView;
@@ -86,65 +80,60 @@ public class VehiclesFragment extends Fragment {
 
     private void search() {
         mVehicle_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 setRecycler();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mSearchText = String.valueOf(mVehicle_search.getQuery());
-
+                mSearchText = (mVehicle_search.getQuery().toString().toLowerCase());
+                if (mSearchText.isEmpty()) {
+                    initialRecycler();
+                    mVehicle_search.setIconified(true);
+                }
                 return false;
             }
-
         });
-
-
     }
 
     private void setRecycler() {
 //      query db
         DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Vehicles");
-        Query query = DB.orderByChild("name").equalTo(mSearchText);
+        Query query = DB.orderByChild("name").startAt(mSearchText).endAt(mSearchText + "\uf8ff");
 
         FirebaseRecyclerOptions<VehicleModel> options
                 = new FirebaseRecyclerOptions.Builder<VehicleModel>()
                 .setQuery(query, VehicleModel.class)
                 .build();
 
-//              Initialize and set adapter
+//      Initialize and set adapter
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mMatatuAdapter.startListening();
         mRecyclerView.setAdapter(mMatatuAdapter);
     }
 
     private void loadNew() {
-//        Initialize recyclerview
 
-        mRecyclerView1 = mView.findViewById(R.id.rv_new_vehicles);
-        mLinearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView1.setLayoutManager(mLinearLayoutManager1);
+//      Initialize recyclerview
+        RecyclerView recyclerView1 = mView.findViewById(R.id.rv_new_vehicles);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView1.setLayoutManager(linearLayoutManager1);
 
 //      Initialize DB
         mDb1 = FirebaseDatabase.getInstance().getReference().child("Vehicles");
 
 //      query db
-
         FirebaseRecyclerOptions<NewVehiclesModel> options
                 = new FirebaseRecyclerOptions.Builder<NewVehiclesModel>()
                 .setQuery(mDb1.limitToLast(10), NewVehiclesModel.class)
                 .build();
 
 //      Initialize and set adapter
-        mNewVehiclesAdapter = new NewVehiclesAdapter(options, getContext());
-        mRecyclerView1.setAdapter(mNewVehiclesAdapter);
-        mNewVehiclesAdapter.startListening();
-
+        NewVehiclesAdapter newVehiclesAdapter = new NewVehiclesAdapter(options, getContext());
+        recyclerView1.setAdapter(newVehiclesAdapter);
+        newVehiclesAdapter.startListening();
     }
 
     private void loadSpinner() {
@@ -206,7 +195,7 @@ public class VehiclesFragment extends Fragment {
         mMatatuAdapter.startListening();
     }
 
-    private void shimmerThread() {
+    private void loadData() {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
 
@@ -214,30 +203,46 @@ public class VehiclesFragment extends Fragment {
             mShimmerFrameLayout.stopShimmer();
             mRecyclerView.setVisibility(View.VISIBLE);
         }, 4000);
-    }
 
-    private void initializeRecyclerAndShimmer() {
-
-        //      Initialize recyclerview
+//      Initialize recyclerview
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setReverseLayout(true);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        mLinearLayoutManager.setStackFromEnd(true);
+        mLinearLayoutManager.setReverseLayout(true);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mRecyclerView.setVisibility(View.GONE);
         mShimmerFrameLayout.startShimmer();
         mShimmerFrameLayout.setVisibility(View.VISIBLE);
-    }
 
-    private void loadData() {
-        //      query db
+//      query db
         FirebaseRecyclerOptions<VehicleModel> options
                 = new FirebaseRecyclerOptions.Builder<VehicleModel>()
-                .setQuery(mDb.child("Vehicles"), VehicleModel.class)
+                .setQuery(mDb1, VehicleModel.class)
                 .build();
 
-        //      Initialize and set adapter
+//      Initialize and set adapter
+        mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
+        mMatatuAdapter.startListening();
+        mRecyclerView.setAdapter(mMatatuAdapter);
+    }
+
+    private void initialRecycler() {
+
+//      Initialize recyclerview
+        mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        mLinearLayoutManager.setStackFromEnd(true);
+        mLinearLayoutManager.setReverseLayout(true);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+
+//      query db
+        FirebaseRecyclerOptions<VehicleModel> options
+                = new FirebaseRecyclerOptions.Builder<VehicleModel>()
+                .setQuery(mDb1, VehicleModel.class)
+                .build();
+
+//      Initialize and set adapter
         mMatatuAdapter = new VehiclesAdapter(options, VehiclesFragment.this, getContext());
         mMatatuAdapter.startListening();
         mRecyclerView.setAdapter(mMatatuAdapter);
@@ -255,7 +260,5 @@ public class VehiclesFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mMatatuAdapter.stopListening();
-
     }
-
 }

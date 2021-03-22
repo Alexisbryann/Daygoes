@@ -184,6 +184,7 @@ public class Posts extends AppCompatActivity {
                                     + UUID.randomUUID().toString());
 
 //          adding listeners on upload or failure of image
+            //                                 Progress Listener for loading percentage on the dialog box
             ref.putFile(filePath)
                     .addOnSuccessListener(
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -217,20 +218,14 @@ public class Posts extends AppCompatActivity {
                         }
                     })
                     .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                //                                 Progress Listener for loading percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
-                                }
+                            taskSnapshot -> {
+                                double progress
+                                        = (100.0
+                                        * taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount());
+                                progressDialog.setMessage(
+                                        "Uploaded "
+                                                + (int) progress + "%");
                             });
         }
     }

@@ -51,7 +51,7 @@ public class RoutesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.routes,container,false);
 
-        //check Internet Connection
+//      check Internet Connection
         new CheckInternetConnection(getContext()).checkConnection();
 
 //      Inflate views
@@ -59,6 +59,13 @@ public class RoutesFragment extends Fragment {
         mTv_Route = mView.findViewById(R.id.tv_sacco);
         mRoutes_search = mView.findViewById(R.id.search_view_routes);
 
+        initialRecycler();
+        search();
+
+        return mView;
+    }
+
+    private void initialRecycler() {
 //      Initialize recyclerView
         mRecyclerView = mView.findViewById(R.id.recycler_route);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
@@ -77,58 +84,57 @@ public class RoutesFragment extends Fragment {
 //      Initialize and set adapter
         mRoutesAdapter = new RoutesAdapter(options,RoutesFragment.this,getContext());
         mRecyclerView.setAdapter(mRoutesAdapter);
-
-        search();
-
-        return mView;
+        mRoutesAdapter.startListening();
     }
 
     private void search() {
         mRoutes_search.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-
-
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 setRecycler();
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
-                mSearchText = String.valueOf(mRoutes_search.getQuery());
+                mSearchText = mRoutes_search.getQuery().toString().toLowerCase();
+                if (mSearchText.isEmpty()){
+                    initialRecycler();
 
+                }
                 return false;
             }
-
-
         });
     }
-
-
     private void setRecycler() {
 //      query db
+
         DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Routes");
-        Query query = DB.orderByChild("route").equalTo(mSearchText);
+        Query query = DB.orderByChild("route").startAt(mSearchText).endAt(mSearchText +"\uf8ff");
 
         FirebaseRecyclerOptions<RoutesModel> options
                 = new FirebaseRecyclerOptions.Builder<RoutesModel>()
                 .setQuery(query, RoutesModel.class)
                 .build();
 
-//              Initialize and set adapter
+//      Initialize and set adapter
         mRoutesAdapter = new RoutesAdapter(options, RoutesFragment.this, getContext());
         mRoutesAdapter.startListening();
         mRecyclerView.setAdapter(mRoutesAdapter);
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initialRecycler();
+    }
 
     // Function to tell the app to start getting data from database on starting of the activity
     @Override
     public void onStart()
     {
         super.onStart();
-        mRoutesAdapter.startListening();
+        initialRecycler();
     }
 
     // Function to tell the app to stop getting data from database on stopping of the activity
@@ -137,5 +143,7 @@ public class RoutesFragment extends Fragment {
     {
         super.onStop();
         mRoutesAdapter.stopListening();
+        initialRecycler();
     }
+
 }
