@@ -3,7 +3,6 @@ package com.alexis.matatu;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -24,9 +24,7 @@ import com.alexis.matatu.usersession.UserSession;
 public class WelcomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
-    private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
     private UserSession prefManager;
@@ -36,13 +34,11 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Checking for first time launch - before calling setContentView()
-            prefManager = new UserSession(this);
-            if (!prefManager.isFirstTimeLaunch()) {
-                launchHomeScreen();
-                finish();
-            }
-
-        UserSession userSession = new UserSession(this);
+        prefManager = new UserSession(this);
+        if (!prefManager.isFirstTimeLaunch()) {
+            launchHomeScreen();
+            finish();
+        }
 
 
         // Making notification bar transparent
@@ -70,35 +66,26 @@ public class WelcomeActivity extends AppCompatActivity {
         // making notification bar transparent
         changeStatusBarColor();
 
-        myViewPagerAdapter = new MyViewPagerAdapter();
+        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchHomeScreen();
-            }
-        });
+        btnSkip.setOnClickListener(v -> launchHomeScreen());
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // checking for last page
-                // if last page home screen will be launched
-                int current = getItem(+1);
-                if (current < layouts.length) {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                } else {
-                    launchHomeScreen();
-                }
+        btnNext.setOnClickListener(v -> {
+            // checking for last page ,if last page home screen will be launched
+            int current = getItem();
+            if (current < layouts.length) {
+                // move to next screen
+                viewPager.setCurrentItem(current);
+            } else {
+                launchHomeScreen();
             }
         });
     }
 
     private void addBottomDots(int currentPage) {
-        dots = new TextView[layouts.length];
+        TextView[] dots = new TextView[layouts.length];
 
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
@@ -116,21 +103,21 @@ public class WelcomeActivity extends AppCompatActivity {
             dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
-    private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
+    private int getItem() {
+        return viewPager.getCurrentItem() + 1;
     }
 
     private void launchHomeScreen() {
-            prefManager.setFirstTimeLaunch(false);
-            if(prefManager.isLoggedIn()) {
-                Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(i);
-            }else{
+        prefManager.setFirstTimeLaunch(false);
+        if (prefManager.isLoggedIn()) {
+            Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
+            startActivity(i);
+        } else {
             Intent i = new Intent(WelcomeActivity.this, Login1.class);
             startActivity(i);
 //        Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
 //        startActivity(i);
-            }
+        }
         finish();
     }
 
@@ -177,14 +164,14 @@ public class WelcomeActivity extends AppCompatActivity {
      * View pager adapter
      */
     public class MyViewPagerAdapter extends PagerAdapter {
-        private LayoutInflater layoutInflater;
 
         public MyViewPagerAdapter() {
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
@@ -198,13 +185,13 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object obj) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object obj) {
             return view == obj;
         }
 
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
             View view = (View) object;
             container.removeView(view);
         }

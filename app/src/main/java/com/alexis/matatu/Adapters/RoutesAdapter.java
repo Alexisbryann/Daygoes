@@ -92,21 +92,20 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
             builder.setTitle("Stops along this route.");
             builder.setNegativeButton("OK", null);
 
-
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Routes");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        String stop1 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop1();
-                        String stop2 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop2();
-                        String stop3 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop3();
-                        String stop4 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop4();
-                        String stop5 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop5();
-                        String stop6 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop6();
-                        String stop7 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop7();
-                        String stop8 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop8();
-                        String stop9 = Objects.requireNonNull(dataSnapshot.child(route).getValue(StopsModel.class)).getStop9();
+                        String stop1 = dataSnapshot.child(route).getValue(StopsModel.class).getStop1();
+                        String stop2 = dataSnapshot.child(route).getValue(StopsModel.class).getStop2();
+                        String stop3 = dataSnapshot.child(route).getValue(StopsModel.class).getStop3();
+                        String stop4 = dataSnapshot.child(route).getValue(StopsModel.class).getStop4();
+                        String stop5 = dataSnapshot.child(route).getValue(StopsModel.class).getStop5();
+                        String stop6 = dataSnapshot.child(route).getValue(StopsModel.class).getStop6();
+                        String stop7 = dataSnapshot.child(route).getValue(StopsModel.class).getStop7();
+                        String stop8 = dataSnapshot.child(route).getValue(StopsModel.class).getStop8();
+                        String stop9 = dataSnapshot.child(route).getValue(StopsModel.class).getStop9();
 
                         final List<String> Stops = new ArrayList<>();
                         Stops.add(stop1);

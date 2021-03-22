@@ -3,11 +3,14 @@ package com.alexis.matatu;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -18,13 +21,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alexis.matatu.Models.FavouriteVehicleModel;
-import com.alexis.matatu.Models.SliderModel;
-import com.alexis.matatu.Models.VehicleModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,17 +32,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class IndividualVehicle extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private SliderLayout mSliderShow;
     private TextView mTv_name;
     private TextView mTv_plate;
     private TextView mTv_route;
-    private SliderLayout mSlider;
     private ImageView mLike;
     private ImageView mFavourite;
     private ImageView mShare;
@@ -73,7 +75,6 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mPlate1;
     private long mRatings;
     private String mRoute1;
-    private ArrayList<String> mVehicleDetails;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class IndividualVehicle extends AppCompatActivity {
         mPlate = i.getStringExtra("PLATE_KEY");
         mRoute = i.getStringExtra("ROUTE_KEY");
 
-        mAuth = FirebaseAuth.getInstance();
-        mUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        mUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
 
         inflateViews();
@@ -103,14 +104,12 @@ public class IndividualVehicle extends AppCompatActivity {
     }
 
 
-
     private void inflateViews() {
 //      inflate the layout
         mFabChat = findViewById(R.id.fab_chat);
         mTv_name = findViewById(R.id.tv_matatu_name);
         mTv_plate = findViewById(R.id.tv_plate);
         mTv_route = findViewById(R.id.tv_sacco);
-        mSlider = findViewById(R.id.slider);
         mLike = findViewById(R.id.img_like);
         mFavourite = findViewById(R.id.img_favourite);
         mShare = findViewById(R.id.img_share);
@@ -147,10 +146,12 @@ public class IndividualVehicle extends AppCompatActivity {
         mLike.setOnClickListener(v -> onLikeClicked());
         mFavourite.setOnClickListener(v -> onFavouriteClicked());
         mShare.setOnClickListener(v -> {
-            Toast toast = Toast.makeText(IndividualVehicle.this, "Share", Toast.LENGTH_LONG);
-            toast.show();
+            try {
+                share();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
         });
-
 
         mDislike.setOnClickListener(v -> onDislikeClicked());
         mFabChat.setOnClickListener(v -> {
@@ -164,6 +165,46 @@ public class IndividualVehicle extends AppCompatActivity {
         mRatingBar.setRating(setRatings());
     }
 
+    private void share() throws ExecutionException, InterruptedException {
+
+        @SuppressLint("StaticFieldLeak")
+        class myTask extends AsyncTask<Void, Void, Bitmap> {
+
+            protected Bitmap doInBackground(Void... params) {
+                Bitmap myBitmap = null;
+                try {
+                    java.net.URL url = new URL(mImage1);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoInput(true);
+                    connection.connect();
+                    InputStream input = connection.getInputStream();
+                    myBitmap = BitmapFactory.decodeStream(input);
+
+                } catch (IOException e) {
+                    // Log exception
+                }
+                return myBitmap;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap result) {
+                //do stuff
+            }
+        }
+
+        Bitmap returned_bitmap = new myTask().execute().get();
+
+        final String appPackageName = this.getPackageName();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hey, check out this Vehicle on Daygoes !, Download the App at: https://play.google.com/store/apps/details?id=" + appPackageName);
+        String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), returned_bitmap, "title", null);
+        Uri bitmapUri = Uri.parse(bitmapPath);
+        intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+        intent.setType("image/*");
+        startActivity(Intent.createChooser(intent, "Share image via..."));
+
+    }
+
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------
@@ -173,7 +214,7 @@ public class IndividualVehicle extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot ignored : dataSnapshot.getChildren()) {
 
                     mImage1 = dataSnapshot.child("image1").getValue(String.class);
                     mImage2 = dataSnapshot.child("image2").getValue(String.class);
@@ -324,7 +365,7 @@ public class IndividualVehicle extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    for (DataSnapshot ignored : dataSnapshot.getChildren()) {
                         mNumOfLikes1 = dataSnapshot.getChildrenCount();
                         mNumOfLikes.setText(mNumOfLikes1 + "");
                     }
@@ -399,7 +440,7 @@ public class IndividualVehicle extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    for (DataSnapshot ignored : dataSnapshot.getChildren()) {
                         long numOfFavs = dataSnapshot.getChildrenCount();
                         mNumOfFavs.setText(numOfFavs + "");
                     }
@@ -438,14 +479,14 @@ public class IndividualVehicle extends AppCompatActivity {
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot ds : snapshot.getChildren()) {
+                            for (DataSnapshot ignored : snapshot.getChildren()) {
 
                                 mName1 = snapshot.child("name").getValue(String.class);
                                 mImage11 = snapshot.child("image1").getValue(String.class);
                                 mCapacity = snapshot.child("capacity").getValue(String.class);
                                 mSacco = snapshot.child("sacco").getValue(String.class);
                                 mPlate1 = snapshot.child("plate").getValue(String.class);
-                                mRatings = snapshot.child("rating").getValue(long.class);
+                                mRatings = snapshot.child("rating").getValue(Long.class);
                                 mRoute1 = snapshot.child("route").getValue(String.class);
 
                             }
@@ -458,13 +499,10 @@ public class IndividualVehicle extends AppCompatActivity {
                     });
 
                     mFavourite.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN);
-                    favourites.setValue(mUserId).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                favourited.setValue(new VehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
+                    favourites.setValue(mUserId).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            favourited.setValue(new FavouriteVehicleModel(mImage11, mName1, mSacco, mRoute1, mCapacity, mPlate1, mRatings));
 
-                            }
                         }
                     });
                     Toast.makeText(IndividualVehicle.this, "Added " + mName + " to your favourites", Toast.LENGTH_LONG).show();
@@ -514,7 +552,7 @@ public class IndividualVehicle extends AppCompatActivity {
 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    for (DataSnapshot ignored : dataSnapshot.getChildren()) {
                         long numOfDislikes = dataSnapshot.getChildrenCount();
                         mNumOfDislikes.setText(numOfDislikes + "");
                     }

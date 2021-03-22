@@ -23,6 +23,7 @@
                 android:id="@+id/spinner"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:popupBackground="@color/cardBg"
                 android:spinnerMode="dropdown"
@@ -35,13 +36,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:commitIcon="@android:drawable/ic_menu_search"
-                android:iconifiedByDefault="true"
+                android:iconifiedByDefault="false"
                 android:queryHint="Search vehicle"
                 android:soundEffectsEnabled="true"
                 android:splitMotionEvents="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryHint="Search vehicle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

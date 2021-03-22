@@ -1,74 +1,41 @@
 package com.alexis.matatu;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.fonts.Font;
-import android.graphics.fonts.FontFamily;
-import android.graphics.fonts.FontStyle;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.alexis.matatu.Adapters.ViewPagerAdapter;
-import com.alexis.matatu.Models.User;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.alexis.matatu.usersession.UserSession;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private DrawerLayout mDrawer;
     private Toolbar mToolbar;
-    private NavigationView mNavigationView;
-    private View mHeaderView;
     private TextView mUsername;
     private TextView mEmail;
-    private FirebaseAuth mAuth;
-    private FirebaseUser mCurrentUser;
-    private ImageView mImgLogo;
     private UserSession session;
-    private DatabaseReference mDatabase;
-    private String mUid,mUsername1,mPhone;
-    private String name, mobile;
-    private HashMap<String, String> user;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
@@ -79,17 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
-
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        mUid = mCurrentUser.getUid();
-
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextAppearance(this, R.style.almendraText);
 
-        mDrawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         ViewPager viewPager = findViewById(R.id.viewPager2);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -99,22 +60,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setupWithViewPager(viewPager);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawer.addDrawerListener(toggle);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        mNavigationView = findViewById(R.id.nav_view);
-        mHeaderView = mNavigationView.getHeaderView(0);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
 
-        mUsername = mHeaderView.findViewById(R.id.tv_username);
-        mEmail = mHeaderView.findViewById(R.id.tv_email);
-        mImgLogo = mHeaderView.findViewById(R.id.img_logo);
+        mUsername = headerView.findViewById(R.id.tv_username);
+        mEmail = headerView.findViewById(R.id.tv_email);
+        ImageView imgLogo = headerView.findViewById(R.id.img_logo);
 
-        Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
+        Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(imgLogo);
 
-        mNavigationView.setNavigationItemSelectedListener(this);
-        mNavigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
-        mHeaderView.setBackgroundColor(getResources().getColor(R.color.cardBgDark));
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
+        headerView.setBackgroundColor(getResources().getColor(R.color.cardBgDark));
         getValues();
         setName();
 
@@ -124,13 +85,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setName() {
         SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
-        mPhone = prefs.getString("phone", "");
-        mUsername1 = prefs.getString("username", "");
-        mEmail.setText(mPhone);
-        mUsername.setText("Welcome " + mUsername1);
+        String phone = prefs.getString("phone", "");
+        String username1 = prefs.getString("username", "");
+        mEmail.setText(phone);
+        mUsername.setText(getString(R.string.welcome_text) + username1);
     }
+
     private void getValues() {
 
         //create new session object by passing application context
@@ -139,11 +102,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //validating session
         session.isLoggedIn();
 
-        //get User details if logged in
-        user = session.getUserDetails();
-
-        name = user.get(UserSession.KEY_NAME);
-        mobile = user.get(UserSession.KEY_MOBiLE);
     }
 
     private void tapview() {
@@ -215,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }).start();
     }
+
     private void tapview1() {
 
         new TapTargetSequence(this)
@@ -297,8 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         return super.onOptionsItemSelected(item);
     }

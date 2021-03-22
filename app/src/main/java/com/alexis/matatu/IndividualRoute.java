@@ -1,12 +1,11 @@
 package com.alexis.matatu;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toolbar;
 
 import com.alexis.matatu.Adapters.IndividualRouteAdapter;
 import com.alexis.matatu.Models.IndividualRouteModel;
@@ -18,9 +17,6 @@ import com.google.firebase.database.Query;
 
 public class IndividualRoute extends AppCompatActivity {
 
-    private DatabaseReference mDb;
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
     private IndividualRouteAdapter mIndividualRouteAdapter;
 
     @Override
@@ -33,17 +29,17 @@ public class IndividualRoute extends AppCompatActivity {
         new CheckInternetConnection(this).checkConnection();
 
 //      Initialize recyclerView
-        mRecyclerView = findViewById(R.id.recycler_vehicles_routes);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        RecyclerView recyclerView = findViewById(R.id.recycler_vehicles_routes);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
 //      retrieving data using intent
         Intent i = getIntent();
         String name = i.getStringExtra("NAME_KEY");
 
 //      Initialize DB
-        mDb =  FirebaseDatabase.getInstance().getReference().child("Vehicles");
-        Query query = mDb.orderByChild("route").equalTo(name);
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+        Query query = db.orderByChild("route").equalTo(name);
 
 //      query db
         FirebaseRecyclerOptions<IndividualRouteModel> options
@@ -53,7 +49,7 @@ public class IndividualRoute extends AppCompatActivity {
 
 //      Initialize and set adapter
         mIndividualRouteAdapter = new IndividualRouteAdapter(options,this);
-        mRecyclerView.setAdapter(mIndividualRouteAdapter);
+        recyclerView.setAdapter(mIndividualRouteAdapter);
 
     }
 

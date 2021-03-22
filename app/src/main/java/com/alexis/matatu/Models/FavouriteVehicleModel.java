@@ -9,9 +9,9 @@ public class FavouriteVehicleModel {
     private String Route;
     private String Capacity;
     private String Plate;
-    private String Rating;
+    private Long Rating;
 
-    public FavouriteVehicleModel(String image1, String name, String sacco, String route, String capacity, String plate, String rating) {
+    public FavouriteVehicleModel(String image1, String name, String sacco, String route, String capacity, String plate, Long rating) {
         Image1 = image1;
         Name = name;
         Sacco = sacco;
@@ -71,11 +71,11 @@ public class FavouriteVehicleModel {
         Plate = plate;
     }
 
-    public String getRating() {
+    public Long getRating() {
         return Rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Long rating) {
         Rating = rating;
     }
 }

@@ -48,7 +48,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewVehicles" />
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
@@ -59,12 +58,6 @@
             android:name=".Drawer"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".PayActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity android:name=".IndividualRoute" />
         <activity
             android:name=".Chat"
@@ -99,15 +92,15 @@
             </intent-filter>
         </service>
 
-        <!--File Provider-->
+        <!-- make sure within the application tag, otherwise app will crash with XmlResourceParser errors -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.alexis.matatu.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths" />
+                android:resource="@xml/fileprovider" />
         </provider>
     </application>
 

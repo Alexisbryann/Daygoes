@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.matatu.Adapters.HypeAdapter;
 import com.alexis.matatu.Network.CheckInternetConnection;
-import com.alexis.matatu.PayActivity;
 import com.alexis.matatu.R;
 import com.alexis.matatu.TheScene;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;

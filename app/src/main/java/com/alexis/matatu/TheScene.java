@@ -1,31 +1,19 @@
 package com.alexis.matatu;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.alexis.matatu.Adapters.SceneAdapter;
 import com.alexis.matatu.Models.SceneModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class TheScene extends AppCompatActivity {
-
-    private RecyclerView mRv_scene;
-    private LinearLayoutManager mLinearLayoutManager;
-    private DatabaseReference mDb;
-    private SceneAdapter mSceneAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,28 +24,25 @@ public class TheScene extends AppCompatActivity {
         //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
-//      Inflate views
-
-
 //      Initialize recyclerView
-        mRv_scene = findViewById(R.id.rv_scene);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mRv_scene.setLayoutManager(mLinearLayoutManager);
+        RecyclerView rv_scene = findViewById(R.id.rv_scene);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rv_scene.setLayoutManager(linearLayoutManager);
 
 
 //      Initialize DB
-        mDb = FirebaseDatabase.getInstance().getReference().child("ChatGroups");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ChatGroups");
 
 
 //      query db
         FirebaseRecyclerOptions<SceneModel> options
                 = new FirebaseRecyclerOptions.Builder<SceneModel>()
-                .setQuery(mDb, SceneModel.class)
+                .setQuery(db, SceneModel.class)
                 .build();
 
 //      Initialize and set adapter
-        mSceneAdapter = new SceneAdapter(options, TheScene.this);
-        mRv_scene.setAdapter(mSceneAdapter);
-        mSceneAdapter.startListening();
+        SceneAdapter sceneAdapter = new SceneAdapter(options, TheScene.this);
+        rv_scene.setAdapter(sceneAdapter);
+        sceneAdapter.startListening();
     }
 }

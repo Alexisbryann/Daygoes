@@ -17,24 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.squareup.picasso.Picasso;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseUser mCurrentUser;
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private ProgressBar mProgressBar;
     private Button mLogin;
     private EditText mEmail;
     private EditText mPassword;
-    private Button mRegister;
     private String mEmail1;
     private String mPassword1;
-    private TextView mForgotPass;
-    private ImageView mImgLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,60 +38,41 @@ public class LoginActivity extends AppCompatActivity {
         new CheckInternetConnection(this).checkConnection();
 
         mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
 
         mEmail = findViewById(R.id.txt_email);
         mPassword = findViewById(R.id.txt_password);
         mLogin = findViewById(R.id.button_send_otp);
-        mRegister = findViewById(R.id.btn_register);
-        mForgotPass = findViewById(R.id.tv_forgot_password);
+        Button register = findViewById(R.id.btn_register);
+        TextView forgotPass = findViewById(R.id.tv_forgot_password);
         mProgressBar = findViewById(R.id.progressBar);
-        mImgLogo = findViewById(R.id.img_logo);
+        ImageView imgLogo = findViewById(R.id.img_logo);
 
-        Picasso.with(LoginActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(mImgLogo);
+        Picasso.with(LoginActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(imgLogo);
 
+        mLogin.setOnClickListener(v -> {
 
-
-        mLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mEmail1 = mEmail.getText().toString();
-                mPassword1 = mPassword.getText().toString();
-                if (mPassword1.isEmpty()) {
-                    mPassword.setError(LoginActivity.this.getString(R.string.password_empty));
-                }
-                if (mEmail1.isEmpty()) {
-                    mEmail.setError(LoginActivity.this.getString(R.string.email_empty));
-                } else {
-                    handleLogin();
-                }
+            mEmail1 = mEmail.getText().toString();
+            mPassword1 = mPassword.getText().toString();
+            if (mPassword1.isEmpty()) {
+                mPassword.setError(LoginActivity.this.getString(R.string.password_empty));
+            }
+            if (mEmail1.isEmpty()) {
+                mEmail.setError(LoginActivity.this.getString(R.string.email_empty));
+            } else {
+                handleLogin();
             }
         });
 
 
-        mRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        register.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
-        mForgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,ForgotPassword.class);
-                startActivity(intent);
-            }
+        forgotPass.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
+            startActivity(intent);
         });
-    }
-
-    private void validateInput() {
-//        if (mPassword1.length() < 6) {
-//            mPassword.setError(LoginActivity.this.getString(R.string.pass_less_than_six));
-//        }
-
     }
 
     private void handleLogin() {
@@ -125,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email",mEmail1 );
+        editor.putString("email", mEmail1);
         editor.apply();
     }
 
@@ -149,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 //                    Intent intent = new Intent(LoginActivity.this,LoginActivity.class);
 //                    startActivity(intent);
 //                    finish();
-                }
+        }
 //            }
 //        });
 
