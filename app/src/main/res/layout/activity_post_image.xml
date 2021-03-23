@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/cardBgDark">
 
     <LinearLayout
         android:id="@+id/layout_button"
@@ -55,6 +56,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/cardBg"
         android:contentDescription="@string/chosen_image"
         app:layout_constraintBottom_toTopOf="@+id/edt_img_comment"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:autofillHints=""
+        android:background="@color/colorPrimaryWhite"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/add_comments"
