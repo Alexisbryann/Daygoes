@@ -111,7 +111,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="information_text">OTP verification failed, please try again.</string>
     <string name="info_text">OTP verification failed, please try again</string>
-    <string name="welcome_text">\"Welcome \"</string>
+    <string name="welcome_text">Welcome</string>
     <string name="chosen_image">Chosen image</string>
     <string name="choose">Choose</string>
     <string name="upload">Upload</string>
