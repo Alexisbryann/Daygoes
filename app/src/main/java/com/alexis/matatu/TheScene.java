@@ -31,8 +31,7 @@ public class TheScene extends AppCompatActivity {
 
 
 //      Initialize DB
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ChatGroups");
-
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("/ChatGroups");
 
 //      query db
         FirebaseRecyclerOptions<SceneModel> options

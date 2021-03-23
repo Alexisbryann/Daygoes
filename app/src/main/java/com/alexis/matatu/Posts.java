@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alexis.matatu.Adapters.PostsAdapter;
 import com.alexis.matatu.Models.PostsModel;
 import com.alexis.matatu.Models.PostsModel1;
+import com.alexis.matatu.Models.SceneModel;
 import com.alexis.matatu.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -83,6 +85,14 @@ public class Posts extends AppCompatActivity {
     }
 
     private void comment() {
+
+        DatabaseReference Posts = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Posts").child(mName);
+        DatabaseReference PostGroups = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("ChatGroups");
+
         String msg = mEdtMessage.getText().toString().trim();
         String messageSender = mUsername1;
 
@@ -90,12 +100,11 @@ public class Posts extends AppCompatActivity {
             Toast.makeText(Posts.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
         } else {
             // Read the input field and push a new instance of PostsModel to the Firebase database
-            FirebaseDatabase.getInstance()
-                    .getReference()
-                    .child("Posts").child(mName)
-                    .push()
-                    .setValue(new PostsModel(msg, messageSender));
-
+            Posts.push().setValue(new PostsModel(msg, messageSender)).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    PostGroups.child(mName).setValue(new SceneModel(mName));
+                }
+            });
             // Clear the input
         }
         mEdtMessage.setText("");

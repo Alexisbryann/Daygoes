@@ -19,6 +19,7 @@ import com.alexis.matatu.Models.PostsModel;
 import com.alexis.matatu.Models.PostsModel1;
 import com.alexis.matatu.Posts;
 import com.alexis.matatu.R;
+import com.alexis.matatu.Uitility.PicassoCircleTransformation;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
@@ -37,7 +38,7 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
         holder.mUsername.setText(model.getMessageSender());
         holder.mTimestamp.setText(model.getMessageTime());
         holder.mMessage.setText(model.getMessageText());
-        Picasso.with(mContext).load(model.getUrl()).into(holder.mImg);
+        Picasso.with(mContext).load(model.getUrl()).resize(300,300).centerCrop().into(holder.mImg);
     }
 
     @NonNull
