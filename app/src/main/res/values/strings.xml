@@ -10,7 +10,6 @@
     <string name="capacity">Capacity:</string>
     <string name="no_plate">No. plate:</string>
     <string name="ratings">Ratings:</string>
-    <string name="textview">TextView</string>
     <string name="like">Like</string>
     <string name="comments">Comments</string>
     <string name="favourite">Add to Favourites</string>
@@ -70,7 +69,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="navigation_drawer">Navigation drawer</string>
     <string name="edit_profile">Edit profile</string>
-    <string name="username">Username</string>
     <string name="profile_icon">Profile icon</string>
     <string name="enter_username">Enter username</string>
     <string name="send_otp">send otp</string>
@@ -118,6 +116,10 @@
     <string name="choose_image">Choose image</string>
     <string name="upload_image">upload image</string>
     <string name="add_comments">Add comments</string>
+    <string name="textview">TextView</string>
+    <string name="time_stamp">time stamp</string>
+    <string name="username">Username</string>
+    <string name="picture_posted">picture posted</string>
 
 
 </resources>

@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:409500760965:android:ddf5f70e65dc7b14bde2ec",
+        "android_client_info": {
+          "package_name": "com.alexis.daygoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409500760965-cc0orndl2d64ccf12c4gg08migs9ggir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH447MN7N6SBsHoQzeUR4dHN6pUd9tO4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409500760965-cc0orndl2d64ccf12c4gg08migs9ggir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:409500760965:android:dbab22759879d5f0bde2ec",
         "android_client_info": {
           "package_name": "com.alexis.daygoesadmin"
@@ -45,9 +74,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:409500760965:android:a5dbe486e360ef13bde2ec",
+        "mobilesdk_app_id": "1:409500760965:android:e259993195e4d38abde2ec",
         "android_client_info": {
-          "package_name": "com.alexis.matatu"
+          "package_name": "com.alexis.daygoesdriver"
         }
       },
       "oauth_client": [

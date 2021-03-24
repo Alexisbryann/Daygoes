@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alexis.matatu">
+    package="com.alexis.daygoes">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -32,15 +32,15 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.alexis.daygoes.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".Posts"
+            android:name="com.alexis.daygoes.Posts"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
-        <activity android:name=".TheScene" />
-        <activity android:name=".VehicleOffers" />
+        <activity android:name="com.alexis.daygoes.TheScene" />
+        <activity android:name="com.alexis.daygoes.VehicleOffers" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.alexis.daygoes.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,47 +49,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.alexis.daygoes.WelcomeActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".OtpConfirmationActivity"
+            android:name="com.alexis.daygoes.OtpConfirmationActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".Drawer"
+            android:name="com.alexis.daygoes.Drawer"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".IndividualRoute" />
+        <activity android:name="com.alexis.daygoes.IndividualRoute" />
         <activity
-            android:name=".Chat"
+            android:name="com.alexis.daygoes.Chat"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".ForgotPassword"
+            android:name="com.alexis.daygoes.ForgotPassword"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.alexis.daygoes.RegisterActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.alexis.daygoes.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HelpCenter"
+            android:name="com.alexis.daygoes.HelpCenter"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".IndividualVehicle"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.alexis.daygoes.IndividualVehicle"
+            android:parentActivityName="com.alexis.daygoes.MainActivity" />
         <activity
-            android:name=".Login1"
+            android:name="com.alexis.daygoes.Login1"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
-        <activity android:name=".IndividualRouteVehicle" />
+        <activity android:name="com.alexis.daygoes.IndividualRouteVehicle" />
         <activity
-            android:name=".PostImage"
+            android:name="com.alexis.daygoes.PostImage"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name=".FirebaseMessageReceiver">
+        <service android:name="com.alexis.daygoes.FirebaseMessageReceiver">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -98,7 +98,7 @@
         <!-- make sure within the application tag, otherwise app will crash with XmlResourceParser errors -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.alexis.matatu.fileprovider"
+            android:authorities="com.alexis.daygoes.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

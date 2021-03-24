@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.alexis.matatu"
+        applicationId "com.alexis.daygoes"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -102,8 +102,6 @@ dependencies {
 
 //    Easy feedback
     implementation 'com.webianks.library:easy-feedback:1.0.2'
-
-
 
 
 }
