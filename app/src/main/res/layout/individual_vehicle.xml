@@ -287,6 +287,27 @@
 
                 </FrameLayout>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_make_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ripple"
+                    android:fontFamily="@font/almendra"
+                    android:includeFontPadding="true"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/make_post"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/colorAccentAmber"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/frameLayout5"
+                    app:layout_constraintStart_toStartOf="@+id/frameLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rating_comments"
+                    app:rippleColor="@color/colorAccentRed" />
+
                 <View
                     android:id="@+id/divider3"
                     android:layout_width="0dp"
@@ -358,6 +379,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:contentDescription="@string/chat_button"
         android:focusable="true"
         android:stateListAnimator="@android:anim/fade_in"
         app:backgroundTint="@color/colorAccentAmber"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -55,30 +56,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocation.addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+            public void onDataChange(DataSnapshot snapshot) {
                 Double Latitude = snapshot.child("latitude").getValue(Double.class);
                 Double Longitude = snapshot.child("longitude").getValue(Double.class);
 
+                if (snapshot.exists()) {
+                    LatLng location = new LatLng(Latitude, Longitude);
+                    Marker marker = mMap.addMarker(new MarkerOptions()
+                            .position(location)
+                            .title(mName));
 
-                LatLng location = new LatLng(Latitude, Longitude);
+                    int height = 30;
+                    int width = 30;
+                    Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.trolleybus);
+                    Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                    BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+                    marker.setIcon(smallMarkerIcon);
+                    marker.showInfoWindow();
 
-                Marker marker = mMap.addMarker(new MarkerOptions()
-                        .position(location)
-                        .title(mName));
-                int height = 30;
-                int width = 30;
-                Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.trolleybus);
-                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-                BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
-                marker.setIcon(smallMarkerIcon);
-                marker.showInfoWindow();
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
-
+                } else {
+                    Toast.makeText(MapsActivity.this, "This Vehicle is currently offline", Toast.LENGTH_LONG).show();
+                }
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -83,11 +83,11 @@ public class Chat extends AppCompatActivity {
                         .child("Chats").child(groupName)
                         .push()
                         .setValue(new ChatModel(msg, messageSender,null));
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .child("ChatGroups")
-                        .child(groupName)
-                        .setValue(new ChatModel2(groupName));
+//                FirebaseDatabase.getInstance()
+//                        .getReference()
+//                        .child("ChatGroups")
+//                        .child(groupName)
+//                        .setValue(new ChatModel2(groupName));
 
                 // Clear the input
             }

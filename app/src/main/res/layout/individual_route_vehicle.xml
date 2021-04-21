@@ -218,7 +218,7 @@
                         </FrameLayout>
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_make_post"
+                            android:id="@+id/btn_pay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -227,7 +227,7 @@
                             android:includeFontPadding="true"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
-                            android:text="@string/make_post"
+                            android:text="@string/pay_ride"
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="18sp"
                             android:textStyle="bold"

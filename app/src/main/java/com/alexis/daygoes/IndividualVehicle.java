@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -75,6 +77,7 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mPlate1;
     private long mRatings;
     private String mRoute1;
+    private Button mMake_post;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,6 +110,7 @@ public class IndividualVehicle extends AppCompatActivity {
     private void inflateViews() {
 //      inflate the layout
         mFabChat = findViewById(R.id.fab_chat);
+        mMake_post = findViewById(R.id.btn_make_post);
         mTv_name = findViewById(R.id.tv_matatu_name);
         mTv_plate = findViewById(R.id.tv_plate);
         mTv_route = findViewById(R.id.tv_sacco);
@@ -160,6 +164,15 @@ public class IndividualVehicle extends AppCompatActivity {
             Intent i = new Intent(context, Chat.class);
             i.putExtra("NAME_KEY", mTv_name.getText().toString());
             context.startActivity(i);
+        });
+        mMake_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent i = new Intent(context, Posts.class);
+                i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                context.startActivity(i);
+            }
         });
 
         mRatingBar.setRating(setRatings());

@@ -121,5 +121,9 @@
     <string name="username">Username</string>
     <string name="picture_posted">picture posted</string>
 
+    <string name="error">An error occurred, please try again</string>
+    <string name="success">Successfully sent!</string>
+    <string name="chat_button">chat button</string>
+
 
 </resources>

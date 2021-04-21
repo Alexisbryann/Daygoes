@@ -1,7 +1,6 @@
 package com.alexis.daygoes;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -79,7 +78,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mPlate1;
     private long mRatings;
     private String mRoute1;
-    private Button mBtn_make_posts;
+    private Button mBtn_pay;
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -138,7 +137,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         displayNumberOfDislikes();
         displayRatings();
         iconInitialize();
-        make_post();
+        pay();
     }
 
     private boolean checkPermission() {
@@ -192,17 +191,14 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
         mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
         mTv_rating_comments = findViewById(R.id.tv_rating_comments);
-        mBtn_make_posts = findViewById(R.id.btn_make_post);
+        mBtn_pay = findViewById(R.id.btn_pay);
 
     }
 
-    private void make_post() {
-        mBtn_make_posts.setOnClickListener(v -> {
-            String name = mTv_name.getText().toString() + " posts";
-            Context context = v.getContext();
-            Intent i = new Intent(context, Posts.class);
-            i.putExtra("NAME_KEY", name);
-            context.startActivity(i);
+    private void pay() {
+        mBtn_pay.setOnClickListener(v -> {
+            Intent i = new Intent(IndividualRouteVehicle.this, PayActivity.class);
+            startActivity(i);
         });
     }
 

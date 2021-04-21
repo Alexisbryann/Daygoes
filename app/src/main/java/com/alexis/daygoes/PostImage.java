@@ -34,6 +34,7 @@ public class PostImage extends AppCompatActivity {
     private Uri imageuri;
     private EditText mEdtMessage;
     private String mUsername1;
+    private String mGroupName;
 
     // Uri indicates, where the image will be picked from
     private Uri filePath;
@@ -62,6 +63,7 @@ public class PostImage extends AppCompatActivity {
         //      receive intent data passed.
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
+        mGroupName = mName + " posts";
 
         SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
         mUsername1 = prefs.getString("username", "");
@@ -172,7 +174,7 @@ public class PostImage extends AppCompatActivity {
                                             // Read the input field and push a new instance of PostsModel to the Firebase database
                                             FirebaseDatabase.getInstance()
                                                     .getReference()
-                                                    .child("Posts").child(mName)
+                                                    .child("Posts").child(mGroupName)
                                                     .push()
                                                     .setValue(new PostsModel2(msg, messageSender, url));
 
