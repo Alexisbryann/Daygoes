@@ -1,5 +1,7 @@
 package com.alexis.daygoes.Adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -72,8 +74,10 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
                     toast.show();
                     Context context = v.getContext();
                     Intent i = new Intent(context, IndividualRoute.class);
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation((Activity) context);
                     i.putExtra("NAME_KEY", mTv_route.getText().toString());
-                    context.startActivity(i);
+                    context.startActivity(i,options.toBundle());
                 }
             });
 

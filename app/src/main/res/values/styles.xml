@@ -4,6 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cardBg</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
+        <item name="android:windowContentTransitions">true</item>
         <!--        <item name="backgroundTint">@color/colorAccentAmber</item>-->
     </style>
 
@@ -35,6 +36,7 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 
 
 </resources>

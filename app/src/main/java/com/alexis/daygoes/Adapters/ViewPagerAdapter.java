@@ -2,13 +2,16 @@ package com.alexis.daygoes.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.alexis.daygoes.DrawerLocker;
 import com.alexis.daygoes.Fragments.VehiclesFragment;
 import com.alexis.daygoes.Fragments.HypeFragment;
 import com.alexis.daygoes.Fragments.RoutesFragment;
+import com.alexis.daygoes.R;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm) {
@@ -21,6 +24,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+
         Fragment fragment = null;
         if (position == 0) {
             fragment = new VehiclesFragment();

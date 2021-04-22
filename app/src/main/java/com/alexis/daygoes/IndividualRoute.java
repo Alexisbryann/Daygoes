@@ -1,7 +1,11 @@
 package com.alexis.daygoes;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Slide;
+import android.view.Gravity;
+import android.view.animation.DecelerateInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +26,7 @@ public class IndividualRoute extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAnimation();
         setContentView(R.layout.vehicles_routes);
         getSupportActionBar().setTitle("Vehicles on this route");
 
@@ -58,6 +63,15 @@ public class IndividualRoute extends AppCompatActivity {
         super.onResume();
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
+    }
+
+    public void setAnimation() {
+        Slide slide = new Slide();
+        slide.setSlideEdge(Gravity.LEFT);
+        slide.setDuration(400);
+        slide.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(slide);
+        getWindow().setEnterTransition(slide);
     }
 
     // Function to tell the app to start getting data from database on starting of the activity

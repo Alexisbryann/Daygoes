@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.daygoes.Adapters.NewVehiclesAdapter;
 import com.alexis.daygoes.Adapters.VehiclesAdapter;
+import com.alexis.daygoes.DrawerLocker;
+import com.alexis.daygoes.MainActivity;
 import com.alexis.daygoes.Models.NewVehiclesModel;
 import com.alexis.daygoes.Models.VehicleModel;
 import com.alexis.daygoes.Network.CheckInternetConnection;
@@ -57,6 +60,7 @@ public class VehiclesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.vehicles, container, false);
+
 
         //check Internet Connection
         new CheckInternetConnection(getContext()).checkConnection();

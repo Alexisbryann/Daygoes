@@ -125,5 +125,8 @@
     <string name="success">Successfully sent!</string>
     <string name="chat_button">chat button</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 
 </resources>

@@ -1,5 +1,7 @@
 package com.alexis.daygoes;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -111,7 +113,9 @@ public class WelcomeActivity extends AppCompatActivity {
         prefManager.setFirstTimeLaunch(false);
         if (prefManager.isLoggedIn()) {
             Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
-            startActivity(i);
+            ActivityOptions options =
+                    ActivityOptions.makeSceneTransitionAnimation(this);
+            startActivity(i,options.toBundle());
         } else {
             Intent i = new Intent(WelcomeActivity.this, Login1.class);
             startActivity(i);

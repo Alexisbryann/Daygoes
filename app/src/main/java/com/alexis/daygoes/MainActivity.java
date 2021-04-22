@@ -1,6 +1,7 @@
 package com.alexis.daygoes;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -8,9 +9,12 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +27,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.app.Fragment;
+
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.alexis.daygoes.Adapters.ViewPagerAdapter;
+import com.alexis.daygoes.Fragments.VehiclesFragment;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.alexis.daygoes.Uitility.PicassoCircleTransformation;
 import com.alexis.daygoes.usersession.UserSession;
@@ -37,21 +46,27 @@ import com.squareup.picasso.Picasso;
 import com.webianks.easy_feedback.EasyFeedback;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import static androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+import static androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED;
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLocker {
 
     private Toolbar mToolbar;
     private TextView mUsername;
     private TextView mEmail;
     private UserSession session;
-
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private DrawerLayout mDrawer;
+    private ActionBarDrawerToggle mToggle;
+    private TabLayout mTabLayout;
 
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAnimation();
         setContentView(R.layout.activity_main);
 
         if (Build.VERSION.SDK_INT >= 23) {
@@ -62,15 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                // Code for above or equal 23 API Oriented Device
-                // Your Permission granted already .Do next code
             } else {
                 requestPermission(); // Code for permission
             }
-        } else {
-
-            // Code for Below 23 API Oriented Device
-            // Do next code
         }
 
         //check Internet Connection
@@ -80,19 +89,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextAppearance(this, R.style.almendraText);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        mDrawer = findViewById(R.id.drawer_layout);
 
         ViewPager viewPager = findViewById(R.id.viewPager2);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
+        mTabLayout = findViewById(R.id.tabLayout);
+        mTabLayout.setupWithViewPager(viewPager);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        mToggle = new ActionBarDrawerToggle(
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.addDrawerListener(mToggle);
+        mToggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -105,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
-        headerView.setBackgroundColor(getResources().getColor(R.color.cardBgDark));
+        headerView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryWhite));
         getValues();
         setName();
 
@@ -123,6 +132,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return false;
         }
     }
+
+    public void setAnimation() {
+        Slide slide = new Slide();
+        slide.setSlideEdge(Gravity.LEFT);
+        slide.setDuration(400);
+        slide.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(slide);
+        getWindow().setEnterTransition(slide);
+    }
+
 
     private void requestPermission() {
 
@@ -163,11 +182,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @SuppressLint("ResourceType")
     private void tapview() {
 
         new TapTargetSequence(this)
                 .targets(
-                        TapTarget.forToolbarNavigationIcon(mToolbar, "Navigation Drawer", "You can Edit profile, read about the app, give us feedback,contact help, sign out, get an app tour and explore the app from here!")
+                        TapTarget.forToolbarNavigationIcon(mToolbar, "Navigation Drawer", "You can Edit profile, read about the app, give us feedback,contact help, get an app tour and explore the app from here!")
                                 .targetCircleColor(R.color.colorAccentRed)
                                 .titleTextColor(R.color.colorPrimaryBlack)
                                 .titleTextSize(25)
@@ -178,30 +198,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .tintTarget(true)
                                 .transparentTarget(true)
                                 .outerCircleColor(R.color.colorAccentAmber),
-//
-//                        TapTarget.forView(findViewById(R.id.rv_new_vehicles), "New Vehicles", "Newest vehicles will be added here!")
-//                                .targetCircleColor(R.color.colorAccentRed)
-//                                .titleTextColor(R.color.colorPrimaryBlack)
-//                                .titleTextSize(25)
-//                                .descriptionTextSize(15).descriptionTypeface(Typeface.DEFAULT_BOLD)
-//                                .descriptionTextColor(R.color.colorPrimaryWhite)
-//                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-//                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-//                                .tintTarget(true)
-//                                .transparentTarget(true)
-//                                .outerCircleColor(R.color.colorAccentGreen),
-
-//                        TapTarget.forView(findViewById(R.id.spinner), "Spinner", "You can select to filter vehicles by either popularity or your favourites!")
-//                                .targetCircleColor(R.color.colorAccentRed)
-//                                .titleTextColor(R.color.colorPrimaryBlack)
-//                                .titleTextSize(25)
-//                                .descriptionTextSize(15)
-//                                .descriptionTextColor(R.color.colorPrimaryBlack)
-//                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-//                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-//                                .tintTarget(true)
-//                                .transparentTarget(true)
-//                                .outerCircleColor(R.color.colorAccentAmber),
 
                         TapTarget.forView(findViewById(R.id.tabLayout), "Swipe tabs", "Here you can choose whether to view vehicles, routes or hype!")
                                 .targetCircleColor(R.color.colorAccentRed)
@@ -332,6 +328,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -347,6 +344,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, HelpCenter.class));
         }
         if (id == R.id.explore) {
+            Objects.requireNonNull(mTabLayout.getTabAt(0)).select();
             tapview1();
         }
         if (id == R.id.feedback) {
@@ -362,4 +360,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    public void lockDrawer() {
+        mDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED);
+    }
+
+    @Override
+    public void unlockDrawer() {
+        mDrawer.setDrawerLockMode(LOCK_MODE_UNLOCKED);
+    }
 }
