@@ -1,6 +1,8 @@
 package com.alexis.daygoes.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -45,9 +47,10 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
         holder.mRatingBar.setRating(model.getRating());
-        holder.mTv_no_of_stars.setText(model.getRating()+"");
+        holder.mTv_no_of_stars.setText(model.getRating() + "");
 
-        }
+    }
+
     @NonNull
     @Override
     public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -85,10 +88,12 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
 
                 Context context = v.getContext();
                 Intent i = new Intent(context, IndividualVehicle.class);
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
                 i.putExtra("NAME_KEY", mTv_name.getText().toString());
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
-                context.startActivity(i);
+                context.startActivity(i,options.toBundle());
             });
 
             mLocation.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +106,6 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
 
                 }
             });
-    }
+        }
     }
 }

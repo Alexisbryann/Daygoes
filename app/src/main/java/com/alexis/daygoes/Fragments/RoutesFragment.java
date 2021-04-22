@@ -1,9 +1,12 @@
 package com.alexis.daygoes.Fragments;
 
 import android.os.Bundle;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -56,7 +59,7 @@ public class RoutesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        setAnimation();
         mView = inflater.inflate(R.layout.routes, container, false);
 
 //      check Internet Connection
@@ -65,7 +68,7 @@ public class RoutesFragment extends Fragment {
 //      Inflate views
         mToolbar = mView.findViewById(R.id.toolbar);
         mToolbar1 = mView.findViewById(R.id.toolbar1);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar1);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar1);
         mTv_Route = mView.findViewById(R.id.tv_sacco);
         mRoutes_search = mView.findViewById(R.id.search_view_routes);
 
@@ -74,6 +77,17 @@ public class RoutesFragment extends Fragment {
         search();
 
         return mView;
+    }
+
+    private void setAnimation() {
+
+        Slide slide = new Slide();
+        slide.setSlideEdge(Gravity.RIGHT);
+        slide.setDuration(400);
+        slide.setInterpolator(new DecelerateInterpolator());
+        getActivity().getWindow().setExitTransition(slide);
+        getActivity().getWindow().setEnterTransition(slide);
+
     }
 
     private void initialRecycler() {

@@ -1,6 +1,8 @@
 package com.alexis.daygoes.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -74,10 +76,14 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
             itemView.setOnClickListener(v -> {
                 Context context = v.getContext();
                 Intent i = new Intent(context, IndividualRouteVehicle.class);
+
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity) context);
+
                 i.putExtra("NAME_KEY", mTv_name.getText().toString());
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
-                context.startActivity(i);
+                context.startActivity(i,options.toBundle());
             });
 
         }

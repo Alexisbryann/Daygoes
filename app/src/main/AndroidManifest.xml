@@ -77,9 +77,9 @@
         <activity
             android:name=".HelpCenter"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".IndividualVehicle"
-            android:parentActivityName=".MainActivity" />
+        <activity android:name=".IndividualVehicle" />
+        <!--            android:parentActivityName=".MainActivity"-->
+
         <activity
             android:name=".Login1"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />

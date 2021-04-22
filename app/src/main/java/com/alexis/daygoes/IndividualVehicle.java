@@ -9,9 +9,12 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.transition.Explode;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -82,6 +85,7 @@ public class IndividualVehicle extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAnimation();
         setContentView(R.layout.individual_vehicle);
 
         //check Internet Connection
@@ -106,6 +110,14 @@ public class IndividualVehicle extends AppCompatActivity {
         iconInitialize();
     }
 
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
+
+    }
 
     private void inflateViews() {
 //      inflate the layout
@@ -607,4 +619,8 @@ public class IndividualVehicle extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -12,7 +12,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.transition.Explode;
 import android.util.Log;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -95,6 +97,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAnimation();
         setContentView(R.layout.individual_route_vehicle);
 
 
@@ -138,6 +141,14 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         displayRatings();
         iconInitialize();
         pay();
+    }
+
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
     }
 
     private boolean checkPermission() {
@@ -198,6 +209,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private void pay() {
         mBtn_pay.setOnClickListener(v -> {
             Intent i = new Intent(IndividualRouteVehicle.this, PayActivity.class);
+            i.putExtra("NAME_KEY", mTv_name.getText().toString());
             startActivity(i);
         });
     }
