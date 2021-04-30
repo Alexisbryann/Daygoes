@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -43,6 +45,7 @@ public class PayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAnimation();
         setContentView(R.layout.activity_pay);
 
         //check Internet Connection
@@ -68,6 +71,15 @@ public class PayActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(500);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
 
     }
 }

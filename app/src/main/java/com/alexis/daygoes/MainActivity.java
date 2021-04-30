@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -48,6 +50,7 @@ import com.webianks.easy_feedback.EasyFeedback;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+import static android.view.View.TEXT_ALIGNMENT_CENTER;
 import static androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
 import static androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED;
 
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextAppearance(this, R.style.almendraText);
+        mToolbar.setTitleMarginStart(TEXT_ALIGNMENT_CENTER);
 
         mDrawer = findViewById(R.id.drawer_layout);
 
@@ -106,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         mUsername = headerView.findViewById(R.id.tv_username);
         mEmail = headerView.findViewById(R.id.tv_email);
         ImageView imgLogo = headerView.findViewById(R.id.img_logo);
@@ -113,8 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Picasso.with(MainActivity.this).load(R.drawable.logo).transform(new PicassoCircleTransformation()).into(imgLogo);
 
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setBackgroundColor(getResources().getColor(R.color.cardBg));
-        headerView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryWhite));
+
         getValues();
         setName();
 

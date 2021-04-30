@@ -130,12 +130,12 @@
 
     <string name="payment_procedure">You can pay for your ride via Mpesa.\n\n
         Simply follow the following simple steps:\n\n
-        1. Go to M-PESA menu on your phone \n
-        2. Go to Lipa na M-PESA, Buy Goods and Services option \n
-        3. Enter the till number provided below \n
-        4. Enter amount \n
+        1. Go to M-PESA menu on your phone. \n
+        2. Go to Lipa na M-PESA, Buy Goods and Services option. \n
+        3. Enter the till number provided below. \n
+        4. Enter amount. \n
         5. Enter M-PESA pin. \n
-        6. SMS confirmation received on phone</string>
+        6. SMS confirmation received on phone.</string>
 
 
 </resources>

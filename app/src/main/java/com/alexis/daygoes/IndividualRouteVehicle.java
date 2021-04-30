@@ -1,6 +1,8 @@
 package com.alexis.daygoes;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -209,8 +211,10 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private void pay() {
         mBtn_pay.setOnClickListener(v -> {
             Intent i = new Intent(IndividualRouteVehicle.this, PayActivity.class);
+            ActivityOptions options =
+                    ActivityOptions.makeSceneTransitionAnimation(this);
             i.putExtra("NAME_KEY", mTv_name.getText().toString());
-            startActivity(i);
+            startActivity(i,options.toBundle());
         });
     }
 

@@ -86,11 +86,13 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
                                 android:text="till number"
                                 android:textAllCaps="true"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/colorPrimaryBlack"
                                 app:layout_constraintBottom_toBottomOf="@+id/tv_till_pay"
+                                app:layout_constraintEnd_toStartOf="@+id/tv_till_pay"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="@+id/tv_till_pay" />
 
@@ -98,25 +100,79 @@
                                 android:id="@+id/tv_till_pay"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="32dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginBottom="32dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/textView5"
-                                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                                android:textColor="@color/colorAccentGreen"
+                                app:layout_constraintBottom_toTopOf="@+id/button_OK"
+                                app:layout_constraintEnd_toEndOf="@+id/edt_amount_pay"
+                                app:layout_constraintStart_toStartOf="@+id/edt_amount_pay"
+                                app:layout_constraintTop_toBottomOf="@+id/edt_amount_pay" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="phone number"
+                                android:textAllCaps="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/colorPrimaryBlack"
+                                app:layout_constraintBottom_toBottomOf="@+id/edt_phone_number"
+                                app:layout_constraintEnd_toStartOf="@+id/edt_phone_number"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/edt_phone_number" />
 
                             <TextView
                                 android:id="@+id/textView6"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:text="@string/payment_procedure"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="amount"
+                                android:textAllCaps="true"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                app:layout_constraintEnd_toEndOf="parent"
+                                android:textColor="@color/colorPrimaryBlack"
+                                app:layout_constraintBottom_toBottomOf="@+id/edt_amount_pay"
+                                app:layout_constraintEnd_toStartOf="@+id/edt_amount_pay"
                                 app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/edt_amount_pay" />
+
+                            <EditText
+                                android:id="@+id/edt_phone_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:ems="10"
+                                android:hint="Enter phone number"
+                                android:inputType="phone"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/text_view_send_money" />
+
+                            <EditText
+                                android:id="@+id/edt_amount_pay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:ems="10"
+                                android:hint="Enter Amount"
+                                android:inputType="number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/edt_phone_number" />
+
+                            <Button
+                                android:id="@+id/button_OK"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/ripple"
+                                android:text="pay"
+                                android:textColor="@color/colorPrimaryBlack"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>

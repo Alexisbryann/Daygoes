@@ -5,13 +5,16 @@
         <item name="colorPrimary">@color/cardBg</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
         <!--        <item name="backgroundTint">@color/colorAccentAmber</item>-->
     </style>
 
-    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
-        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
-        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
-    </style>
+    <!--    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">-->
+    <!--        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>-->
+    <!--        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>-->
+    <!--        <item name="textColor"-->
+    <!--    </style>-->
 
     <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorPrimaryBlack</item>
@@ -24,6 +27,8 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -36,7 +41,6 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>
-
 
 
 </resources>

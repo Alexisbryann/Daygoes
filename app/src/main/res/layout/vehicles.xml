@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/frameLayout4"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/cardBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,7 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/card_background">
 
             <Spinner
                 android:id="@+id/spinner"
@@ -35,6 +35,7 @@
                 android:id="@+id/search_vehicle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="32dp"
                 android:commitIcon="@android:drawable/ic_menu_search"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search vehicle"
@@ -85,10 +86,10 @@
         android:id="@+id/rv_matatu_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
-        app:layout_constraintBottom_toBottomOf="parent"
 
 
         tools:listitem="@layout/item_vehicles" />
