@@ -1,5 +1,7 @@
 package com.alexis.daygoes.Adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -54,7 +56,9 @@ public class SceneAdapter extends FirebaseRecyclerAdapter<SceneModel, SceneAdapt
                     Context context = v.getContext();
                     Intent i = new Intent(context, Posts.class);
                     i.putExtra("NAME_KEY", mRoomName.getText().toString());
-                    context.startActivity(i);
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                    context.startActivity(i, options.toBundle());
                 }
             });
 

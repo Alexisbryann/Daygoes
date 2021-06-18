@@ -47,7 +47,7 @@
                     app:layout_constraintStart_toStartOf="@+id/imgview_vehicle_photo"
                     app:layout_constraintTop_toBottomOf="@+id/imgview_vehicle_photo"
                     app:lottie_autoPlay="true"
-                    app:lottie_colorFilter="@color/dot_dark_screen1"
+                    app:lottie_colorFilter="@color/colorAccentGreen"
                     app:lottie_fileName="ripple.json"
                     app:lottie_loop="true" />
 

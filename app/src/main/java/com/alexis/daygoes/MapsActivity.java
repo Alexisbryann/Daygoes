@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
@@ -48,6 +51,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+    }
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
     }
 
     @Override

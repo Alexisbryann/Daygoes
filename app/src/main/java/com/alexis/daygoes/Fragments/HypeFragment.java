@@ -1,10 +1,14 @@
 package com.alexis.daygoes.Fragments;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -43,6 +47,7 @@ public class HypeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setAnimation();
         mView = inflater.inflate(R.layout.hype, container, false);
 
         //check Internet Connection
@@ -55,40 +60,43 @@ public class HypeFragment extends Fragment {
         mOffers = mView.findViewById(R.id.btn_offers);
         mScene = mView.findViewById(R.id.btn_scene);
 
-        mOffers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                offers();
-            }
-        });
-        mScene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scene();
-            }
-        });
+        mOffers.setOnClickListener(v -> offers());
+        mScene.setOnClickListener(v -> scene());
 
         return mView;
     }
+    private void setAnimation() {
+
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getActivity().getWindow().setExitTransition(explode);
+        getActivity().getWindow().setEnterTransition(explode);
+
+    }
 
     private void scene() {
+        ActivityOptions options =
+                ActivityOptions.makeSceneTransitionAnimation((getActivity()));
         Intent intent = new Intent(getContext(), TheScene.class);
-        startActivity(intent);
+        startActivity(intent,options.toBundle());
     }
 
     private void offers() {
+        ActivityOptions options =
+                ActivityOptions.makeSceneTransitionAnimation((getActivity()));
         Intent intent = new Intent(getContext(), VehicleOffers.class);
-        startActivity(intent);
+        startActivity(intent,options.toBundle());
     }
     @Override
     public void onResume() {
         super.onResume();
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
+//        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
     }
     @Override
     public void onStop() {
         super.onStop();
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+//        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
     }
 
 }

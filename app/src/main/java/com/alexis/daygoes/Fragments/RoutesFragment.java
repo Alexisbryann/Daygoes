@@ -1,6 +1,7 @@
 package com.alexis.daygoes.Fragments;
 
 import android.os.Bundle;
+import android.transition.Explode;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -81,12 +82,11 @@ public class RoutesFragment extends Fragment {
 
     private void setAnimation() {
 
-        Slide slide = new Slide();
-        slide.setSlideEdge(Gravity.RIGHT);
-        slide.setDuration(400);
-        slide.setInterpolator(new DecelerateInterpolator());
-        getActivity().getWindow().setExitTransition(slide);
-        getActivity().getWindow().setEnterTransition(slide);
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getActivity().getWindow().setExitTransition(explode);
+        getActivity().getWindow().setEnterTransition(explode);
 
     }
 

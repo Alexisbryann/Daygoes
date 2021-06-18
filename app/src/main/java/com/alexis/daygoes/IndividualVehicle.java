@@ -1,6 +1,8 @@
 package com.alexis.daygoes;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -175,7 +177,9 @@ public class IndividualVehicle extends AppCompatActivity {
             Context context = v.getContext();
             Intent i = new Intent(context, Chat.class);
             i.putExtra("NAME_KEY", mTv_name.getText().toString());
-            context.startActivity(i);
+            ActivityOptions options =
+                    ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+            context.startActivity(i,options.toBundle());
         });
         mMake_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,7 +187,9 @@ public class IndividualVehicle extends AppCompatActivity {
                 Context context = v.getContext();
                 Intent i = new Intent(context, Posts.class);
                 i.putExtra("NAME_KEY", mTv_name.getText().toString());
-                context.startActivity(i);
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                context.startActivity(i,options.toBundle());
             }
         });
 

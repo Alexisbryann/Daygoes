@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ public class Posts extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts);
 
@@ -86,6 +89,13 @@ public class Posts extends AppCompatActivity {
         });
         mSend.setOnClickListener(v -> mSend.setOnClickListener(view -> comment()));
 
+    }
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
     }
 
     private void comment() {

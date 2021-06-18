@@ -1,6 +1,8 @@
 package com.alexis.daygoes;
 
 import android.os.Bundle;
+import android.transition.Explode;
+import android.view.animation.DecelerateInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ public class TheScene extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_scene);
         getSupportActionBar().setTitle("The Scene");
@@ -43,5 +46,12 @@ public class TheScene extends AppCompatActivity {
         SceneAdapter sceneAdapter = new SceneAdapter(options, TheScene.this);
         rv_scene.setAdapter(sceneAdapter);
         sceneAdapter.startListening();
+    }
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
     }
 }

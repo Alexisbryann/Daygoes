@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ public class Chat extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
@@ -95,7 +98,13 @@ public class Chat extends AppCompatActivity {
         }));
 
     }
-
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
+    }
     // Function to tell the app to start getting data from database on starting of the activity
     @Override
     public void onStart() {

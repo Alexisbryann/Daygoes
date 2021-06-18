@@ -1,6 +1,8 @@
 package com.alexis.daygoes;
 
 import android.os.Bundle;
+import android.transition.Explode;
+import android.view.animation.DecelerateInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ public class VehicleOffers extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_offers);
         Objects.requireNonNull(getSupportActionBar()).setTitle("OFFERS");
@@ -43,7 +46,13 @@ public class VehicleOffers extends AppCompatActivity {
         rv_offers.setAdapter(offersAdapter);
         offersAdapter.startListening();
 
-
+    }
+    private void setAnimation() {
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
     }
 
 }

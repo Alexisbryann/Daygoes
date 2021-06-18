@@ -3,6 +3,7 @@ package com.alexis.daygoes;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.animation.DecelerateInterpolator;
@@ -66,12 +67,11 @@ public class IndividualRoute extends AppCompatActivity {
     }
 
     public void setAnimation() {
-        Slide slide = new Slide();
-        slide.setSlideEdge(Gravity.LEFT);
-        slide.setDuration(400);
-        slide.setInterpolator(new DecelerateInterpolator());
-        getWindow().setExitTransition(slide);
-        getWindow().setEnterTransition(slide);
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
     }
 
     // Function to tell the app to start getting data from database on starting of the activity

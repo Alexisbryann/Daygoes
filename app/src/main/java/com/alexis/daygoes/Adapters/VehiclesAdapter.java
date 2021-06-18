@@ -102,7 +102,9 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
                     Context context = v.getContext();
                     Intent i = new Intent(context, MapsActivity.class);
                     i.putExtra("NAME_KEY", mTv_name.getText().toString());
-                    context.startActivity(i);
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                    context.startActivity(i,options.toBundle());
 
                 }
             });
