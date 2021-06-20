@@ -1,16 +1,21 @@
 package com.alexis.daygoes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import com.airbnb.lottie.model.content.GradientColor;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private String mName;
     private DatabaseReference mLocation;
+    private Button mBtnBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +51,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
 
+        mBtnBook = findViewById(R.id.btn_book_now);
+
         mLocation = FirebaseDatabase.getInstance().getReference().child("Location").child(mName);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+
 
     }
     private void setAnimation() {
@@ -87,8 +98,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
-                } else {
+                    mBtnBook.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bookRide();
+                        }
+                    });
+                }
+                else {
                     Toast.makeText(MapsActivity.this, "This Vehicle is currently offline", Toast.LENGTH_LONG).show();
+                    mBtnBook.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MapsActivity.this, "Sorry,this Vehicle is currently offline.", Toast.LENGTH_LONG).show();
+
+                        }
+                    });
                 }
             }
 
@@ -97,7 +122,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
 
+
+        });
+    }
+
+    private void bookRide() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Let this driver know that you are waiting to board their vehicle?")
+                .setTitle("SHOW INTEREST");
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
         });
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(R.color.colorAccentGreen);
+        dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(R.color.colorAccentRed);
     }
+
 }
