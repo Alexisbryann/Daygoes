@@ -10,7 +10,8 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view_posts"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/card_background"
         android:iconifiedByDefault="false"
         android:queryHint="Search route"
         app:commitIcon="@android:drawable/ic_menu_search"

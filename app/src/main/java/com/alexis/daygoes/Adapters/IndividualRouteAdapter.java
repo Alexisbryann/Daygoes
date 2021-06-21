@@ -15,7 +15,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alexis.daygoes.IndividualRouteVehicle;
+import com.alexis.daygoes.IndividualVehicle;
+import com.alexis.daygoes.MapsActivity;
 import com.alexis.daygoes.Models.IndividualRouteModel;
 import com.alexis.daygoes.R;
 import com.alexis.daygoes.Uitility.PicassoCircleTransformation;
@@ -61,6 +64,7 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
         private final ImageView mImg_pic;
         private final TextView mTv_no_of_stars;
         private final TextView mTv_route;
+        private final LottieAnimationView mLocation;
 
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,10 +76,11 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
             mRatingBar = itemView.findViewById(R.id.ratings);
             mTv_no_of_stars = itemView.findViewById(R.id.tv_no_of_stars);
+            mLocation = itemView.findViewById(R.id.route_location);
 
             itemView.setOnClickListener(v -> {
                 Context context = v.getContext();
-                Intent i = new Intent(context, IndividualRouteVehicle.class);
+                Intent i = new Intent(context, IndividualVehicle.class);
 
                 ActivityOptions options =
                         ActivityOptions.makeSceneTransitionAnimation((Activity) context);
@@ -84,6 +89,17 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
                 context.startActivity(i,options.toBundle());
+            });
+            mLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent i = new Intent(context, MapsActivity.class);
+                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                    context.startActivity(i,options.toBundle());
+                }
             });
 
         }

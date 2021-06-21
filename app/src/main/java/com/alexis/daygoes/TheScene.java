@@ -23,6 +23,7 @@ public class TheScene extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_scene);
         getSupportActionBar().setTitle("The Scene");
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();

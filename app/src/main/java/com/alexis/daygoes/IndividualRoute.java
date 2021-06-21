@@ -30,6 +30,7 @@ public class IndividualRoute extends AppCompatActivity {
         setAnimation();
         setContentView(R.layout.vehicles_routes);
         getSupportActionBar().setTitle("Vehicles on this route");
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();

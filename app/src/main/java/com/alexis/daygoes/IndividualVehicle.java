@@ -89,6 +89,7 @@ public class IndividualVehicle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setAnimation();
         setContentView(R.layout.individual_vehicle);
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
@@ -425,7 +426,7 @@ public class IndividualVehicle extends AppCompatActivity {
                 } else {
                     liked.setValue(mUserId);
                     disliked.child(mUserId).removeValue();
-                    mDislike.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
+                    mDislike.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -498,7 +499,7 @@ public class IndividualVehicle extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     dataSnapshot.getRef().removeValue();
                     favourited.getRef().removeValue();
-                    mFavourite.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
+                    mFavourite.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
                     Toast.makeText(IndividualVehicle.this, "Removed " + mName + " from your favourites", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -614,7 +615,7 @@ public class IndividualVehicle extends AppCompatActivity {
                     disliked.setValue(mUserId);
                     liked.child(mUserId).removeValue();
                     mDislike.setColorFilter(Color.rgb(255, 0, 0), PorterDuff.Mode.SRC_IN);
-                    mLike.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
+                    mLike.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
                 }
             }
 

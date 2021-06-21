@@ -2,8 +2,10 @@ package com.alexis.daygoes;
 
 import android.os.Bundle;
 import android.transition.Explode;
+import android.view.Gravity;
 import android.view.animation.DecelerateInterpolator;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +27,7 @@ public class VehicleOffers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_offers);
         Objects.requireNonNull(getSupportActionBar()).setTitle("OFFERS");
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();
@@ -47,6 +50,7 @@ public class VehicleOffers extends AppCompatActivity {
         offersAdapter.startListening();
 
     }
+
     private void setAnimation() {
         Explode explode = new Explode();
         explode.setDuration(1000);
