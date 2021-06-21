@@ -129,6 +129,8 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
                         });
                         AlertDialog dialog = builder.create();
                         dialog.show();
+                        dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(R.color.colorAccentGreen);
+                        dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(R.color.colorAccentRed);
                     }
 
                 }

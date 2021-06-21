@@ -7,13 +7,28 @@
     android:background="@color/colorPrimaryWhite"
     tools:context=".TheScene">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_scene"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view_posts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search route"
+        app:commitIcon="@android:drawable/ic_menu_search"
+        app:defaultQueryHint="Search route"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="Search vehicle name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_scene"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view_posts"
         tools:listitem="@layout/item_scene" />
 </androidx.constraintlayout.widget.ConstraintLayout>

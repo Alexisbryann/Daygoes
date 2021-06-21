@@ -5,11 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,11 +29,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -38,6 +44,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String mName;
     private DatabaseReference mLocation;
     private Button mBtnBook;
+    private String mUserId;
+    private DatabaseReference mDb;
+    private ImageView mDislike;
+    private DatabaseReference mBooked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +61,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        mUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+        mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+
         mBtnBook = findViewById(R.id.btn_book_now);
 
         mLocation = FirebaseDatabase.getInstance().getReference().child("Location").child(mName);
@@ -61,8 +75,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-
     }
+
     private void setAnimation() {
         Explode explode = new Explode();
         explode.setDuration(1000);
@@ -89,7 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     int height = 30;
                     int width = 30;
-                    Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.trolleybus);
+                    Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.location);
                     Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
                     BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
                     marker.setIcon(smallMarkerIcon);
@@ -104,8 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             bookRide();
                         }
                     });
-                }
-                else {
+                } else {
                     Toast.makeText(MapsActivity.this, "This Vehicle is currently offline", Toast.LENGTH_LONG).show();
                     mBtnBook.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -132,12 +145,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         builder.setMessage("Let this driver know that you are waiting to board their vehicle?")
                 .setTitle("SHOW INTEREST");
 
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Book ride", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
+                {
+                    mBooked = FirebaseDatabase.getInstance().getReference().child("Booked")
+                            .child(mName).child(mUserId);
+
+                    mBooked.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                Toast.makeText(MapsActivity.this, "Already shown interest " + mName, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(MapsActivity.this, "You have declared interest in boarding " + mName, Toast.LENGTH_LONG).show();
+                                mBooked.setValue(mUserId);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel interest", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                FirebaseDatabase.getInstance().getReference().child("Booked")
+                        .child(mName).child(mUserId).removeValue();
+                Toast.makeText(MapsActivity.this, "You have cancelled your interest in " + mName, Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNeutralButton("exit", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
             }
@@ -147,6 +188,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dialog.show();
         dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(R.color.colorAccentGreen);
         dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(R.color.colorAccentRed);
+        dialog.getButton(dialog.BUTTON_NEUTRAL).setTextColor(R.color.colorAccentAmber);
     }
 
 }

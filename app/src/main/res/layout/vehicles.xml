@@ -35,15 +35,18 @@
                 android:id="@+id/search_vehicle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:commitIcon="@android:drawable/ic_menu_search"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search vehicle"
                 android:soundEffectsEnabled="true"
-                android:splitMotionEvents="true"
+                android:splitMotionEvents="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/spinner"
                 app:layout_constraintTop_toTopOf="parent"
+                app:queryBackground="@android:color/transparent"
                 app:queryHint="Search vehicle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
