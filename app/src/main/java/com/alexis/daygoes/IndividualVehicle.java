@@ -268,6 +268,7 @@ public class IndividualVehicle extends AppCompatActivity {
                         mSliderShow.addSlider(sliderView);
                     }
                     mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                    mSliderShow.setDuration(4000);
 
                 }
             }
