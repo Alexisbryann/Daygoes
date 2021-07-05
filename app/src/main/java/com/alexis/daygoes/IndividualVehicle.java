@@ -89,7 +89,7 @@ public class IndividualVehicle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setAnimation();
         setContentView(R.layout.individual_vehicle);
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
+//        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
@@ -146,7 +146,7 @@ public class IndividualVehicle extends AppCompatActivity {
         mTv_name.setText(mName);
         mTv_plate.setText(mPlate);
         mTv_route.setText(mRoute);
-        getSupportActionBar().setTitle(mName);
+//        getSupportActionBar().setTitle(mName);
     }
 
     @Override
@@ -268,6 +268,7 @@ public class IndividualVehicle extends AppCompatActivity {
                         mSliderShow.addSlider(sliderView);
                     }
                     mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                    mSliderShow.setDuration(4000);
 
                 }
             }

@@ -57,9 +57,9 @@
         android:layout_gravity="start"
         android:background="@drawable/nav_background"
         android:fitsSystemWindows="false"
-        app:itemShapeInsetStart="10dp"
         app:headerLayout="@layout/nav_header_main"
         app:itemHorizontalPadding="10dp"
+        app:itemShapeInsetStart="10dp"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Medium"
         app:itemTextColor="@color/design_default_color_on_secondary"
         app:menu="@menu/activity_main_drawer">
