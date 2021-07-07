@@ -4,275 +4,179 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:background="@color/cardBg"
+    tools:context=".ProfileActivity">
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/cardBg"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@drawable/background1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                app:cardBackgroundColor="@color/cardBg"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="16dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/img_logo"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_my_posts"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:contentDescription="@string/logo"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/cardBg"
+                        android:text="my posts"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimaryBlack"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        app:rippleColor="@color/colorAccentAmber" />
 
-                    <FrameLayout
-                        android:id="@+id/frameLayout13"
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="40dp"
+                        android:layout_height="0dp"
+                        android:contentDescription="more"
+                        android:elevation="50dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_my_posts"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_my_posts"
+                        app:layout_constraintTop_toTopOf="@+id/btn_my_posts"
+                        app:layout_constraintVertical_bias="1.0"
+                        app:srcCompat="@drawable/more" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_change_username"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@color/cardBgDark"
+                        android:backgroundTint="@color/cardBg"
+                        android:text="change username"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/colorPrimaryBlack"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_logo">
+                        app:layout_constraintTop_toBottomOf="@+id/btn_my_posts"
+                        app:rippleColor="@color/colorAccentAmber" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <EditText
-                                android:id="@+id/old_username"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:ems="10"
-                                android:hint="Enter old username"
-                                android:inputType="textPersonName"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <EditText
-                                android:id="@+id/new_username"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:ems="10"
-                                android:hint="Enter new username"
-                                android:inputType="textPersonName"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/old_username" />
-
-                            <Button
-                                android:id="@+id/changeUsername"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:background="@drawable/ripple"
-                                android:text="change username"
-                                android:textColor="@color/colorPrimaryBlack"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/new_username" />
-
-                            <ProgressBar
-                                android:id="@+id/progressBar2"
-                                style="?android:attr/progressBarStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginStart="8dp"
-                                android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="@+id/changeUsername"
-                                app:layout_constraintStart_toEndOf="@+id/changeUsername"
-                                app:layout_constraintTop_toTopOf="@+id/changeUsername" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/frameLayout12"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_change_username"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/rounded_edges"
-                        android:backgroundTint="@color/cardBgDark"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/frameLayout13">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <EditText
-                                android:id="@+id/old_email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:gravity="center"
-                                android:hint="Enter your old email"
-                                android:inputType="textEmailAddress"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <EditText
-                                android:id="@+id/new_email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:gravity="center"
-                                android:hint="Enter your new email"
-                                android:inputType="textEmailAddress"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/old_email" />
-
-                            <Button
-                                android:id="@+id/changeEmail"
-                                style="?android:textAppearanceSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:background="@drawable/ripple"
-                                android:text="change email"
-                                android:textColor="@color/colorPrimaryBlack"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/new_email"
-                                app:rippleColor="@color/colorAccentRed" />
-
-                            <ProgressBar
-                                android:id="@+id/progressBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginStart="8dp"
-                                android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="@+id/changeEmail"
-                                app:layout_constraintStart_toEndOf="@+id/changeEmail"
-                                app:layout_constraintTop_toTopOf="@+id/changeEmail" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@drawable/rounded_edges"
-                        android:backgroundTint="@color/cardBgDark"
+                        android:layout_marginTop="24dp"
+                        app:cardBackgroundColor="@color/cardBg"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="16dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/frameLayout12">
+                        app:layout_constraintTop_toBottomOf="@+id/btn_change_username">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/password"
-                                android:layout_width="match_parent"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/textInputLayout"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:autofillHints=""
-                                android:focusableInTouchMode="true"
-                                android:gravity="center"
-                                android:hint="Enter your old password"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textPassword"
+                                android:textColorHint="@color/colorPrimaryBlack"
+                                app:boxBackgroundColor="@color/cardBgDark"
+                                app:boxCornerRadiusBottomEnd="16dp"
+                                app:boxCornerRadiusBottomStart="16dp"
+                                app:boxCornerRadiusTopEnd="16dp"
+                                app:boxCornerRadiusTopStart="16dp"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="2dp"
+                                app:errorEnabled="true"
+                                app:hintAnimationEnabled="true"
+                                app:hintTextColor="@color/colorAccentGreen"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
 
-                            <EditText
-                                android:id="@+id/newPassword"
-                                android:layout_width="match_parent"
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/edt_current_username"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:cursorVisible="true"
+                                    android:hint="current username"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textCursorDrawable="@color/colorPrimaryBlack"
+                                    app:textInputLayoutFocusedRectEnabled="false" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/textInputLayout3"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
                                 android:layout_marginTop="16dp"
-                                android:layout_marginEnd="8dp"
-                                android:focusableInTouchMode="true"
-                                android:gravity="center"
-                                android:hint="Enter your new password"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textPassword"
+                                android:textColorHint="@color/colorPrimaryBlack"
+                                app:boxBackgroundColor="@color/cardBgDark"
+                                app:boxCornerRadiusBottomEnd="16dp"
+                                app:boxCornerRadiusBottomStart="16dp"
+                                app:boxCornerRadiusTopEnd="16dp"
+                                app:boxCornerRadiusTopStart="16dp"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="2dp"
+                                app:errorEnabled="true"
+                                app:hintAnimationEnabled="true"
+                                app:hintTextColor="@color/colorAccentGreen"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/password" />
+                                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
-                            <ProgressBar
-                                android:id="@+id/progressBar1"
-                                style="?android:attr/progressBarStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginStart="8dp"
-                                android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="@+id/changePass"
-                                app:layout_constraintStart_toEndOf="@+id/changePass"
-                                app:layout_constraintTop_toTopOf="@+id/changePass" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/edt_new_username"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:cursorVisible="true"
+                                    android:hint="new username"
+                                    android:textColor="@color/colorPrimaryBlack"
+                                    android:textCursorDrawable="@color/colorPrimaryBlack" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <Button
-                                android:id="@+id/changePass"
-                                style="?android:textAppearanceSmall"
+                                android:id="@+id/btn_change"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:background="@drawable/ripple"
-                                android:text="change password"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:text="change"
                                 android:textColor="@color/colorPrimaryBlack"
-                                android:textStyle="bold"
-                                android:visibility="visible"
+                                app:cornerRadius="16dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/newPassword"
+                                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
                                 app:rippleColor="@color/colorAccentRed" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
-                    </FrameLayout>
+                    </androidx.cardview.widget.CardView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-        </ScrollView>
-
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 
-import com.alexis.daygoes.Login1;
+import com.alexis.daygoes.LoginActivity;
 
 import java.util.HashMap;
 
@@ -77,7 +77,7 @@ public class UserSession {
         // Check login status
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(context, Login1.class);
+            Intent i = new Intent(context, LoginActivity.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -118,7 +118,7 @@ public class UserSession {
         editor.commit();
 
         // After logout redirect user to Login Activity
-        Intent i = new Intent(context, Login1.class);
+        Intent i = new Intent(context, LoginActivity.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

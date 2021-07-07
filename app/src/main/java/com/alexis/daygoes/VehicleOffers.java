@@ -26,8 +26,8 @@ public class VehicleOffers extends AppCompatActivity {
         setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_offers);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("OFFERS");
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
+//        Objects.requireNonNull(getSupportActionBar()).setTitle("OFFERS");
+//        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();

@@ -1,6 +1,5 @@
 package com.alexis.daygoes;
 
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -117,7 +116,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     ActivityOptions.makeSceneTransitionAnimation(this);
             startActivity(i,options.toBundle());
         } else {
-            Intent i = new Intent(WelcomeActivity.this, Login1.class);
+            Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(i);
 //        Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
 //        startActivity(i);

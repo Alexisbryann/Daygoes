@@ -19,7 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-
+        <activity android:name=".activity_my_posts" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MyPosts" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,7 +35,6 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".PayActivity" />
-
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -79,8 +80,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IndividualVehicle"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".Login1"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />

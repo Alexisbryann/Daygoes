@@ -1,18 +1,17 @@
 package com.alexis.daygoes;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -26,17 +25,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.Fragment;
-
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.alexis.daygoes.Adapters.ViewPagerAdapter;
-import com.alexis.daygoes.Fragments.VehiclesFragment;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.alexis.daygoes.Uitility.PicassoCircleTransformation;
 import com.alexis.daygoes.usersession.UserSession;
@@ -340,20 +334,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.app_tour) {
+        if (id == R.id.nav_app_tour) {
             session.setFirstTimeLaunch(true);
             Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(intent);
             finish();
         }
-        if (id == R.id.help_center) {
+        if (id == R.id.nav_help_center) {
             startActivity(new Intent(MainActivity.this, HelpCenter.class));
         }
-        if (id == R.id.explore) {
+        if (id == R.id.nav_explore) {
             Objects.requireNonNull(mTabLayout.getTabAt(0)).select();
             tapview1();
         }
-        if (id == R.id.feedback) {
+        if (id == R.id.nav_profile) {
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+
+        }
+        if (id == R.id.nav_feedback) {
             new EasyFeedback.Builder(MainActivity.this)
                     .withEmail("bryannkoech7@gmail.com")
                     .withSystemInfo()

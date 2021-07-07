@@ -1,6 +1,7 @@
 package com.alexis.daygoes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class OtpConfirmationActivity extends AppCompatActivity {
     private String mPhone;
     private DatabaseReference mDatabase;
     private TextInputLayout mInformation;
+    private String mUserId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class OtpConfirmationActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
+//        mUserId = mCurrentUser.getUid();
         session = new UserSession(getApplicationContext());
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -115,7 +118,6 @@ public class OtpConfirmationActivity extends AppCompatActivity {
     }
 
     public void sendUserToHome() {
-
         session.createLoginSession(mUsername, mPhone);
 
         Intent homeIntent = new Intent(OtpConfirmationActivity.this, MainActivity.class);

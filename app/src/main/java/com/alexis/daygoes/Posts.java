@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ import com.alexis.daygoes.Models.PostsModel1;
 import com.alexis.daygoes.Models.SceneModel;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,6 +38,10 @@ public class Posts extends AppCompatActivity {
     private String mName;
     private TextView mVehicleName;
     private String mGroupName;
+    private FirebaseUser mCurrentUser;
+    private FirebaseAuth mAuth;
+    private String mUserId;
+    private String mCurrentUser1;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,7 +49,6 @@ public class Posts extends AppCompatActivity {
         setAnimation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts);
-
 
 //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();
@@ -54,19 +60,38 @@ public class Posts extends AppCompatActivity {
 
 //      receive intent data passed.
         Intent i = getIntent();
-        mName = i.getStringExtra("NAME_KEY" );
+        mName = i.getStringExtra("NAME_KEY");
         mVehicleName.setText(mName + " posts");
         mGroupName = mName + " posts";
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
         SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
         mUsername1 = prefs.getString("username", "");
 
-//      Initialize recyclerview
+        renderui();
+
+        media.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, PostImage.class);
+            intent.putExtra("NAME_KEY", mName);
+            context.startActivity(intent);
+
+        });
+        mSend.setOnClickListener(v -> mSend.setOnClickListener(view -> comment()));
+
+    }
+
+    private void renderui() {
+        //      Initialize recyclerview
         RecyclerView recyclerView = findViewById(R.id.rv_posts);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
 //      Initialize DB
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+        String user = mCurrentUser.getUid();
         assert mName != null;
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Posts").child(mGroupName);
 
@@ -79,17 +104,8 @@ public class Posts extends AppCompatActivity {
 //      Initialize and set adapter
         mPostsAdapter = new PostsAdapter(options, Posts.this, this);
         recyclerView.setAdapter(mPostsAdapter);
-
-        media.setOnClickListener(v -> {
-            Context context = v.getContext();
-            Intent intent = new Intent(context, PostImage.class);
-            intent.putExtra("NAME_KEY", mName);
-            context.startActivity(intent);
-
-        });
-        mSend.setOnClickListener(v -> mSend.setOnClickListener(view -> comment()));
-
     }
+
     private void setAnimation() {
         Explode explode = new Explode();
         explode.setDuration(1000);
@@ -100,6 +116,17 @@ public class Posts extends AppCompatActivity {
 
     private void comment() {
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+        mUserId = mCurrentUser.getUid();
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("MY_PREF2", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("uid", mUserId);
+        editor.putString("VehicleName", mName);
+        editor.apply();
+
+
         DatabaseReference Posts = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("Posts").child(mGroupName);
@@ -109,6 +136,7 @@ public class Posts extends AppCompatActivity {
 
         String msg = mEdtMessage.getText().toString().trim();
         String messageSender = mUsername1;
+        mCurrentUser1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (msg.isEmpty()) {
             Toast.makeText(Posts.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
@@ -117,6 +145,7 @@ public class Posts extends AppCompatActivity {
             Posts.push().setValue(new PostsModel(msg, messageSender)).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     PostGroups.child(mGroupName).setValue(new SceneModel(mName));
+
                 }
             });
             // Clear the input
