@@ -8,11 +8,14 @@ public class PostsModel {
 
     private String messageText;
     private String messageSender;
+    private String url;
     private String messageTime;
 
-    public PostsModel(String messageText, String messageSender) {
+    public PostsModel(String messageText, String messageSender, String url) {
         this.messageText = messageText;
         this.messageSender = messageSender;
+        this.url = url;
+
 
         // Initialize to current time
         Date date = new Date();
@@ -47,6 +50,14 @@ public class PostsModel {
 
     public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

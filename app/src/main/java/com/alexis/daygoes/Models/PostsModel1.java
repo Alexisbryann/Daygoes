@@ -50,6 +50,7 @@ public class PostsModel1 {
     public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
     }
+
     public String getUrl() {
         return url;
     }

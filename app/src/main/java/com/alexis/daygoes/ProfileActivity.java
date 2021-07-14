@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -35,7 +40,6 @@ public class ProfileActivity extends AppCompatActivity {
         mBtnChangeUsername = findViewById(R.id.btn_change_username);
         mChangeUsername = findViewById(R.id.card_change_username);
         mBtnChange = findViewById(R.id.btn_change);
-        mEdtCurrentUsername = findViewById(R.id.edt_current_username);
         mEdtNewUsername = findViewById(R.id.edt_new_username);
 
         mVisible = false;
@@ -66,7 +70,28 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void changeUsername() {
-        mCurrentUsername = Objects.requireNonNull(mEdtCurrentUsername.getText()).toString();
         mNewUsername = Objects.requireNonNull(mEdtNewUsername.getText()).toString();
+
+        SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
+        String phone = prefs.getString("phone", "");
+
+        if (!mNewUsername.equals("")){
+            DatabaseReference username = FirebaseDatabase.getInstance().getReference("Users");
+            assert phone != null;
+            username.child(phone).child("username").setValue(mNewUsername);
+            Toast.makeText(ProfileActivity.this, "Username changed", Toast.LENGTH_LONG).show();
+        }else {
+            mEdtNewUsername.setError("Username can not be blank");
+            Toast.makeText(ProfileActivity.this, "Username can not be blank", Toast.LENGTH_LONG).show();
+        }
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username", mNewUsername);
+        editor.apply();
+
+        mEdtNewUsername.setText("");
+
+
     }
 }

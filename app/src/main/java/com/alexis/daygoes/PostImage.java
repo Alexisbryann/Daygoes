@@ -16,9 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alexis.daygoes.Models.PostsModel;
 import com.alexis.daygoes.Models.PostsModel2;
+import com.alexis.daygoes.Models.SceneModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -48,6 +53,10 @@ public class PostImage extends AppCompatActivity {
     private Uri mDownloadUrl;
     private ImageView mImageView;
 
+    private FirebaseUser mCurrentUser;
+    private FirebaseAuth mAuth;
+    private String mUserId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +77,8 @@ public class PostImage extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
         mUsername1 = prefs.getString("username", "");
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -142,6 +153,9 @@ public class PostImage extends AppCompatActivity {
     private void uploadImage() {
         if (filePath != null) {
 
+            mAuth = FirebaseAuth.getInstance();
+            mCurrentUser = mAuth.getCurrentUser();
+            mUserId = mCurrentUser.getUid();
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
                     = new ProgressDialog(this);
@@ -171,12 +185,20 @@ public class PostImage extends AppCompatActivity {
                                         if (msg.isEmpty()) {
                                             Toast.makeText(PostImage.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
                                         } else {
+                                            DatabaseReference PostGroups = FirebaseDatabase.getInstance()
+                                                    .getReference()
+                                                    .child("ChatGroups");
+                                            DatabaseReference userPosts = FirebaseDatabase.getInstance()
+                                                    .getReference()
+                                                    .child("User Posts").child(mUserId);
                                             // Read the input field and push a new instance of PostsModel to the Firebase database
                                             FirebaseDatabase.getInstance()
                                                     .getReference()
                                                     .child("Posts").child(mGroupName)
                                                     .push()
                                                     .setValue(new PostsModel2(msg, messageSender, url));
+                                            PostGroups.child(mGroupName).setValue(new SceneModel(mName));
+                                            userPosts.push().setValue(new PostsModel(msg, messageSender,url));
 
                                             // Clear the input
                                         }

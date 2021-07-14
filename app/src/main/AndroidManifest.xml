@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".activity_my_posts" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MyPosts" />
         <!--
@@ -80,9 +79,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IndividualVehicle"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login1"
+            android:name=".LoginActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity android:name=".IndividualRouteVehicle" />
         <activity
