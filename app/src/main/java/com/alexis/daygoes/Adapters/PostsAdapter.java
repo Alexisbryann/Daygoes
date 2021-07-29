@@ -31,6 +31,7 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
         holder.mUsername.setText(model.getMessageSender());
         holder.mTimestamp.setText(model.getMessageTime());
         holder.mMessage.setText(model.getMessageText());
+        holder.mTitle.setText(model.getTitle());
         Picasso.with(mContext).load(model.getUrl()).resize(300,300).centerCrop().into(holder.mImg);
     }
 
@@ -47,6 +48,7 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
         private final TextView mTimestamp;
         private final TextView mMessage;
         private final ImageView mImg;
+        private final TextView mTitle;
 
         public FirebaseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +57,7 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
             mTimestamp = itemView.findViewById(R.id.tv_time_stamp_posts);
             mMessage = itemView.findViewById(R.id.tv_message_posts);
             mImg = itemView.findViewById(R.id.img_pic);
+            mTitle = itemView.findViewById(R.id.tv_title);
 
         }
     }

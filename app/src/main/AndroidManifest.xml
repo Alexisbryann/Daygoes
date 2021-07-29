@@ -39,7 +39,7 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".Posts"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TheScene" />
         <activity android:name=".VehicleOffers" />
         <activity
@@ -53,24 +53,25 @@
         </activity>
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"  />
         <activity
             android:name=".OtpConfirmationActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Drawer"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".IndividualRoute" />
+        <activity
+            android:name=".IndividualRoute"/>
         <activity
             android:name=".Chat"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"  />
         <activity
             android:name=".ForgotPassword"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"  />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"  />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -82,11 +83,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"  />
         <activity android:name=".IndividualRouteVehicle" />
         <activity
             android:name=".PostImage"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"  />
 
         <meta-data
             android:name="preloaded_fonts"

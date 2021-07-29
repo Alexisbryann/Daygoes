@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.alexis.daygoes.Adapters.MyPostsAdapter;
 import com.alexis.daygoes.Adapters.PostsAdapter;
 import com.alexis.daygoes.Models.PostsModel;
+import com.alexis.daygoes.Models.PostsModel1;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,9 +53,9 @@ public class MyPosts extends AppCompatActivity {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("User Posts").child(mUser);
 
 //      query db
-        FirebaseRecyclerOptions<PostsModel> options
-                = new FirebaseRecyclerOptions.Builder<PostsModel>()
-                .setQuery(db, PostsModel.class)
+        FirebaseRecyclerOptions<PostsModel1> options
+                = new FirebaseRecyclerOptions.Builder<PostsModel1>()
+                .setQuery(db, PostsModel1.class)
                 .build();
 
 //      Initialize and set adapter

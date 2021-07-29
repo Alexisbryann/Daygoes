@@ -7,30 +7,27 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alexis.daygoes.Models.PostsModel;
 import com.alexis.daygoes.Models.PostsModel2;
 import com.alexis.daygoes.Models.SceneModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class PostImage extends AppCompatActivity {
@@ -56,6 +53,7 @@ public class PostImage extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private FirebaseAuth mAuth;
     private String mUserId;
+    private TextView mImgTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +61,9 @@ public class PostImage extends AppCompatActivity {
         setContentView(R.layout.activity_post_image);
 
         // initialize views
-        // views for button
         Button btnSelect = findViewById(R.id.btnChoose);
         Button btnUpload = findViewById(R.id.btnUpload);
+        mImgTitle = findViewById(R.id.edt_img_title);
         mImageView = findViewById(R.id.imgView);
         mEdtMessage = findViewById(R.id.edt_img_comment);
 
@@ -84,20 +82,10 @@ public class PostImage extends AppCompatActivity {
         storageReference = storage.getReference();
 
         // on pressing btnSelect SelectImage() is called
-        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelectImage();
-            }
-        });
+        btnSelect.setOnClickListener(v -> SelectImage());
 
         // on pressing btnUpload uploadImage() is called
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-            }
-        });
+        btnUpload.setOnClickListener(v -> uploadImage());
     }
 
     // Select Image method
@@ -155,6 +143,7 @@ public class PostImage extends AppCompatActivity {
 
             mAuth = FirebaseAuth.getInstance();
             mCurrentUser = mAuth.getCurrentUser();
+            assert mCurrentUser != null;
             mUserId = mCurrentUser.getUid();
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
@@ -170,42 +159,42 @@ public class PostImage extends AppCompatActivity {
                                     + UUID.randomUUID().toString());
 
             // adding listeners on upload or failure of image
+            // Progress Listener for loading percentage on the dialog box
             ref.putFile(filePath)
                     .addOnSuccessListener(
                             taskSnapshot -> {
-                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        mDownloadUrl = uri;
+                                ref.getDownloadUrl().addOnSuccessListener(uri -> {
+                                    mDownloadUrl = uri;
 
-                                        String msg = mEdtMessage.getText().toString().trim();
-                                        String messageSender = mUsername1;
-                                        String url = mDownloadUrl.toString();
+                                    String title = mImgTitle.getText().toString().trim();
+                                    String msg = mEdtMessage.getText().toString().trim();
+                                    String messageSender = mUsername1;
+                                    String url = mDownloadUrl.toString();
 
-                                        if (msg.isEmpty()) {
-                                            Toast.makeText(PostImage.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
-                                        } else {
-                                            DatabaseReference PostGroups = FirebaseDatabase.getInstance()
-                                                    .getReference()
-                                                    .child("ChatGroups");
-                                            DatabaseReference userPosts = FirebaseDatabase.getInstance()
-                                                    .getReference()
-                                                    .child("User Posts").child(mUserId);
-                                            // Read the input field and push a new instance of PostsModel to the Firebase database
-                                            FirebaseDatabase.getInstance()
-                                                    .getReference()
-                                                    .child("Posts").child(mGroupName)
-                                                    .push()
-                                                    .setValue(new PostsModel2(msg, messageSender, url));
-                                            PostGroups.child(mGroupName).setValue(new SceneModel(mName));
-                                            userPosts.push().setValue(new PostsModel(msg, messageSender,url));
+                                    if (msg.isEmpty() || title.isEmpty()) {
+                                        Toast.makeText(PostImage.this, "Title or message can not be blank", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        DatabaseReference PostGroups = FirebaseDatabase.getInstance()
+                                                .getReference()
+                                                .child("ChatGroups");
+//                                        DatabaseReference userPosts = FirebaseDatabase.getInstance()
+//                                                .getReference()
+//                                                .child("User Posts").child(mUserId);
+                                        // Read the input field and push a new instance of PostsModel to the Firebase database
+                                        FirebaseDatabase.getInstance()
+                                                .getReference()
+                                                .child("Posts").child(mGroupName)
+                                                .push()
+                                                .setValue(new PostsModel2(msg, messageSender, url, title));
+                                        PostGroups.child(mGroupName).setValue(new SceneModel(mName));
+//                                        userPosts.push().setValue(new PostsModel(msg, messageSender, url, null, ServerValue.TIMESTAMP));
 
-                                            // Clear the input
-                                        }
-                                        mEdtMessage.setText("");
-                                        finish();
-
+                                        // Clear the input
                                     }
+                                    mEdtMessage.setText("");
+                                    mImgTitle.setText("");
+                                    finish();
+
                                 });
                                 // Image uploaded successfully Dismiss dialog
                                 progressDialog.dismiss();
@@ -215,34 +204,25 @@ public class PostImage extends AppCompatActivity {
                                         .show();
                             })
 
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                    .addOnFailureListener(e -> {
 
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(PostImage.this,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
+                        // Error, Image not uploaded
+                        progressDialog.dismiss();
+                        Toast
+                                .makeText(PostImage.this,
+                                        "Failed " + e.getMessage(),
+                                        Toast.LENGTH_SHORT)
+                                .show();
                     })
                     .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
-                                }
+                            taskSnapshot -> {
+                                double progress
+                                        = (100.0
+                                        * taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount());
+                                progressDialog.setMessage(
+                                        "Uploaded "
+                                                + (int) progress + "%");
                             });
         }
     }

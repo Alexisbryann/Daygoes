@@ -50,7 +50,6 @@
     <string name="reset_password">reset password</string>
     <string name="back">back</string>
     <string name="forgot_password1">forgot password ?</string>
-    <string name="title">Title</string>
     <string name="message">Message</string>
     <string name="more_button">more button</string>
     <string name="rate_vehicle">Rate this vehicle </string>
@@ -136,6 +135,7 @@
         4. Enter amount. \n
         5. Enter M-PESA pin. \n
         6. SMS confirmation received on phone.</string>
+    <string name="title">Title</string>
 
 
 </resources>

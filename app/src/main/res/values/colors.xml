@@ -8,7 +8,7 @@
     <color name="cardBg">#FFF3E0</color>
     <color name="cardBgDark">#f3e5ab</color>
     <color name="colorShimmer">#DDDDDD</color>
-    <color name="mtrl_btn_bg_color_selector">#FFBF00</color>
+    <color name="mtrl_btn_bg_color_selector">@color/colorAccentAmber</color>
 
     <!-- Screens background color-->
     <color name="bg_screen1">#3498db</color>

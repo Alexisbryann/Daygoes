@@ -3,6 +3,7 @@ package com.alexis.daygoes.Models;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 public class PostsModel {
 
@@ -10,12 +11,17 @@ public class PostsModel {
     private String messageSender;
     private String url;
     private String messageTime;
+    private String id;
+    private Map<String, String> timestamp;
+    private String title;
 
-    public PostsModel(String messageText, String messageSender, String url) {
+    public PostsModel(String messageText, String messageSender, String url, String id, Map<String, String> timestamp, String title) {
         this.messageText = messageText;
         this.messageSender = messageSender;
         this.url = url;
-
+        this.id = id;
+        this.timestamp = timestamp;
+        this.title = title;
 
         // Initialize to current time
         Date date = new Date();
@@ -60,4 +66,27 @@ public class PostsModel {
         this.url = url;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Map<String, String> getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Map<String, String> timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

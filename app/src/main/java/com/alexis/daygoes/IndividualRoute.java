@@ -1,11 +1,8 @@
 package com.alexis.daygoes;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.transition.Explode;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.animation.DecelerateInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +27,7 @@ public class IndividualRoute extends AppCompatActivity {
         setAnimation();
         setContentView(R.layout.vehicles_routes);
         getSupportActionBar().setTitle("Vehicles on this route");
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
+//        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();

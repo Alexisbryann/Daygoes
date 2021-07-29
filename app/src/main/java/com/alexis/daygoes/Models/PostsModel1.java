@@ -10,11 +10,14 @@ public class PostsModel1 {
     private String messageSender;
     private String messageTime;
     private String url;
+    private String title;
 
-    public PostsModel1(String messageText, String messageSender, String url) {
+    public PostsModel1(String messageText, String messageSender, String url, String title) {
         this.messageText = messageText;
         this.messageSender = messageSender;
         this.url = url;
+        this.title = title;
+
 
         // Initialize to current time
         Date date = new Date();
@@ -57,6 +60,14 @@ public class PostsModel1 {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

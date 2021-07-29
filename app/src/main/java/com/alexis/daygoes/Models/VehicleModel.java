@@ -8,11 +8,11 @@ public class VehicleModel {
     private String Route;
     private String Capacity;
     private String Plate;
-    private  float Rating;
+    private  int Rating;
 
     public VehicleModel() {
     }
-    public VehicleModel(String image, String name, String sacco, String route, String capacity, String plate, float rating) {
+    public VehicleModel(String image, String name, String sacco, String route, String capacity, String plate, int rating) {
         Image1 = image;
         Name = name;
         Sacco = sacco;
@@ -71,11 +71,11 @@ public class VehicleModel {
         Plate = plate;
     }
 
-    public float getRating() {
+    public int getRating() {
         return Rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         Rating = rating;
     }
 }

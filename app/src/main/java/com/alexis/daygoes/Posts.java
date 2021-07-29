@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.transition.Explode;
-import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,11 +32,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Posts extends AppCompatActivity {
 
     private ImageButton mSend;
+    private EditText mTitle;
     private EditText mEdtMessage;
     private PostsAdapter mPostsAdapter;
     private String mUsername1;
@@ -65,6 +70,7 @@ public class Posts extends AppCompatActivity {
 //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
+        mTitle = findViewById(R.id.edt_title_posts);
         mUsername = findViewById(R.id.tv_username_posts);
         mVehicleName = findViewById(R.id.tv_vehicle_name_posts);
         mSend = findViewById(R.id.fab_send_posts);
@@ -109,7 +115,30 @@ public class Posts extends AppCompatActivity {
 //
 //            }
 //        });
+//        deleteFunction();
 
+    }
+
+    private void deleteFunction() {
+
+        DatabaseReference delete = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Posts").child(mGroupName);
+
+        long cutoff = new Date().getTime() - TimeUnit.MILLISECONDS.convert(10,TimeUnit.MINUTES);
+        Query oldBug = delete.orderByChild("timestamp").startAt(cutoff);
+        oldBug.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()) {
+                    itemSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
     private void renderui() {
@@ -203,27 +232,34 @@ public class Posts extends AppCompatActivity {
                 .getReference()
                 .child("User Posts").child(mUserId);
 
+        String title = mTitle.getText().toString().trim();
         String msg = mEdtMessage.getText().toString().trim();
         String messageSender = mUsername1;
         mCurrentUser1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
         if (msg.isEmpty()) {
-            Toast.makeText(Posts.this, "You can not send a blank message", Toast.LENGTH_LONG).show();
-        } else {
+            Toast.makeText(Posts.this, "Message can not be blank", Toast.LENGTH_LONG).show();
+        }
+        if (title.isEmpty()) {
+            Toast.makeText(Posts.this, "Title or message can not be blank", Toast.LENGTH_LONG).show();
+        }
+        else {
             // Read the input field and push a new instance of PostsModel to the Firebase database
-            Posts.push().setValue(new PostsModel(msg, messageSender,null)).addOnCompleteListener(task -> {
+            Posts.push().setValue(new PostsModel(msg, messageSender,null,null, ServerValue.TIMESTAMP,title)).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+
                     PostGroups.child(mGroupName).setValue(new SceneModel(mName));
-                    userPosts.push().setValue(new PostsModel(msg, messageSender,null));
+                    userPosts.child(title).setValue(new PostsModel(msg, messageSender,null,null,ServerValue.TIMESTAMP,title));
                 }
                 else{
                     Toast.makeText(Posts.this, "Failed", Toast.LENGTH_LONG).show();
 
                 }
             });
-            // Clear the input
         }
         mEdtMessage.setText("");
+        mTitle.setText("");
     }
 
     @Override

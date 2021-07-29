@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/cardBg">
+    android:background="@color/cardBgDark">
 
     <FrameLayout
         android:layout_width="0dp"
@@ -21,7 +21,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/cardBgDark"
+                app:cardBackgroundColor="@color/cardBg"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp"
                 app:cardPreventCornerOverlap="true"
@@ -39,6 +39,7 @@
                         android:id="@+id/tv_message"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="TextView"
                         android:textColor="@color/colorPrimaryBlack"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,6 +67,17 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/divider12"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="@color/colorAccentAmber"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_username" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

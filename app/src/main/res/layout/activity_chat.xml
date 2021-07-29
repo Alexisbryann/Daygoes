@@ -4,92 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/cardBg"
     tools:context=".Chat">
 
-    <TextView
-        android:id="@+id/tv_vehicle_name"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/rounded_edges"
-        android:backgroundTint="@color/colorAccentGreen"
-        android:fontFamily="@font/almendra"
-        android:gravity="center"
-        android:text="Vehicle name"
-        android:textAllCaps="true"
-        android:textColor="@color/colorAccentAmber"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name"
-        tools:listitem="@layout/item_chat" />
-
     <FrameLayout
-        android:id="@+id/frameLayout9"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_text_enter_otp1"
+            <TextView
+                android:id="@+id/tv_vehicle_name"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:background="@drawable/background1"
+                android:gravity="center"
+                android:text="Vehicle name"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/colorAccentGreen"
-                app:endIconTint="@color/colorAccentAmber"
-                app:hintTextColor="@color/colorAccentGreen"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/fab_send"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/colorAccentAmber">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_message"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Write a comment" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageButton
-                android:id="@+id/fab_send"
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:clickable="true"
-                android:tint="@color/colorAccentGreen"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_text_enter_otp1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/edit_text_enter_otp1"
-                app:srcCompat="@android:drawable/ic_menu_send" />
+                app:layout_constraintStart_toStartOf="parent">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/edit_text_enter_otp1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="@color/colorAccentGreen"
+                        app:endIconTint="@color/colorAccentAmber"
+                        app:hintTextColor="@color/colorAccentGreen"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/fab_send"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/colorAccentAmber">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Write a comment" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/fab_send"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:clickable="true"
+                        android:tint="@color/colorAccentGreen"
+                        app:layout_constraintBottom_toBottomOf="@+id/edit_text_enter_otp1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/edit_text_enter_otp1"
+                        app:srcCompat="@android:drawable/ic_menu_send" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chat"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/divider6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name"
+                tools:listitem="@layout/item_chat" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/colorAccentAmber"
+                app:layout_constraintBottom_toTopOf="@+id/frameLayout9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
-    <View
-        android:id="@+id/divider6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="@color/colorAccentAmber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

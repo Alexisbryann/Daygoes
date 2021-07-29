@@ -1,5 +1,6 @@
 package com.alexis.daygoes.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
@@ -95,6 +96,7 @@ public class RoutesAdapter extends FirebaseRecyclerAdapter<RoutesModel, RoutesAd
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Routes");
             databaseReference.addValueEventListener(new ValueEventListener() {
+                @SuppressLint("ResourceAsColor")
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {

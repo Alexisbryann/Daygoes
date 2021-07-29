@@ -33,7 +33,7 @@ public class TheScene extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_scene);
         getSupportActionBar().setTitle("The Scene");
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
+//        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         mSearchScene = findViewById(R.id.search_view_posts);
 

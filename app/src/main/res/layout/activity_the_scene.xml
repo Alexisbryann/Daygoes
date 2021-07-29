@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryWhite"
+    android:background="@color/cardBg"
     tools:context=".TheScene">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view_posts"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/card_background"
+        android:background="@drawable/background1"
         android:iconifiedByDefault="false"
         android:queryHint="Search route"
         app:commitIcon="@android:drawable/ic_menu_search"
