@@ -83,6 +83,7 @@ public class IndividualVehicle extends AppCompatActivity {
     private long mRatings;
     private String mRoute1;
     private Button mMake_post;
+    private Button mBtn_media;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,7 +139,22 @@ public class IndividualVehicle extends AppCompatActivity {
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
         mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
         mTv_rating_comments = findViewById(R.id.tv_rating_comments);
+        mBtn_media = findViewById(R.id.btn_media);
 
+        mBtn_media.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context,MediaActivity.class);
+
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                intent.putExtra("NAME_KEY", mTv_name.getText().toString());
+                context.startActivity(intent,options.toBundle());
+
+
+            }
+        });
     }
 
     private void getIntentData() {

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -115,7 +116,6 @@ public class Posts extends AppCompatActivity {
 //
 //            }
 //        });
-//        deleteFunction();
 
     }
 
@@ -246,9 +246,10 @@ public class Posts extends AppCompatActivity {
         }
         else {
             // Read the input field and push a new instance of PostsModel to the Firebase database
-            Posts.push().setValue(new PostsModel(msg, messageSender,null,null, ServerValue.TIMESTAMP,title)).addOnCompleteListener(task -> {
+            Posts.child(title).setValue(new PostsModel(msg, messageSender,null,null, ServerValue.TIMESTAMP,title)).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-
+                    editor.putString("GroupName", mGroupName);
+                    editor.apply();
                     PostGroups.child(mGroupName).setValue(new SceneModel(mName));
                     userPosts.child(title).setValue(new PostsModel(msg, messageSender,null,null,ServerValue.TIMESTAMP,title));
                 }

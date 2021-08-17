@@ -5,10 +5,10 @@
     <string name="favourite_vehicles">favourite vehicles</string>
     <string name="filter">filter</string>
     <string name="vehicle_image">Vehicle image</string>
-    <string name="vehicle_name">Vehicle name:</string>
-    <string name="route">Route:</string>
-    <string name="capacity">Capacity:</string>
-    <string name="no_plate">No. plate:</string>
+    <string name="vehicle_name">Vehicle name</string>
+    <string name="route">Route</string>
+    <string name="capacity">Capacity</string>
+    <string name="no_plate">No. plate</string>
     <string name="ratings">Ratings:</string>
     <string name="like">Like</string>
     <string name="comments">Comments</string>
@@ -104,7 +104,7 @@
     <string name="app_tour">app tour</string>
     <string name="sign_out">Sign out</string>
     <string name="scene">Offers from various vehicles are found here by clicking "OFFERS", you can also view posts made to all vehicles by selecting "THE SCENE".</string>
-    <string name="make_post">make post</string>
+    <string name="make_post">Posts</string>
     <string name="title_activity_maps">Map</string>
     <string name="information_text">OTP verification failed, please try again.</string>
     <string name="info_text">OTP verification failed, please try again</string>
@@ -136,6 +136,7 @@
         5. Enter M-PESA pin. \n
         6. SMS confirmation received on phone.</string>
     <string name="title">Title</string>
+    <string name="view_images_videos">view images / videos</string>
 
 
 </resources>

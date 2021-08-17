@@ -85,7 +85,7 @@ public class Chat extends AppCompatActivity {
                         .getReference()
                         .child("Chats").child(groupName)
                         .push()
-                        .setValue(new ChatModel(msg, messageSender,null));
+                        .setValue(new ChatModel(msg, messageSender, null));
 //                FirebaseDatabase.getInstance()
 //                        .getReference()
 //                        .child("ChatGroups")
@@ -98,6 +98,7 @@ public class Chat extends AppCompatActivity {
         }));
 
     }
+
     private void setAnimation() {
         Explode explode = new Explode();
         explode.setDuration(1000);
@@ -105,6 +106,7 @@ public class Chat extends AppCompatActivity {
         getWindow().setExitTransition(explode);
         getWindow().setEnterTransition(explode);
     }
+
     // Function to tell the app to start getting data from database on starting of the activity
     @Override
     public void onStart() {

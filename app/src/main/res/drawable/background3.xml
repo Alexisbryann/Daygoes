@@ -3,12 +3,14 @@
 
     <item>
         <shape>
-
+            <!--            <stroke android:color="@color/cardBg"/>-->
             <solid
                 android:color="@color/cardBgDark"/>
             <corners
                 android:topLeftRadius="50dp"
-                android:topRightRadius="50dp"/>
+                android:topRightRadius="50dp"
+                android:bottomLeftRadius="50dp"
+                android:bottomRightRadius="50dp"/>
         </shape>
     </item>
 </selector>

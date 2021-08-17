@@ -130,7 +130,7 @@
                             android:layout_marginEnd="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+                            app:layout_constraintTop_toBottomOf="@+id/btn_media">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -380,6 +380,20 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout5" />
+
+                        <Button
+                            android:id="@+id/btn_media"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/view_images_videos"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryBlack"
+                            app:cornerRadius="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout3"
+                            app:rippleColor="@color/colorAccentRed" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

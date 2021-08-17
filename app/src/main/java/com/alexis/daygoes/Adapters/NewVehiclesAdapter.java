@@ -1,6 +1,7 @@
 package com.alexis.daygoes.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexis.daygoes.IndividualVehicle;
 import com.alexis.daygoes.Models.NewVehiclesModel;
 import com.alexis.daygoes.R;
 import com.alexis.daygoes.Uitility.PicassoCircleTransformation;
@@ -50,15 +52,15 @@ public class NewVehiclesAdapter extends FirebaseRecyclerAdapter<NewVehiclesModel
 
             mImgVehicleImage = itemView.findViewById(R.id.img_vehicles);
             mTv_name = itemView.findViewById(R.id.tv_name);
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Context context = v.getContext();
-//                    Intent i = new Intent(context, IndividualVehicle.class);
-//                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
-//                    context.startActivity(i);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent i = new Intent(context, IndividualVehicle.class);
+                    i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                    context.startActivity(i);
+                }
+            });
         }
     }
 }
