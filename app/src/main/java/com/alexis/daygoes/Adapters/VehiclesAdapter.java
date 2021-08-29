@@ -44,6 +44,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
         Picasso.with(mContext).load(model.getImage1()).transform(new PicassoCircleTransformation()).into(holder.mImg_pic);
         holder.mTv_name.setText(model.getName());
         holder.mTv_sacco.setText(model.getSacco());
+        holder.mTv_route.setText(model.getRoute());
         holder.mTv_capacity.setText(model.getCapacity());
         holder.mTv_plate.setText(model.getPlate());
         holder.mRatingBar.setRating(model.getRating());
@@ -67,6 +68,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
         private final ImageView mImg_pic;
         private final TextView mTv_no_of_stars;
         private final TextView mTv_sacco;
+        private final TextView mTv_route;
         private final TextView mTv_name;
         private final LottieAnimationView mLocation;
 
@@ -78,6 +80,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
             mImg_pic = itemView.findViewById(R.id.imgview_vehicle_photo);
             mTv_name = itemView.findViewById(R.id.tv_vehicle_name1);
             mTv_sacco = itemView.findViewById(R.id.tv_sacco1);
+            mTv_route = itemView.findViewById(R.id.tv_route31);
             mTv_capacity = itemView.findViewById(R.id.tv_capacity1);
             mTv_plate = itemView.findViewById(R.id.tv_no_plate1);
             mRatingBar = itemView.findViewById(R.id.ratings);
@@ -91,6 +94,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
                 ActivityOptions options =
                         ActivityOptions.makeSceneTransitionAnimation((Activity)context);
                 i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                i.putExtra("ROUTE_KEY1", mTv_route.getText().toString());
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
                 context.startActivity(i,options.toBundle());

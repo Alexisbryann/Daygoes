@@ -3,8 +3,8 @@ package com.alexis.daygoes;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,7 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.transition.Explode;
-import android.util.Log;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,13 +26,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.alexis.daygoes.Models.FavouriteVehicleModel;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,10 +47,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
-
 public class IndividualRouteVehicle extends AppCompatActivity {
 
-    private String mUserId;
     private SliderLayout mSliderShow;
     private TextView mTv_name;
     private TextView mTv_plate;
@@ -59,22 +56,25 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private ImageView mLike;
     private ImageView mFavourite;
     private ImageView mShare;
-    private TextView mNumOfLikes;
-    private TextView mNumOfFavs;
-    private TextView mNumOfDislikes;
     private RatingBar mRatingBar;
-    private ImageView mDislike;
+    private FloatingActionButton mFabChat;
+    private String mUserId;
+    private TextView mNumOfLikes;
     private String mName;
     private long mRating;
+    private TextView mNumOfFavs;
     private TextView mTv_rating_comments;
+    private ImageView mDislike;
+    private TextView mNumOfDislikes;
     private DatabaseReference mDb;
+    private String mPlate;
+    private String mRoute;
     private String mImage1;
     private String mImage2;
     private String mImage3;
     private String mImage4;
     private String mImage5;
-    private String mPlate;
-    private String mRoute;
+    private long mNumOfLikes1;
     private String mName1;
     private String mImage11;
     private String mCapacity;
@@ -82,67 +82,40 @@ public class IndividualRouteVehicle extends AppCompatActivity {
     private String mPlate1;
     private long mRatings;
     private String mRoute1;
-    private Button mBtn_pay;
-
-    private static final int PERMISSION_REQUEST_CODE = 1;
-
-    public IndividualRouteVehicle() {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //check Internet Connection
-        new CheckInternetConnection(this).checkConnection();
-    }
+    private Button mMake_post;
+    private Button mBtn_media;
+    private TextView mTv_routes;
+    private String mRoute11;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setAnimation();
-        setContentView(R.layout.individual_route_vehicle);
-
-
-        if (Build.VERSION.SDK_INT >= 23)
-        {
-            if (checkPermission())
-            {
-                // Code for above or equal 23 API Oriented Device
-                // Your Permission granted already .Do next code
-            } else {
-                requestPermission(); // Code for permission
-            }
-        }
-        else
-        {
-
-            // Code for Below 23 API Oriented Device
-            // Do next code
-        }
-
+        setContentView(R.layout.individual_vehicle);
+//        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background1));
 
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
+
+        Intent i = getIntent();
+        mName = i.getStringExtra("NAME_KEY");
+        mRoute11 = i.getStringExtra("ROUTE_KEY1");
+        mPlate = i.getStringExtra("PLATE_KEY");
+        mRoute = i.getStringExtra("ROUTE_KEY");
+
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         mUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         mDb = FirebaseDatabase.getInstance().getReference().child("Vehicles");
 
-        Intent i = getIntent();
-        mName = i.getStringExtra("NAME_KEY");
-        mPlate = i.getStringExtra("PLATE_KEY");
-        mRoute = i.getStringExtra("ROUTE_KEY");
-
-        inflateImageSlider();
         inflateViews();
+        inflateImageSlider();
         getIntentData();
-        iconInitialize();
         displayNumberOfLikes();
         displayNumberOfFavourites();
         displayNumberOfDislikes();
         displayRatings();
         iconInitialize();
-        pay();
     }
 
     private void setAnimation() {
@@ -151,78 +124,67 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         explode.setInterpolator(new DecelerateInterpolator());
         getWindow().setExitTransition(explode);
         getWindow().setEnterTransition(explode);
-    }
 
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(IndividualRouteVehicle.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private void requestPermission() {
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(IndividualRouteVehicle.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(IndividualRouteVehicle.this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
-        } else {
-            ActivityCompat.requestPermissions(IndividualRouteVehicle.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.e("value", "Permission Granted, Now you can use local drive .");
-            } else {
-                Log.e("value", "Permission Denied, You cannot use local drive .");
-            }
-        }
-    }
-
-    private void getIntentData() {
-        //retrieving data using intent
-
-        mTv_name.setText(mName);
-        mTv_plate.setText(mPlate);
-        mTv_route.setText(mRoute);
-        getSupportActionBar().setTitle(mName);
     }
 
     private void inflateViews() {
+//      inflate the layout
+        mFabChat = findViewById(R.id.fab_chat);
+        mMake_post = findViewById(R.id.btn_make_post);
         mTv_name = findViewById(R.id.tv_matatu_name);
+        mTv_routes = findViewById(R.id.tv_route2);
         mTv_plate = findViewById(R.id.tv_plate);
         mTv_route = findViewById(R.id.tv_sacco);
         mLike = findViewById(R.id.img_like);
         mFavourite = findViewById(R.id.img_favourite);
-        mDislike = findViewById(R.id.img_dislike);
         mShare = findViewById(R.id.img_share);
+        mDislike = findViewById(R.id.img_dislike);
         mRatingBar = findViewById(R.id.ratingBar);
         mNumOfLikes = findViewById(R.id.tv_likes_no);
         mNumOfFavs = findViewById(R.id.tv_favourites_no);
         mNumOfDislikes = findViewById(R.id.tv_dislikes_no);
         mTv_rating_comments = findViewById(R.id.tv_rating_comments);
-        mBtn_pay = findViewById(R.id.btn_pay);
+        mBtn_media = findViewById(R.id.btn_media);
+
+        mBtn_media.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context,MediaActivity.class);
+
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                intent.putExtra("NAME_KEY", mTv_name.getText().toString());
+                context.startActivity(intent,options.toBundle());
+
+
+            }
+        });
+    }
+
+    private void getIntentData() {
+        //retrieving data sent via intent
+        mTv_name.setText(mName);
+        mTv_routes.setText(mRoute11);
+        mTv_plate.setText(mPlate);
+        mTv_route.setText(mRoute);
 
     }
 
-    private void pay() {
-        mBtn_pay.setOnClickListener(v -> {
-            Intent i = new Intent(IndividualRouteVehicle.this, PayActivity.class);
-            ActivityOptions options =
-                    ActivityOptions.makeSceneTransitionAnimation(this);
-            i.putExtra("NAME_KEY", mTv_name.getText().toString());
-            startActivity(i,options.toBundle());
-        });
+    @Override
+    protected void onResume() {
+        iconInitialize();
+        super.onResume();
+        //check Internet Connection
+        new CheckInternetConnection(this).checkConnection();
     }
 
     private void iconInitialize() {
         checkLikes();
-        mLike.setOnClickListener(v -> onLikeClicked());
-
         checkFavourites();
+        checkDislikes();
+
+        mLike.setOnClickListener(v -> onLikeClicked());
         mFavourite.setOnClickListener(v -> onFavouriteClicked());
         mShare.setOnClickListener(v -> {
             try {
@@ -232,8 +194,27 @@ public class IndividualRouteVehicle extends AppCompatActivity {
             }
         });
 
-        checkDislikes();
         mDislike.setOnClickListener(v -> onDislikeClicked());
+        mFabChat.setOnClickListener(v -> {
+
+            Context context = v.getContext();
+            Intent i = new Intent(context, Chat.class);
+            i.putExtra("NAME_KEY", mTv_name.getText().toString());
+            ActivityOptions options =
+                    ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+            context.startActivity(i,options.toBundle());
+        });
+        mMake_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent i = new Intent(context, Posts.class);
+                i.putExtra("NAME_KEY", mTv_name.getText().toString());
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+                context.startActivity(i,options.toBundle());
+            }
+        });
 
         mRatingBar.setRating(setRatings());
     }
@@ -244,7 +225,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         class myTask extends AsyncTask<Void, Void, Bitmap> {
 
             protected Bitmap doInBackground(Void... params) {
-                Bitmap myBitmap=null;
+                Bitmap myBitmap = null;
                 try {
                     java.net.URL url = new URL(mImage1);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -270,7 +251,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         final String appPackageName = this.getPackageName();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, "Hey, check out this Vehicle on Daygoes !, Download the App at: https://play.google.com/store/apps/details?id=" + appPackageName);
-        String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), returned_bitmap,"title", null);
+        String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), returned_bitmap, "title", null);
         Uri bitmapUri = Uri.parse(bitmapPath);
         intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
         intent.setType("image/*");
@@ -435,13 +416,12 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         likesRef.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
-
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
                     for (DataSnapshot ignored : dataSnapshot.getChildren()) {
-                        long numOfLikes = dataSnapshot.getChildrenCount();
-                        mNumOfLikes.setText(numOfLikes + "");
+                        mNumOfLikes1 = dataSnapshot.getChildrenCount();
+                        mNumOfLikes.setText(mNumOfLikes1 + "");
                     }
                 }
             }
@@ -468,7 +448,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
                 } else {
                     liked.setValue(mUserId);
                     disliked.child(mUserId).removeValue();
-                    mDislike.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
+                    mDislike.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -541,7 +521,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     dataSnapshot.getRef().removeValue();
                     favourited.getRef().removeValue();
-                    mFavourite.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
+                    mFavourite.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
                     Toast.makeText(IndividualRouteVehicle.this, "Removed " + mName + " from your favourites", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -657,7 +637,7 @@ public class IndividualRouteVehicle extends AppCompatActivity {
                     disliked.setValue(mUserId);
                     liked.child(mUserId).removeValue();
                     mDislike.setColorFilter(Color.rgb(255, 0, 0), PorterDuff.Mode.SRC_IN);
-                    mLike.setColorFilter(Color.rgb(221, 221, 221), PorterDuff.Mode.SRC_IN);
+                    mLike.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
                 }
             }
 
@@ -668,5 +648,8 @@ public class IndividualRouteVehicle extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -84,6 +84,8 @@ public class IndividualVehicle extends AppCompatActivity {
     private String mRoute1;
     private Button mMake_post;
     private Button mBtn_media;
+    private TextView mTv_routes;
+    private String mRoute11;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,8 +99,10 @@ public class IndividualVehicle extends AppCompatActivity {
 
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
+        mRoute11 = i.getStringExtra("ROUTE_KEY1");
         mPlate = i.getStringExtra("PLATE_KEY");
         mRoute = i.getStringExtra("ROUTE_KEY");
+
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         mUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
@@ -128,6 +132,7 @@ public class IndividualVehicle extends AppCompatActivity {
         mFabChat = findViewById(R.id.fab_chat);
         mMake_post = findViewById(R.id.btn_make_post);
         mTv_name = findViewById(R.id.tv_matatu_name);
+        mTv_routes = findViewById(R.id.tv_route2);
         mTv_plate = findViewById(R.id.tv_plate);
         mTv_route = findViewById(R.id.tv_sacco);
         mLike = findViewById(R.id.img_like);
@@ -160,9 +165,10 @@ public class IndividualVehicle extends AppCompatActivity {
     private void getIntentData() {
         //retrieving data sent via intent
         mTv_name.setText(mName);
+        mTv_routes.setText(mRoute11);
         mTv_plate.setText(mPlate);
         mTv_route.setText(mRoute);
-//        getSupportActionBar().setTitle(mName);
+
     }
 
     @Override

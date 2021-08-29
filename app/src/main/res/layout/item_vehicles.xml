@@ -89,6 +89,19 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_vehicle_name" />
 
                         <TextView
+                            android:id="@+id/tv_routes3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/almendra"
+                            android:text="Route"
+                            android:textColor="@color/colorPrimaryBlack"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_sacco"
+                            app:layout_constraintStart_toStartOf="@+id/tv_sacco"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_sacco" />
+
+                        <TextView
                             android:id="@+id/tv_capacity"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -99,7 +112,7 @@
                             android:textSize="18sp"
                             app:layout_constraintEnd_toEndOf="@id/tv_sacco"
                             app:layout_constraintStart_toStartOf="@id/tv_sacco"
-                            app:layout_constraintTop_toBottomOf="@id/tv_sacco" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_routes3" />
 
                         <TextView
                             android:id="@+id/tv_no_plate"
@@ -146,7 +159,6 @@
                             android:id="@+id/tv_sacco1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -159,8 +171,6 @@
                             android:id="@+id/tv_capacity1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="3dp"
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -173,7 +183,6 @@
                             android:id="@+id/tv_no_plate1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimaryBlack"
                             android:textSize="14sp"
@@ -217,6 +226,18 @@
                             app:layout_constraintBottom_toBottomOf="@id/ratings"
                             app:layout_constraintStart_toEndOf="@+id/ratings"
                             app:layout_constraintTop_toTopOf="@+id/ratings" />
+
+                        <TextView
+                            android:id="@+id/tv_route31"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryBlack"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_routes3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tv_routes3"
+                            app:layout_constraintStart_toStartOf="@+id/tv_sacco1"
+                            app:layout_constraintTop_toTopOf="@+id/tv_routes3" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>

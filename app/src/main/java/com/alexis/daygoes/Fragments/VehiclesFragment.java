@@ -11,7 +11,6 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexis.daygoes.Adapters.NewVehiclesAdapter;
 import com.alexis.daygoes.Adapters.VehiclesAdapter;
-import com.alexis.daygoes.DrawerLocker;
-import com.alexis.daygoes.MainActivity;
 import com.alexis.daygoes.Models.NewVehiclesModel;
 import com.alexis.daygoes.Models.VehicleModel;
 import com.alexis.daygoes.Network.CheckInternetConnection;
