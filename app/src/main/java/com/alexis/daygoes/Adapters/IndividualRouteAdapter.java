@@ -88,6 +88,7 @@ public class IndividualRouteAdapter extends FirebaseRecyclerAdapter<IndividualRo
                 i.putExtra("NAME_KEY", mTv_name.getText().toString());
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
+                i.putExtra("ROUTE_KEYY", mTv_route.getText().toString());
                 context.startActivity(i,options.toBundle());
             });
             mLocation.setOnClickListener(new View.OnClickListener() {

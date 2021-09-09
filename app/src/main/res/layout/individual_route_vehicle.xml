@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background1"
+        android:background="@drawable/card_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,11 +39,12 @@
 
                         <FrameLayout
                             android:id="@+id/frameLayout7"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@color/cardBgDark"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -62,16 +63,17 @@
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="@+id/tv_plate"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/tv_sacco"
                                     app:layout_constraintStart_toEndOf="@+id/tv_matatu_name"
-                                    app:layout_constraintTop_toTopOf="@+id/tv_plate"
+                                    app:layout_constraintTop_toTopOf="parent"
                                     tools:text="route" />
 
                                 <TextView
                                     android:id="@+id/tv_matatu_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
+                                    android:layout_marginStart="16dp"
                                     android:gravity="center|start"
                                     android:text="@string/vehicle_name"
                                     android:textAllCaps="true"
@@ -83,33 +85,19 @@
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
-                                    android:id="@+id/tv_plate"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/plate"
-                                    android:textAllCaps="true"
-                                    android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintStart_toEndOf="@+id/tv_route2"
-                                    app:layout_constraintTop_toTopOf="@+id/tv_matatu_name" />
-
-                                <TextView
                                     android:id="@+id/tv_sacco"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="16dp"
                                     android:gravity="start"
                                     android:text="@string/capacity"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="@+id/tv_plate"
-                                    app:layout_constraintStart_toEndOf="@+id/tv_plate"
-                                    app:layout_constraintTop_toTopOf="@+id/tv_plate" />
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
 

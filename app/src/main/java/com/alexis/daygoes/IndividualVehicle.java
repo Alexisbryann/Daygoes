@@ -99,7 +99,7 @@ public class IndividualVehicle extends AppCompatActivity {
 
         Intent i = getIntent();
         mName = i.getStringExtra("NAME_KEY");
-        mRoute11 = i.getStringExtra("ROUTE_KEY1");
+        mRoute11 = i.getStringExtra("ROUTE_KEYY");
         mPlate = i.getStringExtra("PLATE_KEY");
         mRoute = i.getStringExtra("ROUTE_KEY");
 
@@ -133,7 +133,6 @@ public class IndividualVehicle extends AppCompatActivity {
         mMake_post = findViewById(R.id.btn_make_post);
         mTv_name = findViewById(R.id.tv_matatu_name);
         mTv_routes = findViewById(R.id.tv_route2);
-        mTv_plate = findViewById(R.id.tv_plate);
         mTv_route = findViewById(R.id.tv_sacco);
         mLike = findViewById(R.id.img_like);
         mFavourite = findViewById(R.id.img_favourite);
@@ -166,7 +165,7 @@ public class IndividualVehicle extends AppCompatActivity {
         //retrieving data sent via intent
         mTv_name.setText(mName);
         mTv_routes.setText(mRoute11);
-        mTv_plate.setText(mPlate);
+//        mTv_plate.setText(mPlate);
         mTv_route.setText(mRoute);
 
     }
