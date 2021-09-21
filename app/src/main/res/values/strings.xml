@@ -137,6 +137,7 @@
         6. SMS confirmation received on phone.</string>
     <string name="title">Title</string>
     <string name="view_images_videos">view images / videos</string>
+    <string name="buffering">buffering ....</string>
 
 
 </resources>
