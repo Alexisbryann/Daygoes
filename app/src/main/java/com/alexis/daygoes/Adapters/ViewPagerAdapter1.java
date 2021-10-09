@@ -22,9 +22,9 @@ public class ViewPagerAdapter1 extends FragmentStatePagerAdapter {
 
         Fragment fragment = null;
         if (position == 0) {
-            fragment = new ImageFragment();
-        }else if (position == 1){
             fragment = new VideosFragment();
+        }else if (position == 1){
+            fragment = new ImageFragment();
         }
         assert fragment != null;
         return fragment;    }
@@ -35,10 +35,11 @@ public class ViewPagerAdapter1 extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title = null;
         if (position==0){
-            title = "Images";
+            title = "Videos";
         }
         else if (position==1) {
-            title = "Videos";
+            title = "Images";
+
         }
 
         return title;

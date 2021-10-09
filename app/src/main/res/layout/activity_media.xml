@@ -17,7 +17,8 @@
         app:tabIndicatorColor="@color/colorAccentRed"
         app:tabRippleColor="@color/colorAccentAmber"
         app:tabSelectedTextColor="@color/colorAccentGreen"
-        app:tabTextColor="@color/colorPrimaryBlack">
+        app:tabTextColor="@color/colorPrimaryBlack"
+        tools:ignore="SpeakableTextPresentCheck">
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -29,6 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout2"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

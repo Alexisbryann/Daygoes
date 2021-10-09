@@ -33,14 +33,10 @@ public class VideosFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_videos, container, false);
 
         videoView = view.findViewById(R.id.fragment_webvideo_videoView);
-        playButton = view.findViewById(R.id.fragment_webvideo_play);
 
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playVideoFromWeb();
-            }
-        });
+
+
+        playVideoFromWeb();
 
         return view;
     }
@@ -69,6 +65,18 @@ public class VideosFragment extends Fragment {
         // most of the app teardown should take place.
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             videoView.pause();
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser && getView() != null);
+        if(videoView!=null) {
+            if (isVisibleToUser) {
+                videoView.start();
+            } else {
+                videoView.pause();
+            }
         }
     }
 }

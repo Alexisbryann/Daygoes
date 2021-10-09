@@ -78,9 +78,7 @@ public class Posts extends AppCompatActivity {
         mMedia = findViewById(R.id.img_upload_media_posts);
         mEdtMessage = findViewById(R.id.edt_message_posts);
         mImgLike = findViewById(R.id.img_like_post1);
-        mImgComment = findViewById(R.id.img_comment_post);
         mLikesNo = findViewById(R.id.tv_likes_post);
-        mCommentsNo = findViewById(R.id.tv_comment_post);
 
 //      receive intent data passed.
         Intent i = getIntent();
@@ -104,18 +102,6 @@ public class Posts extends AppCompatActivity {
         });
         mSend.setOnClickListener(v -> mSend.setOnClickListener(view -> post()));
 
-//        mImgLike.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onLikeClicked();
-//            }
-//        });
-//        mImgComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
     }
 
@@ -165,38 +151,8 @@ public class Posts extends AppCompatActivity {
         recyclerView.setAdapter(mPostsAdapter);
 
         DisplayLikesNo();
-        DisplayCommentsNo();
-    }
-    public void onLikeClicked() {
-
-        DatabaseReference liked = FirebaseDatabase.getInstance().getReference().child("Posts Likes")
-                .child(mName).child(mUserId);
-        DatabaseReference disliked = FirebaseDatabase.getInstance().getReference().child("Posts Dislikes")
-                .child(mName);
-
-        liked.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Toast.makeText(Posts.this, "Already liked " + mName, Toast.LENGTH_LONG).show();
-                } else {
-                    liked.setValue(mUserId);
-                    disliked.child(mUserId).removeValue();
-                    mImgLike.setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
-    private void DisplayCommentsNo() {
-
-    }
 
     private void DisplayLikesNo() {
     }
@@ -237,11 +193,7 @@ public class Posts extends AppCompatActivity {
         String messageSender = mUsername1;
         mCurrentUser1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
-        if (msg.isEmpty()) {
-            Toast.makeText(Posts.this, "Message can not be blank", Toast.LENGTH_LONG).show();
-        }
-        if (title.isEmpty()) {
+        if (title.isEmpty() || msg.isEmpty()) {
             Toast.makeText(Posts.this, "Title or message can not be blank", Toast.LENGTH_LONG).show();
         }
         else {

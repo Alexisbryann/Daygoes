@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Matatu/app/src/main/res/layout/activity_posts.xml" value="0.14907407407407408" />
+        <entry key="..\:/Matatu/app/src/main/res/layout/activity_the_scene.xml" value="0.14907407407407408" />
         <entry key="..\:/Matatu/app/src/main/res/layout/activity_videos.xml" value="0.14907407407407408" />
+        <entry key="..\:/Matatu/app/src/main/res/layout/individual_vehicle.xml" value="0.14907407407407408" />
+        <entry key="..\:/Matatu/app/src/main/res/layout/item_posts.xml" value="0.14907407407407408" />
+        <entry key="..\:/Matatu/app/src/main/res/layout/item_vehicles.xml" value="0.14907407407407408" />
         <entry key="..\:/Matatu/app/src/main/res/layout/vehicles_routes.xml" value="0.14907407407407408" />
       </map>
     </option>
