@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Update_at_05_07_2021_22_07_[Default_Changelist]" date="1625512051925" recycled="false" toDelete="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_07_2021_22_07_[Default_Changelist]/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 05/07/2021 22:07 [Default Changelist]" />
-  <binary>
-    <option name="BEFORE_PATH" />
-    <option name="AFTER_PATH" value="app/src/main/res/drawable/menu.png" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_07_2021_22_07_[Default_Changelist]/menu.png" />
-  </binary>
-</changelist>
