@@ -5,7 +5,7 @@
         <shape>
             <!--            <stroke android:color="@color/cardBg"/>-->
             <solid
-                android:color="@color/colorPrimaryWhite"/>
+                android:color="@color/cardBg"/>
             <corners
                 android:topLeftRadius="50dp"
                 android:topRightRadius="50dp"

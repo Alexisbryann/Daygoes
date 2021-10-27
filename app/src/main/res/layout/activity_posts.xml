@@ -13,7 +13,6 @@
         android:layout_height="50dp"
         android:background="@drawable/background1"
         android:gravity="center"
-        android:text="Vehicle name"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryBlack"
         android:textStyle="bold"
@@ -50,43 +49,20 @@
                 android:id="@+id/img_upload_media_posts"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/upload_image"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_posts"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_title1"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_posts"
                 app:srcCompat="@android:drawable/ic_menu_gallery"
-                app:tint="@color/colorAccentGreen" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tv_title1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:boxCornerRadiusBottomEnd="@dimen/fab_margin"
-                app:boxCornerRadiusBottomStart="@dimen/fab_margin"
-                app:boxCornerRadiusTopEnd="@dimen/fab_margin"
-                app:boxCornerRadiusTopStart="@dimen/fab_margin"
-                app:boxStrokeColor="@color/colorAccentGreen"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:hintTextColor="@color/colorAccentGreen"
-                app:layout_constraintBottom_toTopOf="@+id/edit_text_posts"
-                app:layout_constraintEnd_toEndOf="@+id/edit_text_posts"
-                app:layout_constraintStart_toStartOf="@+id/edit_text_posts"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_title_posts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/cardBg"
-                    android:hint="Title of post" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:tint="@color/colorPrimaryBlack" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_text_posts"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:boxCornerRadiusBottomEnd="@dimen/fab_margin"
                 app:boxCornerRadiusBottomStart="@dimen/fab_margin"
@@ -100,7 +76,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/fab_send_posts"
                 app:layout_constraintStart_toEndOf="@+id/img_upload_media_posts"
-                app:layout_constraintTop_toBottomOf="@id/tv_title1"
+                app:layout_constraintTop_toTopOf="parent"
                 app:startIconTint="@color/colorAccentAmber">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -108,19 +84,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/cardBg"
-                    android:hint="Make post" />
+                    android:hint="@string/make_post1" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
                 android:id="@+id/fab_send_posts"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
                 android:clickable="true"
-                android:tint="@color/colorAccentGreen"
+                android:contentDescription="@string/send_button"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_posts"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_title1"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_posts"
                 app:srcCompat="@android:drawable/ic_menu_send" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,6 +43,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         String title = null;
         if (position==0){
             title = "Vehicles";
+
         }
         else if (position==1) {
             title = "Routes";

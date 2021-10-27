@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.alexis.daygoes.Fragments.GridFragment;
 import com.alexis.daygoes.Fragments.ImageFragment;
 import com.alexis.daygoes.Fragments.VideosFragment;
 

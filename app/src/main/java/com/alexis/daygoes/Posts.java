@@ -43,7 +43,6 @@ import java.util.concurrent.TimeUnit;
 public class Posts extends AppCompatActivity {
 
     private ImageButton mSend;
-    private EditText mTitle;
     private EditText mEdtMessage;
     private PostsAdapter mPostsAdapter;
     private String mUsername1;
@@ -71,14 +70,11 @@ public class Posts extends AppCompatActivity {
 //      check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
-        mTitle = findViewById(R.id.edt_title_posts);
         mUsername = findViewById(R.id.tv_username_posts);
         mVehicleName = findViewById(R.id.tv_vehicle_name_posts);
         mSend = findViewById(R.id.fab_send_posts);
         mMedia = findViewById(R.id.img_upload_media_posts);
         mEdtMessage = findViewById(R.id.edt_message_posts);
-        mImgLike = findViewById(R.id.img_like_post1);
-        mLikesNo = findViewById(R.id.tv_likes_post);
 
 //      receive intent data passed.
         Intent i = getIntent();
@@ -188,22 +184,22 @@ public class Posts extends AppCompatActivity {
                 .getReference()
                 .child("User Posts").child(mUserId);
 
-        String title = mTitle.getText().toString().trim();
         String msg = mEdtMessage.getText().toString().trim();
         String messageSender = mUsername1;
         mCurrentUser1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String title = mCurrentUser1 + msg;
 
-        if (title.isEmpty() || msg.isEmpty()) {
-            Toast.makeText(Posts.this, "Title or message can not be blank", Toast.LENGTH_LONG).show();
+        if (msg.isEmpty()) {
+            Toast.makeText(Posts.this, "Message can not be blank", Toast.LENGTH_LONG).show();
         }
         else {
             // Read the input field and push a new instance of PostsModel to the Firebase database
-            Posts.child(title).setValue(new PostsModel(msg, messageSender,null,null, ServerValue.TIMESTAMP,title)).addOnCompleteListener(task -> {
+            Posts.child(title).setValue(new PostsModel(msg, messageSender,null,null, ServerValue.TIMESTAMP)).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     editor.putString("GroupName", mGroupName);
                     editor.apply();
                     PostGroups.child(mGroupName).setValue(new SceneModel(mName));
-                    userPosts.child(title).setValue(new PostsModel(msg, messageSender,null,null,ServerValue.TIMESTAMP,title));
+                    userPosts.child(title).setValue(new PostsModel(msg, messageSender,null,null,ServerValue.TIMESTAMP));
                 }
                 else{
                     Toast.makeText(Posts.this, "Failed", Toast.LENGTH_LONG).show();
@@ -212,7 +208,6 @@ public class Posts extends AppCompatActivity {
             });
         }
         mEdtMessage.setText("");
-        mTitle.setText("");
     }
 
     @Override

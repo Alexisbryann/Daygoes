@@ -63,7 +63,6 @@ public class PostImage extends AppCompatActivity {
         // initialize views
         Button btnSelect = findViewById(R.id.btnChoose);
         Button btnUpload = findViewById(R.id.btnUpload);
-        mImgTitle = findViewById(R.id.edt_img_title);
         mImageView = findViewById(R.id.imgView);
         mEdtMessage = findViewById(R.id.edt_img_comment);
 
@@ -145,6 +144,7 @@ public class PostImage extends AppCompatActivity {
             mCurrentUser = mAuth.getCurrentUser();
             assert mCurrentUser != null;
             mUserId = mCurrentUser.getUid();
+
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
                     = new ProgressDialog(this);
@@ -166,14 +166,10 @@ public class PostImage extends AppCompatActivity {
                                 ref.getDownloadUrl().addOnSuccessListener(uri -> {
                                     mDownloadUrl = uri;
 
-                                    String title = mImgTitle.getText().toString().trim();
                                     String msg = mEdtMessage.getText().toString().trim();
                                     String messageSender = mUsername1;
                                     String url = mDownloadUrl.toString();
 
-                                    if (msg.isEmpty() || title.isEmpty()) {
-                                        Toast.makeText(PostImage.this, "Title or message can not be blank", Toast.LENGTH_LONG).show();
-                                    } else {
                                         DatabaseReference PostGroups = FirebaseDatabase.getInstance()
                                                 .getReference()
                                                 .child("ChatGroups");
@@ -185,15 +181,15 @@ public class PostImage extends AppCompatActivity {
                                                 .getReference()
                                                 .child("Posts").child(mGroupName)
                                                 .push()
-                                                .setValue(new PostsModel2(msg, messageSender, url, title));
+                                                .setValue(new PostsModel2(msg, messageSender, url));
                                         PostGroups.child(mGroupName).setValue(new SceneModel(mName));
 //                                        userPosts.push().setValue(new PostsModel(msg, messageSender, url, null, ServerValue.TIMESTAMP));
 
                                         // Clear the input
-                                    }
-                                    mEdtMessage.setText("");
-                                    mImgTitle.setText("");
+
                                     finish();
+                                    mEdtMessage.setText("");
+
 
                                 });
                                 // Image uploaded successfully Dismiss dialog

@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alexis.daygoes.Models.FavouriteVehicleModel;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -287,7 +288,9 @@ public class IndividualVehicle extends AppCompatActivity {
                         DefaultSliderView sliderView = new DefaultSliderView(IndividualVehicle.this);
                         sliderView.image(s);
                         mSliderShow.addSlider(sliderView);
+                        sliderView.setScaleType(BaseSliderView.ScaleType.Fit);
                     }
+                    mSliderShow.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                     mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
 
                 }

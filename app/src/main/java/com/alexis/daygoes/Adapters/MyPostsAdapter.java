@@ -54,7 +54,6 @@ public class MyPostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, MyPosts
         assert mCurrentUser != null;
         mUser = mCurrentUser.getUid();
 
-        holder.mTitle.setText(model.getTitle());
         holder.mTimestamp.setText(model.getMessageTime());
         holder.mMessage.setText(model.getMessageText());
         Picasso.with(mContext).load(model.getUrl()).resize(300, 300).centerCrop().into(holder.mImg);

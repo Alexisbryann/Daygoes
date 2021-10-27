@@ -1,6 +1,7 @@
 package com.alexis.daygoes.Fragments;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,11 @@ import com.alexis.daygoes.IndividualVehicle;
 import com.alexis.daygoes.Network.CheckInternetConnection;
 import com.alexis.daygoes.R;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.material.drawable.DrawableUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,10 +97,13 @@ private void inflateImageSlider() {
                     DefaultSliderView sliderView = new DefaultSliderView(getContext());
                     sliderView.image(s);
                     mSliderShow.addSlider(sliderView);
+                    sliderView.setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+
+
                 }
-                mSliderShow.setPresetTransformer(SliderLayout.Transformer.Accordion);
+                mSliderShow.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                 mSliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                mSliderShow.setCustomAnimation(new DescriptionAnimation());
+                mSliderShow.stopAutoCycle();
 
             }
         }

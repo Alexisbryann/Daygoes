@@ -41,7 +41,6 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
         holder.mUsername.setText(model.getMessageSender());
         holder.mTimestamp.setText(model.getMessageTime());
         holder.mMessage.setText(model.getMessageText());
-        holder.mTitle.setText(model.getTitle());
         Picasso.with(mContext).load(model.getUrl()).resize(300, 300).centerCrop().into(holder.mImg);
     }
 
@@ -58,8 +57,6 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
         private final TextView mTimestamp;
         private final TextView mMessage;
         private final ImageView mImg;
-        private final TextView mTitle;
-        private final ImageView mLike;
 
         private String mUserId;
         private FirebaseUser mCurrentUser;
@@ -72,12 +69,7 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
             mTimestamp = itemView.findViewById(R.id.tv_time_stamp_posts);
             mMessage = itemView.findViewById(R.id.tv_message_posts);
             mImg = itemView.findViewById(R.id.img_pic);
-            mTitle = itemView.findViewById(R.id.tv_title);
-            mLike = itemView.findViewById(R.id.img_like_post1);
 
-            mLike.setOnClickListener(v -> {
-                onLikeClicked();
-            });
 
         }
 
@@ -90,25 +82,6 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel1, PostsAdap
             DatabaseReference liked = FirebaseDatabase.getInstance().getReference().child("Posts Likes")
                     .child(name).child(mUserId);
 
-            liked.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        liked.removeValue();
-
-                    } else {
-                        liked.setValue(mUserId);
-                        mLike.setColorFilter(Color.rgb(0, 100, 0), PorterDuff.Mode.SRC_IN);
-//                        mLike.setSelected(true);
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
         }
     }
 }

@@ -13,15 +13,14 @@ public class PostsModel {
     private String messageTime;
     private String id;
     private Map<String, String> timestamp;
-    private String title;
 
-    public PostsModel(String messageText, String messageSender, String url, String id, Map<String, String> timestamp, String title) {
+
+    public PostsModel(String messageText, String messageSender, String url, String id, Map<String, String> timestamp) {
         this.messageText = messageText;
         this.messageSender = messageSender;
         this.url = url;
         this.id = id;
         this.timestamp = timestamp;
-        this.title = title;
 
         // Initialize to current time
         Date date = new Date();
@@ -82,11 +81,4 @@ public class PostsModel {
         this.timestamp = timestamp;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }
