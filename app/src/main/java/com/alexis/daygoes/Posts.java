@@ -42,184 +42,176 @@ import java.util.concurrent.TimeUnit;
 
 public class Posts extends AppCompatActivity {
 
-    private ImageButton mSend;
-    private EditText mEdtMessage;
-    private PostsAdapter mPostsAdapter;
-    private String mUsername1;
-    private String mName;
-    private TextView mVehicleName;
-    private String mGroupName;
-    private FirebaseUser mCurrentUser;
-    private FirebaseAuth mAuth;
-    private String mUserId;
-    private String mCurrentUser1;
-    private ImageView mImgLike;
-    private ImageView mImgComment;
-    private TextView mLikesNo;
-    private TextView mCommentsNo;
-    private ImageView mMedia;
-    private TextView mUsername;
+private ImageButton mSend;
+private EditText mEdtMessage;
+private PostsAdapter mPostsAdapter;
+private String mUsername1;
+private String mName;
+private TextView mVehicleName;
+private String mGroupName;
+private FirebaseUser mCurrentUser;
+private FirebaseAuth mAuth;
+private String mUserId;
+private String mCurrentUser1;
+private ImageView mMedia;
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setAnimation();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posts);
+@SuppressLint("SetTextI18n")
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+	setAnimation();
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_posts);
 
 //      check Internet Connection
-        new CheckInternetConnection(this).checkConnection();
+	new CheckInternetConnection(this).checkConnection();
 
-        mUsername = findViewById(R.id.tv_username_posts);
-        mVehicleName = findViewById(R.id.tv_vehicle_name_posts);
-        mSend = findViewById(R.id.fab_send_posts);
-        mMedia = findViewById(R.id.img_upload_media_posts);
-        mEdtMessage = findViewById(R.id.edt_message_posts);
+	mVehicleName = findViewById(R.id.tv_vehicle_name_posts);
+	mSend = findViewById(R.id.fab_send_posts);
+	mMedia = findViewById(R.id.img_upload_media_posts);
+	mEdtMessage = findViewById(R.id.edt_message_posts);
 
 //      receive intent data passed.
-        Intent i = getIntent();
-        mName = i.getStringExtra("NAME_KEY");
-        mVehicleName.setText(mName + " posts");
-        mGroupName = mName + " posts";
+	Intent i = getIntent();
+	mName = i.getStringExtra("NAME_KEY");
+	mVehicleName.setText(mName + " posts");
+	mGroupName = mName + " posts";
 
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-        SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
-        mUsername1 = prefs.getString("username", "");
+	mAuth = FirebaseAuth.getInstance();
+	mCurrentUser = mAuth.getCurrentUser();
+	SharedPreferences prefs = this.getSharedPreferences("MY_PREF", MODE_PRIVATE);
+	mUsername1 = prefs.getString("username", "");
 
-        renderui();
+	renderui();
 
-        mMedia.setOnClickListener(v -> {
-            Context context = v.getContext();
-            Intent intent = new Intent(context, PostImage.class);
-            intent.putExtra("NAME_KEY", mName);
-            context.startActivity(intent);
+	mMedia.setOnClickListener(v -> {
+		Context context = v.getContext();
+		Intent intent = new Intent(context, PostImage.class);
+		intent.putExtra("NAME_KEY", mName);
+		context.startActivity(intent);
 
-        });
-        mSend.setOnClickListener(v -> mSend.setOnClickListener(view -> post()));
+	});
+	mSend.setOnClickListener(v -> mSend.setOnClickListener(view -> post()));
 
 
-    }
+}
 
-    private void deleteFunction() {
+private void deleteFunction() {
 
-        DatabaseReference delete = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Posts").child(mGroupName);
+	DatabaseReference delete = FirebaseDatabase.getInstance()
+			                           .getReference()
+			                           .child("Posts").child(mGroupName);
 
-        long cutoff = new Date().getTime() - TimeUnit.MILLISECONDS.convert(10,TimeUnit.MINUTES);
-        Query oldBug = delete.orderByChild("timestamp").startAt(cutoff);
-        oldBug.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()) {
-                    itemSnapshot.getRef().removeValue();
-                }
-            }
+	long cutoff = new Date().getTime() - TimeUnit.MILLISECONDS.convert(10, TimeUnit.MINUTES);
+	Query oldBug = delete.orderByChild("timestamp").startAt(cutoff);
+	oldBug.addListenerForSingleValueEvent(new ValueEventListener() {
+		@Override
+		public void onDataChange(@NonNull DataSnapshot snapshot) {
+			for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+				itemSnapshot.getRef().removeValue();
+			}
+		}
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
+		@Override
+		public void onCancelled(@NonNull DatabaseError databaseError) {
+		}
+	});
+}
 
-    private void renderui() {
-        //      Initialize recyclerview
-        RecyclerView recyclerView = findViewById(R.id.rv_posts);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+private void renderui() {
+	//      Initialize recyclerview
+	RecyclerView recyclerView = findViewById(R.id.rv_posts);
+	LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+	recyclerView.setLayoutManager(linearLayoutManager);
 
 //      Initialize DB
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-        String user = mCurrentUser.getUid();
-        assert mName != null;
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Posts").child(mGroupName);
+	mAuth = FirebaseAuth.getInstance();
+	mCurrentUser = mAuth.getCurrentUser();
+	String user = mCurrentUser.getUid();
+	assert mName != null;
+	DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Posts").child(mGroupName);
 
 //      query db
-        FirebaseRecyclerOptions<PostsModel1> options
-                = new FirebaseRecyclerOptions.Builder<PostsModel1>()
-                .setQuery(db, PostsModel1.class)
-                .build();
+	FirebaseRecyclerOptions<PostsModel1> options
+			= new FirebaseRecyclerOptions.Builder<PostsModel1>()
+					  .setQuery(db, PostsModel1.class)
+					  .build();
 
 //      Initialize and set adapter
-        mPostsAdapter = new PostsAdapter(options, Posts.this, this);
-        recyclerView.setAdapter(mPostsAdapter);
+	mPostsAdapter = new PostsAdapter(options, Posts.this, this);
+	recyclerView.setAdapter(mPostsAdapter);
 
-        DisplayLikesNo();
-    }
-
-
-    private void DisplayLikesNo() {
-    }
-
-    private void setAnimation() {
-        Explode explode = new Explode();
-        explode.setDuration(1000);
-        explode.setInterpolator(new DecelerateInterpolator());
-        getWindow().setExitTransition(explode);
-        getWindow().setEnterTransition(explode);
-    }
-
-    private void post() {
-
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-        mUserId = mCurrentUser.getUid();
-
-        SharedPreferences sharedPreferences = this.getSharedPreferences("MY_PREF2", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("uid", mUserId);
-        editor.putString("VehicleName", mName);
-        editor.apply();
+	DisplayLikesNo();
+}
 
 
-        DatabaseReference Posts = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Posts").child(mGroupName);
-        DatabaseReference PostGroups = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("ChatGroups");
-        DatabaseReference userPosts = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("User Posts").child(mUserId);
+private void DisplayLikesNo() {
+}
 
-        String msg = mEdtMessage.getText().toString().trim();
-        String messageSender = mUsername1;
-        mCurrentUser1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String title = mCurrentUser1 + msg;
+private void setAnimation() {
+	Explode explode = new Explode();
+	explode.setDuration(1000);
+	explode.setInterpolator(new DecelerateInterpolator());
+	getWindow().setExitTransition(explode);
+	getWindow().setEnterTransition(explode);
+}
 
-        if (msg.isEmpty()) {
-            Toast.makeText(Posts.this, "Message can not be blank", Toast.LENGTH_LONG).show();
-        }
-        else {
-            // Read the input field and push a new instance of PostsModel to the Firebase database
-            Posts.child(title).setValue(new PostsModel(msg, messageSender,null,null, ServerValue.TIMESTAMP)).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    editor.putString("GroupName", mGroupName);
-                    editor.apply();
-                    PostGroups.child(mGroupName).setValue(new SceneModel(mName));
-                    userPosts.child(title).setValue(new PostsModel(msg, messageSender,null,null,ServerValue.TIMESTAMP));
-                }
-                else{
-                    Toast.makeText(Posts.this, "Failed", Toast.LENGTH_LONG).show();
+private void post() {
 
-                }
-            });
-        }
-        mEdtMessage.setText("");
-    }
+	mAuth = FirebaseAuth.getInstance();
+	mCurrentUser = mAuth.getCurrentUser();
+	mUserId = mCurrentUser.getUid();
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mPostsAdapter.startListening();
-    }
+	SharedPreferences sharedPreferences = this.getSharedPreferences("MY_PREF2", MODE_PRIVATE);
+	SharedPreferences.Editor editor = sharedPreferences.edit();
+	editor.putString("uid", mUserId);
+	editor.putString("VehicleName", mName);
+	editor.apply();
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mPostsAdapter.stopListening();
 
-    }
+	DatabaseReference Posts = FirebaseDatabase.getInstance()
+			                          .getReference()
+			                          .child("Posts").child(mGroupName);
+	DatabaseReference PostGroups = FirebaseDatabase.getInstance()
+			                               .getReference()
+			                               .child("ChatGroups");
+	DatabaseReference userPosts = FirebaseDatabase.getInstance()
+			                              .getReference()
+			                              .child("User Posts").child(mUserId);
+
+	String msg = mEdtMessage.getText().toString().trim();
+	String messageSender = mUsername1;
+	mCurrentUser1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
+	String title = mCurrentUser1 + msg;
+
+	if (msg.isEmpty()) {
+		Toast.makeText(Posts.this, "Message can not be blank", Toast.LENGTH_LONG).show();
+	} else {
+		// Read the input field and push a new instance of PostsModel to the Firebase database
+		Posts.child(title).setValue(new PostsModel(msg, messageSender, null, null, ServerValue.TIMESTAMP)).addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				editor.putString("GroupName", mGroupName);
+				editor.apply();
+				PostGroups.child(mGroupName).setValue(new SceneModel(mName));
+				userPosts.child(title).setValue(new PostsModel(msg, messageSender, null, null, ServerValue.TIMESTAMP));
+			} else {
+				Toast.makeText(Posts.this, "Failed", Toast.LENGTH_LONG).show();
+
+			}
+		});
+	}
+	mEdtMessage.setText("");
+}
+
+@Override
+public void onStart() {
+	super.onStart();
+	mPostsAdapter.startListening();
+}
+
+@Override
+public void onStop() {
+	super.onStop();
+	mPostsAdapter.stopListening();
+
+}
 }

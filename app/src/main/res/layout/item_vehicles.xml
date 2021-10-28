@@ -21,7 +21,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -210,14 +209,14 @@
                         <RatingBar
                             android:id="@+id/ratings"
                             style="@android:style/Widget.Holo.Light.RatingBar.Small"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:numStars="5"
                             android:progressBackgroundTint="@color/colorPrimaryWhite"
                             android:progressTint="@color/colorAccentAmber"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_ratings"
                             app:layout_constraintStart_toEndOf="@+id/tv_ratings"
-                            app:layout_constraintStart_toStartOf="@+id/tv_no_plate1"
                             app:layout_constraintTop_toTopOf="@+id/tv_ratings" />
 
                         <View

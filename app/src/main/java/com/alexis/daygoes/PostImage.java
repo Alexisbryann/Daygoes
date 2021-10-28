@@ -10,30 +10,25 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.alexis.daygoes.Models.PostsModel;
 import com.alexis.daygoes.Models.PostsModel2;
 import com.alexis.daygoes.Models.SceneModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.UUID;
 
 public class PostImage extends AppCompatActivity {
 
     private String mName;
-    private Uri imageuri;
     private EditText mEdtMessage;
     private String mUsername1;
     private String mGroupName;
@@ -52,8 +47,6 @@ public class PostImage extends AppCompatActivity {
 
     private FirebaseUser mCurrentUser;
     private FirebaseAuth mAuth;
-    private String mUserId;
-    private TextView mImgTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +91,7 @@ public class PostImage extends AppCompatActivity {
                         intent,
                         "Select Image from here..."),
                 PICK_IMAGE_REQUEST);
+
     }
 
     // Override onActivityResult method
@@ -120,7 +114,6 @@ public class PostImage extends AppCompatActivity {
             // Get the Uri of data
             filePath = data.getData();
             try {
-
                 // Setting image on image view using Bitmap
                 Bitmap bitmap = MediaStore
                         .Images
@@ -129,6 +122,7 @@ public class PostImage extends AppCompatActivity {
                                 getContentResolver(),
                                 filePath);
                 mImageView.setImageBitmap(bitmap);
+
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
@@ -143,7 +137,6 @@ public class PostImage extends AppCompatActivity {
             mAuth = FirebaseAuth.getInstance();
             mCurrentUser = mAuth.getCurrentUser();
             assert mCurrentUser != null;
-            mUserId = mCurrentUser.getUid();
 
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
