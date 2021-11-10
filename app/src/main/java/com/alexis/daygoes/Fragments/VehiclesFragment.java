@@ -202,7 +202,7 @@ public class VehiclesFragment extends Fragment {
             mShimmerFrameLayout.setVisibility(View.GONE);
             mShimmerFrameLayout.stopShimmer();
             mRecyclerView.setVisibility(View.VISIBLE);
-        }, 4000);
+        }, 3000);
 
 //      Initialize recyclerview
         mRecyclerView = mView.findViewById(R.id.rv_matatu_list);
@@ -254,6 +254,11 @@ public class VehiclesFragment extends Fragment {
         super.onStart();
         mMatatuAdapter.startListening();
     }
+@Override
+public void onResume() {
+    super.onResume();
+    initialRecycler();
+}
 
     // Function to tell the app to stop getting data from database on stopping of the activity
     @Override

@@ -8,9 +8,10 @@
     tools:ignore="MissingDefaultResource">
 
     <FrameLayout
+        android:id="@+id/frameLayout12"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background1"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/background1"
                     android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +41,7 @@
 
                         <FrameLayout
                             android:id="@+id/frameLayout7"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
@@ -53,24 +55,6 @@
                                 android:layout_height="match_parent">
 
                                 <TextView
-                                    android:id="@+id/tv_route2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:gravity="center|start"
-                                    android:text="nini hii"
-                                    android:textAllCaps="true"
-                                    android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="@+id/tv_matatu_name"
-                                    app:layout_constraintEnd_toStartOf="@+id/tv_sacco"
-                                    app:layout_constraintStart_toEndOf="@+id/tv_matatu_name"
-                                    app:layout_constraintTop_toTopOf="@+id/tv_matatu_name"
-                                    tools:text="route" />
-
-                                <TextView
                                     android:id="@+id/tv_matatu_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -78,27 +62,13 @@
                                     android:gravity="center|start"
                                     android:text="@string/vehicle_name"
                                     android:textAllCaps="true"
-                                    android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="12sp"
+                                    android:textColor="@color/colorAccentGreen"
+                                    android:textSize="14sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
-                                <TextView
-                                    android:id="@+id/tv_sacco"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="16dp"
-                                    android:gravity="start"
-                                    android:text="@string/capacity"
-                                    android:textAllCaps="true"
-                                    android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="@+id/tv_route2"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/tv_route2" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
 
@@ -118,6 +88,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
 
+                            <!-- Circular progress indicator -->
+                            <com.google.android.material.progressindicator.CircularProgressIndicator
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
                             <com.daimajia.slider.library.SliderLayout
                                 android:id="@+id/slider"
                                 android:layout_width="match_parent"
@@ -133,7 +109,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -145,9 +120,9 @@
 
                                 <TextView
                                     android:id="@+id/textView9"
-                                    android:layout_width="80dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
+                                    android:layout_marginStart="8dp"
                                     android:gravity="center"
                                     android:text="@string/like"
                                     android:textAllCaps="false"
@@ -159,9 +134,9 @@
 
                                 <TextView
                                     android:id="@+id/textView12"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
+                                    android:layout_marginStart="32dp"
                                     android:gravity="center"
                                     android:text="@string/favourite"
                                     android:textAllCaps="false"
@@ -175,103 +150,77 @@
                                     android:id="@+id/textView14"
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginEnd="8dp"
                                     android:gravity="center"
                                     android:text="@string/share"
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorPrimaryBlack"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/textView12"
                                     app:layout_constraintTop_toTopOf="parent" />
 
-                                <ImageView
+                                <com.varunest.sparkbutton.SparkButton
                                     android:id="@+id/img_like"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="@dimen/touch_icon1"
+                                    android:layout_height="@dimen/touch_icon1"
                                     android:contentDescription="@string/thumbs_up_icon"
                                     app:layout_constraintEnd_toEndOf="@+id/textView9"
                                     app:layout_constraintStart_toStartOf="@+id/textView9"
                                     app:layout_constraintTop_toBottomOf="@+id/textView9"
-                                    app:srcCompat="@drawable/thumb_up"
-                                    app:tint="@color/colorPrimaryWhite" />
+                                    app:sparkbutton_activeImage="@drawable/like_active"
+                                    app:sparkbutton_inActiveImage="@drawable/like_inactive"
+                                    app:sparkbutton_primaryColor="@color/colorAccentGreen"
+                                    app:sparkbutton_secondaryColor="@color/colorPrimaryBlue" />
 
-                                <ImageView
+                                <com.varunest.sparkbutton.SparkButton
                                     android:id="@+id/img_favourite"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="@dimen/touch_icon1"
+                                    android:layout_height="@dimen/touch_icon1"
                                     android:contentDescription="@string/favourite_icon"
                                     app:layout_constraintEnd_toEndOf="@+id/textView12"
                                     app:layout_constraintStart_toEndOf="@+id/img_like"
                                     app:layout_constraintStart_toStartOf="@+id/textView12"
                                     app:layout_constraintTop_toBottomOf="@+id/textView12"
-                                    app:srcCompat="@drawable/hearts"
-                                    app:tint="@color/colorPrimaryWhite" />
+                                    app:sparkbutton_activeImage="@drawable/heart_active"
+                                    app:sparkbutton_inActiveImage="@drawable/heart_inactive"
+                                    app:sparkbutton_primaryColor="@color/heart_primary_color"
+                                    app:sparkbutton_secondaryColor="@color/colorAccentAmber" />
 
                                 <ImageView
                                     android:id="@+id/img_share"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="@dimen/touch_icon"
+                                    android:layout_height="0dp"
                                     android:contentDescription="@string/share_icon"
+                                    android:foregroundGravity="center"
+                                    app:layout_constraintBottom_toBottomOf="@+id/img_favourite"
                                     app:layout_constraintEnd_toEndOf="@+id/textView14"
                                     app:layout_constraintStart_toStartOf="@+id/textView14"
-                                    app:layout_constraintTop_toBottomOf="@+id/textView14"
-                                    app:srcCompat="@drawable/share" />
+                                    app:layout_constraintTop_toTopOf="@+id/img_favourite"
+                                    app:srcCompat="@drawable/share"
+                                    app:tint="@color/colorAccentGreen" />
 
                                 <TextView
                                     android:id="@+id/tv_likes_no"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
                                     android:gravity="center"
+                                    android:textColor="@color/colorPrimaryBlue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
                                     app:layout_constraintEnd_toEndOf="@+id/textView9"
-                                    app:layout_constraintStart_toEndOf="@+id/img_like"
-                                    app:layout_constraintStart_toStartOf="@+id/textView9"
-                                    app:layout_constraintTop_toBottomOf="@+id/img_like" />
+                                    app:layout_constraintTop_toTopOf="@+id/textView9" />
 
                                 <TextView
                                     android:id="@+id/tv_favourites_no"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
                                     android:gravity="center"
+                                    android:textColor="@color/colorAccentRed"
+                                    app:layout_constraintBottom_toBottomOf="@id/textView12"
                                     app:layout_constraintEnd_toEndOf="@+id/textView12"
-                                    app:layout_constraintStart_toEndOf="@+id/img_favourite"
-                                    app:layout_constraintStart_toStartOf="@+id/textView12"
-                                    app:layout_constraintTop_toBottomOf="@+id/img_favourite" />
-
-                                <TextView
-                                    android:id="@+id/textView10"
-                                    android:layout_width="80dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_marginEnd="4dp"
-                                    android:gravity="center"
-                                    android:text="@string/dislike"
-                                    android:textColor="@color/colorPrimaryBlack"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/textView14"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageView
-                                    android:id="@+id/img_dislike"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:contentDescription="@string/dislike"
-                                    app:layout_constraintEnd_toEndOf="@+id/textView10"
-                                    app:layout_constraintStart_toStartOf="@+id/textView10"
-                                    app:layout_constraintTop_toBottomOf="@+id/textView10"
-                                    app:srcCompat="@drawable/thumbs_down"
-                                    app:tint="@color/colorPrimaryWhite" />
-
-                                <TextView
-                                    android:id="@+id/tv_dislikes_no"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    app:layout_constraintEnd_toEndOf="@+id/textView10"
-                                    app:layout_constraintStart_toStartOf="@+id/textView10"
-                                    app:layout_constraintTop_toBottomOf="@+id/img_dislike" />
+                                    app:layout_constraintTop_toTopOf="@id/textView12" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </FrameLayout>
@@ -281,7 +230,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -347,6 +295,7 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginTop="4dp"
                             android:layout_marginEnd="10dp"
                             android:background="@color/colorAccentAmber"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -403,9 +352,9 @@
                         <Button
                             android:id="@+id/btn_media"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@string/view_images_videos"
+                            android:text="@string/view_videos"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimaryBlack"
                             app:cornerRadius="16dp"
@@ -414,28 +363,28 @@
                             app:layout_constraintTop_toBottomOf="@+id/frameLayout3"
                             app:rippleColor="@color/colorAccentRed" />
 
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fab_chat"
+                            android:layout_width="@dimen/touch_icon"
+                            android:layout_height="@dimen/touch_icon"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="@color/colorAccentAmber"
+                            android:clickable="true"
+                            android:contentDescription="@string/chat_button"
+                            android:focusable="true"
+                            android:stateListAnimator="@android:anim/fade_in"
+                            app:layout_constraintBottom_toBottomOf="@+id/btn_make_post"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/btn_make_post"
+                            app:rippleColor="@color/colorAccentRed"
+                            app:srcCompat="@drawable/chat"
+                            app:useCompatPadding="true" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
             </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_chat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/colorAccentAmber"
-        android:clickable="true"
-        android:contentDescription="@string/chat_button"
-        android:focusable="true"
-        android:stateListAnimator="@android:anim/fade_in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/colorAccentRed"
-        app:srcCompat="@drawable/chat"
-        app:useCompatPadding="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

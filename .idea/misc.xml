@@ -30,7 +30,8 @@
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/fragment_blank.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/hype.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/img_item.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/individual_vehicle.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/individual_route_vehicle.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/individual_vehicle.xml" value="0.1648148148148148" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/item_chat.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/item_images.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/item_my_posts.xml" value="0.17552083333333332" />
@@ -45,7 +46,11 @@
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/nav_header_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/new_vehicles.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/routes.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/shimmer_individual_vehicle.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/shimmer_placeholder.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/vehicles.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/vehicles_routes.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/welcome_slide1.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/welcome_slide3.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/layout/welcome_slide4.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/kipro/AndroidStudioProjects/Matatu/app/src/main/res/menu/activity_main_drawer.xml" value="0.17552083333333332" />

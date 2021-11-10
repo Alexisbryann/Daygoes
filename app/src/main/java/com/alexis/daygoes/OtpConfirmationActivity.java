@@ -25,7 +25,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-import com.uxcam.UXCam;
+//import com.uxcam.UXCam;
 
 public class OtpConfirmationActivity extends AppCompatActivity {
     private UserSession session;
@@ -48,7 +48,7 @@ public class OtpConfirmationActivity extends AppCompatActivity {
 
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
-        UXCam.startWithKey("5gt4mdbmcb1x5oa");
+//        UXCam.startWithKey("5gt4mdbmcb1x5oa");
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();

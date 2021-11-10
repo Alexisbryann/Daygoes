@@ -24,7 +24,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.squareup.picasso.Picasso;
-import com.uxcam.UXCam;
+//import com.uxcam.UXCam;
 
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
-        UXCam.startWithKey("5gt4mdbmcb1x5oa");
+//        UXCam.startWithKey("5gt4mdbmcb1x5oa");
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();

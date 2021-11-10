@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimaryWhite">#FFFFFF</color>
     <color name="colorPrimaryBlack">#000000</color>
+    <color name="colorPrimaryBlue">#0000ff</color>
     <color name="colorAccentGreen">#006400</color>
     <color name="colorAccentAmber">#FFBF00</color>
     <color name="colorAccentRed">#FF0000</color>
@@ -28,6 +29,10 @@
     <color name="dot_light_screen2">#e55039</color>
     <color name="dot_light_screen3">#82ccdd</color>
     <color name="dot_light_screen4">#38ada9</color>
+
+    <!--    spark button colours-->
+    <color name="heart_primary_color">#da4439</color>
+    <color name="heart_secondary_color">#8a098c</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>

@@ -118,8 +118,7 @@ public class WelcomeActivity extends AppCompatActivity {
         } else {
             Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(i);
-//        Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
-//        startActivity(i);
+
         }
         finish();
     }

@@ -38,7 +38,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".PayActivity" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -49,8 +48,8 @@
         <activity android:name=".VehicleOffers" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,6 +59,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".OtpConfirmationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -67,7 +67,9 @@
             android:name=".Drawer"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".IndividualRoute" />
+        <activity
+            android:name=".IndividualRoute"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Chat"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -92,7 +94,9 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".IndividualRouteVehicle" />
+        <activity
+            android:name=".IndividualRouteVehicle"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PostImage"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -101,7 +105,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name=".FirebaseMessageReceiver"
+        <service
+            android:name=".FirebaseMessageReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

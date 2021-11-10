@@ -10,7 +10,7 @@
     <string name="capacity">Capacity</string>
     <string name="no_plate">No. plate</string>
     <string name="ratings">Ratings:</string>
-    <string name="like">Like</string>
+    <string name="like">Likes</string>
     <string name="comments">Comments</string>
     <string name="favourite">Favourite</string>
     <string name="share">Share</string>
@@ -127,22 +127,13 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <string name="payment_procedure">You can pay for your ride via Mpesa.\n\n
-        Simply follow the following simple steps:\n\n
-        1. Go to M-PESA menu on your phone. \n
-        2. Go to Lipa na M-PESA, Buy Goods and Services option. \n
-        3. Enter the till number provided below. \n
-        4. Enter amount. \n
-        5. Enter M-PESA pin. \n
-        6. SMS confirmation received on phone.</string>
     <string name="title">Title</string>
-    <string name="view_images_videos">view images / videos</string>
+    <string name="view_videos">Watch video</string>
     <string name="buffering">buffering ....</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send_button">Send post</string>
     <string name="make_post1">Make post</string>
-    <string name="please_swipe_left_to_view_the_next_image_or_swipe_right_to_view_the_previous_image">PLease swipe left to view the next image or swipe right to view the previous image.</string>
-
+    <string name="swipe">Swipe on the image to view more images.</string>
+    <string name="active_image">\@drawable/thumbs_up</string>
+    <string name="thumb_up">\@drawable/thumb_up</string>
 
 </resources>

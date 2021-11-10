@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -67,25 +68,24 @@ private int[] tabIcons = {
 };
 
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 @SuppressLint({"ResourceAsColor", "ResourceType"})
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setAnimation();
+//	setAnimation();
 	setContentView(R.layout.activity_main);
 
 
-	if (Build.VERSION.SDK_INT >= 23) {
-		if (checkPermission()) {
-			try {
-				Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
-				m.invoke(null);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			requestPermission(); // Code for permission
+	if (checkPermission()) {
+		try {
+			Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+			m.invoke(null);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	} else {
+		requestPermission(); // Code for permission
 	}
 
 	//check Internet Connection
@@ -105,6 +105,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	mTabLayout = findViewById(R.id.tabLayout);
 	mTabLayout.setupWithViewPager(viewPager);
 	setupTabIcons();
+
 
 	mToggle = new ActionBarDrawerToggle(
 			this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -151,7 +152,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 		@Override
 		public void onTabReselected(TabLayout.Tab tab) {
-
+			Objects.requireNonNull(tab.getIcon()).setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 		}
 	});
 }

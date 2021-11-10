@@ -22,33 +22,20 @@ public class ViewPagerAdapter1 extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        Fragment fragment = null;
-        if (position == 0) {
-            fragment = new VideosFragment();
-        }else if (position == 1){
-            fragment = new ImageFragment();
-        }
-        assert fragment != null;
-        return fragment;    }
+        return new VideosFragment();
+ }
 
 
         @Nullable
         @Override
     public CharSequence getPageTitle(int position) {
-        String title = null;
-        if (position==0){
-            title = "Videos";
-        }
-        else if (position==1) {
-            title = "Images";
 
-        }
 
-        return title;
+            return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 1;
     }
 }
