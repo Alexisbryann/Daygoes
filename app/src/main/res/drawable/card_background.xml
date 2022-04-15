@@ -6,8 +6,8 @@
             <solid
                 android:color="@color/cardBgDark"/>
             <corners
-                android:bottomLeftRadius="50dp"
-                android:bottomRightRadius="50dp"/>
+                android:bottomLeftRadius="6dp"
+                android:bottomRightRadius="6dp"/>
         </shape>
     </item>
 </selector>

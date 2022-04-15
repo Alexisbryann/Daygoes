@@ -91,13 +91,14 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
 
                 Context context = v.getContext();
                 Intent i = new Intent(context, IndividualVehicle.class);
-                ActivityOptions options =
-                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
+//                ActivityOptions options =
+//                        ActivityOptions.makeSceneTransitionAnimation((Activity)context);
                 i.putExtra("NAME_KEY", mTv_name.getText().toString());
                 i.putExtra("ROUTE_KEY1", mTv_route.getText().toString());
                 i.putExtra("PLATE_KEY", mTv_plate.getText().toString());
                 i.putExtra("ROUTE_KEY", mTv_capacity.getText().toString());
-                context.startActivity(i,options.toBundle());
+//                context.startActivity(i,options.toBundle());
+                context.startActivity(i);
             });
 
             mLocation.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +110,7 @@ public class VehiclesAdapter extends FirebaseRecyclerAdapter<VehicleModel, Vehic
                     ActivityOptions options =
                             ActivityOptions.makeSceneTransitionAnimation((Activity)context);
                     context.startActivity(i,options.toBundle());
+
 
                 }
             });

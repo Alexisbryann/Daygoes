@@ -7,8 +7,8 @@
             <solid
                 android:color="@color/cardBgDark"/>
             <corners
-                android:topLeftRadius="50dp"
-                android:topRightRadius="50dp"/>
+                android:topLeftRadius="6dp"
+                android:topRightRadius="6dp"/>
         </shape>
     </item>
 </selector>

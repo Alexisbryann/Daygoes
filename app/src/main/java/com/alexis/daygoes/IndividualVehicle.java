@@ -83,13 +83,12 @@ private String mSacco;
 private String mPlate1;
 private long mRatings;
 private String mRoute1;
-private Button mMake_post;
 
 
 @Override
 protected void onCreate(@Nullable Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setAnimation();
+//	setAnimation();
 	setContentView(R.layout.individual_vehicle);
 
 	//check Internet Connection
@@ -126,7 +125,6 @@ private void inflateViews() {
 
 //      inflate the layout
 	mFabChat = findViewById(R.id.fab_chat);
-	mMake_post = findViewById(R.id.btn_make_post);
 	mTv_name = findViewById(R.id.tv_matatu_name);
 	mLike = findViewById(R.id.img_like);
 	mFavourite = findViewById(R.id.img_favourite);
@@ -181,14 +179,6 @@ private void iconInitialize() {
 
 		Context context = v.getContext();
 		Intent i = new Intent(context, Chat.class);
-		i.putExtra("NAME_KEY", mTv_name.getText().toString());
-		ActivityOptions options =
-				ActivityOptions.makeSceneTransitionAnimation((Activity) context);
-		context.startActivity(i, options.toBundle());
-	});
-	mMake_post.setOnClickListener(v -> {
-		Context context = v.getContext();
-		Intent i = new Intent(context, Posts.class);
 		i.putExtra("NAME_KEY", mTv_name.getText().toString());
 		ActivityOptions options =
 				ActivityOptions.makeSceneTransitionAnimation((Activity) context);
@@ -406,7 +396,11 @@ public void displayNumberOfLikes() {
 
 				for (DataSnapshot ignored : dataSnapshot.getChildren()) {
 					mNumOfLikes1 = dataSnapshot.getChildrenCount();
-					mNumOfLikes.setText(mNumOfLikes1 + "");
+					if(mNumOfLikes1==1){
+						mNumOfLikes.setText(mNumOfLikes1 + " like");
+					}else {
+						mNumOfLikes.setText(mNumOfLikes1 + " likes");
+					}
 				}
 			}
 		}
@@ -484,7 +478,15 @@ public void displayNumberOfFavourites() {
 
 				for (DataSnapshot ignored : dataSnapshot.getChildren()) {
 					long numOfFavs = dataSnapshot.getChildrenCount();
-					mNumOfFavs.setText(numOfFavs + "");
+					if(numOfFavs==0){
+						mNumOfFavs.setText(numOfFavs + " favourites");
+					}
+					else if(numOfFavs==1){
+						mNumOfFavs.setText(numOfFavs + " favourite");
+					}else{
+						mNumOfFavs.setText(numOfFavs + " favourites");
+					}
+
 				}
 			}
 		}

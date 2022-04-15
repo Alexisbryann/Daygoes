@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = mPassword.getText().toString();
 
         if (mUsername2.isEmpty()) {
-            mUsername1.setError(RegisterActivity.this.getString(R.string.email_empty));
+            mUsername1.setError(RegisterActivity.this.getString(R.string.username_empty));
         }
         if (email.isEmpty()) {
             mEmail.setError(RegisterActivity.this.getString(R.string.email_empty));
